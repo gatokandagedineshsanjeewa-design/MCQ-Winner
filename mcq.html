@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MCQ Winner</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f1f5f9;
+    color: #222;
+}
+
+.header {
+    background: #1e3a8a;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+.header h1 {
+    margin: 0;
+}
+
+.header p {
+    margin-bottom: 0;
+}
+
+.container {
+    width: 94%;
+    max-width: 700px;
+    margin: 20px auto;
+}
+
+.progress {
+    background: white;
+    padding: 15px;
+    margin-bottom: 18px;
+    border-radius: 14px;
+    text-align: center;
+    font-weight: bold;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+
+.question {
+    background: white;
+    padding: 18px;
+    margin-bottom: 18px;
+    border-radius: 14px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+}
+
+.question h3 {
+    margin-top: 0;
+    line-height: 1.5;
+}
+
+.option {
+    display: block;
+    padding: 13px;
+    margin: 8px 0;
+    background: #f1f5f9;
+    border-radius: 9px;
+    cursor: pointer;
+}
+
+.option:hover {
+    background: #e2e8f0;
+}
+
+.option input {
+    margin-right: 10px;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 16px;
+    border: none;
+    border-radius: 10px;
+    background: #16a34a;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background: #15803d;
+}
+
+.submit-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+#result {
+    display: none;
+    background: white;
+    padding: 25px;
+    margin-top: 20px;
+    border-radius: 14px;
+    text-align: center;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.score {
+    font-size: 30px;
+    color: #1e3a8a;
+    margin: 10px 0;
+}
+
+.empty {
+    background: white;
+    padding: 25px;
+    border-radius: 14px;
+    text-align: center;
+}
+
+.warning {
+    background: #fff7ed;
+    color: #9a3412;
+    padding: 15px;
+    margin-bottom: 18px;
+    border-radius: 12px;
+    text-align: center;
+    font-weight: bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+
+    <h1>MCQ Winner</h1>
+
+    <p id="subjectTitle">
+        MCQ Test
+    </p>
+
+</div>
+
+
+<div class="container">
+
+    <div id="progress" class="progress">
+        Loading...
+    </div>
+
+    <div id="questionsContainer"></div>
+
+    <button
+        id="submitButton"
+        class="submit-btn"
+        onclick="submitQuiz()">
+
+        Submit Answers
+
+    </button>
+
+
+    <div id="result">
+
+        <h2>🏆 Result</h2>
+
+        <div
+            id="score"
+            class="score">
+        </div>
+
+        <p id="answered"></p>
+
+    </div>
+
+</div>
+
+
+<script>
+
+// ========================================
+// GET SUBJECT
+// ========================================
+
+const urlParams =
+    new URLSearchParams(
+        window.location.search
+    );
+
+const selectedSubject =
+    urlParams.get("subject");
+
+
+// ========================================
+// GET TODAY
+// ========================================
+
+function getToday() {
+
+    const now = new Date();
+
+    const year =
+        now.getFullYear();
+
+    const month =
+        String(
+            now.getMonth() + 1
+        ).padStart(2, "0");
+
+    const day =
+        String(
+            now.getDate()
+        ).padStart(2, "0");
+
+    return (
+        year +
+        "-" +
+        month +
+        "-" +
+        day
+    );
+}
+
+
+// ========================================
+// GET QUESTIONS
+// ========================================
+
+function getQuestions() {
+
+    const allQuestions =
+        JSON.parse(
+            localStorage.getItem(
+                "mcqQuestions"
+            )
+        ) || [];
+
+
+    const savedDate =
+        localStorage.getItem(
+            "mcqDate"
+        );
+
+
+    // Old day's questions
+    if (
+        savedDate &&
+        savedDate !== getToday()
+    ) {
+
+        return [];
+
+    }
+
+
+    if (selectedSubject) {
+
+        return allQuestions.filter(
+            function(item) {
+
+                return (
+                    item.subject ===
+                    selectedSubject
+                );
+
+            }
+        );
+
+    }
+
+
+    return allQuestions;
+}
+
+
+// ========================================
+// SHOW QUESTIONS
+// ========================================
+
+function showQuestions() {
+
+    const container =
+        document.getElementById(
+            "questionsContainer"
+        );
+
+    const questions =
+        getQuestions();
+
+
+    document.getElementById(
+        "subjectTitle"
+    ).textContent =
+        selectedSubject
+        ? selectedSubject +
+          " - Daily MCQ"
+        : "Daily MCQ";
+
+
+    container.innerHTML = "";
+
+
+    // No questions
+    if (
+        questions.length === 0
+    ) {
+
+        container.innerHTML = `
+
+            <div class="empty">
+
+                <h3>
+                    😕 අද MCQ නැහැ
+                </h3>
+
+                <p>
+                    අදට මේ subject එකේ
+                    MCQ add කරලා නැහැ.
+                </p>
+
+            </div>
+
+        `;
+
+
+        document.getElementById(
+            "submitButton"
+        ).style.display = "none";
+
+
+        document.getElementById(
+            "progress"
+        ).textContent =
+            "0 / 25";
+
+
+        return;
+    }
+
+
+    // Show progress
+    document.getElementById(
+        "progress"
+    ).textContent =
+        questions.length +
+        " / 25 MCQ";
+
+
+    // Less than 25 warning
+    if (
+        questions.length < 25
+    ) {
+
+        const warning =
+            document.createElement(
+                "div"
+            );
+
+        warning.className =
+            "warning";
+
+        warning.textContent =
+            "⚠️ අදට " +
+            questions.length +
+            " MCQ පමණයි. " +
+            "MCQ 25ක් සම්පූර්ණ කළ පසු Test එක ලබාදිය හැක.";
+
+        container.appendChild(
+            warning
+        );
+    }
+
+
+    // ====================================
+    // QUESTIONS
+    // ====================================
+
+    questions.forEach(
+        function(item, index) {
+
+            const questionDiv =
+                document.createElement(
+                    "div"
+                );
+
+            questionDiv.className =
+                "question";
+
+
+            let optionsHTML = "";
+
+
+            item.options.forEach(
+                function(
+                    option,
+                    optionIndex
+                ) {
+
+                    optionsHTML += `
+
+                        <label class="option">
+
+                            <input
+                                type="radio"
+                                name="question${index}"
+                                value="${optionIndex}"
+                            >
+
+                            ${
+                                optionIndex + 1
+                            }.
+                            ${option}
+
+                        </label>
+
+                    `;
+
+                }
+            );
+
+
+            questionDiv.innerHTML = `
+
+                <h3>
+                    ${index + 1}.
+                    ${item.question}
+                </h3>
+
+                ${optionsHTML}
+
+            `;
+
+
+            container.appendChild(
+                questionDiv
+            );
+
+        }
+    );
+
+}
+
+
+// ========================================
+// SUBMIT QUIZ
+// ========================================
+
+function submitQuiz() {
+
+    const questions =
+        getQuestions();
+
+
+    if (
+        questions.length === 0
+    ) {
+
+        return;
+
+    }
+
+
+    // Need 25
+    if (
+        questions.length < 25
+    ) {
+
+        alert(
+            "⚠️ අද Test එකට MCQ 25ක් සම්පූර්ණ නැහැ.\n\n" +
+            "දැනට තියෙන්නේ " +
+            questions.length +
+            " MCQ පමණයි."
+        );
+
+        return;
+    }
+
+
+    let score = 0;
+
+    let answered = 0;
+
+
+    // Check answers
+    questions.forEach(
+        function(item, index) {
+
+            const selected =
+                document.querySelector(
+                    'input[name="question' +
+                    index +
+                    '"]:checked'
+                );
+
+
+            if (selected) {
+
+                answered++;
+
+
+                const selectedAnswer =
+                    Number(
+                        selected.value
+                    );
+
+
+                if (
+                    selectedAnswer ===
+                    item.answer
+                ) {
+
+                    score++;
+
+                }
+
+            }
+
+        }
+    );
+
+
+    // All 25 must be answered
+    if (
+        answered < 25
+    ) {
+
+        alert(
+            "⚠️ සියලුම MCQ 25ටම පිළිතුරු දෙන්න.\n\n" +
+            "දැනට Answer කරලා තියෙන්නේ " +
+            answered +
+            " / 25"
+        );
+
+        return;
+    }
+
+
+    // ====================================
+    // RESULT
+    // ====================================
+
+    const result =
+        document.getElementById(
+            "result"
+        );
+
+
+    document.getElementById(
+        "score"
+    ).textContent =
+        score +
+        " / 25";
+
+
+    document.getElementById(
+        "answered"
+    ).textContent =
+        "ඔබ MCQ 25ටම පිළිතුරු ලබා දී ඇත.";
+
+
+    result.style.display =
+        "block";
+
+
+    // Disable submit
+    document.getElementById(
+        "submitButton"
+    ).disabled = true;
+
+
+    // Disable all answers
+    const inputs =
+        document.querySelectorAll(
+            'input[type="radio"]'
+        );
+
+
+    inputs.forEach(
+        function(input) {
+
+            input.disabled = true;
+
+        }
+    );
+
+
+    // Scroll
+    result.scrollIntoView({
+        behavior: "smooth"
+    });
+
+}
+
+
+// ========================================
+// START
+// ========================================
+
+showQuestions();
+
+</script>
+
+</body>
+</html>

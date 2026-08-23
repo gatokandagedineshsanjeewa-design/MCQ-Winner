@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MCQ Winner - Admin</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f1f5f9;
+}
+
+.header {
+    background: #1e3a8a;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+.header h1 {
+    margin: 0;
+}
+
+.container {
+    width: 94%;
+    max-width: 650px;
+    margin: 20px auto;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 14px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+input,
+textarea,
+select {
+    width: 100%;
+    padding: 13px;
+    margin: 8px 0 15px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 9px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.login-btn {
+    background: #1e3a8a;
+    color: white;
+}
+
+.add-btn {
+    background: #16a34a;
+    color: white;
+}
+
+.new-day-btn {
+    background: #f59e0b;
+    color: white;
+    margin-bottom: 15px;
+}
+
+.delete-btn {
+    background: #dc2626;
+    color: white;
+    margin-top: 10px;
+}
+
+#adminPanel {
+    display: none;
+}
+
+.message {
+    text-align: center;
+    font-weight: bold;
+}
+
+.status {
+    background: #eff6ff;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.question-item {
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    padding: 15px;
+    margin-top: 12px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+    <h1>MCQ Winner</h1>
+    <p>Admin Panel</p>
+</div>
+
+<div class="container">
+
+    <!-- LOGIN -->
+    <div class="card" id="loginPanel">
+
+        <h2>🔐 Admin Login</h2>
+
+        <input
+            type="password"
+            id="pin"
+            placeholder="Admin PIN"
+        >
+
+        <button class="login-btn" onclick="login()">
+            Login
+        </button>
+
+        <p id="loginMessage" class="message"></p>
+
+    </div>
+
+
+    <!-- ADMIN PANEL -->
+    <div id="adminPanel">
+
+        <div class="card">
+
+            <h2>📅 Daily MCQ</h2>
+
+            <div id="status" class="status"></div>
+
+            <button
+                class="new-day-btn"
+                onclick="startNewDay()">
+
+                🔄 Start New Day
+
+            </button>
+
+            <p style="text-align:center;">
+                ⚠️ New Day කළාම අදට තිබෙන සියලුම පැරණි MCQ මැකෙනවා.
+            </p>
+
+        </div>
+
+
+        <!-- ADD MCQ -->
+        <div class="card">
+
+            <h2>➕ Add MCQ</h2>
+
+            <label>Subject</label>
+
+            <select id="subject">
+                <option value="Chemistry">Chemistry</option>
+                <option value="Physics">Physics</option>
+            </select>
+
+
+            <label>ප්‍රශ්නය</label>
+
+            <textarea
+                id="question"
+                placeholder="ප්‍රශ්නය මෙතන type කරන්න..."
+            ></textarea>
+
+
+            <label>1 වන පිළිතුර</label>
+
+            <input
+                type="text"
+                id="option1"
+                placeholder="පිළිතුර 1"
+            >
+
+
+            <label>2 වන පිළිතුර</label>
+
+            <input
+                type="text"
+                id="option2"
+                placeholder="පිළිතුර 2"
+            >
+
+
+            <label>3 වන පිළිතුර</label>
+
+            <input
+                type="text"
+                id="option3"
+                placeholder="පිළිතුර 3"
+            >
+
+
+            <label>4 වන පිළිතුර</label>
+
+            <input
+                type="text"
+                id="option4"
+                placeholder="පිළිතුර 4"
+            >
+
+
+            <label>5 වන පිළිතුර</label>
+
+            <input
+                type="text"
+                id="option5"
+                placeholder="පිළිතුර 5"
+            >
+
+
+            <label>නිවැරදි පිළිතුර</label>
+
+            <select id="answer">
+                <option value="0">1 වන පිළිතුර</option>
+                <option value="1">2 වන පිළිතුර</option>
+                <option value="2">3 වන පිළිතුර</option>
+                <option value="3">4 වන පිළිතුර</option>
+                <option value="4">5 වන පිළිතුර</option>
+            </select>
+
+
+            <button
+                class="add-btn"
+                onclick="addQuestion()">
+
+                ➕ Add Question
+
+            </button>
+
+            <p id="addMessage" class="message"></p>
+
+        </div>
+
+
+        <!-- SAVED QUESTIONS -->
+        <div class="card">
+
+            <h2>📚 Today's MCQs</h2>
+
+            <div id="questionList"></div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+const ADMIN_PIN = "6020232";
+
+
+// ========================================
+// TODAY
+// ========================================
+
+function getToday() {
+
+    const now = new Date();
+
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, "0");
+    const day = String(now.getDate()).padStart(2, "0");
+
+    return year + "-" + month + "-" + day;
+}
+
+
+// ========================================
+// GET QUESTIONS
+// ========================================
+
+function getQuestions() {
+
+    return JSON.parse(
+        localStorage.getItem("mcqQuestions")
+    ) || [];
+}
+
+
+// ========================================
+// LOGIN
+// ========================================
+
+function login() {
+
+    const pin =
+        document.getElementById("pin").value;
+
+    const message =
+        document.getElementById("loginMessage");
+
+
+    if (pin === ADMIN_PIN) {
+
+        document.getElementById(
+            "loginPanel"
+        ).style.display = "none";
+
+        document.getElementById(
+            "adminPanel"
+        ).style.display = "block";
+
+        checkDay();
+
+        showQuestions();
+
+    } else {
+
+        message.textContent =
+            "❌ වැරදි PIN එකක්!";
+
+        message.style.color = "red";
+    }
+}
+
+
+// ========================================
+// CHECK DAY
+// ========================================
+
+function checkDay() {
+
+    const today = getToday();
+
+    const savedDate =
+        localStorage.getItem("mcqDate");
+
+
+    if (!savedDate) {
+
+        localStorage.setItem(
+            "mcqDate",
+            today
+        );
+
+        return;
+    }
+
+
+    // New day detected
+    if (savedDate !== today) {
+
+        localStorage.removeItem(
+            "mcqQuestions"
+        );
+
+        localStorage.setItem(
+            "mcqDate",
+            today
+        );
+    }
+}
+
+
+// ========================================
+// START NEW DAY MANUALLY
+// ========================================
+
+function startNewDay() {
+
+    const confirmNewDay =
+        confirm(
+            "⚠️ පැරණි සියලුම MCQ මැකීමට අවශ්‍යද?\n\n" +
+            "මෙය නැවත undo කරන්න බැහැ."
+        );
+
+
+    if (!confirmNewDay) {
+        return;
+    }
+
+
+    localStorage.removeItem(
+        "mcqQuestions"
+    );
+
+
+    localStorage.setItem(
+        "mcqDate",
+        getToday()
+    );
+
+
+    alert(
+        "✅ New Day ආරම්භ කළා!\n\n" +
+        "දැන් අලුත් MCQ add කරන්න."
+    );
+
+
+    showQuestions();
+}
+
+
+// ========================================
+// ADD QUESTION
+// ========================================
+
+function addQuestion() {
+
+    const question =
+        document.getElementById(
+            "question"
+        ).value.trim();
+
+
+    const options = [
+
+        document.getElementById(
+            "option1"
+        ).value.trim(),
+
+        document.getElementById(
+            "option2"
+        ).value.trim(),
+
+        document.getElementById(
+            "option3"
+        ).value.trim(),
+
+        document.getElementById(
+            "option4"
+        ).value.trim(),
+
+        document.getElementById(
+            "option5"
+        ).value.trim()
+
+    ];
+
+
+    const answer =
+        Number(
+            document.getElementById(
+                "answer"
+            ).value
+        );
+
+
+    const subject =
+        document.getElementById(
+            "subject"
+        ).value;
+
+
+    const message =
+        document.getElementById(
+            "addMessage"
+        );
+
+
+    // Check empty
+    if (
+        question === "" ||
+        options.some(function(option) {
+            return option === "";
+        })
+    ) {
+
+        message.textContent =
+            "⚠️ සියලුම තැන් පුරවන්න.";
+
+        message.style.color = "red";
+
+        return;
+    }
+
+
+    const questions =
+        getQuestions();
+
+
+    // Subject count
+    const subjectCount =
+        questions.filter(function(item) {
+
+            return item.subject === subject;
+
+        }).length;
+
+
+    // Maximum 25 per subject
+    if (subjectCount >= 25) {
+
+        message.textContent =
+            "⚠️ " +
+            subject +
+            " සඳහා අද MCQ 25 සම්පූර්ණයි.";
+
+        message.style.color = "red";
+
+        return;
+    }
+
+
+    // Add
+    questions.push({
+
+        subject: subject,
+
+        question: question,
+
+        options: options,
+
+        answer: answer
+
+    });
+
+
+    // Save
+    localStorage.setItem(
+        "mcqQuestions",
+        JSON.stringify(questions)
+    );
+
+
+    localStorage.setItem(
+        "mcqDate",
+        getToday()
+    );
+
+
+    message.textContent =
+        "✅ MCQ එක සාර්ථකව Add කළා!";
+
+
+    message.style.color =
+        "green";
+
+
+    // Clear
+    document.getElementById(
+        "question"
+    ).value = "";
+
+    document.getElementById(
+        "option1"
+    ).value = "";
+
+    document.getElementById(
+        "option2"
+    ).value = "";
+
+    document.getElementById(
+        "option3"
+    ).value = "";
+
+    document.getElementById(
+        "option4"
+    ).value = "";
+
+    document.getElementById(
+        "option5"
+    ).value = "";
+
+
+    showQuestions();
+}
+
+
+// ========================================
+// SHOW QUESTIONS
+// ========================================
+
+function showQuestions() {
+
+    const list =
+        document.getElementById(
+            "questionList"
+        );
+
+
+    const questions =
+        getQuestions();
+
+
+    list.innerHTML = "";
+
+
+    if (questions.length === 0) {
+
+        list.innerHTML =
+            "<p>අදට තවම MCQ add කරලා නැහැ.</p>";
+
+        updateStatus();
+
+        return;
+    }
+
+
+    questions.forEach(
+        function(item, index) {
+
+            const div =
+                document.createElement(
+                    "div"
+                );
+
+
+            div.className =
+                "question-item";
+
+
+            div.innerHTML = `
+
+                <b>
+                    ${index + 1}.
+                    ${item.question}
+                </b>
+
+                <p>
+                    Subject:
+                    ${item.subject}
+                </p>
+
+                <p>
+                    1. ${item.options[0]}<br>
+                    2. ${item.options[1]}<br>
+                    3. ${item.options[2]}<br>
+                    4. ${item.options[3]}<br>
+                    5. ${item.options[4]}
+                </p>
+
+                <p>
+                    <b>
+                        නිවැරදි පිළිතුර:
+                        ${item.answer + 1}
+                    </b>
+                </p>
+
+                <button
+                    class="delete-btn"
+                    onclick="deleteQuestion(${index})">
+
+                    🗑️ Delete
+
+                </button>
+            `;
+
+
+            list.appendChild(div);
+
+        }
+    );
+
+
+    updateStatus();
+}
+
+
+// ========================================
+// UPDATE STATUS
+// ========================================
+
+function updateStatus() {
+
+    const questions =
+        getQuestions();
+
+
+    const chemistry =
+        questions.filter(function(item) {
+
+            return item.subject === "Chemistry";
+
+        }).length;
+
+
+    const physics =
+        questions.filter(function(item) {
+
+            return item.subject === "Physics";
+
+        }).length;
+
+
+    document.getElementById(
+        "status"
+    ).innerHTML =
+
+        "📅 " +
+        getToday() +
+        "<br><br>" +
+
+        "🧪 Chemistry: " +
+        chemistry +
+        " / 25" +
+
+        "<br>" +
+
+        "⚡ Physics: " +
+        physics +
+        " / 25";
+}
+
+
+// ========================================
+// DELETE QUESTION
+// ========================================
+
+function deleteQuestion(index) {
+
+    const questions =
+        getQuestions();
+
+
+    questions.splice(
+        index,
+        1
+    );
+
+
+    localStorage.setItem(
+        "mcqQuestions",
+        JSON.stringify(questions)
+    );
+
+
+    showQuestions();
+}
+
+
+// ========================================
+// START
+// ========================================
+
+</script>
+
+</body>
+</html>

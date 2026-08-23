@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>MCQ Winner - Login</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f2f6ff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .box {
+      width: 90%;
+      max-width: 400px;
+      background: white;
+      padding: 30px 25px;
+      border-radius: 18px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+      text-align: center;
+    }
+
+    h1 {
+      color: #2563eb;
+      margin-bottom: 10px;
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      margin-top: 20px;
+      border: none;
+      border-radius: 10px;
+      background: #2563eb;
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      opacity: 0.6;
+    }
+
+    #message {
+      margin-top: 20px;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="box">
+
+    <h1>MCQ Winner</h1>
+
+    <p>Student Login</p>
+
+    <button id="googleButton" onclick="googleLogin()">
+      Continue with Google
+    </button>
+
+    <p id="message"></p>
+
+  </div>
+
+
+  <script type="module">
+
+    import { initializeApp }
+      from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+    import {
+      getAuth,
+      GoogleAuthProvider,
+      signInWithPopup
+    }
+      from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
+    // =========================
+    // FIREBASE CONFIG
+    // =========================
+
+    const firebaseConfig = {
+
+      apiKey:
+        "AIzaSyAMkaGYmBuoFama5MW5AhoX9q6cly_-nbg",
+
+      authDomain:
+        "mcq-winner.firebaseapp.com",
+
+      projectId:
+        "mcq-winner",
+
+      storageBucket:
+        "mcq-winner.firebasestorage.app",
+
+      messagingSenderId:
+        "1022060912943",
+
+      appId:
+        "1:1022060912943:web:f6e58414867e32f685c1da",
+
+      measurementId:
+        "G-MBH3NZ728H"
+
+    };
+
+
+    // =========================
+    // INITIALIZE FIREBASE
+    // =========================
+
+    const app =
+      initializeApp(firebaseConfig);
+
+    const auth =
+      getAuth(app);
+
+    const provider =
+      new GoogleAuthProvider();
+
+
+    // =========================
+    // ELEMENTS
+    // =========================
+
+    const message =
+      document.getElementById("message");
+
+    const googleButton =
+      document.getElementById("googleButton");
+
+
+    // =========================
+    // GOOGLE LOGIN
+    // =========================
+
+    window.googleLogin =
+      async function() {
+
+        message.innerText =
+          "Google Login වෙත යමින්...";
+
+        googleButton.disabled = true;
+
+        try {
+
+          const result =
+            await signInWithPopup(
+              auth,
+              provider
+            );
+
+
+          // Login successful
+
+          if (result.user) {
+
+            message.innerText =
+              "Login සාර්ථකයි!";
+
+            setTimeout(() => {
+
+              window.location.href =
+                "./index.html";
+
+            }, 500);
+
+          }
+
+        }
+
+        catch (error) {
+
+          console.error(error);
+
+          googleButton.disabled = false;
+
+          message.innerText =
+            "Google Login Error:\n\n" +
+            "Code: " +
+            error.code +
+            "\n\n" +
+            "Message: " +
+            error.message;
+
+        }
+
+      };
+
+  </script>
+
+</body>
+</html>
