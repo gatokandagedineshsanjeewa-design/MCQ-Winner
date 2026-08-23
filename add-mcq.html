@@ -137,7 +137,9 @@ button {
             placeholder="Admin PIN"
         >
 
-        <button class="login-btn" onclick="login()">
+        <button
+            class="login-btn"
+            onclick="login()">
             Login
         </button>
 
@@ -153,7 +155,9 @@ button {
 
             <h2>📅 Daily MCQ</h2>
 
-            <div id="status" class="status"></div>
+            <div id="status" class="status">
+                Loading...
+            </div>
 
             <button
                 class="new-day-btn"
@@ -192,43 +196,34 @@ button {
 
 
             <label>1 වන පිළිතුර</label>
-
             <input
                 type="text"
                 id="option1"
                 placeholder="පිළිතුර 1"
             >
 
-
             <label>2 වන පිළිතුර</label>
-
             <input
                 type="text"
                 id="option2"
                 placeholder="පිළිතුර 2"
             >
 
-
             <label>3 වන පිළිතුර</label>
-
             <input
                 type="text"
                 id="option3"
                 placeholder="පිළිතුර 3"
             >
 
-
             <label>4 වන පිළිතුර</label>
-
             <input
                 type="text"
                 id="option4"
                 placeholder="පිළිතුර 4"
             >
 
-
             <label>5 වන පිළිතුර</label>
-
             <input
                 type="text"
                 id="option5"
@@ -274,9 +269,70 @@ button {
 </div>
 
 
-<script>
+<script type="module">
 
-const ADMIN_PIN = "6020232";
+// ========================================
+// FIREBASE
+// ========================================
+
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+import {
+    getFirestore,
+    collection,
+    addDoc,
+    getDocs,
+    deleteDoc,
+    doc,
+    query,
+    where
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+// ========================================
+// FIREBASE CONFIG
+// ========================================
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyAMkaGYmBuoFama5MW5AhoX9q6cly_-nbg",
+
+    authDomain:
+        "mcq-winner.firebaseapp.com",
+
+    projectId:
+        "mcq-winner",
+
+    storageBucket:
+        "mcq-winner.firebasestorage.app",
+
+    messagingSenderId:
+        "1022060912943",
+
+    appId:
+        "1:1022060912943:web:f6e58414867e32f685c1da",
+
+    measurementId:
+        "G-MBH3NZ728H"
+};
+
+
+const app =
+    initializeApp(firebaseConfig);
+
+const db =
+    getFirestore(app);
+
+
+// ========================================
+// ADMIN PIN
+// ========================================
+
+const ADMIN_PIN =
+    "6020232";
 
 
 // ========================================
@@ -285,25 +341,29 @@ const ADMIN_PIN = "6020232";
 
 function getToday() {
 
-    const now = new Date();
+    const now =
+        new Date();
 
-    const year = now.getFullYear();
-    const month = String(now.getMonth() + 1).padStart(2, "0");
-    const day = String(now.getDate()).padStart(2, "0");
+    const year =
+        now.getFullYear();
 
-    return year + "-" + month + "-" + day;
-}
+    const month =
+        String(
+            now.getMonth() + 1
+        ).padStart(2, "0");
 
+    const day =
+        String(
+            now.getDate()
+        ).padStart(2, "0");
 
-// ========================================
-// GET QUESTIONS
-// ========================================
-
-function getQuestions() {
-
-    return JSON.parse(
-        localStorage.getItem("mcqQuestions")
-    ) || [];
+    return (
+        year +
+        "-" +
+        month +
+        "-" +
+        day
+    );
 }
 
 
@@ -311,113 +371,89 @@ function getQuestions() {
 // LOGIN
 // ========================================
 
-function login() {
+window.login =
+    function() {
 
-    const pin =
-        document.getElementById("pin").value;
+        const pin =
+            document.getElementById(
+                "pin"
+            ).value;
 
-    const message =
-        document.getElementById("loginMessage");
-
-
-    if (pin === ADMIN_PIN) {
-
-        document.getElementById(
-            "loginPanel"
-        ).style.display = "none";
-
-        document.getElementById(
-            "adminPanel"
-        ).style.display = "block";
-
-        checkDay();
-
-        showQuestions();
-
-    } else {
-
-        message.textContent =
-            "❌ වැරදි PIN එකක්!";
-
-        message.style.color = "red";
-    }
-}
+        const message =
+            document.getElementById(
+                "loginMessage"
+            );
 
 
-// ========================================
-// CHECK DAY
-// ========================================
+        if (pin === ADMIN_PIN) {
 
-function checkDay() {
+            document.getElementById(
+                "loginPanel"
+            ).style.display =
+                "none";
 
-    const today = getToday();
+            document.getElementById(
+                "adminPanel"
+            ).style.display =
+                "block";
 
-    const savedDate =
-        localStorage.getItem("mcqDate");
+            showQuestions();
 
+        } else {
 
-    if (!savedDate) {
+            message.textContent =
+                "❌ වැරදි PIN එකක්!";
 
-        localStorage.setItem(
-            "mcqDate",
-            today
-        );
+            message.style.color =
+                "red";
+        }
 
-        return;
-    }
-
-
-    // New day detected
-    if (savedDate !== today) {
-
-        localStorage.removeItem(
-            "mcqQuestions"
-        );
-
-        localStorage.setItem(
-            "mcqDate",
-            today
-        );
-    }
-}
+    };
 
 
 // ========================================
-// START NEW DAY MANUALLY
+// GET TODAY'S QUESTIONS
 // ========================================
 
-function startNewDay() {
+async function getQuestions() {
 
-    const confirmNewDay =
-        confirm(
-            "⚠️ පැරණි සියලුම MCQ මැකීමට අවශ්‍යද?\n\n" +
-            "මෙය නැවත undo කරන්න බැහැ."
+    const today =
+        getToday();
+
+    const q =
+        query(
+            collection(
+                db,
+                "mcqs"
+            ),
+            where(
+                "date",
+                "==",
+                today
+            )
         );
 
+    const snapshot =
+        await getDocs(q);
 
-    if (!confirmNewDay) {
-        return;
-    }
+    const questions = [];
 
+    snapshot.forEach(
+        function(docSnap) {
 
-    localStorage.removeItem(
-        "mcqQuestions"
+            questions.push({
+
+                id:
+                    docSnap.id,
+
+                ...docSnap.data()
+
+            });
+
+        }
     );
 
-
-    localStorage.setItem(
-        "mcqDate",
-        getToday()
-    );
-
-
-    alert(
-        "✅ New Day ආරම්භ කළා!\n\n" +
-        "දැන් අලුත් MCQ add කරන්න."
-    );
-
-
-    showQuestions();
+    return questions;
 }
 
 
@@ -425,173 +461,206 @@ function startNewDay() {
 // ADD QUESTION
 // ========================================
 
-function addQuestion() {
+window.addQuestion =
+    async function() {
 
-    const question =
-        document.getElementById(
-            "question"
-        ).value.trim();
-
-
-    const options = [
-
-        document.getElementById(
-            "option1"
-        ).value.trim(),
-
-        document.getElementById(
-            "option2"
-        ).value.trim(),
-
-        document.getElementById(
-            "option3"
-        ).value.trim(),
-
-        document.getElementById(
-            "option4"
-        ).value.trim(),
-
-        document.getElementById(
-            "option5"
-        ).value.trim()
-
-    ];
-
-
-    const answer =
-        Number(
+        const message =
             document.getElementById(
-                "answer"
-            ).value
-        );
+                "addMessage"
+            );
 
 
-    const subject =
-        document.getElementById(
-            "subject"
-        ).value;
+        const subject =
+            document.getElementById(
+                "subject"
+            ).value;
 
 
-    const message =
-        document.getElementById(
-            "addMessage"
-        );
+        const question =
+            document.getElementById(
+                "question"
+            ).value.trim();
 
 
-    // Check empty
-    if (
-        question === "" ||
-        options.some(function(option) {
-            return option === "";
-        })
-    ) {
+        const options = [
 
-        message.textContent =
-            "⚠️ සියලුම තැන් පුරවන්න.";
+            document.getElementById(
+                "option1"
+            ).value.trim(),
 
-        message.style.color = "red";
+            document.getElementById(
+                "option2"
+            ).value.trim(),
 
-        return;
-    }
+            document.getElementById(
+                "option3"
+            ).value.trim(),
 
+            document.getElementById(
+                "option4"
+            ).value.trim(),
 
-    const questions =
-        getQuestions();
+            document.getElementById(
+                "option5"
+            ).value.trim()
 
-
-    // Subject count
-    const subjectCount =
-        questions.filter(function(item) {
-
-            return item.subject === subject;
-
-        }).length;
+        ];
 
 
-    // Maximum 25 per subject
-    if (subjectCount >= 25) {
-
-        message.textContent =
-            "⚠️ " +
-            subject +
-            " සඳහා අද MCQ 25 සම්පූර්ණයි.";
-
-        message.style.color = "red";
-
-        return;
-    }
+        const answer =
+            Number(
+                document.getElementById(
+                    "answer"
+                ).value
+            );
 
 
-    // Add
-    questions.push({
+        // CHECK EMPTY
 
-        subject: subject,
+        if (
+            question === "" ||
+            options.some(
+                function(option) {
+                    return option === "";
+                }
+            )
+        ) {
 
-        question: question,
+            message.textContent =
+                "⚠️ සියලුම තැන් පුරවන්න.";
 
-        options: options,
+            message.style.color =
+                "red";
 
-        answer: answer
-
-    });
-
-
-    // Save
-    localStorage.setItem(
-        "mcqQuestions",
-        JSON.stringify(questions)
-    );
-
-
-    localStorage.setItem(
-        "mcqDate",
-        getToday()
-    );
+            return;
+        }
 
 
-    message.textContent =
-        "✅ MCQ එක සාර්ථකව Add කළා!";
+        // CHECK SUBJECT COUNT
+
+        try {
+
+            const questions =
+                await getQuestions();
 
 
-    message.style.color =
-        "green";
+            const subjectCount =
+                questions.filter(
+                    function(item) {
+
+                        return (
+                            item.subject ===
+                            subject
+                        );
+
+                    }
+                ).length;
 
 
-    // Clear
-    document.getElementById(
-        "question"
-    ).value = "";
+            if (
+                subjectCount >= 25
+            ) {
 
-    document.getElementById(
-        "option1"
-    ).value = "";
+                message.textContent =
+                    "⚠️ " +
+                    subject +
+                    " සඳහා අද MCQ 25 සම්පූර්ණයි.";
 
-    document.getElementById(
-        "option2"
-    ).value = "";
+                message.style.color =
+                    "red";
 
-    document.getElementById(
-        "option3"
-    ).value = "";
-
-    document.getElementById(
-        "option4"
-    ).value = "";
-
-    document.getElementById(
-        "option5"
-    ).value = "";
+                return;
+            }
 
 
-    showQuestions();
-}
+            // SAVE FIRESTORE
+
+            await addDoc(
+                collection(
+                    db,
+                    "mcqs"
+                ),
+                {
+
+                    subject:
+                        subject,
+
+                    question:
+                        question,
+
+                    options:
+                        options,
+
+                    answer:
+                        answer,
+
+                    date:
+                        getToday(),
+
+                    createdAt:
+                        new Date()
+                }
+            );
+
+
+            message.textContent =
+                "✅ MCQ එක Firestore එකට සාර්ථකව Save කළා!";
+
+            message.style.color =
+                "green";
+
+
+            // CLEAR
+
+            document.getElementById(
+                "question"
+            ).value = "";
+
+            document.getElementById(
+                "option1"
+            ).value = "";
+
+            document.getElementById(
+                "option2"
+            ).value = "";
+
+            document.getElementById(
+                "option3"
+            ).value = "";
+
+            document.getElementById(
+                "option4"
+            ).value = "";
+
+            document.getElementById(
+                "option5"
+            ).value = "";
+
+
+            showQuestions();
+
+        }
+
+        catch(error) {
+
+            console.error(error);
+
+            message.textContent =
+                "❌ Save Error:\n" +
+                error.message;
+
+            message.style.color =
+                "red";
+        }
+
+    };
 
 
 // ========================================
 // SHOW QUESTIONS
 // ========================================
 
-function showQuestions() {
+async function showQuestions() {
 
     const list =
         document.getElementById(
@@ -599,81 +668,104 @@ function showQuestions() {
         );
 
 
-    const questions =
-        getQuestions();
+    list.innerHTML =
+        "Loading...";
 
 
-    list.innerHTML = "";
+    try {
 
+        const questions =
+            await getQuestions();
 
-    if (questions.length === 0) {
 
         list.innerHTML =
-            "<p>අදට තවම MCQ add කරලා නැහැ.</p>";
+            "";
 
-        updateStatus();
 
-        return;
+        if (
+            questions.length === 0
+        ) {
+
+            list.innerHTML =
+                "<p>අදට තවම MCQ add කරලා නැහැ.</p>";
+
+            updateStatus(
+                questions
+            );
+
+            return;
+        }
+
+
+        questions.forEach(
+            function(item, index) {
+
+                const div =
+                    document.createElement(
+                        "div"
+                    );
+
+                div.className =
+                    "question-item";
+
+
+                div.innerHTML = `
+
+                    <b>
+                        ${index + 1}.
+                        ${item.question}
+                    </b>
+
+                    <p>
+                        Subject:
+                        ${item.subject}
+                    </p>
+
+                    <p>
+                        1. ${item.options[0]}<br>
+                        2. ${item.options[1]}<br>
+                        3. ${item.options[2]}<br>
+                        4. ${item.options[3]}<br>
+                        5. ${item.options[4]}
+                    </p>
+
+                    <p>
+                        <b>
+                            නිවැරදි පිළිතුර:
+                            ${item.answer + 1}
+                        </b>
+                    </p>
+
+                    <button
+                        class="delete-btn"
+                        onclick="deleteQuestion('${item.id}')">
+
+                        🗑️ Delete
+
+                    </button>
+                `;
+
+                list.appendChild(div);
+
+            }
+        );
+
+
+        updateStatus(
+            questions
+        );
+
     }
 
+    catch(error) {
 
-    questions.forEach(
-        function(item, index) {
+        console.error(error);
 
-            const div =
-                document.createElement(
-                    "div"
-                );
+        list.innerHTML =
+            "❌ Questions load error.";
 
+    }
 
-            div.className =
-                "question-item";
-
-
-            div.innerHTML = `
-
-                <b>
-                    ${index + 1}.
-                    ${item.question}
-                </b>
-
-                <p>
-                    Subject:
-                    ${item.subject}
-                </p>
-
-                <p>
-                    1. ${item.options[0]}<br>
-                    2. ${item.options[1]}<br>
-                    3. ${item.options[2]}<br>
-                    4. ${item.options[3]}<br>
-                    5. ${item.options[4]}
-                </p>
-
-                <p>
-                    <b>
-                        නිවැරදි පිළිතුර:
-                        ${item.answer + 1}
-                    </b>
-                </p>
-
-                <button
-                    class="delete-btn"
-                    onclick="deleteQuestion(${index})">
-
-                    🗑️ Delete
-
-                </button>
-            `;
-
-
-            list.appendChild(div);
-
-        }
-    );
-
-
-    updateStatus();
 }
 
 
@@ -681,26 +773,34 @@ function showQuestions() {
 // UPDATE STATUS
 // ========================================
 
-function updateStatus() {
-
-    const questions =
-        getQuestions();
-
+function updateStatus(
+    questions
+) {
 
     const chemistry =
-        questions.filter(function(item) {
+        questions.filter(
+            function(item) {
 
-            return item.subject === "Chemistry";
+                return (
+                    item.subject ===
+                    "Chemistry"
+                );
 
-        }).length;
+            }
+        ).length;
 
 
     const physics =
-        questions.filter(function(item) {
+        questions.filter(
+            function(item) {
 
-            return item.subject === "Physics";
+                return (
+                    item.subject ===
+                    "Physics"
+                );
 
-        }).length;
+            }
+        ).length;
 
 
     document.getElementById(
@@ -727,31 +827,116 @@ function updateStatus() {
 // DELETE QUESTION
 // ========================================
 
-function deleteQuestion(index) {
+window.deleteQuestion =
+    async function(id) {
 
-    const questions =
-        getQuestions();
-
-
-    questions.splice(
-        index,
-        1
-    );
+        const confirmDelete =
+            confirm(
+                "මෙම MCQ එක Delete කරන්නද?"
+            );
 
 
-    localStorage.setItem(
-        "mcqQuestions",
-        JSON.stringify(questions)
-    );
+        if (!confirmDelete) {
+            return;
+        }
 
 
-    showQuestions();
-}
+        try {
+
+            await deleteDoc(
+                doc(
+                    db,
+                    "mcqs",
+                    id
+                )
+            );
+
+
+            alert(
+                "✅ MCQ එක Delete කළා."
+            );
+
+
+            showQuestions();
+
+        }
+
+        catch(error) {
+
+            console.error(error);
+
+            alert(
+                "❌ Delete Error:\n" +
+                error.message
+            );
+
+        }
+
+    };
 
 
 // ========================================
-// START
+// START NEW DAY
 // ========================================
+
+window.startNewDay =
+    async function() {
+
+        const confirmNewDay =
+            confirm(
+                "⚠️ අද තිබෙන සියලුම MCQ මැකීමට අවශ්‍යද?\n\n" +
+                "මෙය නැවත undo කරන්න බැහැ."
+            );
+
+
+        if (!confirmNewDay) {
+            return;
+        }
+
+
+        try {
+
+            const questions =
+                await getQuestions();
+
+
+            for (
+                const item
+                of questions
+            ) {
+
+                await deleteDoc(
+                    doc(
+                        db,
+                        "mcqs",
+                        item.id
+                    )
+                );
+
+            }
+
+
+            alert(
+                "✅ New Day ආරම්භ කළා!"
+            );
+
+
+            showQuestions();
+
+        }
+
+        catch(error) {
+
+            console.error(error);
+
+            alert(
+                "❌ New Day Error:\n" +
+                error.message
+            );
+
+        }
+
+    };
 
 </script>
 
