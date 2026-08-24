@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="si">
+
+<head>
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>MCQ Winner - Discussion</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #eef4ff;
+    color: #172554;
+}
+
+
+/* HEADER */
+
+.header {
+    background: linear-gradient(
+        135deg,
+        #1e3a8a,
+        #2563eb
+    );
+
+    color: white;
+    text-align: center;
+
+    padding: 30px 20px;
+
+    border-radius: 0 0 25px 25px;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 30px;
+}
+
+.header p {
+    margin: 8px 0 0;
+}
+
+
+/* CONTAINER */
+
+.container {
+    width: 92%;
+    max-width: 650px;
+    margin: 25px auto;
+}
+
+
+/* NOTICE */
+
+.notice {
+    background: #fff7ed;
+
+    border-left: 5px solid #f97316;
+
+    padding: 18px;
+
+    border-radius: 12px;
+
+    margin-bottom: 20px;
+}
+
+.notice h3 {
+    margin: 0 0 8px;
+}
+
+.notice p {
+    margin: 0;
+    color: #64748b;
+}
+
+
+/* BUTTONS */
+
+.action {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.action button {
+    flex: 1;
+
+    padding: 14px;
+
+    border: none;
+    border-radius: 10px;
+
+    background: #2563eb;
+    color: white;
+
+    font-size: 15px;
+    font-weight: bold;
+}
+
+
+/* POST */
+
+.post {
+    background: white;
+
+    padding: 18px;
+
+    margin-bottom: 15px;
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 3px 12px
+        rgba(0,0,0,0.08);
+}
+
+.post-header {
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.post-type {
+    color: #2563eb;
+    font-size: 13px;
+}
+
+.post p {
+    margin: 8px 0;
+    line-height: 1.5;
+}
+
+.reply {
+    color: #64748b;
+    font-size: 14px;
+}
+
+
+/* FOOTER */
+
+.footer {
+    text-align: center;
+
+    padding: 25px;
+
+    color: #64748b;
+
+    font-size: 14px;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="header">
+
+    <h1>💬 Discussion</h1>
+
+    <p>
+        එකතුවෙලා ඉගෙන ගමු 💪
+    </p>
+
+</div>
+
+
+<div class="container">
+
+
+    <!-- NOTICE -->
+
+    <div class="notice">
+
+        <h3>📢 නිවේදනය</h3>
+
+        <p>
+            MCQ ප්‍රශ්න ගැන සාකච්ඡා කරන්න,
+            ඔබට ඇති ප්‍රශ්න අහන්න.
+        </p>
+
+    </div>
+
+
+    <!-- ACTION BUTTONS -->
+
+    <div class="action">
+
+        <button onclick="askQuestion()">
+            📝 ප්‍රශ්නයක් අහන්න
+        </button>
+
+        <button onclick="discussMCQ()">
+            💡 MCQ Discuss
+        </button>
+
+    </div>
+
+
+    <!-- SAMPLE POSTS -->
+
+    <div class="post">
+
+        <div class="post-header">
+            🧪 Chemistry
+        </div>
+
+        <div class="post-type">
+            MCQ Discussion
+        </div>
+
+        <p>
+            අද Chemistry MCQ එකේ
+            12 වන ප්‍රශ්නය ගැන කාටහරි
+            පැහැදිලි කිරීමක් දෙන්න පුළුවන්ද?
+        </p>
+
+        <div class="reply">
+            💬 Replies 2
+        </div>
+
+    </div>
+
+
+    <div class="post">
+
+        <div class="post-header">
+            ⚡ Physics
+        </div>
+
+        <div class="post-type">
+            Question
+        </div>
+
+        <p>
+            මේ ප්‍රශ්නය විසඳන ක්‍රමය
+            කාටහරි කියලා දෙන්න පුළුවන්ද?
+        </p>
+
+        <div class="reply">
+            💬 Replies 3
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<div class="footer">
+
+    MCQ Winner © 2026
+
+    <br>
+
+    එකතුවෙලා ගොඩයමු ❤️
+
+</div>
+
+
+<script>
+
+function askQuestion() {
+
+    alert(
+        "ඉදිරියේදී මෙතනින් ඔබේ ප්‍රශ්නය post කරන්න පුළුවන්."
+    );
+
+}
+
+
+function discussMCQ() {
+
+    alert(
+        "MCQ Discussion එක ඉක්මනින් ලබාදෙන්නම්."
+    );
+
+}
+
+</script>
+
+
+</body>
+
+</html>
