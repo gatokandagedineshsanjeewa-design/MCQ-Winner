@@ -1,0 +1,19 @@
+{
+  "name": "MCQ Winner",
+  "short_name": "MCQ Winner",
+  "id": "/MCQ-Winner/",
+  "start_url": "/MCQ-Winner/",
+  "scope": "/MCQ-Winner/",
+  "display": "standalone",
+  "background_color": "#0b1f3a",
+  "theme_color": "#d4af37",
+  "description": "MCQ Winner – A/L Chemistry and Physics MCQ Practice App",
+  "icons": [
+    {
+      "src": "Logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
