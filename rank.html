@@ -1,0 +1,1439 @@
+<!DOCTYPE html>
+<html lang="si">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>MCQ Winner - Rank List</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #eef4ff;
+    color: #172554;
+}
+
+
+/* HEADER */
+
+.header {
+    background: linear-gradient(
+        135deg,
+        #1e3a8a,
+        #2563eb
+    );
+
+    color: white;
+    text-align: center;
+
+    padding: 28px 20px 35px;
+
+    border-radius:
+        0 0 28px 28px;
+}
+
+.header .logo {
+    font-size: 48px;
+}
+
+.header h1 {
+    margin: 5px 0;
+    font-size: 30px;
+}
+
+.header p {
+    margin: 8px 0 0;
+    opacity: 0.9;
+}
+
+
+/* CONTAINER */
+
+.container {
+    width: 94%;
+    max-width: 700px;
+    margin: 22px auto;
+}
+
+
+/* BACK */
+
+.back-btn {
+    width: 100%;
+
+    padding: 14px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: white;
+
+    color: #1e3a8a;
+
+    font-size: 17px;
+
+    font-weight: bold;
+
+    box-shadow:
+        0 3px 10px
+        rgba(0,0,0,0.08);
+
+    cursor: pointer;
+
+    margin-bottom: 20px;
+}
+
+
+/* DAY INFO */
+
+.day-info {
+    background: white;
+
+    padding: 17px;
+
+    margin-bottom: 20px;
+
+    border-radius: 15px;
+
+    text-align: center;
+
+    box-shadow:
+        0 3px 10px
+        rgba(0,0,0,0.08);
+
+    line-height: 1.7;
+}
+
+.day-info strong {
+    color: #1d4ed8;
+}
+
+
+/* SUBJECT BOX */
+
+.subject-box {
+    background: white;
+
+    border-radius: 20px;
+
+    padding: 20px;
+
+    margin-bottom: 25px;
+
+    box-shadow:
+        0 4px 15px
+        rgba(0,0,0,0.08);
+}
+
+.subject-title {
+    text-align: center;
+
+    margin-bottom: 18px;
+
+    font-size: 24px;
+
+    font-weight: bold;
+}
+
+
+/* MY RANK */
+
+.my-rank {
+    background: #eff6ff;
+
+    border: 2px solid #bfdbfe;
+
+    border-radius: 15px;
+
+    padding: 16px;
+
+    text-align: center;
+
+    margin-bottom: 20px;
+}
+
+.my-rank h3 {
+    margin: 0 0 8px;
+}
+
+.my-rank .rank-number {
+    font-size: 30px;
+
+    font-weight: bold;
+
+    color: #1d4ed8;
+}
+
+.my-rank p {
+    margin: 5px 0;
+}
+
+
+/* RANK ROW */
+
+.rank-row {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    background: #f8fafc;
+
+    padding: 12px;
+
+    margin: 8px 0;
+
+    border-radius: 12px;
+
+    transition: 0.2s;
+}
+
+
+/* CURRENT USER */
+
+.my-row {
+    border: 3px solid #2563eb;
+
+    background: #dbeafe;
+
+    box-shadow:
+        0 3px 12px
+        rgba(37,99,235,0.18);
+}
+
+
+/* RANK NUMBER */
+
+.rank-number {
+    width: 42px;
+
+    text-align: center;
+
+    font-size: 20px;
+
+    font-weight: bold;
+}
+
+
+/* NAME */
+
+.rank-name {
+    flex: 1;
+
+    min-width: 0;
+}
+
+.rank-name strong {
+    display: block;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+}
+
+.rank-name small {
+    color: #64748b;
+}
+
+
+/* SCORE */
+
+.rank-score {
+    text-align: right;
+
+    font-weight: bold;
+
+    white-space: nowrap;
+}
+
+
+/* TIME */
+
+.rank-time {
+    color: #475569;
+
+    font-size: 13px;
+
+    margin-top: 3px;
+}
+
+
+/* TOP THREE */
+
+.first {
+    background: #fef3c7;
+}
+
+.second {
+    background: #f1f5f9;
+}
+
+.third {
+    background: #ffedd5;
+}
+
+
+/* EMPTY */
+
+.loading,
+.empty {
+    text-align: center;
+
+    padding: 25px;
+
+    color: #64748b;
+
+    line-height: 1.7;
+}
+
+
+/* FOOTER */
+
+.footer {
+    text-align: center;
+
+    padding: 25px 10px;
+
+    color: #64748b;
+
+    font-size: 14px;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- HEADER -->
+
+<div class="header">
+
+    <div class="logo">
+        🏆
+    </div>
+
+    <h1>
+        Rank List
+    </h1>
+
+    <p>
+        අද Top 20
+    </p>
+
+</div>
+
+
+
+<div class="container">
+
+
+    <!-- BACK -->
+
+    <button
+        class="back-btn"
+        onclick="window.location.href='index.html'"
+    >
+        ← Home
+    </button>
+
+
+
+    <!-- DAY INFORMATION -->
+
+    <div
+        id="dayInfo"
+        class="day-info"
+    >
+
+        ⏳ Rank List එක
+        load වෙමින්...
+
+    </div>
+
+
+
+    <!-- CHEMISTRY -->
+
+    <div class="subject-box">
+
+        <div class="subject-title">
+
+            🧪 Chemistry
+
+        </div>
+
+
+        <div
+            id="chemistryMyRank"
+            class="my-rank"
+        >
+
+            <div class="loading">
+
+                Rank බලමින්...
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="chemistryList"
+        >
+
+            <div class="loading">
+
+                Loading...
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- PHYSICS -->
+
+    <div class="subject-box">
+
+        <div class="subject-title">
+
+            ⚡ Physics
+
+        </div>
+
+
+        <div
+            id="physicsMyRank"
+            class="my-rank"
+        >
+
+            <div class="loading">
+
+                Rank බලමින්...
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="physicsList"
+        >
+
+            <div class="loading">
+
+                Loading...
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+
+<!-- FOOTER -->
+
+<div class="footer">
+
+    MCQ Winner © 2026
+
+    <br>
+
+    එකතුවෙලා ගොඩයමු ❤️
+
+</div>
+
+
+
+<script type="module">
+
+
+// ========================================
+// FIREBASE APP
+// ========================================
+
+import {
+    initializeApp
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+
+
+// ========================================
+// FIREBASE AUTH
+// ========================================
+
+import {
+    getAuth,
+    onAuthStateChanged
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
+
+// ========================================
+// FIRESTORE
+// ========================================
+
+import {
+    getFirestore,
+    collection,
+    getDocs,
+    query,
+    where
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+
+// ========================================
+// FIREBASE CONFIG
+// ========================================
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyAMkaGYmBuoFama5MW5AhoX9q6cly_-nbg",
+
+    authDomain:
+        "mcq-winner.firebaseapp.com",
+
+    projectId:
+        "mcq-winner",
+
+    storageBucket:
+        "mcq-winner.firebasestorage.app",
+
+    messagingSenderId:
+        "1022060912943",
+
+    appId:
+        "1:1022060912943:web:f6e58414867e32f685c1da",
+
+    measurementId:
+        "G-MBH3NZ728H"
+
+};
+
+
+
+// ========================================
+// INITIALIZE
+// ========================================
+
+const app =
+    initializeApp(
+        firebaseConfig
+    );
+
+
+const auth =
+    getAuth(app);
+
+
+const db =
+    getFirestore(app);
+
+
+
+// ========================================
+// CURRENT USER
+// ========================================
+
+let currentUser = null;
+
+
+
+// ========================================
+// SRI LANKA DATE
+// ========================================
+
+function getSriLankaTime() {
+
+    return new Date(
+
+        new Date().toLocaleString(
+            "en-US",
+            {
+                timeZone:
+                    "Asia/Colombo"
+            }
+        )
+
+    );
+
+}
+
+
+
+// ========================================
+// FORMAT DATE
+// ========================================
+
+function formatDate(
+    date
+) {
+
+    const year =
+        date.getFullYear();
+
+
+    const month =
+        String(
+            date.getMonth() + 1
+        ).padStart(
+            2,
+            "0"
+        );
+
+
+    const day =
+        String(
+            date.getDate()
+        ).padStart(
+            2,
+            "0"
+        );
+
+
+    return (
+
+        year +
+        "-" +
+        month +
+        "-" +
+        day
+
+    );
+
+}
+
+
+
+// ========================================
+// ADD DAYS
+// ========================================
+
+function addDays(
+    date,
+    days
+) {
+
+    const result =
+        new Date(date);
+
+
+    result.setDate(
+        result.getDate() + days
+    );
+
+
+    return result;
+
+}
+
+
+
+// ========================================
+// ACTIVE RANK DATE
+// ========================================
+
+/*
+
+    05:00 AM - 11:59 PM
+    --------------------
+    අද Rank
+
+    00:00 AM - 04:59 AM
+    --------------------
+    පෙර දවසේ Rank
+
+*/
+
+function getRankDate() {
+
+    const now =
+        getSriLankaTime();
+
+
+    const hour =
+        now.getHours();
+
+
+    if (hour < 5) {
+
+        return formatDate(
+
+            addDays(
+                now,
+                -1
+            )
+
+        );
+
+    }
+
+
+    return formatDate(
+        now
+    );
+
+}
+
+
+
+// ========================================
+// SHOW DAY INFO
+// ========================================
+
+function updateDayInfo() {
+
+    const now =
+        getSriLankaTime();
+
+
+    const hour =
+        now.getHours();
+
+
+    const rankDate =
+        getRankDate();
+
+
+    const box =
+        document.getElementById(
+            "dayInfo"
+        );
+
+
+    if (hour < 5) {
+
+        box.innerHTML =
+
+            "🌙 දැන් <b>5:00 AMට කලින්</b>." +
+
+            "<br>" +
+
+            "🏆 පෙන්වන්නේ <b>" +
+            rankDate +
+            "</b> දවසේ Rank List එක.";
+
+    }
+
+    else {
+
+        box.innerHTML =
+
+            "🌅 දැන් <b>5:00 AM පසුයි</b>." +
+
+            "<br>" +
+
+            "🏆 පෙන්වන්නේ <b>" +
+            rankDate +
+            "</b> දවසේ Rank List එක.";
+
+    }
+
+}
+
+
+
+// ========================================
+// FORMAT TIME
+// ========================================
+
+function formatTime(
+    totalSeconds
+) {
+
+    totalSeconds =
+        Number(
+            totalSeconds
+        ) || 0;
+
+
+    const minutes =
+        Math.floor(
+            totalSeconds / 60
+        );
+
+
+    const seconds =
+        totalSeconds % 60;
+
+
+    return (
+
+        String(minutes)
+            .padStart(
+                2,
+                "0"
+            ) +
+
+        ":" +
+
+        String(seconds)
+            .padStart(
+                2,
+                "0"
+            )
+
+    );
+
+}
+
+
+
+// ========================================
+// LOGIN CHECK
+// ========================================
+
+onAuthStateChanged(
+
+    auth,
+
+    async function(user) {
+
+        if (!user) {
+
+            window.location.href =
+                "./login.html";
+
+            return;
+
+        }
+
+
+        currentUser =
+            user;
+
+
+        updateDayInfo();
+
+
+        await loadRanking(
+            "Chemistry"
+        );
+
+
+        await loadRanking(
+            "Physics"
+        );
+
+    }
+
+);
+
+
+
+// ========================================
+// LOAD RANKING
+// ========================================
+
+async function loadRanking(
+    subject
+) {
+
+    const listId =
+
+        subject === "Chemistry"
+
+        ? "chemistryList"
+
+        : "physicsList";
+
+
+    const myRankId =
+
+        subject === "Chemistry"
+
+        ? "chemistryMyRank"
+
+        : "physicsMyRank";
+
+
+    const listElement =
+        document.getElementById(
+            listId
+        );
+
+
+    const myRankElement =
+        document.getElementById(
+            myRankId
+        );
+
+
+    try {
+
+
+        // ====================================
+        // GET ACTIVE DATE
+        // ====================================
+
+        const rankDate =
+            getRankDate();
+
+
+
+        // ====================================
+        // FIRESTORE QUERY
+        // ====================================
+
+        const q =
+            query(
+
+                collection(
+                    db,
+                    "results"
+                ),
+
+                where(
+                    "subject",
+                    "==",
+                    subject
+                ),
+
+                where(
+                    "date",
+                    "==",
+                    rankDate
+                )
+
+            );
+
+
+        const snapshot =
+            await getDocs(q);
+
+
+        const results = [];
+
+
+        snapshot.forEach(
+
+            function(docSnap) {
+
+                results.push({
+
+                    id:
+                        docSnap.id,
+
+                    ...docSnap.data()
+
+                });
+
+            }
+
+        );
+
+
+
+        // ====================================
+        // SORT
+        // ====================================
+
+        results.sort(
+
+            function(a, b) {
+
+                const scoreA =
+                    Number(
+                        a.score
+                    ) || 0;
+
+
+                const scoreB =
+                    Number(
+                        b.score
+                    ) || 0;
+
+
+                // SCORE HIGH → LOW
+
+                if (
+                    scoreA !==
+                    scoreB
+                ) {
+
+                    return (
+
+                        scoreB -
+                        scoreA
+
+                    );
+
+                }
+
+
+
+                // SAME SCORE
+                // TIME LOW → HIGH
+
+                const timeA =
+                    Number(
+                        a.timeTaken
+                    ) || 0;
+
+
+                const timeB =
+                    Number(
+                        b.timeTaken
+                    ) || 0;
+
+
+                return (
+
+                    timeA -
+                    timeB
+
+                );
+
+            }
+
+        );
+
+
+
+        // ====================================
+        // TOP 20
+        // ====================================
+
+        const top20 =
+            results.slice(
+                0,
+                20
+            );
+
+
+
+        // ====================================
+        // EMPTY
+        // ====================================
+
+        if (
+            top20.length === 0
+        ) {
+
+            listElement.innerHTML = `
+
+                <div class="empty">
+
+                    📝 ${rankDate}
+                    දවසේ
+                    ${subject}
+                    Result තවම නැහැ.
+
+                </div>
+
+            `;
+
+        }
+
+        else {
+
+
+            listElement.innerHTML =
+                "";
+
+
+            top20.forEach(
+
+                function(
+                    item,
+                    index
+                ) {
+
+                    const row =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    row.className =
+                        "rank-row";
+
+
+
+                    // ====================================
+                    // CURRENT USER
+                    // ====================================
+
+                    if (
+                        item.uid ===
+                        currentUser.uid
+                    ) {
+
+                        row.classList.add(
+                            "my-row"
+                        );
+
+                    }
+
+
+
+                    // ====================================
+                    // TOP THREE
+                    // ====================================
+
+                    if (
+                        index === 0
+                    ) {
+
+                        row.classList.add(
+                            "first"
+                        );
+
+                    }
+
+                    else if (
+                        index === 1
+                    ) {
+
+                        row.classList.add(
+                            "second"
+                        );
+
+                    }
+
+                    else if (
+                        index === 2
+                    ) {
+
+                        row.classList.add(
+                            "third"
+                        );
+
+                    }
+
+
+
+                    // ====================================
+                    // ICON
+                    // ====================================
+
+                    const rankIcon =
+
+                        index === 0
+                        ? "🥇"
+
+                        : index === 1
+                        ? "🥈"
+
+                        : index === 2
+                        ? "🥉"
+
+                        : (
+                            index + 1
+                        );
+
+
+
+                    // ====================================
+                    // ROW
+                    // ====================================
+
+                    row.innerHTML = `
+
+                        <div class="rank-number">
+
+                            ${rankIcon}
+
+                        </div>
+
+
+                        <div class="rank-name">
+
+                            <strong>
+
+                                ${
+                                    escapeHTML(
+                                        item.name ||
+                                        "Student"
+                                    )
+                                }
+
+                                ${
+                                    item.uid ===
+                                    currentUser.uid
+                                    ? " 👤 You"
+                                    : ""
+                                }
+
+                            </strong>
+
+                            <small>
+
+                                ${item.score}/25
+
+                            </small>
+
+                        </div>
+
+
+                        <div class="rank-score">
+
+                            🏆 ${item.score}/25
+
+                            <div class="rank-time">
+
+                                ⏱️
+                                ${
+                                    formatTime(
+                                        item.timeTaken
+                                    )
+                                }
+
+                            </div>
+
+                        </div>
+
+                    `;
+
+
+                    listElement.appendChild(
+                        row
+                    );
+
+                }
+
+            );
+
+        }
+
+
+
+        // ====================================
+        // MY RESULT
+        // ====================================
+
+        const myResults =
+            results.filter(
+
+                function(item) {
+
+                    return (
+
+                        item.uid ===
+                        currentUser.uid
+
+                    );
+
+                }
+
+            );
+
+
+
+        // ====================================
+        // NO MY RESULT
+        // ====================================
+
+        if (
+            myResults.length === 0
+        ) {
+
+            myRankElement.innerHTML = `
+
+                <h3>
+
+                    👤 ඔබේ
+                    ${subject}
+                    Rank
+
+                </h3>
+
+                <p>
+
+                    ${rankDate}
+                    දවසේ
+                    ${subject}
+                    Test එක
+                    තවම කරලා නැහැ.
+
+                </p>
+
+            `;
+
+        }
+
+        else {
+
+
+            const myResult =
+                myResults[0];
+
+
+            const myIndex =
+                results.findIndex(
+
+                    function(item) {
+
+                        return (
+
+                            item.id ===
+                            myResult.id
+
+                        );
+
+                    }
+
+                );
+
+
+            const myRank =
+                myIndex + 1;
+
+
+
+            myRankElement.innerHTML = `
+
+                <h3>
+
+                    👤 ඔබේ
+                    ${subject}
+                    Rank
+
+                </h3>
+
+
+                <div class="rank-number">
+
+                    #${myRank}
+
+                </div>
+
+
+                <p>
+
+                    🏆 Score:
+
+                    <b>
+
+                        ${myResult.score}/25
+
+                    </b>
+
+                </p>
+
+
+                <p>
+
+                    ⏱️ Time:
+
+                    <b>
+
+                        ${
+                            formatTime(
+                                myResult.timeTaken
+                            )
+                        }
+
+                    </b>
+
+                </p>
+
+            `;
+
+        }
+
+    }
+
+    catch(error) {
+
+        console.error(
+
+            subject +
+            " ranking error:",
+
+            error
+
+        );
+
+
+        listElement.innerHTML = `
+
+            <div class="empty">
+
+                ⚠️ ${subject}
+                Rank List එක
+                load කරන්න බැරි වුණා.
+
+            </div>
+
+        `;
+
+
+        myRankElement.innerHTML = `
+
+            <p>
+
+                ⚠️ ඔබේ Rank එකත්
+                ලබාගන්න බැරි වුණා.
+
+            </p>
+
+        `;
+
+    }
+
+}
+
+
+
+// ========================================
+// ESCAPE HTML
+// ========================================
+
+function escapeHTML(
+    text
+) {
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+
+    div.textContent =
+        text || "";
+
+
+    return div.innerHTML;
+
+}
+
+</script>
+
+
+</body>
+
+</html>
