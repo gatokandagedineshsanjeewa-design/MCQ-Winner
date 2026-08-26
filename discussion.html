@@ -1,0 +1,2221 @@
+<!DOCTYPE html>
+<html lang="si">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Discussion - MCQ Winner</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #eaf2ff;
+    color: #172554;
+}
+
+
+/* ================================
+   HEADER
+================================ */
+
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    background: linear-gradient(
+        135deg,
+        #1e3a8a,
+        #2563eb
+    );
+
+    color: white;
+    padding: 13px 15px;
+
+    box-shadow:
+        0 3px 15px rgba(0,0,0,0.18);
+}
+
+.header-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    max-width: 800px;
+    margin: auto;
+}
+
+.back-btn {
+    width: 42px;
+    height: 42px;
+
+    border: none;
+    border-radius: 50%;
+
+    background: rgba(255,255,255,0.16);
+    color: white;
+
+    font-size: 22px;
+}
+
+.group-icon {
+    width: 43px;
+    height: 43px;
+
+    border-radius: 50%;
+
+    background: white;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 23px;
+}
+
+.header-info {
+    flex: 1;
+}
+
+.header-info h1 {
+    margin: 0;
+    font-size: 20px;
+}
+
+.header-info p {
+    margin: 3px 0 0;
+
+    font-size: 12px;
+    opacity: 0.85;
+}
+
+
+/* ================================
+   PINNED MESSAGE
+================================ */
+
+.pinned-area {
+    display: none;
+
+    position: sticky;
+    top: 68px;
+
+    z-index: 900;
+
+    background: white;
+
+    border-bottom:
+        1px solid #dbeafe;
+
+    padding: 9px 14px;
+
+    box-shadow:
+        0 2px 8px rgba(0,0,0,0.06);
+}
+
+.pinned-inner {
+    max-width: 800px;
+    margin: auto;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.pin-icon {
+    font-size: 20px;
+}
+
+.pinned-content {
+    min-width: 0;
+    flex: 1;
+}
+
+.pinned-title {
+    font-size: 11px;
+    font-weight: bold;
+    color: #2563eb;
+}
+
+.pinned-message {
+    font-size: 13px;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+/* ================================
+   CHAT
+================================ */
+
+.chat {
+    width: 100%;
+    max-width: 800px;
+
+    margin: auto;
+
+    padding:
+        15px
+        12px
+        105px;
+}
+
+
+/* ================================
+   MESSAGE
+================================ */
+
+.message {
+    position: relative;
+
+    max-width: 88%;
+
+    margin-bottom: 14px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.message.mine {
+    margin-left: auto;
+    align-items: flex-end;
+}
+
+.message.other {
+    margin-right: auto;
+    align-items: flex-start;
+}
+
+
+/* NAME */
+
+.message-name {
+    margin:
+        0 9px
+        4px;
+
+    font-size: 12px;
+    font-weight: bold;
+
+    color: #475569;
+}
+
+.admin-badge {
+    display: inline-block;
+
+    margin-left: 5px;
+
+    padding:
+        2px 7px;
+
+    border-radius: 8px;
+
+    background: #f59e0b;
+
+    color: white;
+
+    font-size: 10px;
+}
+
+
+/* BUBBLE */
+
+.bubble {
+    background: white;
+
+    padding:
+        10px 13px;
+
+    border-radius: 17px;
+
+    border-bottom-left-radius: 5px;
+
+    box-shadow:
+        0 2px 7px
+        rgba(0,0,0,0.08);
+
+    font-size: 15px;
+
+    line-height: 1.45;
+
+    word-break: break-word;
+
+    white-space: pre-wrap;
+}
+
+.mine .bubble {
+    background: #2563eb;
+
+    color: white;
+
+    border-bottom-left-radius: 17px;
+    border-bottom-right-radius: 5px;
+}
+
+
+/* ADMIN BUBBLE */
+
+.admin-message .bubble {
+    background: #fff7ed;
+
+    color: #431407;
+
+    border:
+        1px solid #fed7aa;
+}
+
+
+/* TIME */
+
+.message-time {
+    margin:
+        4px 8px
+        0;
+
+    font-size: 10px;
+
+    color: #94a3b8;
+}
+
+
+/* ================================
+   REACTIONS
+================================ */
+
+.reactions {
+    display: flex;
+
+    gap: 4px;
+
+    flex-wrap: wrap;
+
+    margin-top: 3px;
+}
+
+.reaction-item {
+    background: white;
+
+    border:
+        1px solid #dbeafe;
+
+    border-radius: 15px;
+
+    padding:
+        3px 8px;
+
+    font-size: 13px;
+
+    box-shadow:
+        0 1px 4px
+        rgba(0,0,0,0.08);
+}
+
+
+/* ================================
+   REACTION MENU
+================================ */
+
+.reaction-menu {
+    position: fixed;
+
+    display: none;
+
+    background: white;
+
+    padding: 7px;
+
+    border-radius: 22px;
+
+    box-shadow:
+        0 8px 30px
+        rgba(0,0,0,0.28);
+
+    z-index: 5000;
+
+    gap: 4px;
+
+    animation:
+        reactionShow
+        0.15s ease;
+}
+
+@keyframes reactionShow {
+
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+}
+
+.reaction-menu button {
+    width: 42px;
+    height: 42px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #f1f5f9;
+
+    font-size: 21px;
+
+    cursor: pointer;
+}
+
+.reaction-menu button:active {
+    transform: scale(0.88);
+}
+
+
+/* ================================
+   ADMIN MENU
+================================ */
+
+.admin-menu {
+    position: fixed;
+
+    display: none;
+
+    width: 205px;
+
+    background: white;
+
+    padding: 7px;
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 10px 35px
+        rgba(0,0,0,0.3);
+
+    z-index: 6000;
+}
+
+.admin-menu button {
+    width: 100%;
+
+    border: none;
+
+    background: white;
+
+    padding: 12px;
+
+    text-align: left;
+
+    border-radius: 9px;
+
+    font-size: 14px;
+}
+
+.admin-menu button:active {
+    background: #f1f5f9;
+}
+
+
+/* ================================
+   INPUT
+================================ */
+
+.input-area {
+    position: fixed;
+
+    left: 0;
+    bottom: 0;
+
+    width: 100%;
+
+    background:
+        rgba(255,255,255,0.97);
+
+    backdrop-filter: blur(10px);
+
+    border-top:
+        1px solid #dbeafe;
+
+    padding: 9px;
+
+    z-index: 1000;
+}
+
+.input-inner {
+    max-width: 800px;
+
+    margin: auto;
+
+    display: flex;
+
+    align-items: flex-end;
+
+    gap: 8px;
+}
+
+#messageInput {
+    flex: 1;
+
+    min-height: 44px;
+    max-height: 120px;
+
+    resize: none;
+
+    border:
+        1px solid #cbd5e1;
+
+    border-radius: 22px;
+
+    padding:
+        11px 15px;
+
+    font-family: Arial;
+    font-size: 15px;
+
+    outline: none;
+
+    background: #f8fafc;
+}
+
+#messageInput:focus {
+    border-color: #2563eb;
+
+    background: white;
+}
+
+.send-btn {
+    width: 45px;
+    height: 45px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #2563eb;
+
+    color: white;
+
+    font-size: 20px;
+
+    cursor: pointer;
+}
+
+.send-btn:active {
+    transform: scale(0.92);
+}
+
+.send-btn:disabled {
+    opacity: 0.5;
+}
+
+
+/* ================================
+   BLOCKED
+================================ */
+
+.blocked-box {
+    display: none;
+
+    max-width: 800px;
+
+    margin: auto;
+
+    background: #fee2e2;
+
+    color: #991b1b;
+
+    padding: 12px;
+
+    border-radius: 12px;
+
+    text-align: center;
+
+    font-weight: bold;
+}
+
+
+/* ================================
+   EMPTY / LOADING
+================================ */
+
+.empty,
+.loading {
+    text-align: center;
+
+    padding: 70px 20px;
+
+    color: #64748b;
+
+    line-height: 1.6;
+}
+
+
+/* ================================
+   ADMIN PIN LABEL
+================================ */
+
+.pinned-label {
+    display: inline-block;
+
+    margin-left: 5px;
+
+    color: #2563eb;
+
+    font-size: 10px;
+}
+
+
+/* ================================
+   MOBILE
+================================ */
+
+@media (max-width: 500px) {
+
+    .message {
+        max-width: 91%;
+    }
+
+    .bubble {
+        font-size: 14px;
+    }
+
+    .reaction-menu button {
+        width: 39px;
+        height: 39px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================================
+     HEADER
+================================ -->
+
+<div class="header">
+
+    <div class="header-row">
+
+        <button
+            class="back-btn"
+            onclick="window.location.href='index.html'"
+        >
+            ←
+        </button>
+
+        <div class="group-icon">
+            💬
+        </div>
+
+        <div class="header-info">
+
+            <h1>
+                MCQ Winner Discussion
+            </h1>
+
+            <p>
+                🟢 Community Chat
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ================================
+     PINNED
+================================ -->
+
+<div
+    id="pinnedArea"
+    class="pinned-area"
+>
+
+    <div class="pinned-inner">
+
+        <div class="pin-icon">
+            📌
+        </div>
+
+        <div class="pinned-content">
+
+            <div class="pinned-title">
+                PINNED MESSAGE
+            </div>
+
+            <div
+                id="pinnedMessage"
+                class="pinned-message"
+            ></div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ================================
+     CHAT
+================================ -->
+
+<div
+    id="chat"
+    class="chat"
+>
+
+    <div class="loading">
+        ⏳ Messages loading...
+    </div>
+
+</div>
+
+
+
+<!-- ================================
+     INPUT
+================================ -->
+
+<div class="input-area">
+
+    <div
+        id="blockedBox"
+        class="blocked-box"
+    >
+        🚫 ඔබට දැනට message යවන්න අවසර නැහැ.
+    </div>
+
+    <div
+        id="inputInner"
+        class="input-inner"
+    >
+
+        <textarea
+            id="messageInput"
+            placeholder="Message එකක් ලියන්න..."
+            rows="1"
+        ></textarea>
+
+        <button
+            id="sendButton"
+            class="send-btn"
+        >
+            ➤
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<!-- ================================
+     REACTION MENU
+================================ -->
+
+<div
+    id="reactionMenu"
+    class="reaction-menu"
+>
+
+    <button data-reaction="👍">
+        👍
+    </button>
+
+    <button data-reaction="❤️">
+        ❤️
+    </button>
+
+    <button data-reaction="😂">
+        😂
+    </button>
+
+    <button data-reaction="😮">
+        😮
+    </button>
+
+    <button data-reaction="😢">
+        😢
+    </button>
+
+</div>
+
+
+
+<!-- ================================
+     ADMIN MENU
+================================ -->
+
+<div
+    id="adminMenu"
+    class="admin-menu"
+>
+
+    <button id="pinButton">
+        📌 Pin Message
+    </button>
+
+    <button id="blockButton">
+        🚫 Block Student
+    </button>
+
+    <button id="unblockButton">
+        ✅ Unblock Student
+    </button>
+
+</div>
+
+
+
+<script type="module">
+
+
+/* ========================================
+   FIREBASE IMPORTS
+======================================== */
+
+import {
+    initializeApp
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+
+import {
+    getAuth,
+    onAuthStateChanged
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
+import {
+    getFirestore,
+    collection,
+    addDoc,
+    query,
+    orderBy,
+    onSnapshot,
+    serverTimestamp,
+    doc,
+    setDoc,
+    deleteDoc,
+    getDoc
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+/* ========================================
+   FIREBASE CONFIG
+======================================== */
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyAMkaGYmBuoFama5MW5AhoX9q6cly_-nbg",
+
+    authDomain:
+        "mcq-winner.firebaseapp.com",
+
+    projectId:
+        "mcq-winner",
+
+    storageBucket:
+        "mcq-winner.firebasestorage.app",
+
+    messagingSenderId:
+        "1022060912943",
+
+    appId:
+        "1:1022060912943:web:f6e58414867e32f685c1da",
+
+    measurementId:
+        "G-MBH3NZ728H"
+
+};
+
+
+/* ========================================
+   INITIALIZE
+======================================== */
+
+const app =
+    initializeApp(
+        firebaseConfig
+    );
+
+const auth =
+    getAuth(app);
+
+const db =
+    getFirestore(app);
+
+
+/* ========================================
+   ADMIN UID
+======================================== */
+
+const ADMIN_UID =
+    "Npiu0xJQQchrVgHnXRuR8Rr5FOA2";
+
+
+/* ========================================
+   VARIABLES
+======================================== */
+
+let currentUser = null;
+
+let selectedMessage = null;
+
+let selectedStudent = null;
+
+
+/* ========================================
+   AUTH
+======================================== */
+
+onAuthStateChanged(
+
+    auth,
+
+    async function(user) {
+
+        if (!user) {
+
+            window.location.href =
+                "./login.html";
+
+            return;
+
+        }
+
+        currentUser = user;
+
+        await checkBlocked();
+
+        loadMessages();
+
+    }
+
+);
+
+
+/* ========================================
+   BLOCK CHECK
+======================================== */
+
+async function checkBlocked() {
+
+    const ref =
+        doc(
+            db,
+            "blockedUsers",
+            currentUser.uid
+        );
+
+    const snap =
+        await getDoc(ref);
+
+    const blocked =
+        snap.exists();
+
+    document.getElementById(
+        "inputInner"
+    ).style.display =
+        blocked
+        ? "none"
+        : "flex";
+
+    document.getElementById(
+        "blockedBox"
+    ).style.display =
+        blocked
+        ? "block"
+        : "none";
+
+}
+
+
+/* ========================================
+   LOAD MESSAGES
+======================================== */
+
+function loadMessages() {
+
+    const q =
+        query(
+
+            collection(
+                db,
+                "messages"
+            ),
+
+            orderBy(
+                "createdAt",
+                "asc"
+            )
+
+        );
+
+
+    onSnapshot(
+
+        q,
+
+        function(snapshot) {
+
+            const chat =
+                document.getElementById(
+                    "chat"
+                );
+
+            chat.innerHTML = "";
+
+
+            if (snapshot.empty) {
+
+                chat.innerHTML = `
+
+                    <div class="empty">
+
+                        💬
+
+                        <br><br>
+
+                        තවම Discussion
+                        messages නැහැ.
+
+                        <br><br>
+
+                        පළමු message එක
+                        ඔයා දාන්න!
+
+                    </div>
+
+                `;
+
+                hidePinned();
+
+                return;
+
+            }
+
+
+            let pinnedFound = false;
+
+
+            snapshot.forEach(
+
+                function(docSnap) {
+
+                    const data =
+                        docSnap.data();
+
+
+                    renderMessage(
+                        docSnap.id,
+                        data
+                    );
+
+
+                    if (data.pinned) {
+
+                        updatePinnedMessage(
+                            docSnap.id,
+                            data
+                        );
+
+                        pinnedFound = true;
+
+                    }
+
+                }
+
+            );
+
+
+            if (!pinnedFound) {
+
+                hidePinned();
+
+            }
+
+
+            scrollToBottom();
+
+        },
+
+        function(error) {
+
+            console.error(error);
+
+            document.getElementById(
+                "chat"
+            ).innerHTML = `
+
+                <div class="empty">
+
+                    ⚠️ Messages load
+                    කරන්න බැරි වුණා.
+
+                    <br><br>
+
+                    Firestore Rules
+                    check කරන්න.
+
+                </div>
+
+            `;
+
+        }
+
+    );
+
+}
+
+
+/* ========================================
+   RENDER MESSAGE
+======================================== */
+
+function renderMessage(
+    messageId,
+    data
+) {
+
+    const chat =
+        document.getElementById(
+            "chat"
+        );
+
+
+    const message =
+        document.createElement(
+            "div"
+        );
+
+
+    const mine =
+        data.uid ===
+        currentUser.uid;
+
+
+    const isAdmin =
+        data.uid ===
+        ADMIN_UID;
+
+
+    message.className =
+        "message " +
+        (
+            mine
+            ? "mine"
+            : "other"
+        );
+
+
+    if (isAdmin) {
+
+        message.classList.add(
+            "admin-message"
+        );
+
+    }
+
+
+    /* ================================
+       ADMIN NAME
+    ================================= */
+
+    const name =
+        isAdmin
+        ? "Admin"
+        : escapeHTML(
+            data.name ||
+            "Student"
+          );
+
+
+    /* ================================
+       TIME
+    ================================= */
+
+    let timeText = "";
+
+
+    if (data.createdAt) {
+
+        const date =
+            data.createdAt.toDate();
+
+
+        timeText =
+            date.toLocaleTimeString(
+                "en-LK",
+                {
+                    hour: "2-digit",
+                    minute: "2-digit"
+                }
+            );
+
+    }
+
+
+    message.innerHTML = `
+
+        <div class="message-name">
+
+            ${name}
+
+            ${
+                isAdmin
+                ? `
+                    <span class="admin-badge">
+                        👑 ADMIN
+                    </span>
+                  `
+                : ""
+            }
+
+        </div>
+
+
+        <div class="bubble">
+
+            ${escapeHTML(
+                data.text || ""
+            )}
+
+        </div>
+
+
+        <div class="message-time">
+
+            ${timeText}
+
+            ${
+                data.pinned
+                ? `
+                    <span class="pinned-label">
+                        📌 Pinned
+                    </span>
+                  `
+                : ""
+            }
+
+        </div>
+
+
+        <div
+            class="reactions"
+            id="reactions-${messageId}"
+        ></div>
+
+    `;
+
+
+    chat.appendChild(
+        message
+    );
+
+
+    loadReactions(
+        messageId
+    );
+
+
+    /* ====================================
+       LONG PRESS
+    ==================================== */
+
+    let pressTimer = null;
+
+
+    message.addEventListener(
+        "pointerdown",
+        function() {
+
+            pressTimer =
+                setTimeout(
+
+                    function() {
+
+                        selectedMessage =
+                            messageId;
+
+                        selectedStudent =
+                            data.uid;
+
+
+                        /*
+                         * Student reaction
+                         */
+
+                        if (
+                            data.uid !==
+                            currentUser.uid
+                        ) {
+
+                            showReactionMenu(
+                                message
+                            );
+
+                        }
+
+
+                        /*
+                         * Admin menu
+                         */
+
+                        if (
+                            currentUser.uid ===
+                            ADMIN_UID
+                        ) {
+
+                            showAdminMenu(
+                                message,
+                                data
+                            );
+
+                        }
+
+                    },
+
+                    550
+
+                );
+
+        }
+    );
+
+
+    message.addEventListener(
+        "pointerup",
+        function() {
+
+            clearTimeout(
+                pressTimer
+            );
+
+        }
+    );
+
+
+    message.addEventListener(
+        "pointerleave",
+        function() {
+
+            clearTimeout(
+                pressTimer
+            );
+
+        }
+    );
+
+}
+
+
+/* ========================================
+   REACTIONS
+======================================== */
+
+async function loadReactions(
+    messageId
+) {
+
+    const ref =
+        collection(
+
+            db,
+            "messages",
+            messageId,
+            "reactions"
+
+        );
+
+
+    onSnapshot(
+
+        ref,
+
+        function(snapshot) {
+
+            const counts = {};
+
+
+            snapshot.forEach(
+
+                function(docSnap) {
+
+                    const data =
+                        docSnap.data();
+
+
+                    const reaction =
+                        data.reaction;
+
+
+                    counts[reaction] =
+                        (
+                            counts[reaction] ||
+                            0
+                        ) + 1;
+
+                }
+
+            );
+
+
+            const box =
+                document.getElementById(
+                    "reactions-" +
+                    messageId
+                );
+
+
+            if (!box) {
+                return;
+            }
+
+
+            box.innerHTML = "";
+
+
+            Object.keys(counts)
+                .forEach(
+
+                    function(reaction) {
+
+                        const item =
+                            document.createElement(
+                                "span"
+                            );
+
+
+                        item.className =
+                            "reaction-item";
+
+
+                        item.textContent =
+                            reaction +
+                            " " +
+                            counts[reaction];
+
+
+                        box.appendChild(
+                            item
+                        );
+
+                    }
+
+                );
+
+        }
+
+    );
+
+}
+
+
+/* ========================================
+   SHOW REACTION MENU
+======================================== */
+
+function showReactionMenu(
+    messageElement
+) {
+
+    const menu =
+        document.getElementById(
+            "reactionMenu"
+        );
+
+
+    const rect =
+        messageElement.getBoundingClientRect();
+
+
+    menu.style.display =
+        "flex";
+
+
+    let top =
+        rect.top - 55;
+
+
+    if (top < 10) {
+
+        top =
+            rect.bottom + 5;
+
+    }
+
+
+    menu.style.top =
+        top + "px";
+
+
+    menu.style.left =
+        Math.max(
+
+            8,
+
+            Math.min(
+                rect.left,
+                window.innerWidth - 225
+            )
+
+        ) + "px";
+
+}
+
+
+/* ========================================
+   SELECT REACTION
+======================================== */
+
+document
+    .querySelectorAll(
+        "#reactionMenu button"
+    )
+    .forEach(
+
+        function(button) {
+
+            button.addEventListener(
+
+                "click",
+
+                async function() {
+
+                    if (
+                        !currentUser ||
+                        !selectedMessage
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    const reaction =
+                        this.dataset.reaction;
+
+
+                    const reactionRef =
+                        doc(
+
+                            db,
+
+                            "messages",
+
+                            selectedMessage,
+
+                            "reactions",
+
+                            currentUser.uid
+
+                        );
+
+
+                    try {
+
+                        await setDoc(
+
+                            reactionRef,
+
+                            {
+
+                                uid:
+                                    currentUser.uid,
+
+                                reaction:
+                                    reaction,
+
+                                createdAt:
+                                    serverTimestamp()
+
+                            }
+
+                        );
+
+                    }
+
+                    catch(error) {
+
+                        console.error(
+                            error
+                        );
+
+                        alert(
+                            "⚠️ Reaction දාන්න බැරි වුණා."
+                        );
+
+                    }
+
+
+                    hideMenus();
+
+                }
+
+            );
+
+        }
+
+    );
+
+
+/* ========================================
+   ADMIN MENU
+======================================== */
+
+function showAdminMenu(
+    messageElement,
+    data
+) {
+
+    const menu =
+        document.getElementById(
+            "adminMenu"
+        );
+
+
+    const pinButton =
+        document.getElementById(
+            "pinButton"
+        );
+
+
+    if (data.pinned) {
+
+        pinButton.textContent =
+            "📌 Unpin Message";
+
+    }
+
+    else {
+
+        pinButton.textContent =
+            "📌 Pin Message";
+
+    }
+
+
+    const blockButton =
+        document.getElementById(
+            "blockButton"
+        );
+
+
+    const unblockButton =
+        document.getElementById(
+            "unblockButton"
+        );
+
+
+    if (
+        data.uid ===
+        ADMIN_UID
+    ) {
+
+        blockButton.style.display =
+            "none";
+
+        unblockButton.style.display =
+            "none";
+
+    }
+
+    else {
+
+        blockButton.style.display =
+            "block";
+
+        unblockButton.style.display =
+            "block";
+
+    }
+
+
+    const rect =
+        messageElement.getBoundingClientRect();
+
+
+    menu.style.display =
+        "block";
+
+
+    menu.style.top =
+        Math.min(
+            rect.bottom + 5,
+            window.innerHeight - 165
+        ) + "px";
+
+
+    menu.style.left =
+        Math.min(
+            rect.left,
+            window.innerWidth - 215
+        ) + "px";
+
+}
+
+
+/* ========================================
+   PIN / UNPIN
+======================================== */
+
+document.getElementById(
+    "pinButton"
+).addEventListener(
+
+    "click",
+
+    async function() {
+
+        if (
+            currentUser.uid !==
+            ADMIN_UID
+        ) {
+
+            return;
+
+        }
+
+
+        if (!selectedMessage) {
+            return;
+        }
+
+
+        const ref =
+            doc(
+                db,
+                "messages",
+                selectedMessage
+            );
+
+
+        const snap =
+            await getDoc(ref);
+
+
+        if (!snap.exists()) {
+            return;
+        }
+
+
+        const data =
+            snap.data();
+
+
+        await setDoc(
+
+            ref,
+
+            {
+
+                pinned:
+                    !data.pinned
+
+            },
+
+            {
+                merge: true
+            }
+
+        );
+
+
+        hideMenus();
+
+    }
+
+);
+
+
+/* ========================================
+   BLOCK
+======================================== */
+
+document.getElementById(
+    "blockButton"
+).addEventListener(
+
+    "click",
+
+    async function() {
+
+        if (
+            currentUser.uid !==
+            ADMIN_UID
+        ) {
+
+            return;
+
+        }
+
+
+        if (
+            !selectedStudent ||
+            selectedStudent === ADMIN_UID
+        ) {
+
+            return;
+
+        }
+
+
+        await setDoc(
+
+            doc(
+                db,
+                "blockedUsers",
+                selectedStudent
+            ),
+
+            {
+
+                uid:
+                    selectedStudent,
+
+                blockedAt:
+                    serverTimestamp(),
+
+                blockedBy:
+                    ADMIN_UID
+
+            }
+
+        );
+
+
+        alert(
+            "🚫 Student Block කළා."
+        );
+
+
+        hideMenus();
+
+    }
+
+);
+
+
+/* ========================================
+   UNBLOCK
+======================================== */
+
+document.getElementById(
+    "unblockButton"
+).addEventListener(
+
+    "click",
+
+    async function() {
+
+        if (
+            currentUser.uid !==
+            ADMIN_UID
+        ) {
+
+            return;
+
+        }
+
+
+        if (
+            !selectedStudent ||
+            selectedStudent === ADMIN_UID
+        ) {
+
+            return;
+
+        }
+
+
+        await deleteDoc(
+
+            doc(
+                db,
+                "blockedUsers",
+                selectedStudent
+            )
+
+        );
+
+
+        alert(
+            "✅ Student Unblock කළා."
+        );
+
+
+        hideMenus();
+
+    }
+
+);
+
+
+/* ========================================
+   SEND MESSAGE
+======================================== */
+
+document.getElementById(
+    "sendButton"
+).addEventListener(
+    "click",
+    sendMessage
+);
+
+
+document.getElementById(
+    "messageInput"
+).addEventListener(
+
+    "keydown",
+
+    function(event) {
+
+        if (
+            event.key === "Enter" &&
+            !event.shiftKey
+        ) {
+
+            event.preventDefault();
+
+            sendMessage();
+
+        }
+
+    }
+
+);
+
+
+/* ========================================
+   SEND
+======================================== */
+
+async function sendMessage() {
+
+    if (!currentUser) {
+        return;
+    }
+
+
+    const input =
+        document.getElementById(
+            "messageInput"
+        );
+
+
+    const text =
+        input.value.trim();
+
+
+    if (!text) {
+        return;
+    }
+
+
+    if (
+        await isUserBlocked(
+            currentUser.uid
+        )
+    ) {
+
+        alert(
+            "🚫 ඔබට message යවන්න අවසර නැහැ."
+        );
+
+        await checkBlocked();
+
+        return;
+
+    }
+
+
+    const button =
+        document.getElementById(
+            "sendButton"
+        );
+
+
+    button.disabled =
+        true;
+
+
+    try {
+
+        await addDoc(
+
+            collection(
+                db,
+                "messages"
+            ),
+
+            {
+
+                uid:
+                    currentUser.uid,
+
+                name:
+                    currentUser.uid ===
+                    ADMIN_UID
+                    ? "Admin"
+                    : (
+                        currentUser.displayName ||
+                        "Student"
+                      ),
+
+                text:
+                    text,
+
+                createdAt:
+                    serverTimestamp(),
+
+                pinned:
+                    false
+
+            }
+
+        );
+
+
+        input.value = "";
+
+    }
+
+    catch(error) {
+
+        console.error(error);
+
+        alert(
+            "⚠️ Message send කරන්න බැරි වුණා."
+        );
+
+    }
+
+
+    button.disabled =
+        false;
+
+}
+
+
+/* ========================================
+   CHECK BLOCKED
+======================================== */
+
+async function isUserBlocked(uid) {
+
+    const ref =
+        doc(
+            db,
+            "blockedUsers",
+            uid
+        );
+
+
+    const snap =
+        await getDoc(ref);
+
+
+    return snap.exists();
+
+}
+
+
+/* ========================================
+   PINNED DISPLAY
+======================================== */
+
+function updatePinnedMessage(
+    messageId,
+    data
+) {
+
+    const area =
+        document.getElementById(
+            "pinnedArea"
+        );
+
+
+    const text =
+        document.getElementById(
+            "pinnedMessage"
+        );
+
+
+    if (
+        data &&
+        data.pinned
+    ) {
+
+        area.style.display =
+            "block";
+
+
+        const displayName =
+            data.uid === ADMIN_UID
+            ? "Admin"
+            : (
+                data.name ||
+                "Student"
+              );
+
+
+        text.textContent =
+            displayName +
+            ": " +
+            (data.text || "");
+
+    }
+
+}
+
+
+/* ========================================
+   HIDE PINNED
+======================================== */
+
+function hidePinned() {
+
+    document.getElementById(
+        "pinnedArea"
+    ).style.display =
+        "none";
+
+}
+
+
+/* ========================================
+   HIDE MENUS
+======================================== */
+
+function hideMenus() {
+
+    document.getElementById(
+        "reactionMenu"
+    ).style.display =
+        "none";
+
+
+    document.getElementById(
+        "adminMenu"
+    ).style.display =
+        "none";
+
+}
+
+
+/* ========================================
+   OUTSIDE CLICK
+======================================== */
+
+document.addEventListener(
+
+    "click",
+
+    function(event) {
+
+        if (
+            !event.target.closest(
+                ".reaction-menu"
+            ) &&
+            !event.target.closest(
+                ".admin-menu"
+            ) &&
+            !event.target.closest(
+                ".message"
+            )
+        ) {
+
+            hideMenus();
+
+        }
+
+    }
+
+);
+
+
+/* ========================================
+   SCROLL
+======================================== */
+
+function scrollToBottom() {
+
+    setTimeout(
+
+        function() {
+
+            window.scrollTo({
+
+                top:
+                    document.body.scrollHeight,
+
+                behavior:
+                    "smooth"
+
+            });
+
+        },
+
+        100
+
+    );
+
+}
+
+
+/* ========================================
+   ESCAPE HTML
+======================================== */
+
+function escapeHTML(text) {
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+
+    div.textContent =
+        text;
+
+
+    return div.innerHTML;
+
+}
+
+</script>
+
+</body>
+
+</html>
