@@ -1,0 +1,1737 @@
+<!DOCTYPE html>
+<html lang="si">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>MCQ Winner - Members</title>
+
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+
+    margin: 0;
+
+    font-family: Arial, sans-serif;
+
+    background: #eef4ff;
+
+    color: #172554;
+
+}
+
+
+.header {
+
+    background: linear-gradient(
+        135deg,
+        #1e3a8a,
+        #2563eb
+    );
+
+    color: white;
+
+    text-align: center;
+
+    padding: 25px 15px;
+
+}
+
+
+.header h1 {
+
+    margin: 0;
+
+    font-size: 28px;
+
+}
+
+
+.header p {
+
+    margin: 8px 0 0;
+
+    opacity: 0.9;
+
+}
+
+
+.container {
+
+    width: 94%;
+
+    max-width: 750px;
+
+    margin: 20px auto;
+
+}
+
+
+.card {
+
+    background: white;
+
+    padding: 20px;
+
+    border-radius: 18px;
+
+    margin-bottom: 18px;
+
+    box-shadow:
+        0 5px 15px
+        rgba(0,0,0,0.09);
+
+}
+
+
+input {
+
+    width: 100%;
+
+    padding: 14px;
+
+    margin: 10px 0 15px;
+
+    border:
+        1px solid #cbd5e1;
+
+    border-radius: 9px;
+
+    font-size: 17px;
+
+    outline: none;
+
+}
+
+
+button {
+
+    width: 100%;
+
+    padding: 14px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    margin-top: 8px;
+
+}
+
+
+.google-btn {
+
+    background: white;
+
+    color: #1e293b;
+
+    border:
+        1px solid #cbd5e1;
+
+}
+
+
+.pin-btn {
+
+    background: #1e3a8a;
+
+    color: white;
+
+}
+
+
+.refresh-btn {
+
+    background: #2563eb;
+
+    color: white;
+
+}
+
+
+.back-btn {
+
+    background: #e2e8f0;
+
+    color: #172554;
+
+}
+
+
+.logout-btn {
+
+    background: #64748b;
+
+    color: white;
+
+}
+
+
+.stats {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 10px;
+
+}
+
+
+.stat {
+
+    padding: 15px 8px;
+
+    border-radius: 14px;
+
+    text-align: center;
+
+}
+
+
+.stat h2 {
+
+    margin: 0;
+
+    font-size: 25px;
+
+}
+
+
+.stat p {
+
+    margin: 6px 0 0;
+
+    font-size: 13px;
+
+}
+
+
+.total {
+
+    background: #dbeafe;
+
+    color: #1e40af;
+
+}
+
+
+.active {
+
+    background: #dcfce7;
+
+    color: #166534;
+
+}
+
+
+.inactive {
+
+    background: #fee2e2;
+
+    color: #991b1b;
+
+}
+
+
+.admin-box {
+
+    background: #eff6ff;
+
+    color: #1e3a8a;
+
+    padding: 14px;
+
+    border-radius: 12px;
+
+    line-height: 1.6;
+
+    margin-bottom: 15px;
+
+}
+
+
+.user-box {
+
+    background: #f8fafc;
+
+    padding: 13px;
+
+    border-radius: 10px;
+
+    line-height: 1.6;
+
+    word-break: break-word;
+
+}
+
+
+.member {
+
+    background: #f8fafc;
+
+    border:
+        1px solid #e2e8f0;
+
+    border-radius: 15px;
+
+    padding: 17px;
+
+    margin-top: 12px;
+
+}
+
+
+.member-name {
+
+    font-size: 20px;
+
+    font-weight: bold;
+
+    color: #1e3a8a;
+
+    margin-bottom: 8px;
+
+}
+
+
+.member-info {
+
+    line-height: 1.7;
+
+    font-size: 14px;
+
+    word-break: break-word;
+
+}
+
+
+.badge {
+
+    display: inline-block;
+
+    padding: 5px 10px;
+
+    border-radius: 20px;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+}
+
+
+.badge-active {
+
+    background: #dcfce7;
+
+    color: #166534;
+
+}
+
+
+.badge-inactive {
+
+    background: #fee2e2;
+
+    color: #991b1b;
+
+}
+
+
+.message {
+
+    text-align: center;
+
+    font-weight: bold;
+
+    line-height: 1.6;
+
+    margin: 10px 0;
+
+}
+
+
+.loading {
+
+    text-align: center;
+
+    color: #64748b;
+
+    padding: 20px;
+
+}
+
+
+.error {
+
+    background: #fee2e2;
+
+    color: #991b1b;
+
+    padding: 15px;
+
+    border-radius: 12px;
+
+    line-height: 1.6;
+
+}
+
+
+.hidden {
+
+    display: none !important;
+
+}
+
+
+@media (max-width: 450px) {
+
+    .stats {
+
+        grid-template-columns:
+            repeat(3, 1fr);
+
+    }
+
+    .stat h2 {
+
+        font-size: 21px;
+
+    }
+
+    .stat p {
+
+        font-size: 11px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- ========================================
+     HEADER
+======================================== -->
+
+<div class="header">
+
+    <h1>
+        👑 MCQ Winner
+    </h1>
+
+    <p>
+        👥 Members Management
+    </p>
+
+</div>
+
+
+
+<div class="container">
+
+
+<!-- ========================================
+     GOOGLE LOGIN
+======================================== -->
+
+<div
+    class="card"
+    id="loginPanel"
+>
+
+    <h2>
+        🔐 Admin Login
+    </h2>
+
+    <p>
+        Admin Google Account එකෙන් Login වෙන්න.
+    </p>
+
+    <button
+        id="googleLoginButton"
+        class="google-btn"
+    >
+        🔵 Sign in with Google
+    </button>
+
+    <p
+        id="loginMessage"
+        class="message"
+    ></p>
+
+</div>
+
+
+
+<!-- ========================================
+     ADMIN PIN
+======================================== -->
+
+<div
+    class="card hidden"
+    id="pinPanel"
+>
+
+    <h2>
+        🔢 Admin PIN
+    </h2>
+
+
+    <div
+        id="userBox"
+        class="user-box"
+    ></div>
+
+
+    <p>
+        Members page එකට ඇතුල් වීමට
+        Admin PIN එක ඇතුළත් කරන්න.
+    </p>
+
+
+    <input
+        type="password"
+        id="pin"
+        inputmode="numeric"
+        placeholder="Admin PIN"
+    >
+
+
+    <button
+        id="pinLoginButton"
+        class="pin-btn"
+    >
+        🔓 Unlock Members
+    </button>
+
+
+    <p
+        id="pinMessage"
+        class="message"
+    ></p>
+
+</div>
+
+
+
+<!-- ========================================
+     MEMBERS ADMIN PANEL
+======================================== -->
+
+<div
+    id="adminPanel"
+    class="hidden"
+>
+
+
+<!-- ========================================
+     ADMIN INFO
+======================================== -->
+
+<div class="card">
+
+    <div
+        id="adminInfo"
+        class="admin-box"
+    >
+        👑 Admin
+    </div>
+
+
+    <button
+        id="refreshButton"
+        class="refresh-btn"
+    >
+        🔄 Refresh Members
+    </button>
+
+</div>
+
+
+
+<!-- ========================================
+     STATISTICS
+======================================== -->
+
+<div class="card">
+
+    <h2>
+        📊 Member Statistics
+    </h2>
+
+
+    <div class="stats">
+
+
+        <div class="stat total">
+
+            <h2 id="totalCount">
+                0
+            </h2>
+
+            <p>
+                Total
+            </p>
+
+        </div>
+
+
+        <div class="stat active">
+
+            <h2 id="activeCount">
+                0
+            </h2>
+
+            <p>
+                Active
+            </p>
+
+        </div>
+
+
+        <div class="stat inactive">
+
+            <h2 id="inactiveCount">
+                0
+            </h2>
+
+            <p>
+                Inactive
+            </p>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- ========================================
+     MEMBERS
+======================================== -->
+
+<div class="card">
+
+    <h2>
+        👥 All Members
+    </h2>
+
+
+    <div
+        id="message"
+        class="message"
+    ></div>
+
+
+    <div id="memberList">
+
+        <div class="loading">
+            ⏳ Members loading...
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- ========================================
+     NAVIGATION
+======================================== -->
+
+<div class="card">
+
+    <button
+        class="back-btn"
+        id="backButton"
+    >
+        ← Back to Home
+    </button>
+
+
+    <button
+        class="logout-btn"
+        id="logoutButton"
+    >
+        🚪 Admin Logout
+    </button>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+<!-- ========================================
+     FIREBASE
+======================================== -->
+
+<script type="module">
+
+
+/* ========================================
+   FIREBASE APP
+======================================== */
+
+import {
+
+    initializeApp
+
+}
+
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+
+
+/* ========================================
+   AUTH
+======================================== */
+
+import {
+
+    getAuth,
+
+    GoogleAuthProvider,
+
+    signInWithPopup,
+
+    onAuthStateChanged,
+
+    signOut
+
+}
+
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
+
+/* ========================================
+   FIRESTORE
+======================================== */
+
+import {
+
+    getFirestore,
+
+    collection,
+
+    getDocs
+
+}
+
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+
+/* ========================================
+   FIREBASE CONFIG
+======================================== */
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyAMkaGYmBuoFama5MW5AhoX9q6cly_-nbg",
+
+    authDomain:
+        "mcq-winner.firebaseapp.com",
+
+    projectId:
+        "mcq-winner",
+
+    storageBucket:
+        "mcq-winner.firebasestorage.app",
+
+    messagingSenderId:
+        "1022060912943",
+
+    appId:
+        "1:1022060912943:web:f6e58414867e32f685c1da",
+
+    measurementId:
+        "G-MBH3NZ728H"
+
+};
+
+
+
+/* ========================================
+   INITIALIZE
+======================================== */
+
+const app =
+    initializeApp(
+        firebaseConfig
+    );
+
+
+const auth =
+    getAuth(app);
+
+
+const db =
+    getFirestore(app);
+
+
+const provider =
+    new GoogleAuthProvider();
+
+
+
+/* ========================================
+   ADMIN DETAILS
+======================================== */
+
+const ADMIN_UID =
+    "Npiu0xJQQchrVgHnXRuR8Rr5FOA2";
+
+
+const ADMIN_PIN =
+    "6020232";
+
+
+let currentUser =
+    null;
+
+
+let pinUnlocked =
+    false;
+
+
+
+/* ========================================
+   ELEMENTS
+======================================== */
+
+const loginPanel =
+    document.getElementById(
+        "loginPanel"
+    );
+
+
+const pinPanel =
+    document.getElementById(
+        "pinPanel"
+    );
+
+
+const adminPanel =
+    document.getElementById(
+        "adminPanel"
+    );
+
+
+const loginMessage =
+    document.getElementById(
+        "loginMessage"
+    );
+
+
+const pinMessage =
+    document.getElementById(
+        "pinMessage"
+    );
+
+
+const userBox =
+    document.getElementById(
+        "userBox"
+    );
+
+
+const adminInfo =
+    document.getElementById(
+        "adminInfo"
+    );
+
+
+const memberList =
+    document.getElementById(
+        "memberList"
+    );
+
+
+const message =
+    document.getElementById(
+        "message"
+    );
+
+
+const totalCount =
+    document.getElementById(
+        "totalCount"
+    );
+
+
+const activeCount =
+    document.getElementById(
+        "activeCount"
+    );
+
+
+const inactiveCount =
+    document.getElementById(
+        "inactiveCount"
+    );
+
+
+
+/* ========================================
+   GOOGLE LOGIN
+======================================== */
+
+document
+    .getElementById(
+        "googleLoginButton"
+    )
+    .addEventListener(
+        "click",
+        async function() {
+
+
+            loginMessage.textContent =
+                "⏳ Google Login වෙමින්...";
+
+
+            loginMessage.style.color =
+                "#64748b";
+
+
+            try {
+
+                await signInWithPopup(
+                    auth,
+                    provider
+                );
+
+            }
+
+            catch(error) {
+
+                console.error(error);
+
+
+                loginMessage.textContent =
+                    "❌ Google Login Error: " +
+                    error.message;
+
+
+                loginMessage.style.color =
+                    "red";
+
+            }
+
+        }
+    );
+
+
+
+/* ========================================
+   AUTH STATE
+======================================== */
+
+onAuthStateChanged(
+
+    auth,
+
+    function(user) {
+
+
+        if (!user) {
+
+            currentUser =
+                null;
+
+            pinUnlocked =
+                false;
+
+
+            loginPanel.classList.remove(
+                "hidden"
+            );
+
+
+            pinPanel.classList.add(
+                "hidden"
+            );
+
+
+            adminPanel.classList.add(
+                "hidden"
+            );
+
+
+            return;
+
+        }
+
+
+        currentUser =
+            user;
+
+
+
+        /* =================================
+           ADMIN UID CHECK
+        ================================= */
+
+        if (
+            user.uid !==
+            ADMIN_UID
+        ) {
+
+
+            loginMessage.textContent =
+
+                "🚫 මෙම Google Account එකට " +
+                "Admin access නැහැ.";
+
+
+            loginMessage.style.color =
+                "red";
+
+
+            pinPanel.classList.add(
+                "hidden"
+            );
+
+
+            adminPanel.classList.add(
+                "hidden"
+            );
+
+
+            signOut(auth);
+
+
+            return;
+
+        }
+
+
+
+        /* =================================
+           ADMIN GOOGLE ACCOUNT OK
+        ================================= */
+
+        loginPanel.classList.add(
+            "hidden"
+        );
+
+
+        pinPanel.classList.remove(
+            "hidden"
+        );
+
+
+        adminPanel.classList.add(
+            "hidden"
+        );
+
+
+        userBox.textContent =
+
+            "👑 Admin: " +
+
+            (
+                user.displayName ||
+                "Admin"
+            ) +
+
+            "\n" +
+
+            (
+                user.email ||
+                ""
+            );
+
+    }
+
+);
+
+
+
+/* ========================================
+   PIN LOGIN
+======================================== */
+
+document
+    .getElementById(
+        "pinLoginButton"
+    )
+    .addEventListener(
+        "click",
+        unlockAdmin
+    );
+
+
+
+document
+    .getElementById(
+        "pin"
+    )
+    .addEventListener(
+        "keydown",
+        function(event) {
+
+            if (
+                event.key ===
+                "Enter"
+            ) {
+
+                unlockAdmin();
+
+            }
+
+        }
+    );
+
+
+
+function unlockAdmin() {
+
+    const pin =
+        document.getElementById(
+            "pin"
+        ).value;
+
+
+    if (
+        !currentUser ||
+        currentUser.uid !==
+        ADMIN_UID
+    ) {
+
+        pinMessage.textContent =
+            "🚫 Admin access denied.";
+
+        pinMessage.style.color =
+            "red";
+
+        return;
+
+    }
+
+
+    if (
+        pin ===
+        ADMIN_PIN
+    ) {
+
+
+        pinUnlocked =
+            true;
+
+
+        pinPanel.classList.add(
+            "hidden"
+        );
+
+
+        adminPanel.classList.remove(
+            "hidden"
+        );
+
+
+        adminInfo.innerHTML =
+
+            "👑 <b>Admin</b><br>" +
+
+            "👤 " +
+
+            escapeHTML(
+                currentUser.displayName ||
+                "Admin"
+            ) +
+
+            "<br>" +
+
+            "📧 " +
+
+            escapeHTML(
+                currentUser.email ||
+                ""
+            );
+
+
+        loadMembers();
+
+    }
+
+    else {
+
+        pinMessage.textContent =
+            "❌ වැරදි Admin PIN එකක්.";
+
+        pinMessage.style.color =
+            "red";
+
+    }
+
+}
+
+
+
+/* ========================================
+   LOAD MEMBERS
+======================================== */
+
+async function loadMembers() {
+
+
+    if (
+        !currentUser ||
+        currentUser.uid !==
+        ADMIN_UID ||
+        !pinUnlocked
+    ) {
+
+        return;
+
+    }
+
+
+    memberList.innerHTML =
+
+        "<div class='loading'>" +
+        "⏳ Members loading..." +
+        "</div>";
+
+
+    message.textContent =
+        "";
+
+
+    try {
+
+
+        const snapshot =
+            await getDocs(
+
+                collection(
+                    db,
+                    "users"
+                )
+
+            );
+
+
+        const members =
+            [];
+
+
+        snapshot.forEach(
+
+            function(docSnap) {
+
+                members.push({
+
+                    id:
+                        docSnap.id,
+
+                    ...docSnap.data()
+
+                });
+
+            }
+
+        );
+
+
+
+        /* =================================
+           SORT
+        ================================= */
+
+        members.sort(
+
+            function(a, b) {
+
+                const nameA =
+                    (
+                        a.displayName ||
+                        a.name ||
+                        ""
+                    ).toLowerCase();
+
+
+                const nameB =
+                    (
+                        b.displayName ||
+                        b.name ||
+                        ""
+                    ).toLowerCase();
+
+
+                return nameA.localeCompare(
+                    nameB
+                );
+
+            }
+
+        );
+
+
+
+        /* =================================
+           COUNTS
+        ================================= */
+
+        let active = 0;
+
+        let inactive = 0;
+
+
+        members.forEach(
+
+            function(member) {
+
+                if (
+                    member.subscriptionActive ===
+                    true
+                ) {
+
+                    active++;
+
+                }
+
+                else {
+
+                    inactive++;
+
+                }
+
+            }
+
+        );
+
+
+        totalCount.textContent =
+            members.length;
+
+
+        activeCount.textContent =
+            active;
+
+
+        inactiveCount.textContent =
+            inactive;
+
+
+
+        /* =================================
+           NO MEMBERS
+        ================================= */
+
+        if (
+            members.length === 0
+        ) {
+
+            memberList.innerHTML =
+
+                "<div class='loading'>" +
+
+                "👥 තවම membersලා නැහැ." +
+
+                "</div>";
+
+            return;
+
+        }
+
+
+
+        /* =================================
+           DISPLAY
+        ================================= */
+
+        memberList.innerHTML =
+            "";
+
+
+        members.forEach(
+
+            function(member, index) {
+
+
+                const div =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                div.className =
+                    "member";
+
+
+                const name =
+
+                    member.displayName ||
+                    member.name ||
+                    "Unknown User";
+
+
+                const email =
+
+                    member.email ||
+                    "Email නැහැ";
+
+
+                const uid =
+
+                    member.id;
+
+
+                const active =
+
+                    member.subscriptionActive ===
+                    true;
+
+
+                const createdDate =
+
+                    formatDate(
+                        member.createdAt
+                    );
+
+
+                div.innerHTML = `
+
+                    <div class="member-name">
+
+                        ${index + 1}.
+                        ${escapeHTML(name)}
+
+                    </div>
+
+
+                    <div class="member-info">
+
+                        📧
+                        <b>Email:</b>
+                        ${escapeHTML(email)}
+
+                        <br>
+
+                        🆔
+                        <b>UID:</b>
+                        ${escapeHTML(uid)}
+
+                        <br>
+
+                        💳
+                        <b>Subscription:</b>
+
+                        ${
+                            active
+
+                            ?
+
+                            '<span class="badge badge-active">' +
+                            '🟢 Active' +
+                            '</span>'
+
+                            :
+
+                            '<span class="badge badge-inactive">' +
+                            '🔴 Inactive' +
+                            '</span>'
+                        }
+
+                        <br>
+
+                        📅
+                        <b>Account Created:</b>
+                        ${escapeHTML(createdDate)}
+
+                    </div>
+
+                `;
+
+
+                memberList.appendChild(
+                    div
+                );
+
+            }
+
+        );
+
+
+        message.textContent =
+
+            "✅ Members " +
+            members.length +
+            " දෙනෙක් හමු වුණා.";
+
+
+        message.style.color =
+            "#15803d";
+
+    }
+
+
+    catch(error) {
+
+
+        console.error(
+            "Members error:",
+            error
+        );
+
+
+        memberList.innerHTML =
+
+            "<div class='error'>" +
+
+            "❌ Members load කරන්න බැරි වුණා." +
+
+            "<br><br>" +
+
+            escapeHTML(
+                error.message
+            ) +
+
+            "</div>";
+
+    }
+
+}
+
+
+
+/* ========================================
+   FORMAT DATE
+======================================== */
+
+function formatDate(value) {
+
+    if (!value) {
+
+        return "Not available";
+
+    }
+
+
+    try {
+
+
+        if (
+            typeof value.toDate ===
+            "function"
+        ) {
+
+            return value
+                .toDate()
+                .toLocaleString(
+                    "en-GB"
+                );
+
+        }
+
+
+        if (
+            value instanceof Date
+        ) {
+
+            return value
+                .toLocaleString(
+                    "en-GB"
+                );
+
+        }
+
+
+        const date =
+            new Date(value);
+
+
+        if (
+            !isNaN(
+                date.getTime()
+            )
+        ) {
+
+            return date
+                .toLocaleString(
+                    "en-GB"
+                );
+
+        }
+
+
+        return "Not available";
+
+    }
+
+    catch(error) {
+
+        return "Not available";
+
+    }
+
+}
+
+
+
+/* ========================================
+   ESCAPE HTML
+======================================== */
+
+function escapeHTML(text) {
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+
+    div.textContent =
+        text ?? "";
+
+
+    return div.innerHTML;
+
+}
+
+
+
+/* ========================================
+   REFRESH
+======================================== */
+
+document
+    .getElementById(
+        "refreshButton"
+    )
+    .addEventListener(
+
+        "click",
+
+        async function() {
+
+            await loadMembers();
+
+        }
+
+    );
+
+
+
+/* ========================================
+   BACK
+======================================== */
+
+document
+    .getElementById(
+        "backButton"
+    )
+    .addEventListener(
+
+        "click",
+
+        function() {
+
+            window.location.href =
+                "./index.html";
+
+        }
+
+    );
+
+
+
+/* ========================================
+   LOGOUT
+======================================== */
+
+document
+    .getElementById(
+        "logoutButton"
+    )
+    .addEventListener(
+
+        "click",
+
+        async function() {
+
+
+            const yes =
+                confirm(
+                    "Admin Logout කරන්නද?"
+                );
+
+
+            if (!yes) return;
+
+
+            try {
+
+                pinUnlocked =
+                    false;
+
+
+                await signOut(
+                    auth
+                );
+
+
+                window.location.href =
+                    "./index.html";
+
+            }
+
+            catch(error) {
+
+                alert(
+                    "Logout Error: " +
+                    error.message
+                );
+
+            }
+
+        }
+
+    );
+
+
+</script>
+
+
+</body>
+
+</html>
