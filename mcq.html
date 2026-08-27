@@ -1,0 +1,2204 @@
+<!DOCTYPE html>
+<html lang="si">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>MCQ Winner</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f1f5f9;
+    color: #222;
+}
+
+.header {
+    background: #1e3a8a;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+.header h1 {
+    margin: 0;
+}
+
+.header p {
+    margin-bottom: 0;
+}
+
+.container {
+    width: 94%;
+    max-width: 700px;
+    margin: 20px auto;
+}
+
+.progress {
+    background: white;
+    padding: 15px;
+    margin-bottom: 18px;
+    border-radius: 14px;
+    text-align: center;
+    font-weight: bold;
+
+    box-shadow:
+        0 3px 10px
+        rgba(0,0,0,0.08);
+}
+
+.timer {
+    background: #dbeafe;
+    color: #1e3a8a;
+    padding: 12px;
+    margin-bottom: 18px;
+    border-radius: 12px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.start-box {
+    background: white;
+    padding: 30px 20px;
+    margin-bottom: 20px;
+    border-radius: 16px;
+    text-align: center;
+
+    box-shadow:
+        0 3px 10px
+        rgba(0,0,0,0.08);
+}
+
+.start-box h2 {
+    margin-top: 0;
+}
+
+.start-box p {
+    color: #64748b;
+    line-height: 1.6;
+}
+
+.start-btn {
+    width: 100%;
+    padding: 16px;
+    border: none;
+    border-radius: 12px;
+    background: #2563eb;
+    color: white;
+    font-size: 19px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.start-btn:disabled {
+    opacity: 0.6;
+}
+
+.question {
+    background: white;
+    padding: 18px;
+    margin-bottom: 18px;
+    border-radius: 14px;
+
+    box-shadow:
+        0 3px 10px
+        rgba(0,0,0,0.08);
+}
+
+.question h3 {
+    margin-top: 0;
+    line-height: 1.5;
+}
+
+.option {
+    display: block;
+    padding: 13px;
+    margin: 8px 0;
+    background: #f1f5f9;
+    border-radius: 9px;
+    cursor: pointer;
+    line-height: 1.5;
+}
+
+.option:hover {
+    background: #e2e8f0;
+}
+
+.option input {
+    margin-right: 10px;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 16px;
+    border: none;
+    border-radius: 10px;
+    background: #16a34a;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.submit-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+#result {
+    display: none;
+    background: white;
+    padding: 25px;
+    margin-top: 20px;
+    border-radius: 14px;
+    text-align: center;
+
+    box-shadow:
+        0 3px 10px
+        rgba(0,0,0,0.1);
+}
+
+.score {
+    font-size: 30px;
+    color: #1e3a8a;
+    margin: 10px 0;
+}
+
+.locked {
+    background: #fee2e2;
+    color: #991b1b;
+    padding: 20px;
+    margin-bottom: 18px;
+    border-radius: 12px;
+    text-align: center;
+    font-weight: bold;
+    line-height: 1.6;
+}
+
+.info-box {
+    background: #eff6ff;
+    color: #1e3a8a;
+    padding: 18px;
+    border-radius: 12px;
+    text-align: center;
+    line-height: 1.6;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.countdown {
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background:
+        rgba(15, 23, 42, 0.96);
+
+    color: white;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 100px;
+
+    font-weight: bold;
+
+    z-index: 9999;
+}
+
+.countdown.go {
+    font-size: 70px;
+}
+
+
+/* ========================================
+   ADMIN MESSAGE POPUP
+======================================== */
+
+.admin-message-overlay {
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background:
+        rgba(0,0,0,0.55);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    z-index: 99999;
+
+    padding: 20px;
+
+}
+
+.admin-message {
+
+    width: 100%;
+    max-width: 430px;
+
+    background: #27282b;
+
+    color: white;
+
+    border-radius: 22px;
+
+    padding: 25px 22px;
+
+    box-shadow:
+        0 10px 30px
+        rgba(0,0,0,0.35);
+
+}
+
+.admin-message-title {
+
+    font-size: 22px;
+
+    font-weight: bold;
+
+    margin-bottom: 22px;
+
+}
+
+.admin-message-text {
+
+    font-size: 17px;
+
+    line-height: 1.7;
+
+    margin-bottom: 25px;
+
+}
+
+.admin-ok-btn {
+
+    width: auto;
+
+    min-width: 70px;
+
+    padding: 10px 22px;
+
+    background: #2563eb;
+
+    color: white;
+
+    border: none;
+
+    border-radius: 8px;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    float: right;
+
+}
+
+.admin-ok-btn:active {
+
+    transform: scale(0.97);
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<!-- ========================================
+     ADMIN MESSAGE POPUP
+======================================== -->
+
+<div
+    id="adminMessageBox"
+    class="admin-message-overlay hidden"
+>
+
+    <div class="admin-message">
+
+        <div class="admin-message-title">
+            Admin says
+        </div>
+
+        <div
+            id="adminMessageText"
+            class="admin-message-text"
+        ></div>
+
+        <button
+            class="admin-ok-btn"
+            onclick="closeAdminMessage()"
+        >
+            OK
+        </button>
+
+        <div style="clear: both;"></div>
+
+    </div>
+
+</div>
+
+
+<!-- ========================================
+     COUNTDOWN
+======================================== -->
+
+<div
+    id="countdown"
+    class="countdown hidden"
+>
+    3
+</div>
+
+
+<!-- ========================================
+     HEADER
+======================================== -->
+
+<div class="header">
+
+    <h1>
+        MCQ Winner
+    </h1>
+
+    <p id="subjectTitle">
+        Daily MCQ
+    </p>
+
+</div>
+
+
+<div class="container">
+
+
+    <!-- ========================================
+         PROGRESS
+    ======================================== -->
+
+    <div
+        id="progress"
+        class="progress"
+    >
+        අද MCQ Test
+    </div>
+
+
+    <!-- ========================================
+         TIMER
+    ======================================== -->
+
+    <div
+        id="timer"
+        class="timer hidden"
+    >
+        ⏱️ Time: 00:00
+    </div>
+
+
+    <!-- ========================================
+         START BOX
+    ======================================== -->
+
+    <div
+        id="startBox"
+        class="start-box"
+    >
+
+        <h2>
+            📝 අද Test එක
+        </h2>
+
+        <p>
+
+            MCQ 25ටම පිළිතුරු දෙන්න.
+
+            <br><br>
+
+            <b>▶️ Start Test</b>
+            ඔබාගෙන පස්සේ
+
+            <br>
+
+            <b>3 → 2 → 1 → GO!</b>
+
+            <br><br>
+
+            GO! වුණාම Timer එක
+            පටන් ගනී.
+
+        </p>
+
+
+        <button
+            id="startButton"
+            class="start-btn"
+            onclick="startTest()"
+        >
+            ▶️ Start Test
+        </button>
+
+    </div>
+
+
+    <!-- ========================================
+         QUESTIONS
+    ======================================== -->
+
+    <div
+        id="questionsContainer"
+        class="hidden"
+    ></div>
+
+
+    <!-- ========================================
+         SUBMIT
+    ======================================== -->
+
+    <button
+        id="submitButton"
+        class="submit-btn hidden"
+        onclick="submitQuiz()"
+    >
+        ✅ Submit Answers
+    </button>
+
+
+    <!-- ========================================
+         RESULT
+    ======================================== -->
+
+    <div id="result">
+
+        <h2>
+            🏆 Result
+        </h2>
+
+        <div
+            id="score"
+            class="score"
+        ></div>
+
+        <p id="answered"></p>
+
+        <p id="timeResult"></p>
+
+        <p id="saveStatus"></p>
+
+    </div>
+
+
+</div>
+
+
+<script type="module">
+
+
+/* ========================================
+   FIREBASE APP
+======================================== */
+
+import {
+    initializeApp
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+
+/* ========================================
+   FIREBASE AUTH
+======================================== */
+
+import {
+    getAuth,
+    onAuthStateChanged
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
+/* ========================================
+   FIRESTORE
+======================================== */
+
+import {
+    getFirestore,
+    collection,
+    getDocs,
+    query,
+    where,
+    addDoc,
+    serverTimestamp
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+/* ========================================
+   FIREBASE CONFIG
+======================================== */
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyAMkaGYmBuoFama5MW5AhoX9q6cly_-nbg",
+
+    authDomain:
+        "mcq-winner.firebaseapp.com",
+
+    projectId:
+        "mcq-winner",
+
+    storageBucket:
+        "mcq-winner.firebasestorage.app",
+
+    messagingSenderId:
+        "1022060912943",
+
+    appId:
+        "1:1022060912943:web:f6e58414867e32f685c1da",
+
+    measurementId:
+        "G-MBH3NZ728H"
+
+};
+
+
+/* ========================================
+   INITIALIZE
+======================================== */
+
+const app =
+    initializeApp(
+        firebaseConfig
+    );
+
+const auth =
+    getAuth(app);
+
+const db =
+    getFirestore(app);
+
+
+/* ========================================
+   VARIABLES
+======================================== */
+
+let currentUser = null;
+
+let alreadySubmitted = false;
+
+let testStarted = false;
+
+let quizStartTime = null;
+
+let timerInterval = null;
+
+let currentQuestions = [];
+
+
+/* ========================================
+   SUBJECT
+======================================== */
+
+const urlParams =
+    new URLSearchParams(
+        window.location.search
+    );
+
+const selectedSubject =
+    urlParams.get("subject");
+
+
+document.getElementById(
+    "subjectTitle"
+).textContent =
+
+    selectedSubject
+    ? selectedSubject +
+      " - Daily MCQ"
+    : "Daily MCQ";
+
+
+/* ========================================
+   ADMIN MESSAGE
+======================================== */
+
+function showAdminMessage(message) {
+
+    document.getElementById(
+        "adminMessageText"
+    ).textContent = message;
+
+
+    document.getElementById(
+        "adminMessageBox"
+    ).classList.remove(
+        "hidden"
+    );
+
+}
+
+
+function closeAdminMessage() {
+
+    document.getElementById(
+        "adminMessageBox"
+    ).classList.add(
+        "hidden"
+    );
+
+}
+
+
+window.showAdminMessage =
+    showAdminMessage;
+
+window.closeAdminMessage =
+    closeAdminMessage;
+
+
+/* ========================================
+   WAIT
+======================================== */
+
+function wait(milliseconds) {
+
+    return new Promise(
+        function(resolve) {
+
+            setTimeout(
+                resolve,
+                milliseconds
+            );
+
+        }
+    );
+
+}
+
+
+/* ========================================
+   SRI LANKA TIME
+======================================== */
+
+function getSriLankaTime() {
+
+    return new Date(
+
+        new Date().toLocaleString(
+            "en-US",
+            {
+                timeZone:
+                    "Asia/Colombo"
+            }
+        )
+
+    );
+
+}
+
+
+/* ========================================
+   GET DATE STRING
+======================================== */
+
+function formatDate(date) {
+
+    const year =
+        date.getFullYear();
+
+    const month =
+        String(
+            date.getMonth() + 1
+        ).padStart(
+            2,
+            "0"
+        );
+
+    const day =
+        String(
+            date.getDate()
+        ).padStart(
+            2,
+            "0"
+        );
+
+    return (
+
+        year +
+        "-" +
+        month +
+        "-" +
+        day
+
+    );
+
+}
+
+
+/* ========================================
+   DAILY MCQ DATE
+
+   5:00 AM = NEW DAY
+
+   Before 5 AM:
+   previous day's MCQ date
+
+   5 AM onwards:
+   today's MCQ date
+======================================== */
+
+function getMCQDay() {
+
+    const now =
+        getSriLankaTime();
+
+    const hour =
+        now.getHours();
+
+    const minute =
+        now.getMinutes();
+
+
+    let day =
+        new Date(now);
+
+
+    if (
+        hour < 5 ||
+        (
+            hour === 4 &&
+            minute < 60
+        )
+    ) {
+
+        day.setDate(
+            day.getDate() - 1
+        );
+
+    }
+
+
+    return formatDate(day);
+
+}
+
+
+/* ========================================
+   ADMIN PREPARE DATE
+
+   10 PM onwards:
+   Admin can prepare tomorrow's MCQ.
+
+   10 PM - 5 AM = next day MCQ.
+======================================== */
+
+function getAdminMCQDay() {
+
+    const now =
+        getSriLankaTime();
+
+
+    const hour =
+        now.getHours();
+
+
+    const minute =
+        now.getMinutes();
+
+
+    let day =
+        new Date(now);
+
+
+    if (hour >= 22) {
+
+        day.setDate(
+            day.getDate() + 1
+        );
+
+    }
+
+
+    return formatDate(day);
+
+}
+
+
+/* ========================================
+   TEST OPEN/CLOSE
+
+   5:00 AM -> OPEN
+
+   10:00 PM -> CLOSE
+======================================== */
+
+function isTestOpen() {
+
+    const now =
+        getSriLankaTime();
+
+
+    const hour =
+        now.getHours();
+
+
+    const minute =
+        now.getMinutes();
+
+
+    const totalMinutes =
+        hour * 60 +
+        minute;
+
+
+    const opening =
+        5 * 60;
+
+
+    const closing =
+        22 * 60;
+
+
+    return (
+
+        totalMinutes >= opening &&
+        totalMinutes < closing
+
+    );
+
+}
+
+
+/* ========================================
+   TEST CLOSED
+======================================== */
+
+function isTestClosed() {
+
+    return !isTestOpen();
+
+}
+
+
+/* ========================================
+   NEXT OPEN TIME MESSAGE
+======================================== */
+
+function getLockMessage() {
+
+    const now =
+        getSriLankaTime();
+
+    const hour =
+        now.getHours();
+
+
+    if (hour >= 22) {
+
+        return `
+            🔒 අද Test එක රෑ 10:00ට
+            අවසන් වී ඇත.
+
+            <br><br>
+
+            🌅 අලුත් MCQ Test එක
+            උදේ 5:00ට open වේ.
+        `;
+
+    }
+
+
+    return `
+        🔒 දැන් MCQ Test එක open නැහැ.
+
+        <br><br>
+
+        🌅 MCQ Test එක
+        උදේ 5:00 සිට
+        රෑ 10:00 දක්වා open වේ.
+    `;
+
+}
+
+
+/* ========================================
+   LOGIN CHECK
+======================================== */
+
+onAuthStateChanged(
+
+    auth,
+
+    async function(user) {
+
+        if (!user) {
+
+            window.location.href =
+                "./login.html";
+
+            return;
+
+        }
+
+
+        currentUser =
+            user;
+
+
+        if (!isTestOpen()) {
+
+            showTimeLock();
+
+            return;
+
+        }
+
+
+        await checkPreviousResult();
+
+    }
+
+);
+
+
+/* ========================================
+   CHECK PREVIOUS RESULT
+
+   IMPORTANT:
+   Uses MCQ DAY,
+   not normal calendar date.
+======================================== */
+
+async function checkPreviousResult() {
+
+    if (!currentUser) {
+
+        return;
+
+    }
+
+
+    try {
+
+        const today =
+            getMCQDay();
+
+
+        const q =
+            query(
+
+                collection(
+                    db,
+                    "results"
+                ),
+
+                where(
+                    "uid",
+                    "==",
+                    currentUser.uid
+                ),
+
+                where(
+                    "subject",
+                    "==",
+                    selectedSubject
+                ),
+
+                where(
+                    "date",
+                    "==",
+                    today
+                )
+
+            );
+
+
+        const snapshot =
+            await getDocs(q);
+
+
+        if (!snapshot.empty) {
+
+            alreadySubmitted =
+                true;
+
+
+            const previous =
+                snapshot.docs[0].data();
+
+
+            showPreviousResult(
+                previous
+            );
+
+        }
+
+    }
+
+    catch(error) {
+
+        console.error(
+            "Previous result error:",
+            error
+        );
+
+    }
+
+}
+
+
+/* ========================================
+   SHOW PREVIOUS RESULT
+======================================== */
+
+function showPreviousResult(
+    previous
+) {
+
+    document.getElementById(
+        "startBox"
+    ).innerHTML = `
+
+        <h2>
+            ✅ Test Complete
+        </h2>
+
+        <p>
+
+            ඔබ අද
+            ${selectedSubject}
+            Test එක දැනටමත් කර ඇත.
+
+        </p>
+
+        <div class="score">
+
+            🏆
+            ${previous.score}
+            /
+            ${previous.total}
+
+        </div>
+
+        <p>
+
+            නැවත Submit කරන්න
+            බැහැ.
+
+        </p>
+
+    `;
+
+
+    document.getElementById(
+        "submitButton"
+    ).classList.add(
+        "hidden"
+    );
+
+
+    document.getElementById(
+        "timer"
+    ).classList.add(
+        "hidden"
+    );
+
+
+    document.getElementById(
+        "progress"
+    ).textContent =
+        "🏆 අද Test එක complete කර ඇත";
+
+}
+
+
+/* ========================================
+   GET TODAY QUESTIONS
+======================================== */
+
+async function getQuestions() {
+
+    const today =
+        getMCQDay();
+
+
+    const q =
+        query(
+
+            collection(
+                db,
+                "mcqs"
+            ),
+
+            where(
+                "date",
+                "==",
+                today
+            )
+
+        );
+
+
+    const snapshot =
+        await getDocs(q);
+
+
+    const questions = [];
+
+
+    snapshot.forEach(
+
+        function(docSnap) {
+
+            const data =
+                docSnap.data();
+
+
+            if (
+
+                !selectedSubject ||
+
+                data.subject ===
+                selectedSubject
+
+            ) {
+
+                questions.push({
+
+                    id:
+                        docSnap.id,
+
+                    ...data
+
+                });
+
+            }
+
+        }
+
+    );
+
+
+    return questions;
+
+}
+
+
+/* ========================================
+   START TEST
+======================================== */
+
+async function startTest() {
+
+    if (alreadySubmitted) {
+
+        return;
+
+    }
+
+
+    if (!isTestOpen()) {
+
+        showTimeLock();
+
+        return;
+
+    }
+
+
+    const questions =
+        await getQuestions();
+
+
+    /*
+       MCQ 25 CHECK
+
+       IMPORTANT:
+       Browser alert removed.
+       Now uses Admin says popup.
+    */
+
+    if (questions.length < 25) {
+
+        showAdminMessage(
+
+            "⚠️ අද " +
+            selectedSubject +
+            " MCQ 25ක් තවම සම්පූර්ණ නැහැ."
+
+        );
+
+        return;
+
+    }
+
+
+    currentQuestions =
+        questions.slice(0, 25);
+
+
+    document.getElementById(
+        "startButton"
+    ).disabled = true;
+
+
+    const countdown =
+        document.getElementById(
+            "countdown"
+        );
+
+
+    countdown.classList.remove(
+        "hidden"
+    );
+
+    countdown.classList.remove(
+        "go"
+    );
+
+
+    countdown.textContent =
+        "3";
+
+
+    await wait(1000);
+
+
+    if (!isTestOpen()) {
+
+        showTimeLock();
+
+        return;
+
+    }
+
+
+    countdown.textContent =
+        "2";
+
+
+    await wait(1000);
+
+
+    if (!isTestOpen()) {
+
+        showTimeLock();
+
+        return;
+
+    }
+
+
+    countdown.textContent =
+        "1";
+
+
+    await wait(1000);
+
+
+    if (!isTestOpen()) {
+
+        showTimeLock();
+
+        return;
+
+    }
+
+
+    countdown.textContent =
+        "GO!";
+
+
+    countdown.classList.add(
+        "go"
+    );
+
+
+    /*
+       EXACT TEST START
+    */
+
+    quizStartTime =
+        Date.now();
+
+
+    testStarted =
+        true;
+
+
+    await wait(700);
+
+
+    countdown.classList.add(
+        "hidden"
+    );
+
+
+    document.getElementById(
+        "startBox"
+    ).classList.add(
+        "hidden"
+    );
+
+
+    document.getElementById(
+        "timer"
+    ).classList.remove(
+        "hidden"
+    );
+
+
+    document.getElementById(
+        "questionsContainer"
+    ).classList.remove(
+        "hidden"
+    );
+
+
+    document.getElementById(
+        "submitButton"
+    ).classList.remove(
+        "hidden"
+    );
+
+
+    document.getElementById(
+        "progress"
+    ).textContent =
+        "0 / 25 Answered";
+
+
+    showQuestions(
+        currentQuestions
+    );
+
+
+    startTimer();
+
+}
+
+
+/* ========================================
+   TIMER
+======================================== */
+
+function startTimer() {
+
+    if (timerInterval) {
+
+        clearInterval(
+            timerInterval
+        );
+
+    }
+
+
+    timerInterval =
+        setInterval(
+
+            function() {
+
+                if (!isTestOpen()) {
+
+                    clearInterval(
+                        timerInterval
+                    );
+
+
+                    showTimeLock();
+
+                    return;
+
+                }
+
+
+                const elapsed =
+                    Math.floor(
+
+                        (
+                            Date.now() -
+                            quizStartTime
+                        ) / 1000
+
+                    );
+
+
+                document.getElementById(
+                    "timer"
+                ).textContent =
+
+                    "⏱️ Time: " +
+                    formatTime(
+                        elapsed
+                    );
+
+            },
+
+            1000
+
+        );
+
+}
+
+
+/* ========================================
+   SHOW QUESTIONS
+======================================== */
+
+function showQuestions(
+    questions
+) {
+
+    const container =
+        document.getElementById(
+            "questionsContainer"
+        );
+
+
+    container.innerHTML =
+        "";
+
+
+    questions.forEach(
+
+        function(item, index) {
+
+            const questionDiv =
+                document.createElement(
+                    "div"
+                );
+
+
+            questionDiv.className =
+                "question";
+
+
+            let optionsHTML =
+                "";
+
+
+            item.options.forEach(
+
+                function(
+                    option,
+                    optionIndex
+                ) {
+
+                    optionsHTML += `
+
+                        <label class="option">
+
+                            <input
+                                type="radio"
+                                name="question${index}"
+                                value="${optionIndex}"
+                            >
+
+                            ${optionIndex + 1}.
+                            ${escapeHTML(option)}
+
+                        </label>
+
+                    `;
+
+                }
+
+            );
+
+
+            questionDiv.innerHTML = `
+
+                <h3>
+
+                    ${index + 1}.
+                    ${escapeHTML(
+                        item.question
+                    )}
+
+                </h3>
+
+                ${optionsHTML}
+
+            `;
+
+
+            container.appendChild(
+                questionDiv
+            );
+
+        }
+
+    );
+
+
+    updateProgress();
+
+}
+
+
+/* ========================================
+   UPDATE PROGRESS
+======================================== */
+
+function updateProgress() {
+
+    const answered =
+        document.querySelectorAll(
+
+            'input[type="radio"]:checked'
+
+        ).length;
+
+
+    document.getElementById(
+        "progress"
+    ).textContent =
+
+        answered +
+        " / 25 Answered";
+
+}
+
+
+/* ========================================
+   ANSWER CHANGE
+======================================== */
+
+document.addEventListener(
+
+    "change",
+
+    function(event) {
+
+        if (
+
+            event.target.matches(
+                'input[type="radio"]'
+            )
+
+        ) {
+
+            updateProgress();
+
+        }
+
+    }
+
+);
+
+
+/* ========================================
+   TIME LOCK
+======================================== */
+
+function showTimeLock() {
+
+    if (timerInterval) {
+
+        clearInterval(
+            timerInterval
+        );
+
+    }
+
+
+    testStarted =
+        false;
+
+
+    document.getElementById(
+        "startBox"
+    ).classList.add(
+        "hidden"
+    );
+
+
+    document.getElementById(
+        "timer"
+    ).classList.add(
+        "hidden"
+    );
+
+
+    document.getElementById(
+        "questionsContainer"
+    ).classList.remove(
+        "hidden"
+    );
+
+
+    document.getElementById(
+        "questionsContainer"
+    ).innerHTML = `
+
+        <div class="locked">
+
+            ${getLockMessage()}
+
+        </div>
+
+    `;
+
+
+    document.getElementById(
+        "submitButton"
+    ).classList.add(
+        "hidden"
+    );
+
+
+    document.getElementById(
+        "progress"
+    ).textContent =
+        "🔒 Test Closed";
+
+
+    document.getElementById(
+        "countdown"
+    ).classList.add(
+        "hidden"
+    );
+
+}
+
+
+/* ========================================
+   SAVE RESULT
+======================================== */
+
+async function saveResult(
+    score,
+    answered,
+    timeTaken
+) {
+
+    if (!isTestOpen()) {
+
+        throw new Error(
+
+            "🔒 රෑ 10:00 පසු " +
+            "Submit කරන්න බැහැ."
+
+        );
+
+    }
+
+
+    const mcqDay =
+        getMCQDay();
+
+
+    /*
+       CHECK DUPLICATE
+    */
+
+    const q =
+        query(
+
+            collection(
+                db,
+                "results"
+            ),
+
+            where(
+                "uid",
+                "==",
+                currentUser.uid
+            ),
+
+            where(
+                "subject",
+                "==",
+                selectedSubject
+            ),
+
+            where(
+                "date",
+                "==",
+                mcqDay
+            )
+
+        );
+
+
+    const existing =
+        await getDocs(q);
+
+
+    if (!existing.empty) {
+
+        throw new Error(
+
+            "ඔබ අද මේ Test එක " +
+            "submit කරලා තියෙනවා."
+
+        );
+
+    }
+
+
+    /*
+       SAVE RESULT
+    */
+
+    await addDoc(
+
+        collection(
+            db,
+            "results"
+        ),
+
+        {
+
+            uid:
+                currentUser.uid,
+
+            email:
+                currentUser.email ||
+                "",
+
+            name:
+                currentUser.displayName ||
+                "Student",
+
+            subject:
+                selectedSubject ||
+                "",
+
+            date:
+                mcqDay,
+
+            score:
+                score,
+
+            total:
+                25,
+
+            answered:
+                answered,
+
+            timeTaken:
+                timeTaken,
+
+            createdAt:
+                serverTimestamp()
+
+        }
+
+    );
+
+}
+
+
+/* ========================================
+   SUBMIT QUIZ
+======================================== */
+
+async function submitQuiz() {
+
+    if (!testStarted) {
+
+        alert(
+
+            "▶️ මුලින් Start Test " +
+            "button එක click කරන්න."
+
+        );
+
+        return;
+
+    }
+
+
+    /*
+       IMPORTANT:
+       CHECK TIME AGAIN
+    */
+
+    if (!isTestOpen()) {
+
+        showTimeLock();
+
+        return;
+
+    }
+
+
+    const questions =
+        currentQuestions;
+
+
+    if (questions.length < 25) {
+
+        alert(
+
+            "⚠️ MCQ 25ක් " +
+            "සම්පූර්ණ නැහැ."
+
+        );
+
+        return;
+
+    }
+
+
+    let score =
+        0;
+
+
+    let answered =
+        0;
+
+
+    /*
+       CHECK ANSWERS
+    */
+
+    questions.forEach(
+
+        function(item, index) {
+
+            const selected =
+                document.querySelector(
+
+                    'input[name="question' +
+                    index +
+                    '"]:checked'
+
+                );
+
+
+            if (selected) {
+
+                answered++;
+
+
+                const selectedAnswer =
+                    Number(
+                        selected.value
+                    );
+
+
+                if (
+
+                    selectedAnswer ===
+                    Number(item.answer)
+
+                ) {
+
+                    score++;
+
+                }
+
+            }
+
+        }
+
+    );
+
+
+    /*
+       ALL 25 REQUIRED
+    */
+
+    if (answered < 25) {
+
+        alert(
+
+            "⚠️ MCQ 25ටම answer කරන්න.\n\n" +
+
+            "දැනට " +
+            answered +
+            " / 25 answer කරලා තියෙන්නේ."
+
+        );
+
+        return;
+
+    }
+
+
+    /*
+       TIME
+    */
+
+    const timeTaken =
+        Math.floor(
+
+            (
+                Date.now() -
+                quizStartTime
+            ) / 1000
+
+        );
+
+
+    const saveStatus =
+        document.getElementById(
+            "saveStatus"
+        );
+
+
+    saveStatus.textContent =
+        "⏳ Result save කරමින්...";
+
+
+    /*
+       SAVE
+    */
+
+    try {
+
+        await saveResult(
+
+            score,
+
+            answered,
+
+            timeTaken
+
+        );
+
+
+        alreadySubmitted =
+            true;
+
+
+        testStarted =
+            false;
+
+
+        if (timerInterval) {
+
+            clearInterval(
+                timerInterval
+            );
+
+        }
+
+
+        saveStatus.textContent =
+            "✅ Result සාර්ථකව save වුණා.";
+
+    }
+
+    catch(error) {
+
+        console.error(error);
+
+
+        saveStatus.textContent =
+            "⚠️ Result save වුණේ නැහැ.";
+
+
+        alert(
+
+            "⚠️ " +
+            error.message
+
+        );
+
+
+        return;
+
+    }
+
+
+    /*
+       SHOW RESULT
+    */
+
+    document.getElementById(
+        "score"
+    ).textContent =
+
+        score +
+        " / 25";
+
+
+    document.getElementById(
+        "answered"
+    ).textContent =
+
+        "MCQ 25ටම පිළිතුරු ලබා දී ඇත.";
+
+
+    document.getElementById(
+        "timeResult"
+    ).textContent =
+
+        "⏱️ Completion Time: " +
+
+        formatTime(
+            timeTaken
+        );
+
+
+    document.getElementById(
+        "result"
+    ).style.display =
+        "block";
+
+
+    /*
+       DISABLE SUBMIT
+    */
+
+    document.getElementById(
+        "submitButton"
+    ).disabled =
+        true;
+
+
+    /*
+       DISABLE ANSWERS
+    */
+
+    const inputs =
+        document.querySelectorAll(
+
+            'input[type="radio"]'
+
+        );
+
+
+    inputs.forEach(
+
+        function(input) {
+
+            input.disabled =
+                true;
+
+        }
+
+    );
+
+
+    /*
+       SCROLL RESULT
+    */
+
+    document.getElementById(
+        "result"
+    ).scrollIntoView({
+
+        behavior:
+            "smooth"
+
+    });
+
+}
+
+
+/* ========================================
+   FORMAT TIME
+======================================== */
+
+function formatTime(
+    totalSeconds
+) {
+
+    const minutes =
+        Math.floor(
+            totalSeconds / 60
+        );
+
+
+    const seconds =
+        totalSeconds % 60;
+
+
+    return (
+
+        String(minutes)
+            .padStart(
+                2,
+                "0"
+            ) +
+
+        ":" +
+
+        String(seconds)
+            .padStart(
+                2,
+                "0"
+            )
+
+    );
+
+}
+
+
+/* ========================================
+   ESCAPE HTML
+======================================== */
+
+function escapeHTML(text) {
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+
+    div.textContent =
+        text || "";
+
+
+    return div.innerHTML;
+
+}
+
+
+/* ========================================
+   GLOBAL FUNCTIONS
+======================================== */
+
+window.startTest =
+    startTest;
+
+window.submitQuiz =
+    submitQuiz;
+
+</script>
+
+</body>
+
+</html>
