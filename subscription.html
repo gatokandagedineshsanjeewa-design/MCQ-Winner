@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="si">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>MCQ Winner - Subscription</title>
+
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+
+    margin: 0;
+
+    font-family: Arial, sans-serif;
+
+    background: #eef4ff;
+
+    color: #172554;
+
+    min-height: 100vh;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding: 20px;
+
+}
+
+
+.container {
+
+    width: 100%;
+
+    max-width: 430px;
+
+}
+
+
+.card {
+
+    background: white;
+
+    border-radius: 24px;
+
+    padding: 30px 24px;
+
+    text-align: center;
+
+    box-shadow:
+        0 8px 25px
+        rgba(0,0,0,0.12);
+
+}
+
+
+.logo {
+
+    width: 90px;
+
+    height: 90px;
+
+    object-fit: contain;
+
+    margin-bottom: 10px;
+
+}
+
+
+h1 {
+
+    margin: 5px 0;
+
+    color: #1e3a8a;
+
+    font-size: 30px;
+
+}
+
+
+.subtitle {
+
+    color: #64748b;
+
+    margin-bottom: 25px;
+
+    line-height: 1.5;
+
+}
+
+
+.price-box {
+
+    background: #eff6ff;
+
+    border-radius: 18px;
+
+    padding: 22px;
+
+    margin-bottom: 22px;
+
+}
+
+
+.price {
+
+    font-size: 34px;
+
+    font-weight: bold;
+
+    color: #2563eb;
+
+}
+
+
+.week {
+
+    color: #64748b;
+
+    margin-top: 5px;
+
+}
+
+
+.features {
+
+    text-align: left;
+
+    margin: 20px 0;
+
+}
+
+
+.feature {
+
+    padding: 10px 0;
+
+    font-size: 16px;
+
+    line-height: 1.5;
+
+}
+
+
+.subscribe-btn {
+
+    width: 100%;
+
+    padding: 16px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: #2563eb;
+
+    color: white;
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+}
+
+
+.subscribe-btn:active {
+
+    transform: scale(0.98);
+
+}
+
+
+.subscribe-btn:disabled {
+
+    opacity: 0.7;
+
+    cursor: not-allowed;
+
+}
+
+
+.note {
+
+    margin-top: 18px;
+
+    color: #64748b;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+
+}
+
+
+.message {
+
+    margin-top: 15px;
+
+    line-height: 1.6;
+
+    white-space: pre-line;
+
+}
+
+
+.back-btn {
+
+    margin-top: 15px;
+
+    width: 100%;
+
+    padding: 12px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #e2e8f0;
+
+    color: #172554;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+}
+
+
+.active-box {
+
+    background: #dcfce7;
+
+    color: #166534;
+
+    padding: 18px;
+
+    border-radius: 15px;
+
+    margin-top: 20px;
+
+    line-height: 1.6;
+
+    font-weight: bold;
+
+}
+
+
+.loading {
+
+    color: #64748b;
+
+    margin-top: 15px;
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <div class="card">
+
+
+        <!-- ====================================
+             LOGO
+        ===================================== -->
+
+        <img
+            class="logo"
+            src="Logo.png"
+            alt="MCQ Winner Logo"
+        >
+
+
+        <!-- ====================================
+             TITLE
+        ===================================== -->
+
+        <h1>
+            MCQ Winner
+        </h1>
+
+
+        <div class="subtitle">
+
+            Daily MCQ Test access ලබාගන්න
+            subscription එක activate කරන්න.
+
+        </div>
+
+
+        <!-- ====================================
+             PRICE
+        ===================================== -->
+
+        <div class="price-box">
+
+            <div class="price">
+                රු.20
+            </div>
+
+            <div class="week">
+                සතියකට
+            </div>
+
+        </div>
+
+
+        <!-- ====================================
+             FEATURES
+        ===================================== -->
+
+        <div class="features">
+
+
+            <div class="feature">
+
+                ✅ Chemistry – Daily 25 MCQs
+
+            </div>
+
+
+            <div class="feature">
+
+                ✅ Physics – Daily 25 MCQs
+
+            </div>
+
+
+            <div class="feature">
+
+                ✅ Daily Test & Results
+
+            </div>
+
+
+            <div class="feature">
+
+                ✅ Rank List
+
+            </div>
+
+
+            <div class="feature">
+
+                ✅ Discussion
+
+            </div>
+
+
+        </div>
+
+
+        <!-- ====================================
+             SUBSCRIBE BUTTON
+        ===================================== -->
+
+        <button
+            id="subscribeButton"
+            class="subscribe-btn"
+        >
+
+            💳 Subscribe – රු.20 / සතිය
+
+        </button>
+
+
+        <!-- ====================================
+             MESSAGE
+        ===================================== -->
+
+        <div
+            id="message"
+            class="message"
+        ></div>
+
+
+        <!-- ====================================
+             ACTIVE BOX
+        ===================================== -->
+
+        <div
+            id="activeBox"
+            class="active-box"
+            style="display:none;"
+        >
+
+            ✅ ඔබගේ Subscription එක Active.
+
+            <br><br>
+
+            දැන් Daily MCQ Test
+            භාවිතා කළ හැක.
+
+        </div>
+
+
+        <!-- ====================================
+             NOTE
+        ===================================== -->
+
+        <div class="note">
+
+            💳 Payment system එක
+            Google Play Billing සමඟ
+            connect කරනු ඇත.
+
+            <br><br>
+
+            Subscription එක සාර්ථකව
+            activate වූ පසු
+            ඔබගේ account එකට access
+            ලබා දෙනු ඇත.
+
+        </div>
+
+
+        <!-- ====================================
+             BACK BUTTON
+        ===================================== -->
+
+        <button
+            class="back-btn"
+            onclick="goBack()"
+        >
+
+            ← Back to Home
+
+        </button>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- ========================================
+     FIREBASE
+======================================== -->
+
+<script type="module">
+
+
+/* ========================================
+   FIREBASE APP
+======================================== */
+
+import {
+
+    initializeApp
+
+}
+
+from
+
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+
+
+/* ========================================
+   FIREBASE AUTH
+======================================== */
+
+import {
+
+    getAuth,
+
+    onAuthStateChanged
+
+}
+
+from
+
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
+
+/* ========================================
+   FIRESTORE
+======================================== */
+
+import {
+
+    getFirestore,
+
+    doc,
+
+    getDoc
+
+}
+
+from
+
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+
+/* ========================================
+   FIREBASE CONFIG
+======================================== */
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyAMkaGYmBuoFama5MW5AhoX9q6cly_-nbg",
+
+    authDomain:
+        "mcq-winner.firebaseapp.com",
+
+    projectId:
+        "mcq-winner",
+
+    storageBucket:
+        "mcq-winner.firebasestorage.app",
+
+    messagingSenderId:
+        "1022060912943",
+
+    appId:
+        "1:1022060912943:web:f6e58414867e32f685c1da",
+
+    measurementId:
+        "G-MBH3NZ728H"
+
+};
+
+
+
+/* ========================================
+   INITIALIZE FIREBASE
+======================================== */
+
+const app =
+
+    initializeApp(
+        firebaseConfig
+    );
+
+
+const auth =
+
+    getAuth(app);
+
+
+const db =
+
+    getFirestore(app);
+
+
+
+/* ========================================
+   ELEMENTS
+======================================== */
+
+const subscribeButton =
+
+    document.getElementById(
+        "subscribeButton"
+    );
+
+
+const message =
+
+    document.getElementById(
+        "message"
+    );
+
+
+const activeBox =
+
+    document.getElementById(
+        "activeBox"
+    );
+
+
+
+/* ========================================
+   SHOW MESSAGE
+======================================== */
+
+function showMessage(
+    text,
+    success = false
+) {
+
+    message.textContent =
+        text;
+
+
+    if (success) {
+
+        message.style.color =
+            "#15803d";
+
+    }
+
+    else {
+
+        message.style.color =
+            "#dc2626";
+
+    }
+
+}
+
+
+
+/* ========================================
+   CHECK USER
+======================================== */
+
+onAuthStateChanged(
+
+    auth,
+
+    async function(user) {
+
+
+        /* ====================================
+           USER NOT LOGGED IN
+        ==================================== */
+
+        if (!user) {
+
+            window.location.href =
+                "./login.html";
+
+            return;
+
+        }
+
+
+        /* ====================================
+           FIREBASE UID
+        ==================================== */
+
+        const uid =
+            user.uid;
+
+
+        console.log(
+            "Logged in UID:",
+            uid
+        );
+
+
+        try {
+
+
+            /* =================================
+               USERS DOCUMENT
+
+               users/{Firebase UID}
+            ================================= */
+
+            const userRef =
+
+                doc(
+                    db,
+                    "users",
+                    uid
+                );
+
+
+            const userSnap =
+
+                await getDoc(
+                    userRef
+                );
+
+
+            /* =================================
+               DOCUMENT NOT FOUND
+            ================================= */
+
+            if (
+                !userSnap.exists()
+            ) {
+
+                showMessage(
+
+                    "⚠️ ඔබගේ user account information හමු වුණේ නැහැ.\n\n" +
+                    "කරුණාකර නැවත Login වෙන්න."
+
+                );
+
+                subscribeButton.disabled =
+                    true;
+
+                return;
+
+            }
+
+
+            /* =================================
+               USER DATA
+            ================================= */
+
+            const userData =
+                userSnap.data();
+
+
+            console.log(
+                "User data:",
+                userData
+            );
+
+
+            /* =================================
+               SUBSCRIPTION STATUS
+            ================================= */
+
+            const subscriptionActive =
+
+                userData.subscriptionActive ===
+                true;
+
+
+
+            /* =================================
+               ACTIVE
+            ================================= */
+
+            if (
+                subscriptionActive
+            ) {
+
+
+                subscribeButton.disabled =
+                    true;
+
+
+                subscribeButton.textContent =
+                    "✅ Subscription Active";
+
+
+                subscribeButton.style.background =
+                    "#16a34a";
+
+
+                activeBox.style.display =
+                    "block";
+
+
+                showMessage(
+
+                    "ඔබගේ subscription එක දැනට Active.",
+
+                    true
+
+                );
+
+            }
+
+
+            /* =================================
+               NOT ACTIVE
+            ================================= */
+
+            else {
+
+
+                subscribeButton.disabled =
+                    false;
+
+
+                subscribeButton.textContent =
+                    "💳 Subscribe – රු.20 / සතිය";
+
+
+                subscribeButton.style.background =
+                    "#2563eb";
+
+
+                activeBox.style.display =
+                    "none";
+
+
+                showMessage(
+
+                    "Subscription එක activate කරගන්න."
+
+                );
+
+            }
+
+        }
+
+
+        catch(error) {
+
+
+            console.error(
+
+                "Subscription check error:",
+
+                error
+
+            );
+
+
+            subscribeButton.disabled =
+                true;
+
+
+            showMessage(
+
+                "⚠️ Subscription information ලබාගැනීමට නොහැකි විය.\n\n" +
+                "කරුණාකර internet connection එක check කරන්න."
+
+            );
+
+        }
+
+    }
+
+);
+
+
+
+/* ========================================
+   SUBSCRIBE BUTTON
+======================================== */
+
+subscribeButton.addEventListener(
+
+    "click",
+
+    function() {
+
+
+        showMessage(
+
+            "💳 Google Play Billing එක තවම connect කරලා නැහැ.\n\n" +
+            "මේ button එක පසුව Google Play subscription payment එකට connect කරමු."
+
+        );
+
+    }
+
+);
+
+
+
+/* ========================================
+   BACK TO HOME
+======================================== */
+
+window.goBack =
+
+    function() {
+
+        window.location.href =
+            "./index.html";
+
+    };
+
+
+</script>
+
+
+</body>
+
+</html>
