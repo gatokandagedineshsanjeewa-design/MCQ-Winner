@@ -1,0 +1,1963 @@
+<!DOCTYPE html><html lang="si"><head><meta charset="UTF-8"><meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+
+«»
+
+<title>MCQ Winner</title><link
+    rel="manifest"
+    href="manifest.json"
+><meta
+name="theme-color"
+content="#1e3a8a"
+
+«»
+
+<meta
+name="mobile-web-app-capable"
+content="yes"
+
+«»
+
+<meta
+name="apple-mobile-web-app-capable"
+content="yes"
+
+«»
+
+<meta
+name="apple-mobile-web-app-status-bar-style"
+content="default"
+
+«»
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+
+    margin: 0;
+
+    font-family: Arial, sans-serif;
+
+    background: #eef4ff;
+
+    color: #172554;
+
+}
+
+
+/* ========================================
+   LOGIN STATUS
+======================================== */
+
+.login-status {
+
+    position: absolute;
+
+    top: 14px;
+
+    right: 14px;
+
+    background: rgba(255,255,255,0.96);
+
+    color: #172554;
+
+    padding: 8px 13px;
+
+    border-radius: 30px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    box-shadow:
+        0 3px 12px
+        rgba(0,0,0,0.18);
+
+    cursor: pointer;
+
+    z-index: 10;
+
+    max-width: 180px;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    -webkit-tap-highlight-color:
+        transparent;
+
+}
+
+
+.login-status:active {
+
+    transform:
+        scale(0.96);
+
+}
+
+
+.login-dot {
+
+    width: 9px;
+
+    height: 9px;
+
+    border-radius: 50%;
+
+    background: #ef4444;
+
+    flex-shrink: 0;
+
+}
+
+
+.login-dot.online {
+
+    background: #22c55e;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(34,197,94,0.15);
+
+}
+
+
+/* ========================================
+   HEADER
+======================================== */
+
+.header {
+
+    position: relative;
+
+    background: linear-gradient(
+        135deg,
+        #1e3a8a,
+        #2563eb
+    );
+
+    color: white;
+
+    text-align: center;
+
+    padding:
+        55px
+        20px
+        45px;
+
+    border-radius:
+        0 0 30px 30px;
+
+}
+
+
+.logo {
+
+    margin-bottom: 10px;
+
+    cursor: pointer;
+
+    -webkit-tap-highlight-color:
+        transparent;
+
+}
+
+
+.logo img {
+
+    width: 110px;
+
+    height: 110px;
+
+    object-fit: contain;
+
+    display: block;
+
+    margin: 0 auto;
+
+}
+
+
+.header h1 {
+
+    margin: 0;
+
+    font-size: 34px;
+
+    letter-spacing: 1px;
+
+}
+
+
+.tagline {
+
+    margin: 10px 0 0;
+
+    font-size: 22px;
+
+    font-weight: bold;
+
+}
+
+
+.header p {
+
+    margin: 8px 0 0;
+
+    font-size: 16px;
+
+    opacity: 0.9;
+
+}
+
+
+/* ========================================
+   FORMULA
+======================================== */
+
+.formula-box {
+
+    width: 90%;
+
+    max-width: 500px;
+
+    margin:
+        -25px auto
+        25px;
+
+    background: white;
+
+    padding: 18px;
+
+    border-radius: 18px;
+
+    text-align: center;
+
+    box-shadow:
+        0 5px 18px
+        rgba(0,0,0,0.12);
+
+}
+
+
+.formula {
+
+    font-size: 22px;
+
+    font-weight: bold;
+
+    color: #1e3a8a;
+
+    letter-spacing: 2px;
+
+}
+
+
+.formula-box p {
+
+    margin: 8px 0 0;
+
+    color: #64748b;
+
+}
+
+
+/* ========================================
+   CONTAINER
+======================================== */
+
+.container {
+
+    width: 92%;
+
+    max-width: 650px;
+
+    margin: auto;
+
+}
+
+
+.title {
+
+    text-align: center;
+
+    margin:
+        25px 0
+        18px;
+
+}
+
+
+.title h2 {
+
+    margin: 0;
+
+    font-size: 24px;
+
+}
+
+
+.title p {
+
+    margin-top: 7px;
+
+    color: #64748b;
+
+}
+
+
+/* ========================================
+   SUBJECT CARD
+======================================== */
+
+.subject-card {
+
+    background: white;
+
+    padding: 25px;
+
+    margin: 18px 0;
+
+    border-radius: 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    box-shadow:
+        0 5px 15px
+        rgba(0,0,0,0.09);
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+}
+
+
+.subject-card:active {
+
+    transform:
+        scale(0.97);
+
+}
+
+
+.icon {
+
+    width: 65px;
+
+    height: 65px;
+
+    border-radius: 17px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 34px;
+
+}
+
+
+.chemistry-icon {
+
+    background: #dcfce7;
+
+}
+
+
+.physics-icon {
+
+    background: #dbeafe;
+
+}
+
+
+.discussion-icon {
+
+    background: #fef3c7;
+
+}
+
+
+.rank-icon {
+
+    background: #fef3c7;
+
+}
+
+
+.subject-info {
+
+    flex: 1;
+
+}
+
+
+.subject-info h3 {
+
+    margin: 0;
+
+    font-size: 22px;
+
+}
+
+
+.subject-info p {
+
+    margin: 7px 0 0;
+
+    color: #64748b;
+
+}
+
+
+.arrow {
+
+    font-size: 27px;
+
+    color: #2563eb;
+
+}
+
+
+/* ========================================
+   DAILY BOX
+======================================== */
+
+.daily-box {
+
+    background: #172554;
+
+    color: white;
+
+    padding: 22px;
+
+    border-radius: 20px;
+
+    margin: 28px 0;
+
+    text-align: center;
+
+}
+
+
+.daily-box h3 {
+
+    margin: 0;
+
+    font-size: 22px;
+
+}
+
+
+.daily-box p {
+
+    margin: 8px 0 0;
+
+    opacity: 0.85;
+
+}
+
+
+/* ========================================
+   FOOTER
+======================================== */
+
+.footer {
+
+    text-align: center;
+
+    padding: 25px 10px;
+
+    color: #64748b;
+
+    font-size: 14px;
+
+}
+
+
+/* ========================================
+   HIDDEN
+======================================== */
+
+.hidden {
+
+    display: none !important;
+
+}
+
+
+/* ========================================
+   ADMIN MENU
+======================================== */
+
+.admin-menu-overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        rgba(0,0,0,0.55);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    z-index: 9999;
+
+    padding: 20px;
+
+}
+
+
+.admin-menu {
+
+    width: 100%;
+
+    max-width: 360px;
+
+    background: white;
+
+    border-radius: 22px;
+
+    padding: 24px;
+
+    box-shadow:
+        0 10px 35px
+        rgba(0,0,0,0.25);
+
+    text-align: center;
+
+}
+
+
+.admin-menu h2 {
+
+    margin-top: 0;
+
+    color: #1e3a8a;
+
+}
+
+
+.admin-menu p {
+
+    color: #64748b;
+
+}
+
+
+.admin-menu button {
+
+    width: 100%;
+
+    padding: 14px;
+
+    margin-top: 10px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+}
+
+
+.add-mcq-admin {
+
+    background: #16a34a;
+
+    color: white;
+
+}
+
+
+.members-admin {
+
+    background: #2563eb;
+
+    color: white;
+
+}
+
+
+.close-admin {
+
+    background: #e2e8f0;
+
+    color: #334155;
+
+}
+
+</style></head><body><!-- ========================================
+     HEADER
+======================================== --><div class="header"><!-- LOGIN STATUS -->
+
+<div
+    class="login-status"
+    id="loginStatus"
+    onclick="handleLoginStatus()"
+>
+
+    <span
+        class="login-dot"
+        id="loginDot"
+    ></span>
+
+    <span id="loginText">
+        Checking...
+    </span>
+
+</div>
+
+
+<!-- LOGO -->
+
+<div
+    class="logo"
+    id="adminLogo"
+>
+
+    <img
+        src="Logo.png"
+        alt="MCQ Winner Logo"
+    >
+
+</div>
+
+
+<h1>
+    MCQ Winner
+</h1>
+
+
+<div class="tagline">
+    එකතුවෙලා ගොඩයමු 💪
+</div>
+
+
+<p>
+    A/L Daily MCQ Challenge
+</p>
+
+</div><!-- ========================================
+     FORMULA
+======================================== --><div class="formula-box"><div class="formula">
+    ∑ &nbsp; π &nbsp; √ &nbsp; Δ &nbsp; ∞
+</div>
+
+<p>
+    Learn • Practice • Win
+</p>
+
+</div><!-- ========================================
+     MAIN
+======================================== --><div class="container"><div class="title">
+
+    <h2>
+        📚 අද Test එක තෝරන්න
+    </h2>
+
+    <p>
+        දිනපතා MCQ 25ක්
+    </p>
+
+</div>
+
+
+<!-- CHEMISTRY -->
+
+<div
+    class="subject-card"
+    onclick="openSubject('Chemistry')"
+>
+
+    <div class="icon chemistry-icon">
+        🧪
+    </div>
+
+    <div class="subject-info">
+
+        <h3>
+            Chemistry
+        </h3>
+
+        <p>
+            Daily 25 MCQs
+        </p>
+
+    </div>
+
+    <div class="arrow">
+        →
+    </div>
+
+</div>
+
+
+<!-- PHYSICS -->
+
+<div
+    class="subject-card"
+    onclick="openSubject('Physics')"
+>
+
+    <div class="icon physics-icon">
+        ⚡
+    </div>
+
+    <div class="subject-info">
+
+        <h3>
+            Physics
+        </h3>
+
+        <p>
+            Daily 25 MCQs
+        </p>
+
+    </div>
+
+    <div class="arrow">
+        →
+    </div>
+
+</div>
+
+
+<!-- DISCUSSION -->
+
+<div
+    class="subject-card"
+    onclick="window.location.href='discussion.html'"
+>
+
+    <div class="icon discussion-icon">
+        💬
+    </div>
+
+    <div class="subject-info">
+
+        <h3>
+            Discussion
+        </h3>
+
+        <p>
+            ප්‍රශ්න සාකච්ඡා කරන්න
+        </p>
+
+    </div>
+
+    <div class="arrow">
+        →
+    </div>
+
+</div>
+
+
+<!-- RANK -->
+
+<div
+    class="subject-card"
+    onclick="window.location.href='rank.html'"
+>
+
+    <div class="icon rank-icon">
+        🏆
+    </div>
+
+    <div class="subject-info">
+
+        <h3>
+            Rank List
+        </h3>
+
+        <p>
+            අද Top 20 බලන්න
+        </p>
+
+    </div>
+
+    <div class="arrow">
+        →
+    </div>
+
+</div>
+
+
+<!-- DAILY -->
+
+<div class="daily-box">
+
+    <h3>
+        🔥 Daily Challenge
+    </h3>
+
+    <p>
+        අද MCQ 25ක් කරලා
+        ඔබේ Score එක බලන්න!
+    </p>
+
+</div>
+
+</div><!-- ========================================
+     FOOTER
+======================================== --><div class="footer">MCQ Winner © 2026
+
+<br>
+
+එකතුවෙලා ගොඩයමු ❤️
+
+</div><script type="module">
+
+
+/* ========================================
+   FIREBASE
+======================================== */
+
+import {
+    initializeApp
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+
+import {
+    getAuth,
+    onAuthStateChanged,
+    signOut
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
+import {
+    getFirestore,
+    doc,
+    getDoc
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+/* ========================================
+   FIREBASE CONFIG
+======================================== */
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyAMkaGYmBuoFama5MW5AhoX9q6cly_-nbg",
+
+    authDomain:
+        "mcq-winner.firebaseapp.com",
+
+    projectId:
+        "mcq-winner",
+
+    storageBucket:
+        "mcq-winner.firebasestorage.app",
+
+    messagingSenderId:
+        "1022060912943",
+
+    appId:
+        "1:1022060912943:web:f6e58414867e32f685c1da",
+
+    measurementId:
+        "G-MBH3NZ728H"
+
+};
+
+
+/* ========================================
+   INITIALIZE
+======================================== */
+
+const app =
+    initializeApp(
+        firebaseConfig
+    );
+
+
+const auth =
+    getAuth(app);
+
+
+const db =
+    getFirestore(app);
+
+
+/* ========================================
+   ADMIN UID
+======================================== */
+
+const ADMIN_UID =
+    "Npiu0xJQQchrVgHnXRuR8Rr5FOA2";
+
+
+/* ========================================
+   LOGIN PAGE
+======================================== */
+
+const LOGIN_URL =
+    "./login.html";
+
+
+/* ========================================
+   LOGIN UI
+======================================== */
+
+const loginStatus =
+    document.getElementById(
+        "loginStatus"
+    );
+
+
+const loginText =
+    document.getElementById(
+        "loginText"
+    );
+
+
+const loginDot =
+    document.getElementById(
+        "loginDot"
+    );
+
+
+/* ========================================
+   CURRENT USER DATA
+======================================== */
+
+let currentUser = null;
+
+let currentUserData = null;
+
+let authReady = false;
+
+
+/* ========================================
+   SESSION MARKER
+======================================== */
+
+const loginSession =
+    sessionStorage.getItem(
+        "mcqLoginSession"
+    );
+
+
+/*
+   Session marker එක නැත්නම්
+   Login page එකට යවන්න.
+*/
+
+if (!loginSession) {
+
+    window.location.replace(
+        LOGIN_URL
+    );
+
+}
+
+
+/* ========================================
+   DATE CONVERTER
+======================================== */
+
+function getDateValue(value) {
+
+    if (!value) {
+
+        return null;
+
+    }
+
+
+    /* Firestore Timestamp */
+
+    if (
+        typeof value.toDate ===
+        "function"
+    ) {
+
+        return value.toDate();
+
+    }
+
+
+    /* JavaScript Date */
+
+    if (
+        value instanceof Date
+    ) {
+
+        return value;
+
+    }
+
+
+    /* Timestamp-like */
+
+    if (
+        typeof value.seconds ===
+        "number"
+    ) {
+
+        return new Date(
+            value.seconds * 1000
+        );
+
+    }
+
+
+    /* String / Number */
+
+    const date =
+        new Date(value);
+
+
+    if (
+        isNaN(
+            date.getTime()
+        )
+    ) {
+
+        return null;
+
+    }
+
+
+    return date;
+
+}
+
+
+/* ========================================
+   STUDENT ACCESS
+======================================== */
+
+function hasStudentAccess(
+    userData
+) {
+
+    const now =
+        new Date();
+
+
+    /* ====================================
+       PAID SUBSCRIPTION
+    ==================================== */
+
+    if (
+        userData.subscriptionActive === true
+    ) {
+
+        const subscriptionUntil =
+            getDateValue(
+                userData.subscriptionUntil
+            );
+
+
+        if (
+
+            subscriptionUntil &&
+
+            subscriptionUntil.getTime() >
+            now.getTime()
+
+        ) {
+
+            return true;
+
+        }
+
+    }
+
+
+    /* ====================================
+       2 DAY FREE TRIAL
+    ==================================== */
+
+    if (
+        userData.trialActive === true
+    ) {
+
+        const trialUntil =
+            getDateValue(
+                userData.trialUntil
+            );
+
+
+        if (
+
+            trialUntil &&
+
+            trialUntil.getTime() >
+            now.getTime()
+
+        ) {
+
+            return true;
+
+        }
+
+    }
+
+
+    return false;
+
+}
+
+
+/* ========================================
+   AUTH STATE
+======================================== */
+
+onAuthStateChanged(
+
+    auth,
+
+    async function(user) {
+
+
+        /* =================================
+           NOT LOGGED IN
+        ================================= */
+
+        if (!user) {
+
+            currentUser = null;
+
+            currentUserData = null;
+
+            sessionStorage.removeItem(
+                "mcqLoginSession"
+            );
+
+
+            window.location.replace(
+                LOGIN_URL
+            );
+
+
+            return;
+
+        }
+
+
+        currentUser =
+            user;
+
+
+        /* =================================
+           ADMIN
+        ================================= */
+
+        if (
+            user.uid === ADMIN_UID
+        ) {
+
+            currentUserData = {
+                role: "admin"
+            };
+
+
+            authReady = true;
+
+
+            loginText.textContent =
+                "👑 Admin";
+
+
+            loginDot.classList.add(
+                "online"
+            );
+
+
+            loginStatus.dataset.loggedIn =
+                "true";
+
+
+            loginStatus.dataset.role =
+                "admin";
+
+
+            return;
+
+        }
+
+
+        /* =================================
+           STUDENT PROFILE
+        ================================= */
+
+        try {
+
+            const userRef =
+                doc(
+                    db,
+                    "users",
+                    user.uid
+                );
+
+
+            const userSnap =
+                await getDoc(
+                    userRef
+                );
+
+
+            /* =================================
+               PROFILE NOT FOUND
+            ================================= */
+
+            if (
+                !userSnap.exists()
+            ) {
+
+                await signOut(
+                    auth
+                );
+
+
+                sessionStorage.removeItem(
+                    "mcqLoginSession"
+                );
+
+
+                window.location.replace(
+                    LOGIN_URL
+                );
+
+
+                return;
+
+            }
+
+
+            const userData =
+                userSnap.data();
+
+
+            /* =================================
+               ADMIN ROLE PROTECTION
+            ================================= */
+
+            if (
+                userData.role === "admin"
+            ) {
+
+                /*
+                   Firestore says admin,
+                   but UID is not the
+                   approved Admin UID.
+                */
+
+                await signOut(
+                    auth
+                );
+
+
+                sessionStorage.removeItem(
+                    "mcqLoginSession"
+                );
+
+
+                window.location.replace(
+                    LOGIN_URL
+                );
+
+
+                return;
+
+            }
+
+
+            currentUserData =
+                userData;
+
+
+            authReady = true;
+
+
+            /* =================================
+               STUDENT NAME
+            ================================= */
+
+            let studentName =
+                String(
+                    userData.name ||
+                    "Student"
+                ).trim();
+
+
+            if (!studentName) {
+
+                studentName =
+                    "Student";
+
+            }
+
+
+            const firstName =
+                studentName
+                    .split(/\s+/)[0];
+
+
+            loginText.textContent =
+                "🟢 " +
+                firstName;
+
+
+            loginDot.classList.add(
+                "online"
+            );
+
+
+            loginStatus.dataset.loggedIn =
+                "true";
+
+
+            loginStatus.dataset.role =
+                "student";
+
+
+        }
+
+        catch(error) {
+
+            console.error(
+                "Student profile error:",
+                error
+            );
+
+
+            /*
+               Firebase error එකක් නිසා
+               login immediately block
+               නොකරනවා.
+            */
+
+            loginText.textContent =
+                "Student";
+
+        }
+
+    }
+
+);
+
+
+/* ========================================
+   LOGIN STATUS
+======================================== */
+
+window.handleLoginStatus =
+    function() {
+
+
+        if (!authReady) {
+
+            return;
+
+        }
+
+
+        if (!currentUser) {
+
+            window.location.href =
+                LOGIN_URL;
+
+            return;
+
+        }
+
+
+        /*
+           දැනට status button එක
+           logout button එකක් නෙවෙයි.
+        */
+
+    };
+
+
+/* ========================================
+   OPEN SUBJECT
+======================================== */
+
+window.openSubject =
+    async function(subject) {
+
+
+        /* =================================
+           AUTH READY වෙනකම් WAIT
+        ================================= */
+
+        if (!authReady) {
+
+            alert(
+                "⏳ Account එක verify කරමින් පවතී. ටිකක් රැඳී සිටින්න."
+            );
+
+            return;
+
+        }
+
+
+        const user =
+            auth.currentUser;
+
+
+        /* =================================
+           USER CHECK
+        ================================= */
+
+        if (!user) {
+
+            sessionStorage.removeItem(
+                "mcqLoginSession"
+            );
+
+
+            window.location.href =
+                LOGIN_URL;
+
+
+            return;
+
+        }
+
+
+        /* =================================
+           ADMIN
+        ================================= */
+
+        if (
+            user.uid === ADMIN_UID
+        ) {
+
+            window.location.href =
+                "mcq.html?subject=" +
+                encodeURIComponent(
+                    subject
+                );
+
+
+            return;
+
+        }
+
+
+        /* =================================
+           STUDENT PROFILE
+        ================================= */
+
+        try {
+
+            const userRef =
+                doc(
+                    db,
+                    "users",
+                    user.uid
+                );
+
+
+            const userSnap =
+                await getDoc(
+                    userRef
+                );
+
+
+            if (
+                !userSnap.exists()
+            ) {
+
+                await signOut(
+                    auth
+                );
+
+
+                sessionStorage.removeItem(
+                    "mcqLoginSession"
+                );
+
+
+                window.location.href =
+                    LOGIN_URL;
+
+
+                return;
+
+            }
+
+
+            const userData =
+                userSnap.data();
+
+
+            /* =================================
+               ADMIN ROLE PROTECTION
+            ================================= */
+
+            if (
+                userData.role === "admin"
+            ) {
+
+                await signOut(
+                    auth
+                );
+
+
+                sessionStorage.removeItem(
+                    "mcqLoginSession"
+                );
+
+
+                window.location.href =
+                    LOGIN_URL;
+
+
+                return;
+
+            }
+
+
+            /* =================================
+               TRIAL / SUBSCRIPTION
+            ================================= */
+
+            const access =
+                hasStudentAccess(
+                    userData
+                );
+
+
+            if (!access) {
+
+                /*
+                   Trial ඉවරයි.
+                   Paid subscription අවශ්‍යයි.
+                */
+
+                window.location.href =
+                    "./subscription.html";
+
+
+                return;
+
+            }
+
+
+            /* =================================
+               ACCESS GRANTED
+            ================================= */
+
+            window.location.href =
+                "mcq.html?subject=" +
+                encodeURIComponent(
+                    subject
+                );
+
+        }
+
+        catch(error) {
+
+            console.error(
+                "MCQ access error:",
+                error
+            );
+
+
+            alert(
+                "⚠️ Account information ලබාගැනීමට නොහැකි විය.\n\n" +
+                "Internet connection එක පරීක්ෂා කර නැවත උත්සාහ කරන්න."
+            );
+
+        }
+
+    };
+
+
+/* ========================================
+   ADMIN MENU SECURITY
+======================================== */
+
+window.openAdminMenu =
+    function() {
+
+
+        /*
+           Firebase authentication
+           complete වෙලා නැත්නම්
+           menu එක open කරන්න එපා.
+        */
+
+        if (!authReady) {
+
+            return;
+
+        }
+
+
+        const user =
+            auth.currentUser;
+
+
+        /*
+           ONLY APPROVED ADMIN UID
+        */
+
+        if (
+            !user ||
+            user.uid !== ADMIN_UID
+        ) {
+
+            return;
+
+        }
+
+
+        showAdminMenu();
+
+    };
+
+
+/* ========================================
+   ADMIN MENU
+======================================== */
+
+function showAdminMenu() {
+
+
+    /*
+       Existing menu එකක් තියෙනවා නම්
+       duplicate කරන්න එපා.
+    */
+
+    if (
+        document.querySelector(
+            ".admin-menu-overlay"
+        )
+    ) {
+
+        return;
+
+    }
+
+
+    const overlay =
+        document.createElement(
+            "div"
+        );
+
+
+    overlay.className =
+        "admin-menu-overlay";
+
+
+    overlay.innerHTML = `
+
+        <div class="admin-menu">
+
+            <h2>
+                👑 Admin Menu
+            </h2>
+
+            <p>
+                MCQ Winner Administration
+            </p>
+
+            <button
+                class="add-mcq-admin"
+                id="adminAddMCQ"
+            >
+                ➕ Add MCQ
+            </button>
+
+            <button
+                class="members-admin"
+                id="adminMembers"
+            >
+                👥 Members
+            </button>
+
+            <button
+                class="close-admin"
+                id="adminClose"
+            >
+                ✖ Close
+            </button>
+
+        </div>
+
+    `;
+
+
+    document.body.appendChild(
+        overlay
+    );
+
+
+    /* =================================
+       ADD MCQ
+    ================================= */
+
+    document
+        .getElementById(
+            "adminAddMCQ"
+        )
+        .addEventListener(
+
+            "click",
+
+            function() {
+
+                window.location.href =
+                    "add-mcq.html";
+
+            }
+
+        );
+
+
+    /* =================================
+       MEMBERS
+    ================================= */
+
+    document
+        .getElementById(
+            "adminMembers"
+        )
+        .addEventListener(
+
+            "click",
+
+            function() {
+
+                window.location.href =
+                    "members.html";
+
+            }
+
+        );
+
+
+    /* =================================
+       CLOSE
+    ================================= */
+
+    document
+        .getElementById(
+            "adminClose"
+        )
+        .addEventListener(
+
+            "click",
+
+            function() {
+
+                overlay.remove();
+
+            }
+
+        );
+
+
+    /* =================================
+       OUTSIDE CLICK
+    ================================= */
+
+    overlay.addEventListener(
+
+        "click",
+
+        function(event) {
+
+            if (
+                event.target === overlay
+            ) {
+
+                overlay.remove();
+
+            }
+
+        }
+
+    );
+
+}
+
+
+/* ========================================
+   LOGO 5-TAP
+======================================== */
+
+let adminTapCount = 0;
+
+let adminTapTimer = null;
+
+
+const adminLogo =
+    document.getElementById(
+        "adminLogo"
+    );
+
+
+adminLogo.addEventListener(
+
+    "click",
+
+    function() {
+
+
+        /* =================================
+           ADMIN ONLY
+        ================================= */
+
+        const user =
+            auth.currentUser;
+
+
+        /*
+           Student / not logged in නම්
+           taps count කරන්නේවත් නැහැ.
+        */
+
+        if (
+            !user ||
+            user.uid !== ADMIN_UID
+        ) {
+
+            adminTapCount = 0;
+
+            return;
+
+        }
+
+
+        adminTapCount++;
+
+
+        clearTimeout(
+            adminTapTimer
+        );
+
+
+        adminTapTimer =
+            setTimeout(
+
+                function() {
+
+                    adminTapCount = 0;
+
+                },
+
+                2000
+
+            );
+
+
+        if (
+            adminTapCount >= 5
+        ) {
+
+            adminTapCount = 0;
+
+
+            clearTimeout(
+                adminTapTimer
+            );
+
+
+            window.openAdminMenu();
+
+        }
+
+    }
+
+);
+
+</script><script>
+
+
+/* ========================================
+   SERVICE WORKER
+======================================== */
+
+if (
+    "serviceWorker"
+    in navigator
+) {
+
+    window.addEventListener(
+
+        "load",
+
+        function() {
+
+            navigator.serviceWorker.register(
+                "./pwabuilder-sw.js"
+            )
+
+            .then(
+
+                function() {
+
+                    console.log(
+                        "MCQ Winner Service Worker registered"
+                    );
+
+                }
+
+            )
+
+            .catch(
+
+                function(error) {
+
+                    console.log(
+                        "Service Worker registration failed:",
+                        error
+                    );
+
+                }
+
+            );
+
+        }
+
+    );
+
+}
+
+</script></body></html>
