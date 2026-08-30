@@ -1,0 +1,2670 @@
+<!DOCTYPE html><html lang="si"><head><meta charset="UTF-8"><meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+
+«»
+
+<title>MCQ Winner - Members</title><style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #eef4ff;
+    color: #172554;
+}
+
+.header {
+    background: linear-gradient(
+        135deg,
+        #1e3a8a,
+        #2563eb
+    );
+
+    color: white;
+    text-align: center;
+    padding: 25px 15px;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 28px;
+}
+
+.header p {
+    margin: 8px 0 0;
+    opacity: 0.9;
+}
+
+.container {
+    width: 94%;
+    max-width: 750px;
+    margin: 20px auto;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 18px;
+    margin-bottom: 18px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.09);
+}
+
+.admin-box {
+    background: #eff6ff;
+    color: #1e3a8a;
+    padding: 14px;
+    border-radius: 12px;
+    line-height: 1.6;
+}
+
+.trial-box {
+    background: #f0fdf4;
+    border: 1px solid #86efac;
+    border-radius: 15px;
+    padding: 17px;
+}
+
+.trial-status {
+    padding: 13px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    font-weight: bold;
+    line-height: 1.6;
+}
+
+.trial-active {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.trial-inactive {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+label {
+    display: block;
+    margin-top: 12px;
+    font-weight: bold;
+    color: #1e3a8a;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 13px;
+    margin-top: 7px;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    font-size: 15px;
+    background: white;
+}
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: #2563eb;
+}
+
+button {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+button:disabled {
+    opacity: 0.6;
+}
+
+.refresh-btn {
+    background: #2563eb;
+    color: white;
+}
+
+.back-btn {
+    background: #e2e8f0;
+    color: #172554;
+}
+
+.logout-btn {
+    background: #64748b;
+    color: white;
+}
+
+.save-trial-btn {
+    background: #16a34a;
+    color: white;
+}
+
+.disable-trial-btn {
+    background: #dc2626;
+    color: white;
+}
+
+.approve-btn {
+    background: #16a34a;
+    color: white;
+}
+
+.reject-btn {
+    background: #dc2626;
+    color: white;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.stat {
+    padding: 15px 8px;
+    border-radius: 14px;
+    text-align: center;
+}
+
+.stat h2 {
+    margin: 0;
+    font-size: 25px;
+}
+
+.stat p {
+    margin: 6px 0 0;
+    font-size: 13px;
+}
+
+.total {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.active {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.inactive {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.pending-stat {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.member {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 15px;
+    padding: 17px;
+    margin-top: 12px;
+}
+
+.member-name {
+    font-size: 20px;
+    font-weight: bold;
+    color: #1e3a8a;
+    margin-bottom: 8px;
+}
+
+.member-info {
+    line-height: 1.7;
+    font-size: 14px;
+    word-break: break-word;
+}
+
+.payment-request {
+    background: #fffbeb;
+    border: 1px solid #f59e0b;
+    border-radius: 15px;
+    padding: 17px;
+    margin-top: 12px;
+}
+
+.payment-name {
+    font-size: 19px;
+    font-weight: bold;
+    color: #92400e;
+    margin-bottom: 8px;
+}
+
+.payment-info {
+    line-height: 1.7;
+    font-size: 14px;
+    word-break: break-word;
+}
+
+.badge {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.badge-active {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.badge-inactive {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.badge-pending {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.message {
+    text-align: center;
+    font-weight: bold;
+    line-height: 1.6;
+    margin: 10px 0;
+}
+
+.loading {
+    text-align: center;
+    color: #64748b;
+    padding: 20px;
+}
+
+.empty {
+    background: #f8fafc;
+    color: #64748b;
+    padding: 18px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.error {
+    background: #fee2e2;
+    color: #991b1b;
+    padding: 15px;
+    border-radius: 12px;
+    line-height: 1.6;
+}
+
+.success-box {
+    background: #dcfce7;
+    color: #166534;
+    padding: 14px;
+    border-radius: 12px;
+    line-height: 1.6;
+    margin-top: 12px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+@media (max-width: 550px) {
+
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .stat h2 {
+        font-size: 21px;
+    }
+
+    .stat p {
+        font-size: 11px;
+    }
+
+}
+
+</style></head><body><div class="header"><h1>
+    👑 MCQ Winner
+</h1>
+
+<p>
+    👥 Members Management
+</p>
+
+</div><div class="container"><!-- ========================================
+     ACCESS CHECK
+======================================== --><div
+    id="loadingPanel"
+    class="card"
+><div class="loading">
+    ⏳ Admin access verify කරමින්...
+</div>
+
+</div><!-- ========================================
+     ADMIN PANEL
+======================================== --><div
+    id="adminPanel"
+    class="hidden"
+><!-- ========================================
+     ADMIN INFO
+======================================== --><div class="card"><div
+    id="adminInfo"
+    class="admin-box"
+>
+    👑 Admin
+</div>
+
+<button
+    id="refreshButton"
+    class="refresh-btn"
+>
+    🔄 Refresh
+</button>
+
+</div><!-- ========================================
+     FREE TRIAL SETTINGS
+======================================== --><div class="card"><h2>
+    🎁 Free Trial Settings
+</h2>
+
+<p>
+    මෙතනින් සියලුම අලුත් Student accounts සඳහා
+    Free Trial එක active වන කාලය සකස් කරන්න.
+</p>
+
+
+<div
+    id="trialStatus"
+    class="trial-status trial-inactive"
+>
+    ⏳ Trial settings loading...
+</div>
+
+
+<div class="trial-box">
+
+
+    <label for="trialStart">
+        🟢 Trial ON Date & Time
+    </label>
+
+    <input
+        type="datetime-local"
+        id="trialStart"
+    >
+
+
+    <label for="trialEnd">
+        🔴 Trial OFF Date & Time
+    </label>
+
+    <input
+        type="datetime-local"
+        id="trialEnd"
+    >
+
+
+    <button
+        id="saveTrialButton"
+        class="save-trial-btn"
+    >
+        💾 Save / Enable Free Trial
+    </button>
+
+
+    <button
+        id="disableTrialButton"
+        class="disable-trial-btn"
+    >
+        🛑 Disable Free Trial
+    </button>
+
+
+</div>
+
+
+<div
+    id="trialMessage"
+    class="message"
+></div>
+
+</div><!-- ========================================
+     STATISTICS
+======================================== --><div class="card"><h2>
+    📊 Member Statistics
+</h2>
+
+<div class="stats">
+
+    <div class="stat total">
+
+        <h2 id="totalCount">
+            0
+        </h2>
+
+        <p>
+            Total
+        </p>
+
+    </div>
+
+
+    <div class="stat active">
+
+        <h2 id="activeCount">
+            0
+        </h2>
+
+        <p>
+            Active
+        </p>
+
+    </div>
+
+
+    <div class="stat inactive">
+
+        <h2 id="inactiveCount">
+            0
+        </h2>
+
+        <p>
+            Inactive
+        </p>
+
+    </div>
+
+
+    <div class="stat pending-stat">
+
+        <h2 id="pendingCount">
+            0
+        </h2>
+
+        <p>
+            Pending
+        </p>
+
+    </div>
+
+</div>
+
+</div><!-- ========================================
+     PAYMENT REQUESTS
+======================================== --><div class="card"><h2>
+    💳 Pending Payments
+</h2>
+
+<p>
+    Bank Transfer කරලා submit කරපු
+    payment requests මෙතනින් Approve කරන්න.
+</p>
+
+<div
+    id="paymentMessage"
+    class="message"
+></div>
+
+<div id="paymentList">
+
+    <div class="loading">
+        ⏳ Payment requests loading...
+    </div>
+
+</div>
+
+</div><!-- ========================================
+     ALL MEMBERS
+======================================== --><div class="card"><h2>
+    👥 All Members
+</h2>
+
+<div
+    id="memberMessage"
+    class="message"
+></div>
+
+<div id="memberList">
+
+    <div class="loading">
+        ⏳ Members loading...
+    </div>
+
+</div>
+
+</div><!-- ========================================
+     NAVIGATION
+======================================== --><div class="card"><button
+    class="back-btn"
+    id="backButton"
+>
+    ← Back to Home
+</button>
+
+<button
+    class="logout-btn"
+    id="logoutButton"
+>
+    🚪 Admin Logout
+</button>
+
+</div></div></div><script type="module">
+
+
+/* ========================================
+   FIREBASE
+======================================== */
+
+import {
+    initializeApp
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+
+import {
+    getAuth,
+    onAuthStateChanged,
+    signOut
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
+import {
+    getFirestore,
+    collection,
+    getDocs,
+    doc,
+    getDoc,
+    setDoc,
+    updateDoc,
+    serverTimestamp,
+    Timestamp,
+    query,
+    where
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+/* ========================================
+   FIREBASE CONFIG
+======================================== */
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyAMkaGYmBuoFama5MW5AhoX9q6cly_-nbg",
+
+    authDomain:
+        "mcq-winner.firebaseapp.com",
+
+    projectId:
+        "mcq-winner",
+
+    storageBucket:
+        "mcq-winner.firebasestorage.app",
+
+    messagingSenderId:
+        "1022060912943",
+
+    appId:
+        "1:1022060912943:web:f6e58414867e32f685c1da",
+
+    measurementId:
+        "G-MBH3NZ728H"
+
+};
+
+
+/* ========================================
+   INITIALIZE
+======================================== */
+
+const app =
+    initializeApp(
+        firebaseConfig
+    );
+
+const auth =
+    getAuth(app);
+
+const db =
+    getFirestore(app);
+
+
+/* ========================================
+   ADMIN
+======================================== */
+
+const ADMIN_UID =
+    "Npiu0xJQQchrVgHnXRuR8Rr5FOA2";
+
+
+let currentUser =
+    null;
+
+
+/* ========================================
+   ELEMENTS
+======================================== */
+
+const loadingPanel =
+    document.getElementById(
+        "loadingPanel"
+    );
+
+const adminPanel =
+    document.getElementById(
+        "adminPanel"
+    );
+
+const adminInfo =
+    document.getElementById(
+        "adminInfo"
+    );
+
+const memberList =
+    document.getElementById(
+        "memberList"
+    );
+
+const memberMessage =
+    document.getElementById(
+        "memberMessage"
+    );
+
+const paymentList =
+    document.getElementById(
+        "paymentList"
+    );
+
+const paymentMessage =
+    document.getElementById(
+        "paymentMessage"
+    );
+
+const totalCount =
+    document.getElementById(
+        "totalCount"
+    );
+
+const activeCount =
+    document.getElementById(
+        "activeCount"
+    );
+
+const inactiveCount =
+    document.getElementById(
+        "inactiveCount"
+    );
+
+const pendingCount =
+    document.getElementById(
+        "pendingCount"
+    );
+
+const trialStart =
+    document.getElementById(
+        "trialStart"
+    );
+
+const trialEnd =
+    document.getElementById(
+        "trialEnd"
+    );
+
+const trialStatus =
+    document.getElementById(
+        "trialStatus"
+    );
+
+const trialMessage =
+    document.getElementById(
+        "trialMessage"
+    );
+
+const saveTrialButton =
+    document.getElementById(
+        "saveTrialButton"
+    );
+
+const disableTrialButton =
+    document.getElementById(
+        "disableTrialButton"
+    );
+
+
+/* ========================================
+   AUTH STATE
+======================================== */
+
+onAuthStateChanged(
+
+    auth,
+
+    async function(user) {
+
+        loadingPanel.classList.add(
+            "hidden"
+        );
+
+
+        if (!user) {
+
+            window.location.replace(
+                "./login.html"
+            );
+
+            return;
+
+        }
+
+
+        currentUser =
+            user;
+
+
+        if (
+            user.uid !== ADMIN_UID
+        ) {
+
+            alert(
+                "🚫 Admin access only."
+            );
+
+
+            await signOut(
+                auth
+            );
+
+
+            window.location.replace(
+                "./login.html"
+            );
+
+
+            return;
+
+        }
+
+
+        adminPanel.classList.remove(
+            "hidden"
+        );
+
+
+        adminInfo.innerHTML =
+
+            "👑 <b>Admin</b><br>" +
+
+            "👤 " +
+
+            escapeHTML(
+                user.displayName ||
+                "Admin"
+            ) +
+
+            "<br>" +
+
+            "📧 " +
+
+            escapeHTML(
+                user.email ||
+                ""
+            );
+
+
+        await loadTrialSettings();
+
+        await loadMembers();
+
+        await loadPaymentRequests();
+
+    }
+
+);
+
+
+/* ========================================
+   LOAD TRIAL SETTINGS
+======================================== */
+
+async function loadTrialSettings() {
+
+    if (
+        !currentUser ||
+        currentUser.uid !== ADMIN_UID
+    ) {
+
+        return;
+
+    }
+
+
+    trialMessage.textContent =
+        "";
+
+
+    trialStatus.className =
+        "trial-status trial-inactive";
+
+
+    trialStatus.textContent =
+        "⏳ Trial settings loading...";
+
+
+    try {
+
+        const trialRef =
+            doc(
+                db,
+                "settings",
+                "trial"
+            );
+
+
+        const trialSnap =
+            await getDoc(
+                trialRef
+            );
+
+
+        if (
+            !trialSnap.exists()
+        ) {
+
+            trialStatus.className =
+                "trial-status trial-inactive";
+
+
+            trialStatus.innerHTML =
+                "🔴 <b>Free Trial සකස් කරලා නැහැ.</b><br>" +
+                "පහළින් ON සහ OFF Date/Time දාලා Save කරන්න.";
+
+            return;
+
+        }
+
+
+        const data =
+            trialSnap.data();
+
+
+        const start =
+            getDateValue(
+                data.startAt
+            );
+
+
+        const end =
+            getDateValue(
+                data.endAt
+            );
+
+
+        const enabled =
+            data.enabled === true;
+
+
+        if (
+            start
+        ) {
+
+            trialStart.value =
+                toDateTimeLocal(
+                    start
+                );
+
+        }
+
+
+        if (
+            end
+        ) {
+
+            trialEnd.value =
+                toDateTimeLocal(
+                    end
+                );
+
+        }
+
+
+        const now =
+            new Date();
+
+
+        const activeNow =
+
+            enabled &&
+            start &&
+            end &&
+            now.getTime() >=
+                start.getTime() &&
+            now.getTime() <
+                end.getTime();
+
+
+        if (
+            activeNow
+        ) {
+
+            trialStatus.className =
+                "trial-status trial-active";
+
+
+            trialStatus.innerHTML =
+
+                "🟢 <b>FREE TRIAL ACTIVE</b><br><br>" +
+
+                "🟢 ON: " +
+                escapeHTML(
+                    formatDate(start)
+                ) +
+
+                "<br>" +
+
+                "🔴 OFF: " +
+                escapeHTML(
+                    formatDate(end)
+                );
+
+        }
+
+        else if (
+            enabled &&
+            start &&
+            end &&
+            now.getTime() <
+                start.getTime()
+        ) {
+
+            trialStatus.className =
+                "trial-status trial-inactive";
+
+
+            trialStatus.innerHTML =
+
+                "🟡 <b>FREE TRIAL SCHEDULED</b><br><br>" +
+
+                "🟢 ON: " +
+                escapeHTML(
+                    formatDate(start)
+                ) +
+
+                "<br>" +
+
+                "🔴 OFF: " +
+                escapeHTML(
+                    formatDate(end)
+                );
+
+        }
+
+        else {
+
+            trialStatus.className =
+                "trial-status trial-inactive";
+
+
+            trialStatus.innerHTML =
+
+                "🔴 <b>FREE TRIAL OFF</b><br><br>" +
+
+                (
+                    start
+                    ?
+
+                    "Last ON: " +
+                    escapeHTML(
+                        formatDate(start)
+                    ) +
+                    "<br>"
+
+                    :
+
+                    ""
+                ) +
+
+                (
+                    end
+                    ?
+
+                    "Last OFF: " +
+                    escapeHTML(
+                        formatDate(end)
+                    )
+
+                    :
+
+                    ""
+                );
+
+        }
+
+    }
+
+    catch(error) {
+
+        console.error(
+            "Trial settings error:",
+            error
+        );
+
+
+        trialStatus.className =
+            "trial-status trial-inactive";
+
+
+        trialStatus.innerHTML =
+
+            "❌ Trial settings load කරන්න බැරි වුණා.<br><br>" +
+
+            escapeHTML(
+                error.message
+            );
+
+    }
+
+}
+
+
+/* ========================================
+   SAVE / ENABLE TRIAL
+======================================== */
+
+saveTrialButton.addEventListener(
+
+    "click",
+
+    async function() {
+
+        if (
+            !currentUser ||
+            currentUser.uid !== ADMIN_UID
+        ) {
+
+            return;
+
+        }
+
+
+        const startValue =
+            trialStart.value;
+
+
+        const endValue =
+            trialEnd.value;
+
+
+        if (
+            !startValue ||
+            !endValue
+        ) {
+
+            alert(
+                "කරුණාකර Trial ON Date/Time සහ OFF Date/Time දෙකම ලබා දෙන්න."
+            );
+
+            return;
+
+        }
+
+
+        const start =
+            new Date(
+                startValue
+            );
+
+
+        const end =
+            new Date(
+                endValue
+            );
+
+
+        if (
+            isNaN(start.getTime()) ||
+            isNaN(end.getTime())
+        ) {
+
+            alert(
+                "Date/Time එක නිවැරදි නැහැ."
+            );
+
+            return;
+
+        }
+
+
+        if (
+            end.getTime() <=
+            start.getTime()
+        ) {
+
+            alert(
+                "🔴 OFF Date/Time එක 🟢 ON Date/Time එකට පසුව තිබිය යුතුයි."
+            );
+
+            return;
+
+        }
+
+
+        const yes =
+            confirm(
+
+                "🎁 Free Trial Enable කරන්නද?\n\n" +
+
+                "🟢 ON: " +
+                formatDate(start) +
+
+                "\n" +
+
+                "🔴 OFF: " +
+                formatDate(end)
+
+            );
+
+
+        if (!yes) {
+
+            return;
+
+        }
+
+
+        saveTrialButton.disabled =
+            true;
+
+
+        trialMessage.textContent =
+            "⏳ Trial settings save කරමින්...";
+
+
+        try {
+
+            const trialRef =
+                doc(
+                    db,
+                    "settings",
+                    "trial"
+                );
+
+
+            await setDoc(
+
+                trialRef,
+
+                {
+
+                    enabled:
+                        true,
+
+                    startAt:
+                        Timestamp.fromDate(
+                            start
+                        ),
+
+                    endAt:
+                        Timestamp.fromDate(
+                            end
+                        ),
+
+                    updatedBy:
+                        ADMIN_UID,
+
+                    updatedAt:
+                        serverTimestamp()
+
+                }
+
+            );
+
+
+            trialMessage.className =
+                "success-box";
+
+
+            trialMessage.textContent =
+                "✅ Free Trial settings සාර්ථකව save කළා.";
+
+
+            await loadTrialSettings();
+
+        }
+
+        catch(error) {
+
+            console.error(
+                "Save trial error:",
+                error
+            );
+
+
+            trialMessage.className =
+                "message";
+
+
+            trialMessage.style.color =
+                "#dc2626";
+
+
+            trialMessage.textContent =
+
+                "❌ Trial settings save කරන්න බැරි වුණා.\n\n" +
+
+                error.message;
+
+        }
+
+
+        saveTrialButton.disabled =
+            false;
+
+    }
+
+);
+
+
+/* ========================================
+   DISABLE TRIAL
+======================================== */
+
+disableTrialButton.addEventListener(
+
+    "click",
+
+    async function() {
+
+        if (
+            !currentUser ||
+            currentUser.uid !== ADMIN_UID
+        ) {
+
+            return;
+
+        }
+
+
+        const yes =
+            confirm(
+                "🛑 Free Trial එක OFF කරන්නද?"
+            );
+
+
+        if (!yes) {
+
+            return;
+
+        }
+
+
+        disableTrialButton.disabled =
+            true;
+
+
+        try {
+
+            const trialRef =
+                doc(
+                    db,
+                    "settings",
+                    "trial"
+                );
+
+
+            await setDoc(
+
+                trialRef,
+
+                {
+
+                    enabled:
+                        false,
+
+                    updatedBy:
+                        ADMIN_UID,
+
+                    updatedAt:
+                        serverTimestamp()
+
+                },
+
+                {
+                    merge: true
+                }
+
+            );
+
+
+            trialMessage.className =
+                "success-box";
+
+
+            trialMessage.textContent =
+                "🛑 Free Trial එක OFF කළා.";
+
+
+            await loadTrialSettings();
+
+        }
+
+        catch(error) {
+
+            console.error(
+                "Disable trial error:",
+                error
+            );
+
+
+            trialMessage.className =
+                "message";
+
+
+            trialMessage.style.color =
+                "#dc2626";
+
+
+            trialMessage.textContent =
+
+                "❌ Trial OFF කරන්න බැරි වුණා.\n\n" +
+
+                error.message;
+
+        }
+
+
+        disableTrialButton.disabled =
+            false;
+
+    }
+
+);
+
+
+/* ========================================
+   LOAD MEMBERS
+======================================== */
+
+async function loadMembers() {
+
+    if (
+        !currentUser ||
+        currentUser.uid !== ADMIN_UID
+    ) {
+
+        return;
+
+    }
+
+
+    memberList.innerHTML =
+        "<div class='loading'>" +
+        "⏳ Members loading..." +
+        "</div>";
+
+
+    memberMessage.textContent =
+        "";
+
+
+    try {
+
+        const snapshot =
+            await getDocs(
+                collection(
+                    db,
+                    "users"
+                )
+            );
+
+
+        const members =
+            [];
+
+
+        snapshot.forEach(
+            function(docSnap) {
+
+                const data =
+                    docSnap.data();
+
+
+                if (
+                    docSnap.id ===
+                    ADMIN_UID
+                ) {
+
+                    return;
+
+                }
+
+
+                members.push({
+
+                    id:
+                        docSnap.id,
+
+                    ...data
+
+                });
+
+            }
+        );
+
+
+        members.sort(
+            function(a, b) {
+
+                const nameA =
+                    String(
+                        a.name ||
+                        a.displayName ||
+                        ""
+                    ).toLowerCase();
+
+
+                const nameB =
+                    String(
+                        b.name ||
+                        b.displayName ||
+                        ""
+                    ).toLowerCase();
+
+
+                return nameA.localeCompare(
+                    nameB
+                );
+
+            }
+        );
+
+
+        let active =
+            0;
+
+        let inactive =
+            0;
+
+
+        const now =
+            new Date();
+
+
+        members.forEach(
+            function(member) {
+
+                if (
+                    isSubscriptionActive(
+                        member,
+                        now
+                    )
+                ) {
+
+                    active++;
+
+                }
+
+                else {
+
+                    inactive++;
+
+                }
+
+            }
+        );
+
+
+        totalCount.textContent =
+            members.length;
+
+        activeCount.textContent =
+            active;
+
+        inactiveCount.textContent =
+            inactive;
+
+
+        if (
+            members.length === 0
+        ) {
+
+            memberList.innerHTML =
+                "<div class='empty'>" +
+                "👥 තවම Membersලා නැහැ." +
+                "</div>";
+
+            return;
+
+        }
+
+
+        memberList.innerHTML =
+            "";
+
+
+        members.forEach(
+            function(member, index) {
+
+                const div =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                div.className =
+                    "member";
+
+
+                const name =
+                    member.name ||
+                    member.displayName ||
+                    "Unknown Student";
+
+
+                const email =
+                    member.email ||
+                    "Email නැහැ";
+
+
+                const phone =
+                    member.phoneNumber ||
+                    member.phone ||
+                    "Phone නැහැ";
+
+
+                const uid =
+                    member.id;
+
+
+                const active =
+                    isSubscriptionActive(
+                        member,
+                        new Date()
+                    );
+
+
+                const expiry =
+                    getDateValue(
+                        member.subscriptionUntil
+                    );
+
+
+                const trialActive =
+                    member.trialActive === true;
+
+
+                const trialUntil =
+                    getDateValue(
+                        member.trialUntil
+                    );
+
+
+                let expiryText =
+                    "Not active";
+
+
+                if (expiry) {
+
+                    expiryText =
+                        expiry.toLocaleString(
+                            "en-GB"
+                        );
+
+                }
+
+
+                let trialText =
+                    "No";
+
+
+                if (
+                    trialActive
+                ) {
+
+                    trialText =
+                        trialUntil
+
+                        ?
+
+                        "🟢 Active until " +
+                        trialUntil.toLocaleString(
+                            "en-GB"
+                        )
+
+                        :
+
+                        "🟢 Active";
+
+                }
+
+
+                const created =
+                    formatDate(
+                        member.createdAt
+                    );
+
+
+                div.innerHTML = `
+
+                    <div class="member-name">
+
+                        ${index + 1}.
+                        ${escapeHTML(name)}
+
+                    </div>
+
+
+                    <div class="member-info">
+
+                        📧
+                        <b>Email:</b>
+                        ${escapeHTML(email)}
+
+                        <br>
+
+                        📱
+                        <b>Phone:</b>
+                        ${escapeHTML(phone)}
+
+                        <br>
+
+                        🆔
+                        <b>UID:</b>
+                        ${escapeHTML(uid)}
+
+                        <br>
+
+                        🎁
+                        <b>Trial:</b>
+                        ${escapeHTML(trialText)}
+
+                        <br>
+
+                        💳
+                        <b>Subscription:</b>
+
+                        ${
+                            active
+
+                            ?
+
+                            '<span class="badge badge-active">' +
+                            '🟢 Active' +
+                            '</span>'
+
+                            :
+
+                            '<span class="badge badge-inactive">' +
+                            '🔴 Inactive' +
+                            '</span>'
+                        }
+
+                        <br>
+
+                        📅
+                        <b>Subscription Until:</b>
+                        ${escapeHTML(expiryText)}
+
+                        <br>
+
+                        🗓️
+                        <b>Account Created:</b>
+                        ${escapeHTML(created)}
+
+                    </div>
+
+                `;
+
+
+                memberList.appendChild(
+                    div
+                );
+
+            }
+        );
+
+
+        memberMessage.textContent =
+            "✅ Members " +
+            members.length +
+            " දෙනෙක් හමු වුණා.";
+
+        memberMessage.style.color =
+            "#15803d";
+
+    }
+
+    catch(error) {
+
+        console.error(
+            "Members error:",
+            error
+        );
+
+
+        memberList.innerHTML =
+
+            "<div class='error'>" +
+
+            "❌ Members load කරන්න බැරි වුණා." +
+
+            "<br><br>" +
+
+            escapeHTML(
+                error.message
+            ) +
+
+            "</div>";
+
+    }
+
+}
+
+
+/* ========================================
+   CHECK SUBSCRIPTION
+======================================== */
+
+function isSubscriptionActive(
+    member,
+    now
+) {
+
+    if (
+        member.subscriptionActive !== true
+    ) {
+
+        return false;
+
+    }
+
+
+    const expiry =
+        getDateValue(
+            member.subscriptionUntil
+        );
+
+
+    if (!expiry) {
+
+        return false;
+
+    }
+
+
+    return (
+        expiry.getTime() >
+        now.getTime()
+    );
+
+}
+
+
+/* ========================================
+   LOAD PAYMENT REQUESTS
+======================================== */
+
+async function loadPaymentRequests() {
+
+    if (
+        !currentUser ||
+        currentUser.uid !== ADMIN_UID
+    ) {
+
+        return;
+
+    }
+
+
+    paymentList.innerHTML =
+        "<div class='loading'>" +
+        "⏳ Payment requests loading..." +
+        "</div>";
+
+
+    paymentMessage.textContent =
+        "";
+
+
+    try {
+
+        const paymentQuery =
+            query(
+
+                collection(
+                    db,
+                    "paymentRequests"
+                ),
+
+                where(
+                    "status",
+                    "==",
+                    "pending"
+                )
+
+            );
+
+
+        const snapshot =
+            await getDocs(
+                paymentQuery
+            );
+
+
+        const requests =
+            [];
+
+
+        snapshot.forEach(
+            function(docSnap) {
+
+                requests.push({
+
+                    id:
+                        docSnap.id,
+
+                    ...docSnap.data()
+
+                });
+
+            }
+        );
+
+
+        pendingCount.textContent =
+            requests.length;
+
+
+        if (
+            requests.length === 0
+        ) {
+
+            paymentList.innerHTML =
+
+                "<div class='empty'>" +
+
+                "💳 දැනට Pending Payment Requests නැහැ." +
+
+                "</div>";
+
+            return;
+
+        }
+
+
+        paymentList.innerHTML =
+            "";
+
+
+        requests.forEach(
+            function(request, index) {
+
+                const div =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                div.className =
+                    "payment-request";
+
+
+                const name =
+                    request.name ||
+                    "Unknown Student";
+
+
+                const phone =
+                    request.phone ||
+                    request.phoneNumber ||
+                    "Not available";
+
+
+                const transactionId =
+                    request.transactionId ||
+                    "Not available";
+
+
+                const submitted =
+                    formatDate(
+                        request.createdAt
+                    );
+
+
+                div.innerHTML = `
+
+                    <div class="payment-name">
+
+                        ${index + 1}.
+                        ${escapeHTML(name)}
+
+                    </div>
+
+
+                    <div class="payment-info">
+
+                        📱
+                        <b>Phone:</b>
+                        ${escapeHTML(phone)}
+
+                        <br>
+
+                        🔢
+                        <b>Transaction ID:</b>
+                        ${escapeHTML(transactionId)}
+
+                        <br>
+
+                        💰
+                        <b>Package:</b>
+                        Rs.100 / 7 Days
+
+                        <br>
+
+                        📅
+                        <b>Submitted:</b>
+                        ${escapeHTML(submitted)}
+
+                        <br><br>
+
+                        <span class="badge badge-pending">
+                            ⏳ Pending
+                        </span>
+
+                    </div>
+
+
+                    <button
+                        class="approve-btn"
+                        data-id="${escapeHTML(request.id)}"
+                    >
+                        ✅ Approve 7 Days
+                    </button>
+
+
+                    <button
+                        class="reject-btn"
+                        data-id="${escapeHTML(request.id)}"
+                    >
+                        ❌ Reject
+                    </button>
+
+                `;
+
+
+                paymentList.appendChild(
+                    div
+                );
+
+            }
+        );
+
+
+        document
+            .querySelectorAll(
+                ".approve-btn"
+            )
+            .forEach(
+                function(button) {
+
+                    button.addEventListener(
+                        "click",
+                        function() {
+
+                            approvePayment(
+                                button.dataset.id
+                            );
+
+                        }
+                    );
+
+                }
+            );
+
+
+        document
+            .querySelectorAll(
+                ".reject-btn"
+            )
+            .forEach(
+                function(button) {
+
+                    button.addEventListener(
+                        "click",
+                        function() {
+
+                            rejectPayment(
+                                button.dataset.id
+                            );
+
+                        }
+                    );
+
+                }
+            );
+
+
+        paymentMessage.textContent =
+            "⏳ Pending requests: " +
+            requests.length;
+
+        paymentMessage.style.color =
+            "#92400e";
+
+    }
+
+    catch(error) {
+
+        console.error(
+            "Payment requests error:",
+            error
+        );
+
+
+        paymentList.innerHTML =
+
+            "<div class='error'>" +
+
+            "❌ Payment requests load කරන්න බැරි වුණා." +
+
+            "<br><br>" +
+
+            escapeHTML(
+                error.message
+            ) +
+
+            "</div>";
+
+    }
+
+}
+
+
+/* ========================================
+   APPROVE PAYMENT
+======================================== */
+
+async function approvePayment(
+    requestId
+) {
+
+    if (
+        !currentUser ||
+        currentUser.uid !== ADMIN_UID
+    ) {
+
+        return;
+
+    }
+
+
+    const yes =
+        confirm(
+            "Payment එක verify කරලා දින 7කට Approve කරන්නද?"
+        );
+
+
+    if (!yes) {
+
+        return;
+
+    }
+
+
+    try {
+
+        const requestRef =
+            doc(
+                db,
+                "paymentRequests",
+                requestId
+            );
+
+
+        const requestSnap =
+            await getDoc(
+                requestRef
+            );
+
+
+        if (
+            !requestSnap.exists()
+        ) {
+
+            throw new Error(
+                "Payment request එක හමු වුණේ නැහැ."
+            );
+
+        }
+
+
+        const requestData =
+            requestSnap.data();
+
+
+        const uid =
+            requestData.uid;
+
+
+        if (!uid) {
+
+            throw new Error(
+                "Student UID එක payment request එකේ නැහැ."
+            );
+
+        }
+
+
+        const userRef =
+            doc(
+                db,
+                "users",
+                uid
+            );
+
+
+        const userSnap =
+            await getDoc(
+                userRef
+            );
+
+
+        if (
+            !userSnap.exists()
+        ) {
+
+            throw new Error(
+                "Student account එක හමු වුණේ නැහැ."
+            );
+
+        }
+
+
+        const userData =
+            userSnap.data();
+
+
+        let startTime =
+            new Date();
+
+
+        const oldExpiry =
+            getDateValue(
+                userData.subscriptionUntil
+            );
+
+
+        if (
+            oldExpiry &&
+            oldExpiry.getTime() >
+            startTime.getTime()
+        ) {
+
+            startTime =
+                oldExpiry;
+
+        }
+
+
+        const expiryDate =
+            new Date(
+
+                startTime.getTime() +
+
+                (
+                    7 *
+                    24 *
+                    60 *
+                    60 *
+                    1000
+                )
+
+            );
+
+
+        await updateDoc(
+
+            userRef,
+
+            {
+
+                subscriptionActive:
+                    true,
+
+                subscriptionUntil:
+                    expiryDate,
+
+                subscriptionLastApproved:
+                    serverTimestamp(),
+
+                subscriptionPackage:
+                    "7_days_100"
+
+            }
+
+        );
+
+
+        await updateDoc(
+
+            requestRef,
+
+            {
+
+                status:
+                    "approved",
+
+                approvedBy:
+                    ADMIN_UID,
+
+                approvedAt:
+                    serverTimestamp(),
+
+                approvedUntil:
+                    expiryDate
+
+            }
+
+        );
+
+
+        alert(
+            "✅ Payment Approved!\n\n" +
+            "Studentට දින 7ක subscription එක ලබා දුන්නා."
+        );
+
+
+        await loadPaymentRequests();
+
+        await loadMembers();
+
+    }
+
+    catch(error) {
+
+        console.error(
+            "Approve error:",
+            error
+        );
+
+
+        alert(
+
+            "❌ Payment approve කිරීමට නොහැකි විය." +
+
+            "\n\n" +
+
+            error.message
+
+        );
+
+    }
+
+}
+
+
+/* ========================================
+   REJECT PAYMENT
+======================================== */
+
+async function rejectPayment(
+    requestId
+) {
+
+    if (
+        !currentUser ||
+        currentUser.uid !== ADMIN_UID
+    ) {
+
+        return;
+
+    }
+
+
+    const yes =
+        confirm(
+            "මෙම payment request එක Reject කරන්නද?"
+        );
+
+
+    if (!yes) {
+
+        return;
+
+    }
+
+
+    try {
+
+        const requestRef =
+            doc(
+                db,
+                "paymentRequests",
+                requestId
+            );
+
+
+        await updateDoc(
+
+            requestRef,
+
+            {
+
+                status:
+                    "rejected",
+
+                rejectedBy:
+                    ADMIN_UID,
+
+                rejectedAt:
+                    serverTimestamp()
+
+            }
+
+        );
+
+
+        alert(
+            "❌ Payment request එක Reject කළා."
+        );
+
+
+        await loadPaymentRequests();
+
+    }
+
+    catch(error) {
+
+        console.error(
+            "Reject error:",
+            error
+        );
+
+
+        alert(
+
+            "❌ Reject කිරීමට නොහැකි විය." +
+
+            "\n\n" +
+
+            error.message
+
+        );
+
+    }
+
+}
+
+
+/* ========================================
+   DATE VALUE
+======================================== */
+
+function getDateValue(value) {
+
+    if (!value) {
+
+        return null;
+
+    }
+
+
+    if (
+        typeof value.toDate ===
+        "function"
+    ) {
+
+        return value.toDate();
+
+    }
+
+
+    if (
+        value instanceof Date
+    ) {
+
+        return value;
+
+    }
+
+
+    if (
+        typeof value.seconds ===
+        "number"
+    ) {
+
+        return new Date(
+            value.seconds * 1000
+        );
+
+    }
+
+
+    const date =
+        new Date(value);
+
+
+    if (
+        isNaN(
+            date.getTime()
+        )
+    ) {
+
+        return null;
+
+    }
+
+
+    return date;
+
+}
+
+
+/* ========================================
+   DATE → DATETIME LOCAL
+======================================== */
+
+function toDateTimeLocal(
+    date
+) {
+
+    const pad =
+        function(number) {
+
+            return String(
+                number
+            ).padStart(
+                2,
+                "0"
+            );
+
+        };
+
+
+    return (
+
+        date.getFullYear() +
+        "-" +
+        pad(
+            date.getMonth() + 1
+        ) +
+        "-" +
+        pad(
+            date.getDate()
+        ) +
+        "T" +
+        pad(
+            date.getHours()
+        ) +
+        ":" +
+        pad(
+            date.getMinutes()
+        )
+
+    );
+
+}
+
+
+/* ========================================
+   FORMAT DATE
+======================================== */
+
+function formatDate(value) {
+
+    const date =
+        getDateValue(value);
+
+
+    if (!date) {
+
+        return "Not available";
+
+    }
+
+
+    return date.toLocaleString(
+        "en-GB"
+    );
+
+}
+
+
+/* ========================================
+   ESCAPE HTML
+======================================== */
+
+function escapeHTML(text) {
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+
+    div.textContent =
+        text ?? "";
+
+
+    return div.innerHTML;
+
+}
+
+
+/* ========================================
+   REFRESH
+======================================== */
+
+document
+    .getElementById(
+        "refreshButton"
+    )
+    .addEventListener(
+
+        "click",
+
+        async function() {
+
+            await loadTrialSettings();
+
+            await loadPaymentRequests();
+
+            await loadMembers();
+
+        }
+
+    );
+
+
+/* ========================================
+   BACK
+======================================== */
+
+document
+    .getElementById(
+        "backButton"
+    )
+    .addEventListener(
+
+        "click",
+
+        function() {
+
+            window.location.href =
+                "./index.html";
+
+        }
+
+    );
+
+
+/* ========================================
+   LOGOUT
+======================================== */
+
+document
+    .getElementById(
+        "logoutButton"
+    )
+    .addEventListener(
+
+        "click",
+
+        async function() {
+
+            const yes =
+                confirm(
+                    "Admin Logout කරන්නද?"
+                );
+
+
+            if (!yes) {
+
+                return;
+
+            }
+
+
+            try {
+
+                await signOut(
+                    auth
+                );
+
+
+                localStorage.removeItem(
+                    "mcqLoginSession"
+                );
+
+
+                sessionStorage.removeItem(
+                    "mcqLoginSession"
+                );
+
+
+                window.location.replace(
+                    "./login.html"
+                );
+
+            }
+
+            catch(error) {
+
+                alert(
+                    "Logout Error: " +
+                    error.message
+                );
+
+            }
+
+        }
+
+    );
+
+</script></body></html>
