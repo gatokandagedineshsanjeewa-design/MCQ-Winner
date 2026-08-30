@@ -1,0 +1,2179 @@
+<!DOCTYPE html><html lang="si"><head><meta charset="UTF-8"><meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+
+«»
+
+<title>MCQ Winner</title><link
+    rel="manifest"
+    href="manifest.json"
+><meta
+name="theme-color"
+content="#1e3a8a"
+
+«»
+
+<meta
+name="mobile-web-app-capable"
+content="yes"
+
+«»
+
+<meta
+name="apple-mobile-web-app-capable"
+content="yes"
+
+«»
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+
+    margin: 0;
+
+    font-family: Arial, sans-serif;
+
+    background: #eef4ff;
+
+    color: #172554;
+
+}
+
+
+/* ========================================
+   LOGIN STATUS
+======================================== */
+
+.login-status {
+
+    position: absolute;
+
+    top: 14px;
+
+    right: 14px;
+
+    background: rgba(255,255,255,0.96);
+
+    color: #172554;
+
+    padding: 8px 13px;
+
+    border-radius: 30px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    box-shadow:
+        0 3px 12px
+        rgba(0,0,0,0.18);
+
+    z-index: 10;
+
+    max-width: 180px;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+}
+
+.login-dot {
+
+    width: 9px;
+
+    height: 9px;
+
+    border-radius: 50%;
+
+    background: #ef4444;
+
+    flex-shrink: 0;
+
+}
+
+.login-dot.online {
+
+    background: #22c55e;
+
+    box-shadow:
+        0 0 0 3px
+        rgba(34,197,94,0.15);
+
+}
+
+
+/* ========================================
+   HEADER
+======================================== */
+
+.header {
+
+    position: relative;
+
+    background: linear-gradient(
+        135deg,
+        #1e3a8a,
+        #2563eb
+    );
+
+    color: white;
+
+    text-align: center;
+
+    padding:
+        55px
+        20px
+        45px;
+
+    border-radius:
+        0 0 30px 30px;
+
+}
+
+.logo img {
+
+    width: 110px;
+
+    height: 110px;
+
+    object-fit: contain;
+
+    display: block;
+
+    margin: 0 auto;
+
+}
+
+.logo {
+
+    cursor: pointer;
+
+    -webkit-tap-highlight-color:
+        transparent;
+
+}
+
+.header h1 {
+
+    margin: 0;
+
+    font-size: 34px;
+
+    letter-spacing: 1px;
+
+}
+
+.tagline {
+
+    margin: 10px 0 0;
+
+    font-size: 22px;
+
+    font-weight: bold;
+
+}
+
+.header p {
+
+    margin: 8px 0 0;
+
+    font-size: 16px;
+
+    opacity: 0.9;
+
+}
+
+
+/* ========================================
+   FORMULA
+======================================== */
+
+.formula-box {
+
+    width: 90%;
+
+    max-width: 500px;
+
+    margin:
+        -25px auto
+        25px;
+
+    background: white;
+
+    padding: 18px;
+
+    border-radius: 18px;
+
+    text-align: center;
+
+    box-shadow:
+        0 5px 18px
+        rgba(0,0,0,0.12);
+
+}
+
+.formula {
+
+    font-size: 22px;
+
+    font-weight: bold;
+
+    color: #1e3a8a;
+
+    letter-spacing: 2px;
+
+}
+
+.formula-box p {
+
+    margin: 8px 0 0;
+
+    color: #64748b;
+
+}
+
+
+/* ========================================
+   CONTAINER
+======================================== */
+
+.container {
+
+    width: 92%;
+
+    max-width: 650px;
+
+    margin: auto;
+
+}
+
+.title {
+
+    text-align: center;
+
+    margin:
+        25px 0
+        18px;
+
+}
+
+.title h2 {
+
+    margin: 0;
+
+    font-size: 24px;
+
+}
+
+.title p {
+
+    margin-top: 7px;
+
+    color: #64748b;
+
+}
+
+
+/* ========================================
+   SUBJECT CARD
+======================================== */
+
+.subject-card {
+
+    background: white;
+
+    padding: 25px;
+
+    margin: 18px 0;
+
+    border-radius: 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    box-shadow:
+        0 5px 15px
+        rgba(0,0,0,0.09);
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+}
+
+.subject-card:active {
+
+    transform: scale(0.97);
+
+}
+
+.icon {
+
+    width: 65px;
+
+    height: 65px;
+
+    border-radius: 17px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 34px;
+
+    flex-shrink: 0;
+
+}
+
+.chemistry-icon {
+
+    background: #dcfce7;
+
+}
+
+.physics-icon {
+
+    background: #dbeafe;
+
+}
+
+.rank-icon {
+
+    background: #fef3c7;
+
+}
+
+.subject-info {
+
+    flex: 1;
+
+}
+
+.subject-info h3 {
+
+    margin: 0;
+
+    font-size: 22px;
+
+}
+
+.subject-info p {
+
+    margin: 7px 0 0;
+
+    color: #64748b;
+
+}
+
+.arrow {
+
+    font-size: 27px;
+
+    color: #2563eb;
+
+}
+
+
+/* ========================================
+   ANNOUNCEMENT
+======================================== */
+
+.announcement-box {
+
+    background: white;
+
+    padding: 22px;
+
+    margin:
+        25px 0
+        20px;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 5px 15px
+        rgba(0,0,0,0.09);
+
+    border-left:
+        5px solid #ef4444;
+
+}
+
+.announcement-title {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-bottom: 12px;
+
+}
+
+.announcement-title h3 {
+
+    margin: 0;
+
+    font-size: 21px;
+
+    color: #991b1b;
+
+}
+
+.announcement-message {
+
+    font-size: 16px;
+
+    line-height: 1.6;
+
+    color: #334155;
+
+    white-space: pre-wrap;
+
+    word-break: break-word;
+
+}
+
+.announcement-date {
+
+    margin-top: 12px;
+
+    font-size: 12px;
+
+    color: #94a3b8;
+
+}
+
+
+/* ========================================
+   DAILY
+======================================== */
+
+.daily-box {
+
+    background: #172554;
+
+    color: white;
+
+    padding: 22px;
+
+    border-radius: 20px;
+
+    margin: 28px 0;
+
+    text-align: center;
+
+}
+
+.daily-box h3 {
+
+    margin: 0;
+
+    font-size: 22px;
+
+}
+
+.daily-box p {
+
+    margin: 8px 0 0;
+
+    opacity: 0.85;
+
+}
+
+
+/* ========================================
+   FOOTER
+======================================== */
+
+.footer {
+
+    text-align: center;
+
+    padding: 25px 10px;
+
+    color: #64748b;
+
+    font-size: 14px;
+
+}
+
+
+/* ========================================
+   HIDDEN
+======================================== */
+
+.hidden {
+
+    display: none !important;
+
+}
+
+
+/* ========================================
+   ADMIN MENU
+======================================== */
+
+.admin-menu-overlay {
+
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        rgba(0,0,0,0.55);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    z-index: 9999;
+
+    padding: 20px;
+
+}
+
+.admin-menu {
+
+    width: 100%;
+
+    max-width: 360px;
+
+    max-height: 90vh;
+
+    overflow-y: auto;
+
+    background: white;
+
+    border-radius: 22px;
+
+    padding: 24px;
+
+    box-shadow:
+        0 10px 35px
+        rgba(0,0,0,0.25);
+
+    text-align: center;
+
+}
+
+.admin-menu h2 {
+
+    margin-top: 0;
+
+    color: #1e3a8a;
+
+}
+
+.admin-menu p {
+
+    color: #64748b;
+
+}
+
+.admin-menu button {
+
+    width: 100%;
+
+    padding: 14px;
+
+    margin-top: 10px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+}
+
+.add-mcq-admin {
+
+    background: #16a34a;
+
+    color: white;
+
+}
+
+.members-admin {
+
+    background: #2563eb;
+
+    color: white;
+
+}
+
+.announcement-admin {
+
+    background: #dc2626;
+
+    color: white;
+
+}
+
+.close-admin {
+
+    background: #e2e8f0;
+
+    color: #334155;
+
+}
+
+
+/* ========================================
+   ANNOUNCEMENT EDITOR
+======================================== */
+
+.announcement-editor {
+
+    width: 100%;
+
+    max-width: 430px;
+
+    background: white;
+
+    border-radius: 22px;
+
+    padding: 24px;
+
+    box-shadow:
+        0 10px 35px
+        rgba(0,0,0,0.25);
+
+}
+
+.announcement-editor h2 {
+
+    margin-top: 0;
+
+    color: #991b1b;
+
+    text-align: center;
+
+}
+
+.announcement-editor textarea {
+
+    width: 100%;
+
+    min-height: 150px;
+
+    resize: vertical;
+
+    padding: 14px;
+
+    border:
+        1px solid #cbd5e1;
+
+    border-radius: 12px;
+
+    font-size: 16px;
+
+    font-family: Arial, sans-serif;
+
+    outline: none;
+
+}
+
+.editor-buttons {
+
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 12px;
+
+}
+
+.editor-buttons button {
+
+    flex: 1;
+
+    padding: 13px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+}
+
+.save-announcement {
+
+    background: #16a34a;
+
+    color: white;
+
+}
+
+.delete-announcement {
+
+    background: #dc2626;
+
+    color: white;
+
+}
+
+.cancel-announcement {
+
+    background: #e2e8f0;
+
+    color: #334155;
+
+}
+
+.editor-status {
+
+    text-align: center;
+
+    margin-top: 12px;
+
+    font-size: 14px;
+
+    color: #64748b;
+
+}
+
+</style></head><body><div class="header"><div
+    class="login-status"
+    id="loginStatus"
+><span
+    class="login-dot"
+    id="loginDot"
+></span>
+
+<span id="loginText">
+    Checking...
+</span>
+
+</div><div
+    class="logo"
+    id="adminLogo"
+><img
+    src="Logo.png"
+    alt="MCQ Winner Logo"
+>
+
+</div><h1>
+    MCQ Winner
+</h1><div class="tagline">
+    එකතුවෙලා ගොඩයමු 💪
+</div><p>
+    A/L Daily MCQ Challenge
+</p></div><div class="formula-box"><div class="formula">
+    ∑ &nbsp; π &nbsp; √ &nbsp; Δ &nbsp; ∞
+</div>
+
+<p>
+    Learn • Practice • Win
+</p>
+
+</div><div class="container"><div class="title"><h2>
+    📚 අද Test එක තෝරන්න
+</h2>
+
+<p>
+    Chemistry සහ Physics — දිනපතා MCQ 25ක්
+</p>
+
+</div><div
+    class="subject-card"
+    onclick="openSubject('Chemistry')"
+><div class="icon chemistry-icon">
+    🧪
+</div>
+
+<div class="subject-info">
+
+    <h3>
+        Chemistry
+    </h3>
+
+    <p>
+        Daily 25 MCQs
+    </p>
+
+</div>
+
+<div class="arrow">
+    →
+</div>
+
+</div><div
+    class="subject-card"
+    onclick="openSubject('Physics')"
+><div class="icon physics-icon">
+    ⚡
+</div>
+
+<div class="subject-info">
+
+    <h3>
+        Physics
+    </h3>
+
+    <p>
+        Daily 25 MCQs
+    </p>
+
+</div>
+
+<div class="arrow">
+    →
+</div>
+
+</div><div class="announcement-box"><div class="announcement-title">
+
+    <span style="font-size:28px;">
+        📢
+    </span>
+
+    <h3>
+        Admin Announcement
+    </h3>
+
+</div>
+
+<div
+    class="announcement-message"
+    id="announcementMessage"
+>
+    Announcement එක ලබාගනිමින්...
+</div>
+
+<div
+    class="announcement-date"
+    id="announcementDate"
+></div>
+
+</div><div
+    class="subject-card"
+    onclick="window.location.href='rank.html'"
+><div class="icon rank-icon">
+    🏆
+</div>
+
+<div class="subject-info">
+
+    <h3>
+        Rank List
+    </h3>
+
+    <p>
+        අද Top 20 බලන්න
+    </p>
+
+</div>
+
+<div class="arrow">
+    →
+</div>
+
+</div><div class="daily-box"><h3>
+    🔥 Daily Challenge
+</h3>
+
+<p>
+    අද MCQ 25ක් කරලා ඔබේ Score එක බලන්න!
+</p>
+
+</div></div><div class="footer">MCQ Winner © 2026
+
+<br>
+
+එකතුවෙලා ගොඩයමු ❤️
+
+</div><script type="module">
+
+
+/* ========================================
+   FIREBASE
+======================================== */
+
+import {
+    initializeApp
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+
+import {
+    getAuth,
+    onAuthStateChanged,
+    signOut
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
+import {
+    getFirestore,
+    doc,
+    getDoc,
+    setDoc,
+    deleteDoc,
+    serverTimestamp
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyAMkaGYmBuoFama5MW5AhoX9q6cly_-nbg",
+
+    authDomain:
+        "mcq-winner.firebaseapp.com",
+
+    projectId:
+        "mcq-winner",
+
+    storageBucket:
+        "mcq-winner.firebasestorage.app",
+
+    messagingSenderId:
+        "1022060912943",
+
+    appId:
+        "1:1022060912943:web:f6e58414867e32f685c1da",
+
+    measurementId:
+        "G-MBH3NZ728H"
+
+};
+
+
+const app =
+    initializeApp(
+        firebaseConfig
+    );
+
+
+const auth =
+    getAuth(app);
+
+
+const db =
+    getFirestore(app);
+
+
+const ADMIN_UID =
+    "Npiu0xJQQchrVgHnXRuR8R5FOA2";
+
+
+const LOGIN_URL =
+    "./login.html";
+
+
+const loginText =
+    document.getElementById(
+        "loginText"
+    );
+
+
+const loginDot =
+    document.getElementById(
+        "loginDot"
+    );
+
+
+let currentUser = null;
+
+let currentUserData = null;
+
+let authReady = false;
+
+
+/* ========================================
+   SESSION CHECK - APK FIX
+======================================== */
+
+/*
+   sessionStorage එක check කරලා Firebase Auth
+   state load වෙන්න කලින් Login page එකට redirect
+   කිරීම ඉවත් කර ඇත.
+
+   APK WebView එකේ Firebase session restore
+   වීමට සුළු කාලයක් ගත විය හැක.
+*/
+
+loginText.textContent =
+    "Checking...";
+
+loginDot.classList.remove(
+    "online"
+);
+
+
+/* ========================================
+   DATE CONVERTER
+======================================== */
+
+function getDateValue(value) {
+
+    if (!value) return null;
+
+    if (typeof value.toDate === "function") {
+        return value.toDate();
+    }
+
+    if (value instanceof Date) {
+        return value;
+    }
+
+    if (typeof value.seconds === "number") {
+        return new Date(value.seconds * 1000);
+    }
+
+    const date = new Date(value);
+
+    if (isNaN(date.getTime())) {
+        return null;
+    }
+
+    return date;
+}
+
+
+/* ========================================
+   STUDENT ACCESS
+======================================== */
+
+function hasStudentAccess(userData) {
+
+    const now = new Date();
+
+    if (userData.subscriptionActive === true) {
+
+        const subscriptionUntil =
+            getDateValue(
+                userData.subscriptionUntil
+            );
+
+        if (
+            subscriptionUntil &&
+            subscriptionUntil.getTime() >
+            now.getTime()
+        ) {
+            return true;
+        }
+
+    }
+
+
+    if (userData.trialActive === true) {
+
+        const trialUntil =
+            getDateValue(
+                userData.trialUntil
+            );
+
+        if (
+            trialUntil &&
+            trialUntil.getTime() >
+            now.getTime()
+        ) {
+            return true;
+        }
+
+    }
+
+    return false;
+}
+
+
+/* ========================================
+   LOAD ANNOUNCEMENT
+======================================== */
+
+async function loadAnnouncement() {
+
+    const messageElement =
+        document.getElementById(
+            "announcementMessage"
+        );
+
+    const dateElement =
+        document.getElementById(
+            "announcementDate"
+        );
+
+    try {
+
+        const announcementRef =
+            doc(
+                db,
+                "announcements",
+                "main"
+            );
+
+        const snap =
+            await getDoc(
+                announcementRef
+            );
+
+        if (!snap.exists()) {
+
+            messageElement.textContent =
+                "දැනට නව Announcement එකක් නොමැත.";
+
+            dateElement.textContent = "";
+
+            return;
+
+        }
+
+        const data = snap.data();
+
+        if (data.active === false) {
+
+            messageElement.textContent =
+                "දැනට නව Announcement එකක් නොමැත.";
+
+            dateElement.textContent = "";
+
+            return;
+
+        }
+
+        const text =
+            String(
+                data.message || ""
+            ).trim();
+
+        if (!text) {
+
+            messageElement.textContent =
+                "දැනට නව Announcement එකක් නොමැත.";
+
+            dateElement.textContent = "";
+
+            return;
+
+        }
+
+        messageElement.textContent = text;
+
+        const updated =
+            getDateValue(
+                data.updatedAt
+            );
+
+        if (updated) {
+
+            dateElement.textContent =
+                "Updated: " +
+                updated.toLocaleString(
+                    "si-LK"
+                );
+
+        }
+
+    }
+
+    catch(error) {
+
+        console.error(
+            "Announcement error:",
+            error
+        );
+
+        messageElement.textContent =
+            "Announcement එක ලබාගැනීමට නොහැකි විය.";
+
+    }
+
+}
+
+
+/* ========================================
+   AUTH STATE
+======================================== */
+
+onAuthStateChanged(
+
+    auth,
+
+    async function(user) {
+
+
+        if (!user) {
+
+            currentUser = null;
+
+            currentUserData = null;
+
+            authReady = false;
+
+
+            loginText.textContent =
+                "Not logged in";
+
+
+            loginDot.classList.remove(
+                "online"
+            );
+
+
+            /*
+               Firebase Auth state එක
+               නිවැරදිව resolve වුණ පසු පමණක්
+               Login page එකට යවයි.
+            */
+
+            setTimeout(
+
+                function() {
+
+                    if (!auth.currentUser) {
+
+                        window.location.replace(
+                            LOGIN_URL
+                        );
+
+                    }
+
+                },
+
+                300
+
+            );
+
+
+            return;
+
+        }
+
+
+        currentUser = user;
+
+
+        if (
+            user.uid === ADMIN_UID
+        ) {
+
+            currentUserData = {
+
+                uid: user.uid,
+
+                role: "admin"
+
+            };
+
+
+            localStorage.setItem(
+                "mcqLoginSession",
+                "admin"
+            );
+
+
+            authReady = true;
+
+
+            loginText.textContent =
+                "👑 Admin";
+
+
+            loginDot.classList.add(
+                "online"
+            );
+
+
+            loadAnnouncement();
+
+            return;
+
+        }
+
+
+        try {
+
+            const userRef =
+                doc(
+                    db,
+                    "users",
+                    user.uid
+                );
+
+
+            const userSnap =
+                await getDoc(
+                    userRef
+                );
+
+
+            if (!userSnap.exists()) {
+
+                await signOut(auth);
+
+                window.location.replace(
+                    LOGIN_URL
+                );
+
+                return;
+
+            }
+
+
+            const userData =
+                userSnap.data();
+
+
+            if (
+                userData.role === "admin"
+            ) {
+
+                await signOut(auth);
+
+                window.location.replace(
+                    LOGIN_URL
+                );
+
+                return;
+
+            }
+
+
+            currentUserData =
+                userData;
+
+
+            authReady = true;
+
+
+            let name =
+                String(
+                    userData.name ||
+                    "Student"
+                ).trim();
+
+
+            if (!name) {
+
+                name = "Student";
+
+            }
+
+
+            const firstName =
+                name.split(/\s+/)[0];
+
+
+            loginText.textContent =
+                "🟢 " +
+                firstName;
+
+
+            loginDot.classList.add(
+                "online"
+            );
+
+
+            loadAnnouncement();
+
+        }
+
+        catch(error) {
+
+            console.error(
+                "Profile error:",
+                error
+            );
+
+
+            authReady = false;
+
+
+            loginText.textContent =
+                "Connection error";
+
+        }
+
+    }
+
+);
+
+
+/* ========================================
+   OPEN SUBJECT
+======================================== */
+
+window.openSubject =
+    async function(subject) {
+
+
+        if (!authReady) {
+
+            alert(
+                "⏳ Account එක verify කරමින් පවතී. ටිකක් රැඳී සිටින්න."
+            );
+
+            return;
+
+        }
+
+
+        const user =
+            auth.currentUser;
+
+
+        if (!user) {
+
+            window.location.href =
+                LOGIN_URL;
+
+            return;
+
+        }
+
+
+        if (
+            user.uid === ADMIN_UID
+        ) {
+
+            window.location.href =
+                "mcq.html?subject=" +
+                encodeURIComponent(
+                    subject
+                );
+
+            return;
+
+        }
+
+
+        try {
+
+            const userRef =
+                doc(
+                    db,
+                    "users",
+                    user.uid
+                );
+
+
+            const snap =
+                await getDoc(
+                    userRef
+                );
+
+
+            if (!snap.exists()) {
+
+                await signOut(auth);
+
+                window.location.href =
+                    LOGIN_URL;
+
+                return;
+
+            }
+
+
+            const data =
+                snap.data();
+
+
+            if (
+                data.role === "admin"
+            ) {
+
+                await signOut(auth);
+
+                window.location.href =
+                    LOGIN_URL;
+
+                return;
+
+            }
+
+
+            if (
+                !hasStudentAccess(data)
+            ) {
+
+                window.location.href =
+                    "./subscription.html";
+
+                return;
+
+            }
+
+
+            window.location.href =
+                "mcq.html?subject=" +
+                encodeURIComponent(
+                    subject
+                );
+
+        }
+
+        catch(error) {
+
+            console.error(
+                "MCQ access error:",
+                error
+            );
+
+
+            alert(
+                "⚠️ Account information ලබාගැනීමට නොහැකි විය.\n\n" +
+                "Internet connection එක පරීක්ෂා කර නැවත උත්සාහ කරන්න."
+            );
+
+        }
+
+    };
+
+
+/* ========================================
+   ADMIN MENU
+======================================== */
+
+function showAdminMenu() {
+
+    if (
+        document.querySelector(
+            ".admin-menu-overlay"
+        )
+    ) {
+        return;
+    }
+
+
+    const overlay =
+        document.createElement(
+            "div"
+        );
+
+
+    overlay.className =
+        "admin-menu-overlay";
+
+
+    overlay.innerHTML = `
+
+        <div class="admin-menu">
+
+            <h2>
+                👑 Admin Menu
+            </h2>
+
+            <p>
+                MCQ Winner Administration
+            </p>
+
+            <button
+                class="add-mcq-admin"
+                id="adminAddMCQ"
+            >
+                ➕ Add MCQ
+            </button>
+
+            <button
+                class="members-admin"
+                id="adminMembers"
+            >
+                👥 Members
+            </button>
+
+            <button
+                class="announcement-admin"
+                id="adminAnnouncement"
+            >
+                📢 Announcement
+            </button>
+
+            <button
+                class="close-admin"
+                id="adminClose"
+            >
+                ✖ Close
+            </button>
+
+        </div>
+
+    `;
+
+
+    document.body.appendChild(
+        overlay
+    );
+
+
+    document
+        .getElementById(
+            "adminAddMCQ"
+        )
+        .onclick =
+        function() {
+
+            window.location.href =
+                "add-mcq.html";
+
+        };
+
+
+    document
+        .getElementById(
+            "adminMembers"
+        )
+        .onclick =
+        function() {
+
+            window.location.href =
+                "members.html";
+
+        };
+
+
+    document
+        .getElementById(
+            "adminAnnouncement"
+        )
+        .onclick =
+        function() {
+
+            overlay.remove();
+
+            openAnnouncementEditor();
+
+        };
+
+
+    document
+        .getElementById(
+            "adminClose"
+        )
+        .onclick =
+        function() {
+
+            overlay.remove();
+
+        };
+
+
+    overlay.addEventListener(
+
+        "click",
+
+        function(event) {
+
+            if (
+                event.target === overlay
+            ) {
+
+                overlay.remove();
+
+            }
+
+        }
+
+    );
+
+}
+
+
+/* ========================================
+   ANNOUNCEMENT EDITOR
+======================================== */
+
+async function openAnnouncementEditor() {
+
+
+    const user =
+        auth.currentUser;
+
+
+    if (
+        !user ||
+        user.uid !== ADMIN_UID
+    ) {
+
+        return;
+
+    }
+
+
+    const overlay =
+        document.createElement(
+            "div"
+        );
+
+
+    overlay.className =
+        "admin-menu-overlay";
+
+
+    overlay.innerHTML = `
+
+        <div class="announcement-editor">
+
+            <h2>
+                📢 Announcement
+            </h2>
+
+            <textarea
+                id="announcementInput"
+                placeholder="Studentලාට පෙන්වන්න ඕන Announcement එක මෙතන ලියන්න..."
+            ></textarea>        <div class="editor-buttons">
+
+            <button
+                class="save-announcement"
+                id="saveAnnouncement"
+            >
+                💾 Save
+            </button>
+
+            <button
+                class="delete-announcement"
+                id="deleteAnnouncement"
+            >
+                🗑️ Delete
+            </button>
+
+        </div>
+
+        <div class="editor-buttons">
+
+            <button
+                class="cancel-announcement"
+                id="cancelAnnouncement"
+            >
+                ✖ Cancel
+            </button>
+
+        </div>
+
+        <div
+            class="editor-status"
+            id="editorStatus"
+        ></div>
+
+    </div>
+
+`;
+
+
+document.body.appendChild(
+    overlay
+);
+
+
+const input =
+    document.getElementById(
+        "announcementInput"
+    );
+
+
+const status =
+    document.getElementById(
+        "editorStatus"
+    );
+
+
+try {
+
+    const ref =
+        doc(
+            db,
+            "announcements",
+            "main"
+        );
+
+
+    const snap =
+        await getDoc(
+            ref
+        );
+
+
+    if (snap.exists()) {
+
+        input.value =
+            snap.data().message ||
+            "";
+
+    }
+
+}
+
+catch(error) {
+
+    console.error(
+        "Announcement read error:",
+        error
+    );
+
+}
+
+
+document
+    .getElementById(
+        "saveAnnouncement"
+    )
+    .onclick =
+    async function() {
+
+
+        const text =
+            input.value.trim();
+
+
+        if (!text) {
+
+            status.textContent =
+                "⚠️ Announcement එකක් ලියන්න.";
+
+            return;
+
+        }
+
+
+        status.textContent =
+            "⏳ Saving...";
+
+
+        try {
+
+            const ref =
+                doc(
+                    db,
+                    "announcements",
+                    "main"
+                );
+
+
+            await setDoc(
+
+                ref,
+
+                {
+
+                    message: text,
+
+                    active: true,
+
+                    updatedAt:
+                        serverTimestamp()
+
+                },
+
+                {
+                    merge: true
+                }
+
+            );
+
+
+            status.textContent =
+                "✅ Announcement එක Save කළා.";
+
+
+            await loadAnnouncement();
+
+
+            setTimeout(
+
+                function() {
+
+                    overlay.remove();
+
+                },
+
+                700
+
+            );
+
+        }
+
+        catch(error) {
+
+            console.error(
+                "Save error:",
+                error
+            );
+
+
+            status.textContent =
+                "❌ Save කිරීමට නොහැකි විය.";
+
+        }
+
+    };
+
+
+document
+    .getElementById(
+        "deleteAnnouncement"
+    )
+    .onclick =
+    async function() {
+
+
+        if (
+            !confirm(
+                "Announcement එක Delete කරන්නද?"
+            )
+        ) {
+
+            return;
+
+        }
+
+
+        status.textContent =
+            "⏳ Deleting...";
+
+
+        try {
+
+            await deleteDoc(
+
+                doc(
+                    db,
+                    "announcements",
+                    "main"
+                )
+
+            );
+
+
+            document
+                .getElementById(
+                    "announcementMessage"
+                )
+                .textContent =
+                "දැනට නව Announcement එකක් නොමැත.";
+
+
+            document
+                .getElementById(
+                    "announcementDate"
+                )
+                .textContent =
+                "";
+
+
+            status.textContent =
+                "✅ Announcement එක Delete කළා.";
+
+
+            setTimeout(
+
+                function() {
+
+                    overlay.remove();
+
+                },
+
+                700
+
+            );
+
+        }
+
+        catch(error) {
+
+            console.error(
+                "Delete error:",
+                error
+            );
+
+
+            status.textContent =
+                "❌ Delete කිරීමට නොහැකි විය.";
+
+        }
+
+    };
+
+
+document
+    .getElementById(
+        "cancelAnnouncement"
+    )
+    .onclick =
+    function() {
+
+        overlay.remove();
+
+    };
+
+
+overlay.addEventListener(
+
+    "click",
+
+    function(event) {
+
+        if (
+            event.target === overlay
+        ) {
+
+            overlay.remove();
+
+        }
+
+    }
+
+);
+
+}
+
+/* ========================================
+ADMIN LOGO 5 TAP
+======================================== */
+
+let adminTapCount = 0;
+
+let adminTapTimer = null;
+
+const adminLogo =
+document.getElementById(
+"adminLogo"
+);
+
+adminLogo.addEventListener(
+
+"click",
+
+function() {
+
+
+    const user =
+        auth.currentUser;
+
+
+    if (
+        !user ||
+        user.uid !== ADMIN_UID
+    ) {
+
+        adminTapCount = 0;
+
+        return;
+
+    }
+
+
+    adminTapCount++;
+
+
+    clearTimeout(
+        adminTapTimer
+    );
+
+
+    adminTapTimer =
+        setTimeout(
+
+            function() {
+
+                adminTapCount = 0;
+
+            },
+
+            2000
+
+        );
+
+
+    if (
+        adminTapCount >= 5
+    ) {
+
+        adminTapCount = 0;
+
+        clearTimeout(
+            adminTapTimer
+        );
+
+
+        showAdminMenu();
+
+    }
+
+}
+
+);
+
+</script><script>
+
+/* ========================================
+   SERVICE WORKER
+======================================== */
+
+if (
+    "serviceWorker" in navigator
+) {
+
+    window.addEventListener(
+
+        "load",
+
+        function() {
+
+            navigator.serviceWorker.register(
+                "./pwabuilder-sw.js"
+            )
+
+            .then(
+
+                function() {
+
+                    console.log(
+                        "MCQ Winner Service Worker registered"
+                    );
+
+                }
+
+            )
+
+            .catch(
+
+                function(error) {
+
+                    console.log(
+                        "Service Worker registration failed:",
+                        error
+                    );
+
+                }
+
+            );
+
+        }
+
+    );
+
+}
+
+</script></body></html>
