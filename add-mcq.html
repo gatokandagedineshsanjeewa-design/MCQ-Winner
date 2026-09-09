@@ -1,0 +1,4952 @@
+<!DOCTYPE html>
+<html lang="si">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>MCQ Winner - Add MCQ</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f1f5f9;
+    color:#172554;
+}
+
+.header{
+    background:linear-gradient(
+        135deg,
+        #1e3a8a,
+        #2563eb
+    );
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+.header h1{
+    margin:0;
+}
+
+.container{
+    width:94%;
+    max-width:760px;
+    margin:20px auto;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    margin-bottom:20px;
+    border-radius:14px;
+    box-shadow:0 3px 10px rgba(0,0,0,0.10);
+}
+
+input,
+textarea,
+select{
+    width:100%;
+    padding:13px;
+    margin:8px 0 15px;
+    border:1px solid #cbd5e1;
+    border-radius:8px;
+    font-size:16px;
+    outline:none;
+    font-family:Arial,sans-serif;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+    border-color:#2563eb;
+    box-shadow:0 0 0 2px rgba(37,99,235,.12);
+}
+
+textarea{
+    min-height:120px;
+    resize:vertical;
+}
+
+button{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:9px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+button:disabled{
+    opacity:.6;
+    cursor:not-allowed;
+}
+
+.google-btn{
+    background:white;
+    color:#1e293b;
+    border:1px solid #cbd5e1;
+}
+
+.login-btn{
+    background:#1e3a8a;
+    color:white;
+}
+
+.add-btn{
+    background:#16a34a;
+    color:white;
+}
+
+.update-btn{
+    background:#2563eb;
+    color:white;
+}
+
+.cancel-edit-btn{
+    background:#64748b;
+    color:white;
+    margin-top:10px;
+}
+
+.delete-btn{
+    background:#dc2626;
+    color:white;
+    margin-top:10px;
+}
+
+.edit-btn{
+    background:#f59e0b;
+    color:white;
+    margin-top:10px;
+}
+
+.logout-btn{
+    background:#64748b;
+    color:white;
+    margin-top:10px;
+}
+
+.members-btn{
+    background:#2563eb;
+    color:white;
+    margin-top:10px;
+}
+
+#pinPanel,
+#adminPanel{
+    display:none;
+}
+
+.message{
+    text-align:center;
+    font-weight:bold;
+    line-height:1.5;
+}
+
+.info{
+    background:#eff6ff;
+    color:#1e3a8a;
+    padding:14px;
+    border-radius:10px;
+    margin-bottom:15px;
+    line-height:1.7;
+}
+
+.warning{
+    background:#fff7ed;
+    color:#9a3412;
+    padding:14px;
+    border-radius:10px;
+    margin-bottom:15px;
+    line-height:1.7;
+}
+
+.status{
+    background:#ecfeff;
+    color:#155e75;
+    padding:14px;
+    border-radius:10px;
+    margin-bottom:15px;
+    text-align:center;
+    font-weight:bold;
+    line-height:1.7;
+}
+
+.user-box{
+    background:#f8fafc;
+    padding:12px;
+    border-radius:10px;
+    margin-bottom:15px;
+    font-size:14px;
+    white-space:pre-line;
+    word-break:break-word;
+}
+
+.question-item{
+    border:1px solid #cbd5e1;
+    border-radius:10px;
+    padding:15px;
+    margin-top:12px;
+    background:#f8fafc;
+    line-height:1.6;
+}
+
+.correct{
+    color:#15803d;
+    font-weight:bold;
+}
+
+.editor-label{
+    display:block;
+    font-weight:bold;
+    margin-top:5px;
+}
+
+.hidden{
+    display:none!important;
+}
+
+.empty-box{
+    background:#f8fafc;
+    padding:15px;
+    border-radius:10px;
+    text-align:center;
+    color:#64748b;
+}
+
+
+
+/* Per-field Scientific Keyboard buttons */
+.field-keyboard-row{display:flex;gap:8px;align-items:center;margin:6px 0 12px;}
+.field-keyboard-btn{flex:0 0 auto;width:auto;min-height:40px;padding:8px 14px;background:#1d4ed8;color:#fff;border:0;border-radius:9px;font-weight:bold;cursor:pointer;}
+.field-keyboard-btn:active{transform:scale(.98);}
+
+/* ========================================
+   ADVANCED SCIENTIFIC KEYBOARD
+======================================== */
+
+.scientific-keyboard{
+    background:#0f172a;
+    border-radius:14px;
+    padding:10px;
+    margin:8px 0 15px;
+    box-shadow:0 5px 18px rgba(0,0,0,.20);
+}
+
+.keyboard-top{
+    display:flex;
+    gap:7px;
+    align-items:center;
+    margin-bottom:8px;
+}
+
+.keyboard-title{
+    color:white;
+    font-size:14px;
+    font-weight:bold;
+    flex:1;
+}
+
+.keyboard-close{
+    width:auto;
+    padding:7px 12px;
+    background:#475569;
+    color:white;
+    font-size:13px;
+}
+
+.keyboard-tabs{
+    display:flex;
+    gap:5px;
+    overflow-x:auto;
+    padding-bottom:8px;
+}
+
+.keyboard-tab{
+    width:auto;
+    min-width:max-content;
+    padding:8px 11px;
+    background:#334155;
+    color:#e2e8f0;
+    font-size:13px;
+    border-radius:7px;
+}
+
+.keyboard-tab.active{
+    background:#2563eb;
+    color:white;
+}
+
+.keyboard-grid{
+    display:grid;
+    grid-template-columns:repeat(6,1fr);
+    gap:5px;
+    max-height:310px;
+    overflow-y:auto;
+    padding-right:2px;
+}
+
+.key-btn{
+    width:100%;
+    min-height:42px;
+    padding:6px 4px;
+    background:#f8fafc;
+    color:#0f172a;
+    border:1px solid #cbd5e1;
+    border-radius:7px;
+    font-size:16px;
+    font-weight:bold;
+}
+
+.key-btn:active{
+    transform:scale(.96);
+}
+
+.key-btn.wide{
+    grid-column:span 2;
+}
+
+.keyboard-note{
+    color:#cbd5e1;
+    font-size:11px;
+    margin-top:7px;
+    text-align:center;
+}
+
+
+/* ========================================
+   PERIODIC TABLE
+======================================== */
+
+.periodic-wrapper{
+    overflow-x:auto;
+    padding-bottom:5px;
+}
+
+.periodic-table{
+    display:grid;
+    grid-template-columns:repeat(18,42px);
+    grid-auto-rows:52px;
+    gap:3px;
+    min-width:807px;
+}
+
+.element{
+    width:42px;
+    height:52px;
+    padding:2px;
+    border-radius:5px;
+    border:1px solid #94a3b8;
+    background:#f8fafc;
+    color:#0f172a;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    font-weight:bold;
+}
+
+.element .num{
+    font-size:8px;
+    color:#64748b;
+}
+
+.element .symbol{
+    font-size:15px;
+}
+
+.element .name{
+    font-size:7px;
+    font-weight:normal;
+}
+
+.element:hover{
+    background:#dbeafe;
+}
+
+
+/* ========================================
+   STRUCTURES
+======================================== */
+
+.structure-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:6px;
+}
+
+.structure-btn{
+    width:100%;
+    min-height:58px;
+    background:#f8fafc;
+    border:1px solid #cbd5e1;
+    color:#172554;
+    font-size:20px;
+}
+
+.structure-btn small{
+    display:block;
+    font-size:10px;
+    margin-top:3px;
+}
+
+
+/* ========================================
+   FRACTION MODAL
+======================================== */
+
+.fraction-modal{
+    position:fixed;
+    inset:0;
+    background:rgba(15,23,42,.65);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:9999;
+    padding:15px;
+}
+
+.fraction-box{
+    background:white;
+    width:100%;
+    max-width:400px;
+    border-radius:15px;
+    padding:20px;
+}
+
+.fraction-preview{
+    text-align:center;
+    font-size:26px;
+    margin:15px 0;
+    padding:12px;
+    background:#f8fafc;
+    border-radius:10px;
+}
+
+.fraction-line{
+    border-top:2px solid #172554;
+    margin:5px auto;
+    width:100px;
+}
+
+.fraction-actions{
+    display:flex;
+    gap:8px;
+}
+
+.fraction-actions button{
+    flex:1;
+}
+
+
+/* ========================================
+   PHOTO UPLOAD
+======================================== */
+
+.photo-box{
+    background:#f8fafc;
+    border:1px dashed #94a3b8;
+    padding:12px;
+    border-radius:10px;
+    margin-bottom:15px;
+}
+
+.photo-label{
+    display:block;
+    font-weight:bold;
+    margin-bottom:8px;
+}
+
+.photo-input{
+    margin:0;
+    padding:8px;
+    background:white;
+}
+
+.preview{
+    display:none;
+    width:100%;
+    max-height:260px;
+    object-fit:contain;
+    margin-top:10px;
+    border-radius:10px;
+    border:1px solid #cbd5e1;
+    background:white;
+}
+
+.remove-photo-btn{
+    display:none;
+    width:auto;
+    padding:8px 12px;
+    margin-top:8px;
+    background:#64748b;
+    color:white;
+    font-size:14px;
+}
+
+.upload-status{
+    display:none;
+    margin-top:8px;
+    color:#1e3a8a;
+    font-size:14px;
+    font-weight:bold;
+}
+
+
+/* ========================================
+   SAVED IMAGES
+======================================== */
+
+.saved-image{
+    display:block;
+    width:100%;
+    max-height:220px;
+    object-fit:contain;
+    margin:8px 0;
+    border-radius:8px;
+    border:1px solid #cbd5e1;
+    background:white;
+}
+
+.option-preview-small{
+    display:block;
+    width:100%;
+    max-height:150px;
+    object-fit:contain;
+    margin:5px 0;
+    border-radius:8px;
+    border:1px solid #cbd5e1;
+    background:white;
+}
+
+
+/* ========================================
+   EDIT MODE
+======================================== */
+
+.edit-mode{
+    background:#eff6ff;
+    border:2px solid #2563eb;
+}
+
+.edit-badge{
+    background:#dbeafe;
+    color:#1e40af;
+    padding:10px;
+    border-radius:8px;
+    margin-bottom:12px;
+    font-weight:bold;
+}
+
+
+@media(max-width:520px){
+
+    .container{
+        width:96%;
+    }
+
+    .card{
+        padding:15px;
+    }
+
+    .keyboard-grid{
+        grid-template-columns:repeat(5,1fr);
+    }
+
+    .key-btn{
+        min-height:40px;
+        font-size:14px;
+    }
+
+    .structure-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<div class="header">
+
+    <h1>MCQ Winner</h1>
+
+    <p>👑 Add Daily MCQ</p>
+
+</div>
+
+
+<div class="container">
+
+
+<!-- LOGIN -->
+
+<div class="card" id="loginPanel">
+
+    <h2>🔐 Admin Login</h2>
+
+    <p>
+        Admin Google Account එකෙන් Login වෙන්න.
+    </p>
+
+    <button
+        id="googleLoginButton"
+        class="google-btn">
+
+        🔵 Sign in with Google
+
+    </button>
+
+    <p
+        id="loginMessage"
+        class="message">
+    </p>
+
+</div>
+
+
+<!-- PIN -->
+
+<div class="card" id="pinPanel">
+
+    <h2>🔢 Admin PIN</h2>
+
+    <div id="userBox" class="user-box"></div>
+
+    <p>
+        Admin Panel එකට ඇතුල් වීමට PIN එක ඇතුළත් කරන්න.
+    </p>
+
+    <input
+        type="password"
+        id="pin"
+        inputmode="numeric"
+        placeholder="Admin PIN">
+
+    <button
+        id="pinLoginButton"
+        class="login-btn">
+
+        🔓 Unlock
+
+    </button>
+
+    <p
+        id="pinMessage"
+        class="message">
+    </p>
+
+</div>
+
+
+<!-- ADMIN -->
+
+<div id="adminPanel">
+
+
+<!-- DAILY STATUS -->
+
+<div class="card">
+
+    <h2>📅 Daily MCQ System</h2>
+
+    <div
+        id="status"
+        class="status">
+
+        Loading...
+
+    </div>
+
+    <div
+        id="targetDate"
+        class="info">
+
+        Loading...
+
+    </div>
+
+    <div class="warning">
+
+        🌙 <b>රෑ 10:00 පසු</b>
+
+        <br>
+
+        ➡️ ඊළඟ දවසේ MCQ prepare කරන්න පුළුවන්.
+
+        <br><br>
+
+        🌅 <b>උදේ 5:00</b>
+
+        <br>
+
+        ➡️ එම දවසේ MCQ studentsලාට active වෙනවා.
+
+        <br><br>
+
+        🗃️ පරණ දවස්වල MCQ database එකේ තියාගන්නවා.
+
+    </div>
+
+    <button
+        class="members-btn"
+        id="membersButton">
+
+        👥 Members බලන්න
+
+    </button>
+
+    <button
+        class="logout-btn"
+        id="logoutButton">
+
+        🚪 Logout
+
+    </button>
+
+</div>
+
+
+<!-- ADD / EDIT MCQ -->
+
+<div class="card" id="editorCard">
+
+    <h2 id="editorTitle">➕ Add MCQ</h2>
+
+    <div
+        id="editBadge"
+        class="edit-badge"
+        style="display:none;">
+
+        ✏️ ඔබ දැනට තිබෙන MCQ එකක් Edit කරමින් සිටී.
+
+    </div>
+
+
+    <label>Subject</label>
+
+    <select id="subject">
+
+        <option value="Chemistry">
+            Chemistry
+        </option>
+
+        <option value="Physics">
+            Physics
+        </option>
+
+    </select>
+
+
+    <!-- QUESTION -->
+
+    <label class="editor-label">
+        📝 ප්‍රශ්නය
+    </label>
+
+
+    <textarea
+        id="question"
+        placeholder="ප්‍රශ්නය මෙතන type කරන්න..."></textarea>
+
+    <div class="field-keyboard-row"><button type="button" class="field-keyboard-btn" data-keyboard-target="question">⌨️ Question Keyboard</button></div>
+
+
+    <!-- OPTION 1 -->
+
+    <label class="editor-label">
+        1️⃣ පළමු පිළිතුර
+    </label>
+
+    <input
+        id="option1"
+        type="text"
+        placeholder="පිළිතුර 1">
+
+    <div class="field-keyboard-row"><button type="button" class="field-keyboard-btn" data-keyboard-target="option1">⌨️ Answer 1 Keyboard</button></div>
+
+
+    <!-- OPTION 2 -->
+
+    <label class="editor-label">
+        2️⃣ දෙවන පිළිතුර
+    </label>
+
+    <input
+        id="option2"
+        type="text"
+        placeholder="පිළිතුර 2">
+
+    <div class="field-keyboard-row"><button type="button" class="field-keyboard-btn" data-keyboard-target="option2">⌨️ Answer 2 Keyboard</button></div>
+
+
+    <!-- OPTION 3 -->
+
+    <label class="editor-label">
+        3️⃣ තුන්වන පිළිතුර
+    </label>
+
+    <input
+        id="option3"
+        type="text"
+        placeholder="පිළිතුර 3">
+
+    <div class="field-keyboard-row"><button type="button" class="field-keyboard-btn" data-keyboard-target="option3">⌨️ Answer 3 Keyboard</button></div>
+
+
+    <!-- OPTION 4 -->
+
+    <label class="editor-label">
+        4️⃣ හතරවන පිළිතුර
+    </label>
+
+    <input
+        id="option4"
+        type="text"
+        placeholder="පිළිතුර 4">
+
+    <div class="field-keyboard-row"><button type="button" class="field-keyboard-btn" data-keyboard-target="option4">⌨️ Answer 4 Keyboard</button></div>
+
+
+    <!-- OPTION 5 -->
+
+    <label class="editor-label">
+        5️⃣ පස්වන පිළිතුර
+    </label>
+
+    <input
+        id="option5"
+        type="text"
+        placeholder="පිළිතුර 5">
+
+    <div class="field-keyboard-row"><button type="button" class="field-keyboard-btn" data-keyboard-target="option5">⌨️ Answer 5 Keyboard</button></div>
+
+
+    <!-- SCIENTIFIC KEYBOARD -->
+
+    <div
+        id="scientificKeyboard"
+        class="scientific-keyboard"
+        style="display:none;">
+
+        <div class="keyboard-top">
+
+            <div class="keyboard-title">
+                🧪 Advanced Scientific Keyboard
+            </div>
+
+            <button
+                type="button"
+                class="keyboard-close"
+                id="keyboardClose">
+
+                ✕ Close
+
+            </button>
+
+        </div>
+
+
+        <div
+            id="keyboardTabs"
+            class="keyboard-tabs">
+
+        </div>
+
+
+        <div
+            id="keyboardGrid"
+            class="keyboard-grid">
+
+        </div>
+
+
+        <div class="keyboard-note">
+
+            Active field එකේ cursor තියෙන තැනට symbol එක insert වේ.
+
+        </div>
+
+    </div>
+
+
+    <!-- PHOTO QUESTION -->
+
+    <div class="photo-box">
+
+        <span class="photo-label">
+            📷 ප්‍රශ්නයට Photo එකක්
+        </span>
+
+        <input
+            type="file"
+            id="questionImage"
+            class="photo-input"
+            accept="image/*">
+
+        <img
+            id="questionPreview"
+            class="preview">
+
+        <button
+            type="button"
+            id="questionRemove"
+            class="remove-photo-btn">
+
+            ❌ Photo ඉවත් කරන්න
+
+        </button>
+
+        <div
+            id="questionUploadStatus"
+            class="upload-status">
+        </div>
+
+    </div>
+
+
+    <!-- OPTION PHOTOS -->
+
+    <div class="photo-box">
+
+        <span class="photo-label">
+            📷 පළමු පිළිතුරට Photo
+        </span>
+
+        <input
+            type="file"
+            id="optionImage1"
+            class="photo-input"
+            accept="image/*">
+
+        <img
+            id="optionPreview1"
+            class="preview">
+
+        <button
+            type="button"
+            id="optionRemove1"
+            class="remove-photo-btn">
+
+            ❌ Photo ඉවත් කරන්න
+
+        </button>
+
+    </div>
+
+
+    <div class="photo-box">
+
+        <span class="photo-label">
+            📷 දෙවන පිළිතුරට Photo
+        </span>
+
+        <input
+            type="file"
+            id="optionImage2"
+            class="photo-input"
+            accept="image/*">
+
+        <img
+            id="optionPreview2"
+            class="preview">
+
+        <button
+            type="button"
+            id="optionRemove2"
+            class="remove-photo-btn">
+
+            ❌ Photo ඉවත් කරන්න
+
+        </button>
+
+    </div>
+
+
+    <div class="photo-box">
+
+        <span class="photo-label">
+            📷 තුන්වන පිළිතුරට Photo
+        </span>
+
+        <input
+            type="file"
+            id="optionImage3"
+            class="photo-input"
+            accept="image/*">
+
+        <img
+            id="optionPreview3"
+            class="preview">
+
+        <button
+            type="button"
+            id="optionRemove3"
+            class="remove-photo-btn">
+
+            ❌ Photo ඉවත් කරන්න
+
+        </button>
+
+    </div>
+
+
+    <div class="photo-box">
+
+        <span class="photo-label">
+            📷 හතරවන පිළිතුරට Photo
+        </span>
+
+        <input
+            type="file"
+            id="optionImage4"
+            class="photo-input"
+            accept="image/*">
+
+        <img
+            id="optionPreview4"
+            class="preview">
+
+        <button
+            type="button"
+            id="optionRemove4"
+            class="remove-photo-btn">
+
+            ❌ Photo ඉවත් කරන්න
+
+        </button>
+
+    </div>
+
+
+    <div class="photo-box">
+
+        <span class="photo-label">
+            📷 පස්වන පිළිතුරට Photo
+        </span>
+
+        <input
+            type="file"
+            id="optionImage5"
+            class="photo-input"
+            accept="image/*">
+
+        <img
+            id="optionPreview5"
+            class="preview">
+
+        <button
+            type="button"
+            id="optionRemove5"
+            class="remove-photo-btn">
+
+            ❌ Photo ඉවත් කරන්න
+
+        </button>
+
+    </div>
+
+
+    <!-- ANSWER -->
+
+    <label>
+        ✅ නිවැරදි පිළිතුර
+    </label>
+
+    <select id="answer">
+
+        <option value="0">
+            1 වන පිළිතුර
+        </option>
+
+        <option value="1">
+            2 වන පිළිතුර
+        </option>
+
+        <option value="2">
+            3 වන පිළිතුර
+        </option>
+
+        <option value="3">
+            4 වන පිළිතුර
+        </option>
+
+        <option value="4">
+            5 වන පිළිතුර
+        </option>
+
+    </select>
+
+
+    <button
+        class="add-btn"
+        id="addButton">
+
+        ➕ Add Question
+
+    </button>
+
+
+    <button
+        class="cancel-edit-btn"
+        id="cancelEditButton"
+        style="display:none;">
+
+        ↩️ Cancel Edit
+
+    </button>
+
+
+    <p
+        id="addMessage"
+        class="message">
+    </p>
+
+</div>
+
+
+<!-- QUESTIONS -->
+
+<div class="card">
+
+    <h2>
+        📚 Target Day MCQs
+    </h2>
+
+    <div id="questionList">
+        Loading...
+    </div>
+
+</div>
+
+</div>
+
+
+<!-- FRACTION MODAL -->
+
+<div
+    id="fractionModal"
+    class="fraction-modal">
+
+    <div class="fraction-box">
+
+        <h3>½ Fraction Builder</h3>
+
+        <label>
+            උඩ කොටස
+        </label>
+
+        <input
+            id="fractionNumerator"
+            type="text"
+            placeholder="Numerator">
+
+        <div class="fraction-preview">
+
+            <div id="fractionTopPreview">
+                a
+            </div>
+
+            <div class="fraction-line"></div>
+
+            <div id="fractionBottomPreview">
+                b
+            </div>
+
+        </div>
+
+        <label>
+            යට කොටස
+        </label>
+
+        <input
+            id="fractionDenominator"
+            type="text"
+            placeholder="Denominator">
+
+        <div class="fraction-actions">
+
+            <button
+                type="button"
+                id="fractionInsert"
+                class="add-btn">
+
+                Insert
+
+            </button>
+
+            <button
+                type="button"
+                id="fractionCancel"
+                class="cancel-edit-btn">
+
+                Cancel
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script type="module">
+
+
+/* ========================================
+   FIREBASE
+======================================== */
+
+import {
+    initializeApp
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+
+import {
+    getAuth,
+    GoogleAuthProvider,
+    signInWithPopup,
+    onAuthStateChanged,
+    signOut
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
+import {
+    getFirestore,
+    collection,
+    addDoc,
+    getDocs,
+    getDoc,
+    deleteDoc,
+    setDoc,
+    doc,
+    query,
+    where,
+    updateDoc
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+/* ========================================
+   FIREBASE CONFIG
+======================================== */
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyAMkaGYmBuoFama5MW5AhoX9q6cly_-nbg",
+
+    authDomain:
+        "mcq-winner.firebaseapp.com",
+
+    projectId:
+        "mcq-winner",
+
+    storageBucket:
+        "mcq-winner.firebasestorage.app",
+
+    messagingSenderId:
+        "1022060912943",
+
+    appId:
+        "1:1022060912943:web:f6e58414867e32f685c1da",
+
+    measurementId:
+        "G-MBH3NZ728H"
+
+};
+
+
+const app =
+    initializeApp(firebaseConfig);
+
+
+const auth =
+    getAuth(app);
+
+
+const db =
+    getFirestore(app);
+
+
+const provider =
+    new GoogleAuthProvider();
+
+
+/* ========================================
+   CLOUDINARY
+======================================== */
+
+const CLOUDINARY_CLOUD_NAME =
+    "irjfos43";
+
+const CLOUDINARY_UPLOAD_PRESET =
+    "mcq_winner";
+
+
+/* ========================================
+   ADMIN
+======================================== */
+
+const ADMIN_UID =
+    "Npiu0xJQQchrVgHnXRuR8Rr5FOA2";
+
+
+const ADMIN_PIN =
+    "6020232";
+
+
+let currentUser = null;
+
+let pinUnlocked = false;
+
+
+/* ========================================
+   EDIT MODE
+======================================== */
+
+let editingMcqId = null;
+
+
+/* ========================================
+   ACTIVE SCIENTIFIC FIELD
+======================================== */
+
+let activeScientificField = null;
+
+
+/* ========================================
+   SRI LANKA TIME
+======================================== */
+
+function getSriLankaParts(){
+
+    const parts =
+        new Intl.DateTimeFormat(
+            "en-GB",
+            {
+                timeZone:"Asia/Colombo",
+                year:"numeric",
+                month:"2-digit",
+                day:"2-digit",
+                hour:"2-digit",
+                minute:"2-digit",
+                second:"2-digit",
+                hourCycle:"h23"
+            }
+        ).formatToParts(new Date());
+
+    const result = {};
+
+    parts.forEach(function(part){
+
+        if(part.type !== "literal"){
+
+            result[part.type] =
+                Number(part.value);
+
+        }
+
+    });
+
+    return result;
+}
+
+
+/* ========================================
+   DATE
+======================================== */
+
+function makeDate(year,month,day){
+
+    return(
+        String(year).padStart(4,"0")+
+        "-"+
+        String(month).padStart(2,"0")+
+        "-"+
+        String(day).padStart(2,"0")
+    );
+
+}
+
+
+function getSriLankaDateObject(){
+
+    const p =
+        getSriLankaParts();
+
+    return new Date(
+        Date.UTC(
+            p.year,
+            p.month-1,
+            p.day
+        )
+    );
+
+}
+
+
+function getAdminTargetDate(){
+
+    const p =
+        getSriLankaParts();
+
+    const date =
+        getSriLankaDateObject();
+
+    if(p.hour >= 22){
+
+        date.setUTCDate(
+            date.getUTCDate()+1
+        );
+
+    }
+
+    return makeDate(
+        date.getUTCFullYear(),
+        date.getUTCMonth()+1,
+        date.getUTCDate()
+    );
+
+}
+
+
+/* ========================================
+   ADVANCED KEYBOARD DATA
+======================================== */
+
+const keyboardData = {
+
+
+    "Basic":[
+
+        ["+", "+"],
+        ["−", "−"],
+        ["×", "×"],
+        ["÷", "÷"],
+        ["=", "="],
+        ["≠", "≠"],
+        ["±", "±"],
+        ["≈", "≈"],
+        ["≤", "≤"],
+        ["≥", "≥"],
+        ["<", "<"],
+        [">", ">"],
+        ["∞", "∞"],
+        ["√", "√"],
+        ["∛", "∛"],
+        ["∝", "∝"],
+        ["∴", "∴"],
+        ["∵", "∵"],
+        ["°", "°"],
+        ["′", "′"],
+        ["″", "″"],
+        ["|", "|"],
+        ["‖", "‖"],
+        ["½", "½"],
+        ["⅓", "⅓"],
+        ["⅔", "⅔"],
+        ["¼", "¼"],
+        ["¾", "¾"],
+        ["⅕", "⅕"],
+        ["⅖", "⅖"],
+        ["⅗", "⅗"],
+        ["⅘", "⅘"],
+        ["⅙", "⅙"],
+        ["⅚", "⅚"],
+        ["⅛", "⅛"],
+        ["⅜", "⅜"],
+        ["⅝", "⅝"],
+        ["⅞", "⅞"],
+        ["½ Builder", "__FRACTION__"]
+
+    ],
+
+
+    "Greek":[
+
+        ["α","α"],
+        ["β","β"],
+        ["γ","γ"],
+        ["δ","δ"],
+        ["ε","ε"],
+        ["η","η"],
+        ["θ","θ"],
+        ["ι","ι"],
+        ["κ","κ"],
+        ["λ","λ"],
+        ["μ","μ"],
+        ["ν","ν"],
+        ["ξ","ξ"],
+        ["π","π"],
+        ["ρ","ρ"],
+        ["σ","σ"],
+        ["τ","τ"],
+        ["φ","φ"],
+        ["χ","χ"],
+        ["ψ","ψ"],
+        ["ω","ω"],
+        ["Γ","Γ"],
+        ["Δ","Δ"],
+        ["Θ","Θ"],
+        ["Λ","Λ"],
+        ["Ξ","Ξ"],
+        ["Π","Π"],
+        ["Σ","Σ"],
+        ["Φ","Φ"],
+        ["Ψ","Ψ"],
+        ["Ω","Ω"]
+
+    ],
+
+
+    "Chemistry":[
+
+        ["→","→"],
+        ["←","←"],
+        ["⇌","⇌"],
+        ["⇄","⇄"],
+        ["⟶","⟶"],
+        ["⟷","⟷"],
+        ["↑","↑"],
+        ["↓","↓"],
+        ["Δ","Δ"],
+        ["hν","hν"],
+        ["°C","°C"],
+        ["°F","°F"],
+        ["pH","pH"],
+        ["pOH","pOH"],
+        ["(s)","(s)"],
+        ["(l)","(l)"],
+        ["(g)","(g)"],
+        ["(aq)","(aq)"],
+        ["C₆H₆","C₆H₆"],
+        ["H₂O","H₂O"],
+        ["CO₂","CO₂"],
+        ["O₂","O₂"],
+        ["H₂","H₂"],
+        ["N₂","N₂"],
+        ["NH₃","NH₃"],
+        ["CH₄","CH₄"],
+        ["HCl","HCl"],
+        ["NaOH","NaOH"],
+        ["H₂SO₄","H₂SO₄"],
+        ["HNO₃","HNO₃"],
+        ["NaCl","NaCl"],
+        ["CaCO₃","CaCO₃"],
+        ["SO₄²⁻","SO₄²⁻"],
+        ["NO₃⁻","NO₃⁻"],
+        ["CO₃²⁻","CO₃²⁻"],
+        ["NH₄⁺","NH₄⁺"],
+        ["OH⁻","OH⁻"],
+        ["Cl⁻","Cl⁻"],
+        ["Na⁺","Na⁺"],
+        ["Ca²⁺","Ca²⁺"],
+        ["Fe²⁺","Fe²⁺"],
+        ["Fe³⁺","Fe³⁺"],
+        ["H⁺","H⁺"],
+        ["K⁺","K⁺"],
+        ["Mg²⁺","Mg²⁺"],
+        ["Al³⁺","Al³⁺"],
+        ["NO₂⁻","NO₂⁻"],
+        ["SO₃²⁻","SO₃²⁻"],
+        ["HCO₃⁻","HCO₃⁻"],
+        ["PO₄³⁻","PO₄³⁻"],
+        ["CH₃COO⁻","CH₃COO⁻"],
+        ["MnO₄⁻","MnO₄⁻"],
+        ["Cr₂O₇²⁻","Cr₂O₇²⁻"],
+        ["CO","CO"],
+        ["C₂H₅OH","C₂H₅OH"],
+        ["CH₃COOH","CH₃COOH"],
+        ["Ca(OH)₂","Ca(OH)₂"],
+        ["Na₂CO₃","Na₂CO₃"],
+        ["KMnO₄","KMnO₄"],
+        ["K₂Cr₂O₇","K₂Cr₂O₇"]
+
+    ],
+
+
+    "Physics":[
+
+        ["Δx","Δx"],
+        ["Δt","Δt"],
+        ["Δv","Δv"],
+        ["Δp","Δp"],
+        ["F","F"],
+        ["m","m"],
+        ["a","a"],
+        ["g","g"],
+        ["v","v"],
+        ["u","u"],
+        ["s","s"],
+        ["t","t"],
+        ["p","p"],
+        ["E","E"],
+        ["P","P"],
+        ["V","V"],
+        ["I","I"],
+        ["R","R"],
+        ["Q","Q"],
+        ["C","C"],
+        ["q","q"],
+        ["λ","λ"],
+        ["f","f"],
+        ["ν","ν"],
+        ["T","T"],
+        ["c","c"],
+        ["h","h"],
+        ["k","k"],
+        ["G","G"],
+        ["μ","μ"],
+        ["ε","ε"],
+        ["ρ","ρ"],
+        ["ω","ω"],
+        ["α","α"],
+        ["β","β"],
+        ["γ","γ"],
+        ["Ω","Ω"],
+        ["F⃗","F⃗"],
+        ["v⃗","v⃗"],
+        ["a⃗","a⃗"],
+        ["E⃗","E⃗"],
+        ["B⃗","B⃗"]
+
+    ],
+
+
+    "Units":[
+
+        ["m","m"],
+        ["cm","cm"],
+        ["mm","mm"],
+        ["km","km"],
+        ["kg","kg"],
+        ["g","g"],
+        ["mg","mg"],
+        ["s","s"],
+        ["min","min"],
+        ["h","h"],
+        ["N","N"],
+        ["J","J"],
+        ["W","W"],
+        ["Pa","Pa"],
+        ["Hz","Hz"],
+        ["V","V"],
+        ["A","A"],
+        ["Ω","Ω"],
+        ["C","C"],
+        ["K","K"],
+        ["mol","mol"],
+        ["cd","cd"],
+        ["N·m","N·m"],
+        ["m/s","m/s"],
+        ["m²","m²"],
+        ["m³","m³"],
+        ["m s⁻¹","m s⁻¹"],
+        ["m s⁻²","m s⁻²"],
+        ["kg m⁻³","kg m⁻³"],
+        ["J kg⁻¹","J kg⁻¹"],
+        ["W m⁻²","W m⁻²"],
+        ["N m⁻²","N m⁻²"]
+
+    ],
+
+
+    "Math":[
+
+        ["∑","∑"],
+        ["∫","∫"],
+        ["∮","∮"],
+        ["∂","∂"],
+        ["∇","∇"],
+        ["lim","lim"],
+        ["d/dx","d/dx"],
+        ["sin","sin"],
+        ["cos","cos"],
+        ["tan","tan"],
+        ["sin⁻¹","sin⁻¹"],
+        ["cos⁻¹","cos⁻¹"],
+        ["tan⁻¹","tan⁻¹"],
+        ["log","log"],
+        ["ln","ln"],
+        ["e","e"],
+        ["π","π"],
+        ["∞","∞"],
+        ["√","√"],
+        ["∴","∴"],
+        ["∵","∵"],
+        ["∈","∈"],
+        ["∉","∉"],
+        ["⊂","⊂"],
+        ["⊃","⊃"],
+        ["∩","∩"],
+        ["∪","∪"],
+        ["∀","∀"],
+        ["∃","∃"],
+        ["≡","≡"]
+
+    ],
+
+
+    "Superscript":[
+
+        ["⁰","⁰"],
+        ["¹","¹"],
+        ["²","²"],
+        ["³","³"],
+        ["⁴","⁴"],
+        ["⁵","⁵"],
+        ["⁶","⁶"],
+        ["⁷","⁷"],
+        ["⁸","⁸"],
+        ["⁹","⁹"],
+        ["⁺","⁺"],
+        ["⁻","⁻"],
+        ["⁼","⁼"],
+        ["⁽","⁽"],
+        ["⁾","⁾"],
+        ["ⁿ","ⁿ"],
+        ["ⁱ","ⁱ"],
+        ["⁻¹","⁻¹"],
+        ["⁻²","⁻²"],
+        ["⁻³","⁻³"]
+
+    ],
+
+
+    "Subscript":[
+
+        ["₀","₀"],
+        ["₁","₁"],
+        ["₂","₂"],
+        ["₃","₃"],
+        ["₄","₄"],
+        ["₅","₅"],
+        ["₆","₆"],
+        ["₇","₇"],
+        ["₈","₈"],
+        ["₉","₉"],
+        ["₊","₊"],
+        ["₋","₋"],
+        ["₌","₌"],
+        ["₍","₍"],
+        ["₎","₎"],
+        ["ₐ","ₐ"],
+        ["ₑ","ₑ"],
+        ["ₕ","ₕ"],
+        ["ᵢ","ᵢ"],
+        ["ⱼ","ⱼ"],
+        ["ₖ","ₖ"],
+        ["ₗ","ₗ"],
+        ["ₘ","ₘ"],
+        ["ₙ","ₙ"],
+        ["ₒ","ₒ"],
+        ["ₚ","ₚ"],
+        ["ᵣ","ᵣ"],
+        ["ₛ","ₛ"],
+        ["ₜ","ₜ"],
+        ["ᵤ","ᵤ"],
+        ["ᵥ","ᵥ"],
+        ["ₓ","ₓ"]
+
+    ],
+
+
+    "Formula":[
+
+        ["v = u + at","v = u + at"],
+        ["v² = u² + 2as","v² = u² + 2as"],
+        ["s = ut + ½at²","s = ut + ½at²"],
+        ["F = ma","F = ma"],
+        ["p = mv","p = mv"],
+        ["W = Fs","W = Fs"],
+        ["P = W/t","P = W/t"],
+        ["E = mc²","E = mc²"],
+        ["V = IR","V = IR"],
+        ["Q = It","Q = It"],
+        ["P = VI","P = VI"],
+        ["ρ = m/V","ρ = m/V"],
+        ["KE = ½mv²","KE = ½mv²"],
+        ["PE = mgh","PE = mgh"],
+        ["λ = v/f","λ = v/f"],
+        ["f = 1/T","f = 1/T"],
+        ["n = c/v","n = c/v"],
+        ["PV = nRT","PV = nRT"],
+        ["ΔH","ΔH"],
+        ["ΔG","ΔG"]
+
+    ],
+
+
+    "Symbols":[
+
+        ["→","→"],
+        ["←","←"],
+        ["↔","↔"],
+        ["⇒","⇒"],
+        ["⇐","⇐"],
+        ["⇔","⇔"],
+        ["↑","↑"],
+        ["↓","↓"],
+        ["↗","↗"],
+        ["↘","↘"],
+        ["↙","↙"],
+        ["↖","↖"],
+        ["×","×"],
+        ["÷","÷"],
+        ["±","±"],
+        ["≈","≈"],
+        ["≠","≠"],
+        ["≤","≤"],
+        ["≥","≥"],
+        ["∆","∆"],
+        ["Δ","Δ"],
+        ["∞","∞"],
+        ["∠","∠"],
+        ["⊥","⊥"],
+        ["∥","∥"],
+        ["∴","∴"],
+        ["∵","∵"]
+
+    ]
+
+};
+/* Ensure complete A/L Chemistry ion and formula shortcuts */
+keyboardData.Chemistry = keyboardData.Chemistry || [];
+[
+    ["H⁺","H⁺"],["Na⁺","Na⁺"],["K⁺","K⁺"],["Mg²⁺","Mg²⁺"],["Ca²⁺","Ca²⁺"],["Al³⁺","Al³⁺"],["NH₄⁺","NH₄⁺"],
+    ["Cl⁻","Cl⁻"],["OH⁻","OH⁻"],["NO₃⁻","NO₃⁻"],["NO₂⁻","NO₂⁻"],["SO₄²⁻","SO₄²⁻"],["SO₃²⁻","SO₃²⁻"],
+    ["CO₃²⁻","CO₃²⁻"],["HCO₃⁻","HCO₃⁻"],["PO₄³⁻","PO₄³⁻"],["CH₃COO⁻","CH₃COO⁻"],["MnO₄⁻","MnO₄⁻"],["Cr₂O₇²⁻","Cr₂O₇²⁻"],
+    ["H₂O","H₂O"],["CO₂","CO₂"],["CO","CO"],["NH₃","NH₃"],["CH₄","CH₄"],["C₂H₅OH","C₂H₅OH"],["CH₃COOH","CH₃COOH"],
+    ["HCl","HCl"],["H₂SO₄","H₂SO₄"],["HNO₃","HNO₃"],["NaOH","NaOH"],["Ca(OH)₂","Ca(OH)₂"],["Na₂CO₃","Na₂CO₃"],
+    ["CaCO₃","CaCO₃"],["KMnO₄","KMnO₄"],["K₂Cr₂O₇","K₂Cr₂O₇"]
+].forEach(function(item){
+    if(!keyboardData.Chemistry.some(function(x){return x[0]===item[0];})) keyboardData.Chemistry.push(item);
+});
+
+
+
+
+/* ========================================
+   PERIODIC TABLE
+======================================== */
+
+const elements = [
+
+["H","Hydrogen",1,1,1],
+["He","Helium",2,18,1],
+
+["Li","Lithium",3,1,2],
+["Be","Beryllium",4,2,2],
+["B","Boron",5,13,2],
+["C","Carbon",6,14,2],
+["N","Nitrogen",7,15,2],
+["O","Oxygen",8,16,2],
+["F","Fluorine",9,17,2],
+["Ne","Neon",10,18,2],
+
+["Na","Sodium",11,1,3],
+["Mg","Magnesium",12,2,3],
+["Al","Aluminium",13,13,3],
+["Si","Silicon",14,14,3],
+["P","Phosphorus",15,15,3],
+["S","Sulfur",16,16,3],
+["Cl","Chlorine",17,17,3],
+["Ar","Argon",18,18,3],
+
+["K","Potassium",19,1,4],
+["Ca","Calcium",20,2,4],
+["Sc","Scandium",21,3,4],
+["Ti","Titanium",22,4,4],
+["V","Vanadium",23,5,4],
+["Cr","Chromium",24,6,4],
+["Mn","Manganese",25,7,4],
+["Fe","Iron",26,8,4],
+["Co","Cobalt",27,9,4],
+["Ni","Nickel",28,10,4],
+["Cu","Copper",29,11,4],
+["Zn","Zinc",30,12,4],
+["Ga","Gallium",31,13,4],
+["Ge","Germanium",32,14,4],
+["As","Arsenic",33,15,4],
+["Se","Selenium",34,16,4],
+["Br","Bromine",35,17,4],
+["Kr","Krypton",36,18,4],
+
+["Rb","Rubidium",37,1,5],
+["Sr","Strontium",38,2,5],
+["Y","Yttrium",39,3,5],
+["Zr","Zirconium",40,4,5],
+["Nb","Niobium",41,5,5],
+["Mo","Molybdenum",42,6,5],
+["Tc","Technetium",43,7,5],
+["Ru","Ruthenium",44,8,5],
+["Rh","Rhodium",45,9,5],
+["Pd","Palladium",46,10,5],
+["Ag","Silver",47,11,5],
+["Cd","Cadmium",48,12,5],
+["In","Indium",49,13,5],
+["Sn","Tin",50,14,5],
+["Sb","Antimony",51,15,5],
+["Te","Tellurium",52,16,5],
+["I","Iodine",53,17,5],
+["Xe","Xenon",54,18,5],
+
+["Cs","Cesium",55,1,6],
+["Ba","Barium",56,2,6],
+
+["La","Lanthanum",57,4,6],
+["Ce","Cerium",58,5,6],
+["Pr","Praseodymium",59,6,6],
+["Nd","Neodymium",60,7,6],
+["Pm","Promethium",61,8,6],
+["Sm","Samarium",62,9,6],
+["Eu","Europium",63,10,6],
+["Gd","Gadolinium",64,11,6],
+["Tb","Terbium",65,12,6],
+["Dy","Dysprosium",66,13,6],
+["Ho","Holmium",67,14,6],
+["Er","Erbium",68,15,6],
+["Tm","Thulium",69,16,6],
+["Yb","Ytterbium",70,17,6],
+["Lu","Lutetium",71,18,6],
+
+["Hf","Hafnium",72,4,6],
+["Ta","Tantalum",73,5,6],
+["W","Tungsten",74,6,6],
+["Re","Rhenium",75,7,6],
+["Os","Osmium",76,8,6],
+["Ir","Iridium",77,9,6],
+["Pt","Platinum",78,10,6],
+["Au","Gold",79,11,6],
+["Hg","Mercury",80,12,6],
+["Tl","Thallium",81,13,6],
+["Pb","Lead",82,14,6],
+["Bi","Bismuth",83,15,6],
+["Po","Polonium",84,16,6],
+["At","Astatine",85,17,6],
+["Rn","Radon",86,18,6],
+
+["Fr","Francium",87,1,7],
+["Ra","Radium",88,2,7],
+
+["Ac","Actinium",89,4,7],
+["Th","Thorium",90,5,7],
+["Pa","Protactinium",91,6,7],
+["U","Uranium",92,7,7],
+["Np","Neptunium",93,8,7],
+["Pu","Plutonium",94,9,7],
+["Am","Americium",95,10,7],
+["Cm","Curium",96,11,7],
+["Bk","Berkelium",97,12,7],
+["Cf","Californium",98,13,7],
+["Es","Einsteinium",99,14,7],
+["Fm","Fermium",100,15,7],
+["Md","Mendelevium",101,16,7],
+["No","Nobelium",102,17,7],
+["Lr","Lawrencium",103,18,7],
+
+["Rf","Rutherfordium",104,4,7],
+["Db","Dubnium",105,5,7],
+["Sg","Seaborgium",106,6,7],
+["Bh","Bohrium",107,7,7],
+["Hs","Hassium",108,8,7],
+["Mt","Meitnerium",109,9,7],
+["Ds","Darmstadtium",110,10,7],
+["Rg","Roentgenium",111,11,7],
+["Cn","Copernicium",112,12,7],
+["Nh","Nihonium",113,13,7],
+["Fl","Flerovium",114,14,7],
+["Mc","Moscovium",115,15,7],
+["Lv","Livermorium",116,16,7],
+["Ts","Tennessine",117,17,7],
+["Og","Oganesson",118,18,7]
+
+];
+
+
+/* ========================================
+   RENDER KEYBOARD TABS
+======================================== */
+
+const tabs =
+    document.getElementById(
+        "keyboardTabs"
+    );
+
+const grid =
+    document.getElementById(
+        "keyboardGrid"
+    );
+
+
+function renderKeyboard(){
+
+    tabs.innerHTML = "";
+
+    Object.keys(keyboardData).forEach(
+        function(category,index){
+
+            const button =
+                document.createElement("button");
+
+            button.type = "button";
+
+            button.className =
+                "keyboard-tab";
+
+            button.textContent =
+                category;
+
+            if(index === 0){
+
+                button.classList.add("active");
+
+            }
+
+            button.addEventListener(
+                "click",
+                function(){
+
+                    document
+                        .querySelectorAll(
+                            ".keyboard-tab"
+                        )
+                        .forEach(
+                            function(btn){
+                                btn.classList.remove(
+                                    "active"
+                                );
+                            }
+                        );
+
+                    button.classList.add("active");
+
+                    renderKeyboardCategory(
+                        category
+                    );
+
+                }
+            );
+
+            tabs.appendChild(button);
+
+        }
+    );
+
+    renderKeyboardCategory(
+        Object.keys(keyboardData)[0]
+    );
+
+}
+
+
+function renderKeyboardCategory(category){
+
+    grid.innerHTML = "";
+
+    keyboardData[category].forEach(
+        function(item){
+
+            const button =
+                document.createElement("button");
+
+            button.type = "button";
+
+            button.className =
+                "key-btn";
+
+            button.textContent =
+                item[0];
+
+            button.addEventListener(
+                "pointerdown",
+                function(event){
+
+                    event.preventDefault();
+
+                    if(item[1] === "__FRACTION__"){
+
+                        openFractionBuilder();
+
+                    }
+
+                    else{
+
+                        insertIntoActiveField(
+                            item[1]
+                        );
+
+                    }
+
+                }
+            );
+
+            grid.appendChild(button);
+
+        }
+    );
+
+}
+
+
+/* ========================================
+   PERIODIC TABLE TAB
+======================================== */
+
+const periodicTab =
+    document.createElement("button");
+
+periodicTab.type = "button";
+
+periodicTab.className =
+    "keyboard-tab";
+
+periodicTab.textContent =
+    "🧬 Periodic Table";
+
+periodicTab.addEventListener(
+    "click",
+    function(){
+
+        document
+            .querySelectorAll(
+                ".keyboard-tab"
+            )
+            .forEach(
+                function(btn){
+                    btn.classList.remove(
+                        "active"
+                    );
+                }
+            );
+
+        periodicTab.classList.add("active");
+
+        renderPeriodicTable();
+
+    }
+);
+
+tabs.appendChild(periodicTab);
+
+
+/* ========================================
+   STRUCTURES TAB
+======================================== */
+
+const structureTab =
+    document.createElement("button");
+
+structureTab.type = "button";
+
+structureTab.className =
+    "keyboard-tab";
+
+structureTab.textContent =
+    "⌬ Structures";
+
+structureTab.addEventListener(
+    "click",
+    function(){
+
+        document
+            .querySelectorAll(
+                ".keyboard-tab"
+            )
+            .forEach(
+                function(btn){
+                    btn.classList.remove(
+                        "active"
+                    );
+                }
+            );
+
+        structureTab.classList.add("active");
+
+        renderStructures();
+
+    }
+);
+
+tabs.appendChild(structureTab);
+
+
+/* ========================================
+   PERIODIC TABLE RENDER
+======================================== */
+
+function renderPeriodicTable(){
+
+    grid.style.display =
+        "block";
+
+    grid.innerHTML = "";
+
+
+    const wrapper =
+        document.createElement("div");
+
+    wrapper.className =
+        "periodic-wrapper";
+
+
+    const table =
+        document.createElement("div");
+
+    table.className =
+        "periodic-table";
+
+
+    elements.forEach(
+        function(element){
+
+            const button =
+                document.createElement("button");
+
+            button.type = "button";
+
+            button.className =
+                "element";
+
+
+            button.style.gridColumn =
+                element[3];
+
+            button.style.gridRow =
+                element[4];
+
+
+            button.innerHTML =
+
+                "<span class='num'>" +
+                element[2] +
+                "</span>" +
+
+                "<span class='symbol'>" +
+                escapeHTML(element[0]) +
+                "</span>" +
+
+                "<span class='name'>" +
+                escapeHTML(element[1]) +
+                "</span>";
+
+
+            button.addEventListener(
+                "pointerdown",
+                function(event){
+
+                    event.preventDefault();
+
+                    insertIntoActiveField(
+                        element[0]
+                    );
+
+                }
+            );
+
+
+            table.appendChild(button);
+
+        }
+    );
+
+
+    wrapper.appendChild(table);
+
+    grid.appendChild(wrapper);
+
+}
+
+
+/* ========================================
+   STRUCTURES RENDER
+======================================== */
+
+function renderStructures(){
+
+    grid.style.display =
+        "block";
+
+    grid.innerHTML = "";
+
+
+    const box =
+        document.createElement("div");
+
+    box.className =
+        "structure-grid";
+
+
+    const structures = [
+
+        ["⌬","Benzene"],
+        ["⬡","Hexagon"],
+        ["─","Single bond"],
+        ["═","Double bond"],
+        ["≡","Triple bond"],
+        ["→","Reaction"],
+        ["⇌","Equilibrium"],
+        ["↔","Resonance"],
+        ["↑","Gas"],
+        ["↓","Precipitate"],
+        ["•","Electron"],
+        ["⋅","Bond / dot"]
+
+    ];
+
+
+    structures.forEach(
+        function(item){
+
+            const button =
+                document.createElement("button");
+
+            button.type = "button";
+
+            button.className =
+                "structure-btn";
+
+
+            button.innerHTML =
+                escapeHTML(item[0]) +
+                "<small>" +
+                escapeHTML(item[1]) +
+                "</small>";
+
+
+            button.addEventListener(
+                "pointerdown",
+                function(event){
+
+                    event.preventDefault();
+
+                    insertIntoActiveField(
+                        item[0]
+                    );
+
+                }
+            );
+
+
+            box.appendChild(button);
+
+        }
+    );
+
+
+    grid.appendChild(box);
+
+}
+
+
+/* ========================================
+   ACTIVE FIELD
+======================================== */
+
+function setActiveScientificField(element){
+
+    if(
+        !element ||
+        !(
+            element.matches(
+                "textarea,input[type='text']"
+            )
+        )
+    ){
+
+        return;
+
+    }
+
+    activeScientificField =
+        element;
+
+}
+
+
+/* ========================================
+   FIELD FOCUS
+======================================== */
+
+document
+    .querySelectorAll(
+        "#question,#option1,#option2,#option3,#option4,#option5"
+    )
+    .forEach(
+        function(field){
+
+            field.addEventListener(
+                "focus",
+                function(){
+                    setActiveScientificField(field);
+                }
+            );
+
+        }
+    );
+
+
+/* ========================================
+   PER-FIELD KEYBOARD BUTTONS
+======================================== */
+
+document
+    .querySelectorAll(".field-keyboard-btn")
+    .forEach(function(button){
+
+        button.addEventListener("click",function(event){
+
+            event.preventDefault();
+
+            const targetId =
+                button.getAttribute("data-keyboard-target");
+
+            const field =
+                document.getElementById(targetId);
+
+            if(!field) return;
+
+            setActiveScientificField(field);
+
+            // Keep the cursor/typing target on the selected field.
+            field.focus({preventScroll:true});
+
+            showScientificKeyboard();
+
+            // Put the shared keyboard directly after the selected field's button row.
+            const row = button.parentElement;
+            if(row && row.nextElementSibling !== document.getElementById("scientificKeyboard")){
+                row.insertAdjacentElement("afterend",document.getElementById("scientificKeyboard"));
+            }
+
+            document.getElementById("scientificKeyboard").scrollIntoView({behavior:"smooth",block:"nearest"});
+        });
+    });
+
+/* ========================================
+   SHOW KEYBOARD
+======================================== */
+
+function showScientificKeyboard(){
+
+    document.getElementById(
+        "scientificKeyboard"
+    ).style.display =
+        "block";
+
+}
+
+
+/* ========================================
+   CLOSE KEYBOARD
+======================================== */
+
+document
+    .getElementById("keyboardClose")
+    .addEventListener(
+        "click",
+        function(){
+
+            document.getElementById(
+                "scientificKeyboard"
+            ).style.display =
+                "none";
+
+        }
+    );
+
+
+/* ========================================
+   INSERT INTO ACTIVE FIELD
+======================================== */
+
+function insertIntoActiveField(text){
+
+    const input =
+        activeScientificField;
+
+    if(!input){
+
+        alert(
+            "මුලින් Question හෝ Answer field එකක් select කරන්න."
+        );
+
+        return;
+
+    }
+
+
+    input.focus();
+
+
+    const start =
+        input.selectionStart ??
+        input.value.length;
+
+
+    const end =
+        input.selectionEnd ??
+        input.value.length;
+
+
+    input.value =
+        input.value.substring(
+            0,
+            start
+        ) +
+        text +
+        input.value.substring(
+            end
+        );
+
+
+    const newPosition =
+        start + text.length;
+
+
+    input.selectionStart =
+        newPosition;
+
+    input.selectionEnd =
+        newPosition;
+
+
+    input.dispatchEvent(
+        new Event(
+            "input",
+            {
+                bubbles:true
+            }
+        )
+    );
+
+}
+
+
+/* ========================================
+   FRACTION BUILDER
+======================================== */
+
+function openFractionBuilder(){
+
+    if(!activeScientificField){
+
+        alert(
+            "මුලින් Question හෝ Answer field එකක් select කරන්න."
+        );
+
+        return;
+
+    }
+
+
+    document.getElementById(
+        "fractionNumerator"
+    ).value = "";
+
+
+    document.getElementById(
+        "fractionDenominator"
+    ).value = "";
+
+
+    updateFractionPreview();
+
+
+    document.getElementById(
+        "fractionModal"
+    ).style.display =
+        "flex";
+
+
+    setTimeout(
+        function(){
+
+            document.getElementById(
+                "fractionNumerator"
+            ).focus();
+
+        },
+        100
+    );
+
+}
+
+
+function updateFractionPreview(){
+
+    const top =
+        document.getElementById(
+            "fractionNumerator"
+        ).value ||
+        "a";
+
+
+    const bottom =
+        document.getElementById(
+            "fractionDenominator"
+        ).value ||
+        "b";
+
+
+    document.getElementById(
+        "fractionTopPreview"
+    ).textContent =
+        top;
+
+
+    document.getElementById(
+        "fractionBottomPreview"
+    ).textContent =
+        bottom;
+
+}
+
+
+document
+    .getElementById(
+        "fractionNumerator"
+    )
+    .addEventListener(
+        "input",
+        updateFractionPreview
+    );
+
+
+document
+    .getElementById(
+        "fractionDenominator"
+    )
+    .addEventListener(
+        "input",
+        updateFractionPreview
+    );
+
+
+document
+    .getElementById(
+        "fractionCancel"
+    )
+    .addEventListener(
+        "click",
+        function(){
+
+            document.getElementById(
+                "fractionModal"
+            ).style.display =
+                "none";
+
+        }
+    );
+
+
+document
+    .getElementById(
+        "fractionInsert"
+    )
+    .addEventListener(
+        "click",
+        function(){
+
+            const top =
+                document.getElementById(
+                    "fractionNumerator"
+                ).value.trim();
+
+
+            const bottom =
+                document.getElementById(
+                    "fractionDenominator"
+                ).value.trim();
+
+
+            if(!top || !bottom){
+
+                alert(
+                    "උඩ සහ යට කොටස් දෙකම ඇතුළත් කරන්න."
+                );
+
+                return;
+
+            }
+
+
+            const fraction =
+                "(" +
+                top +
+                ")/(" +
+                bottom +
+                ")";
+
+
+            insertIntoActiveField(
+                fraction
+            );
+
+
+            document.getElementById(
+                "fractionModal"
+            ).style.display =
+                "none";
+
+        }
+    );
+
+
+/* ========================================
+   RENDER INITIAL KEYBOARD
+======================================== */
+
+renderKeyboard();
+
+
+/* ========================================
+   PHOTO PREVIEW
+======================================== */
+
+function setupPhotoPreview(
+    inputId,
+    previewId,
+    removeId
+){
+
+    const input =
+        document.getElementById(inputId);
+
+    const preview =
+        document.getElementById(previewId);
+
+    const removeButton =
+        document.getElementById(removeId);
+
+
+    input.addEventListener(
+        "change",
+        function(){
+
+            const file =
+                input.files[0];
+
+
+            if(!file){
+
+                preview.style.display =
+                    "none";
+
+                removeButton.style.display =
+                    "none";
+
+                return;
+
+            }
+
+
+            if(!file.type.startsWith("image/")){
+
+                alert(
+                    "කරුණාකර image file එකක් තෝරන්න."
+                );
+
+                input.value = "";
+
+                return;
+
+            }
+
+
+            if(
+                file.size >
+                5 * 1024 * 1024
+            ){
+
+                alert(
+                    "Photo එක 5 MB ට වඩා අඩු විය යුතුයි."
+                );
+
+                input.value = "";
+
+                return;
+
+            }
+
+
+            const reader =
+                new FileReader();
+
+
+            reader.onload =
+                function(event){
+
+                    preview.src =
+                        event.target.result;
+
+                    preview.style.display =
+                        "block";
+
+                    removeButton.style.display =
+                        "inline-block";
+
+                };
+
+
+            reader.readAsDataURL(file);
+
+        }
+    );
+
+
+    removeButton.addEventListener(
+        "click",
+        function(){
+
+            input.value = "";
+
+            preview.src = "";
+
+            preview.style.display =
+                "none";
+
+            removeButton.style.display =
+                "none";
+
+        }
+    );
+
+}
+
+
+setupPhotoPreview(
+    "questionImage",
+    "questionPreview",
+    "questionRemove"
+);
+
+
+for(let i=1;i<=5;i++){
+
+    setupPhotoPreview(
+        "optionImage"+i,
+        "optionPreview"+i,
+        "optionRemove"+i
+    );
+
+}
+
+
+/* ========================================
+   CLOUDINARY
+======================================== */
+
+async function uploadToCloudinary(
+    file,
+    statusElementId
+){
+
+    if(!file){
+
+        return null;
+
+    }
+
+
+    const status =
+        statusElementId
+        ? document.getElementById(
+            statusElementId
+        )
+        : null;
+
+
+    if(status){
+
+        status.style.display =
+            "block";
+
+        status.textContent =
+            "☁️ Photo upload වෙමින්...";
+
+    }
+
+
+    const url =
+        "https://api.cloudinary.com/v1_1/" +
+        CLOUDINARY_CLOUD_NAME +
+        "/image/upload";
+
+
+    const formData =
+        new FormData();
+
+
+    formData.append(
+        "file",
+        file
+    );
+
+
+    formData.append(
+        "upload_preset",
+        CLOUDINARY_UPLOAD_PRESET
+    );
+
+
+    const response =
+        await fetch(
+            url,
+            {
+                method:"POST",
+                body:formData
+            }
+        );
+
+
+    const data =
+        await response.json();
+
+
+    if(!response.ok){
+
+        console.error(
+            "Cloudinary error:",
+            data
+        );
+
+
+        throw new Error(
+            data.error?.message ||
+            "Cloudinary photo upload failed."
+        );
+
+    }
+
+
+    if(status){
+
+        status.textContent =
+            "✅ Photo upload වුණා.";
+
+    }
+
+
+    return{
+
+        url:data.secure_url,
+
+        publicId:
+            data.public_id || ""
+
+    };
+
+}
+
+
+/* ========================================
+   TARGET DATE DISPLAY
+======================================== */
+
+function updateTargetDate(){
+
+    const p =
+        getSriLankaParts();
+
+
+    const target =
+        getAdminTargetDate();
+
+
+    const box =
+        document.getElementById(
+            "targetDate"
+        );
+
+
+    if(p.hour >= 22){
+
+        box.innerHTML =
+            "🌙 <b>රෑ 10:00 පසුයි.</b>" +
+            "<br><br>" +
+            "➡️ දැන් <b>" +
+            target +
+            "</b> දවසේ MCQ prepare කරන්න.";
+
+    }
+
+    else if(p.hour < 5){
+
+        box.innerHTML =
+            "🌃 දැන් <b>උදේ 5:00ට කලින්.</b>" +
+            "<br><br>" +
+            "➡️ Target Day: <b>" +
+            target +
+            "</b>";
+
+    }
+
+    else{
+
+        box.innerHTML =
+            "🌅 අද day's MCQ." +
+            "<br><br>" +
+            "➡️ Target Day: <b>" +
+            target +
+            "</b>";
+
+    }
+
+}
+
+
+/* ========================================
+   GOOGLE LOGIN
+======================================== */
+
+document
+    .getElementById(
+        "googleLoginButton"
+    )
+    .addEventListener(
+        "click",
+        async function(){
+
+            const message =
+                document.getElementById(
+                    "loginMessage"
+                );
+
+
+            message.textContent =
+                "⏳ Google Login වෙමින්...";
+
+
+            try{
+
+                await signInWithPopup(
+                    auth,
+                    provider
+                );
+
+            }
+
+            catch(error){
+
+                console.error(error);
+
+
+                message.textContent =
+                    "❌ Google Login Error: " +
+                    error.message;
+
+
+                message.style.color =
+                    "red";
+
+            }
+
+        }
+    );
+
+
+/* ========================================
+   AUTH
+======================================== */
+
+onAuthStateChanged(
+    auth,
+    function(user){
+
+        if(!user){
+
+            currentUser = null;
+
+            pinUnlocked = false;
+
+
+            document.getElementById(
+                "loginPanel"
+            ).style.display =
+                "block";
+
+
+            document.getElementById(
+                "pinPanel"
+            ).style.display =
+                "none";
+
+
+            document.getElementById(
+                "adminPanel"
+            ).style.display =
+                "none";
+
+
+            return;
+
+        }
+
+
+        currentUser =
+            user;
+
+
+        if(user.uid !== ADMIN_UID){
+
+            document.getElementById(
+                "loginPanel"
+            ).style.display =
+                "block";
+
+
+            document.getElementById(
+                "pinPanel"
+            ).style.display =
+                "none";
+
+
+            document.getElementById(
+                "adminPanel"
+            ).style.display =
+                "none";
+
+
+            document.getElementById(
+                "loginMessage"
+            ).textContent =
+                "🚫 මෙම Google Account එකට Admin access නැහැ.";
+
+
+            document.getElementById(
+                "loginMessage"
+            ).style.color =
+                "red";
+
+
+            signOut(auth);
+
+            return;
+
+        }
+
+
+        document.getElementById(
+            "loginPanel"
+        ).style.display =
+            "none";
+
+
+        document.getElementById(
+            "pinPanel"
+        ).style.display =
+            "block";
+
+
+        document.getElementById(
+            "userBox"
+        ).textContent =
+
+            "👑 Admin: " +
+            (
+                user.displayName ||
+                "Admin"
+            ) +
+            "\n" +
+            (
+                user.email ||
+                ""
+            );
+
+    }
+);
+
+
+/* ========================================
+   PIN
+======================================== */
+
+document
+    .getElementById(
+        "pinLoginButton"
+    )
+    .addEventListener(
+        "click",
+        unlockAdmin
+    );
+
+
+document
+    .getElementById(
+        "pin"
+    )
+    .addEventListener(
+        "keydown",
+        function(event){
+
+            if(event.key === "Enter"){
+
+                unlockAdmin();
+
+            }
+
+        }
+    );
+
+
+function unlockAdmin(){
+
+    const pin =
+        document.getElementById(
+            "pin"
+        ).value;
+
+
+    const message =
+        document.getElementById(
+            "pinMessage"
+        );
+
+
+    if(
+        !currentUser ||
+        currentUser.uid !== ADMIN_UID
+    ){
+
+        message.textContent =
+            "🚫 Admin access denied.";
+
+        message.style.color =
+            "red";
+
+        return;
+
+    }
+
+
+    if(pin === ADMIN_PIN){
+
+        pinUnlocked = true;
+
+
+        document.getElementById(
+            "pinPanel"
+        ).style.display =
+            "none";
+
+
+        document.getElementById(
+            "adminPanel"
+        ).style.display =
+            "block";
+
+
+        updateTargetDate();
+
+        showQuestions();
+
+    }
+
+    else{
+
+        message.textContent =
+            "❌ වැරදි Admin PIN එකක්.";
+
+        message.style.color =
+            "red";
+
+    }
+
+}
+
+
+/* ========================================
+   MEMBERS
+======================================== */
+
+document
+    .getElementById(
+        "membersButton"
+    )
+    .addEventListener(
+        "click",
+        function(){
+
+            if(
+                !currentUser ||
+                currentUser.uid !== ADMIN_UID ||
+                !pinUnlocked
+            ){
+
+                alert(
+                    "🚫 Admin access required."
+                );
+
+                return;
+
+            }
+
+
+            window.location.href =
+                "members.html";
+
+        }
+    );
+
+
+/* ========================================
+   GET QUESTIONS
+======================================== */
+
+async function getQuestions(){
+
+    const targetDate =
+        getAdminTargetDate();
+
+
+    const q =
+        query(
+            collection(db,"mcqs"),
+            where(
+                "date",
+                "==",
+                targetDate
+            )
+        );
+
+
+    const snapshot =
+        await getDocs(q);
+
+
+    const questions = [];
+
+
+    snapshot.forEach(
+        function(docSnap){
+
+            questions.push({
+
+                id:docSnap.id,
+
+                ...docSnap.data()
+
+            });
+
+        }
+    );
+
+
+    return questions;
+
+}
+
+
+/* ========================================
+   SECURE ANSWER
+======================================== */
+
+async function getCorrectAnswer(mcqId){
+
+    try{
+
+        const answerRef =
+            doc(
+                db,
+                "mcqAnswers",
+                mcqId
+            );
+
+
+        const answerSnap =
+            await getDoc(
+                answerRef
+            );
+
+
+        if(!answerSnap.exists()){
+
+            return null;
+
+        }
+
+
+        return answerSnap
+            .data()
+            .correctAnswer;
+
+    }
+
+    catch(error){
+
+        console.error(
+            "Answer load error:",
+            error
+        );
+
+
+        return null;
+
+    }
+
+}
+
+
+/* ========================================
+   ADD BUTTON
+======================================== */
+
+document
+    .getElementById(
+        "addButton"
+    )
+    .addEventListener(
+        "click",
+        saveQuestion
+    );
+
+
+/* ========================================
+   SAVE OR UPDATE
+======================================== */
+
+async function saveQuestion(){
+
+    const message =
+        document.getElementById(
+            "addMessage"
+        );
+
+
+    if(
+        !currentUser ||
+        currentUser.uid !== ADMIN_UID ||
+        !pinUnlocked
+    ){
+
+        message.textContent =
+            "🚫 Admin access required.";
+
+        message.style.color =
+            "red";
+
+        return;
+
+    }
+
+
+    const subject =
+        document.getElementById(
+            "subject"
+        ).value;
+
+
+    const question =
+        document.getElementById(
+            "question"
+        ).value.trim();
+
+
+    const options = [];
+
+
+    for(let i=1;i<=5;i++){
+
+        options.push(
+            document.getElementById(
+                "option"+i
+            ).value.trim()
+        );
+
+    }
+
+
+    const answer =
+        Number(
+            document.getElementById(
+                "answer"
+            ).value
+        );
+
+
+    if(
+        question === "" ||
+        options.some(
+            function(option){
+                return option === "";
+            }
+        )
+    ){
+
+        message.textContent =
+            "⚠️ ප්‍රශ්නය සහ පිළිතුරු 5ම පුරවන්න.";
+
+        message.style.color =
+            "red";
+
+        return;
+
+    }
+
+
+    const button =
+        document.getElementById(
+            "addButton"
+        );
+
+
+    button.disabled =
+        true;
+
+
+    try{
+
+        const targetDate =
+            getAdminTargetDate();
+
+
+        /* ====================================
+           EDIT MODE
+        ==================================== */
+
+        if(editingMcqId){
+
+            message.textContent =
+                "⏳ MCQ update වෙමින්...";
+
+
+            const existingRef =
+                doc(
+                    db,
+                    "mcqs",
+                    editingMcqId
+                );
+
+
+            const existingSnap =
+                await getDoc(
+                    existingRef
+                );
+
+
+            if(!existingSnap.exists()){
+
+                throw new Error(
+                    "Edit කරන MCQ එක database එකේ නැහැ."
+                );
+
+            }
+
+
+            const oldData =
+                existingSnap.data();
+
+
+            const questionFile =
+                document.getElementById(
+                    "questionImage"
+                ).files[0] || null;
+
+
+            const questionImageData =
+                questionFile
+                ? await uploadToCloudinary(
+                    questionFile,
+                    "questionUploadStatus"
+                )
+                : null;
+
+
+            const optionImages = [];
+
+
+            for(let i=1;i<=5;i++){
+
+                const file =
+                    document.getElementById(
+                        "optionImage"+i
+                    ).files[0] || null;
+
+
+                if(file){
+
+                    optionImages.push(
+                        await uploadToCloudinary(
+                            file,
+                            null
+                        )
+                    );
+
+                }
+
+                else{
+
+                    optionImages.push(null);
+
+                }
+
+            }
+
+
+            const updateData = {
+
+                subject:subject,
+
+                question:question,
+
+                options:options,
+
+                date:targetDate,
+
+                updatedAt:new Date(),
+
+                updatedBy:
+                    currentUser.uid
+
+            };
+
+
+            if(questionImageData){
+
+                updateData.questionImage =
+                    questionImageData.url;
+
+                updateData.questionImagePublicId =
+                    questionImageData.publicId;
+
+            }
+
+
+            if(!questionFile){
+
+                updateData.questionImage =
+                    oldData.questionImage || "";
+
+                updateData.questionImagePublicId =
+                    oldData.questionImagePublicId || "";
+
+            }
+
+
+            const oldOptionImages =
+                Array.isArray(
+                    oldData.optionImages
+                )
+                ? oldData.optionImages
+                : [];
+
+
+            const oldOptionPublicIds =
+                Array.isArray(
+                    oldData.optionImagePublicIds
+                )
+                ? oldData.optionImagePublicIds
+                : [];
+
+
+            updateData.optionImages =
+                optionImages.map(
+                    function(item,index){
+
+                        return item
+                        ? item.url
+                        : (
+                            oldOptionImages[index] ||
+                            ""
+                        );
+
+                    }
+                );
+
+
+            updateData.optionImagePublicIds =
+                optionImages.map(
+                    function(item,index){
+
+                        return item
+                        ? item.publicId
+                        : (
+                            oldOptionPublicIds[index] ||
+                            ""
+                        );
+
+                    }
+                );
+
+
+            await updateDoc(
+                existingRef,
+                updateData
+            );
+
+
+            /* UPDATE SECURE ANSWER */
+
+            await setDoc(
+                doc(
+                    db,
+                    "mcqAnswers",
+                    editingMcqId
+                ),
+                {
+
+                    correctAnswer:answer,
+
+                    mcqId:editingMcqId,
+
+                    updatedAt:new Date(),
+
+                    updatedBy:
+                        currentUser.uid
+
+                },
+                {
+                    merge:true
+                }
+            );
+
+
+            message.textContent =
+                "✅ MCQ එක සාර්ථකව Update කළා.";
+
+
+            message.style.color =
+                "green";
+
+
+            cancelEdit();
+
+
+            await showQuestions();
+
+
+            return;
+
+        }
+
+
+        /* ====================================
+           ADD MODE
+        ==================================== */
+
+        const questions =
+            await getQuestions();
+
+
+        const subjectCount =
+            questions.filter(
+                function(item){
+
+                    return item.subject === subject;
+
+                }
+            ).length;
+
+
+        if(subjectCount >= 25){
+
+            message.textContent =
+
+                "⚠️ " +
+                subject +
+                " සඳහා " +
+                targetDate +
+                " දවසේ MCQ 25 සම්පූර්ණයි.";
+
+            message.style.color =
+                "red";
+
+            return;
+
+        }
+
+
+        message.textContent =
+            "⏳ Photo තියෙනවා නම් upload වෙමින්...";
+
+
+        /* QUESTION IMAGE */
+
+        const questionFile =
+            document.getElementById(
+                "questionImage"
+            ).files[0] || null;
+
+
+        let questionImageData =
+            null;
+
+
+        if(questionFile){
+
+            questionImageData =
+                await uploadToCloudinary(
+                    questionFile,
+                    "questionUploadStatus"
+                );
+
+        }
+
+
+        /* OPTION IMAGES */
+
+        const optionImages = [];
+
+
+        for(let i=1;i<=5;i++){
+
+            const file =
+                document.getElementById(
+                    "optionImage"+i
+                ).files[0] || null;
+
+
+            if(file){
+
+                optionImages.push(
+                    await uploadToCloudinary(
+                        file,
+                        null
+                    )
+                );
+
+            }
+
+            else{
+
+                optionImages.push(null);
+
+            }
+
+        }
+
+
+        /* SAVE MCQ */
+
+        const mcqData = {
+
+            subject:subject,
+
+            question:question,
+
+            options:options,
+
+            date:targetDate,
+
+            createdAt:new Date(),
+
+            createdBy:
+                currentUser.uid,
+
+            questionImage:
+                questionImageData
+                ? questionImageData.url
+                : "",
+
+            questionImagePublicId:
+                questionImageData
+                ? questionImageData.publicId
+                : "",
+
+            optionImages:
+                optionImages.map(
+                    function(item){
+
+                        return item
+                        ? item.url
+                        : "";
+
+                    }
+                ),
+
+            optionImagePublicIds:
+                optionImages.map(
+                    function(item){
+
+                        return item
+                        ? item.publicId
+                        : "";
+
+                    }
+                )
+
+        };
+
+
+        const mcqDoc =
+            await addDoc(
+                collection(
+                    db,
+                    "mcqs"
+                ),
+                mcqData
+            );
+
+
+        /* SECURE ANSWER */
+
+        await setDoc(
+            doc(
+                db,
+                "mcqAnswers",
+                mcqDoc.id
+            ),
+            {
+
+                correctAnswer:answer,
+
+                mcqId:mcqDoc.id,
+
+                createdAt:new Date(),
+
+                createdBy:
+                    currentUser.uid
+
+            }
+        );
+
+
+        message.innerHTML =
+            "✅ MCQ එක " +
+            targetDate +
+            " දවසට Save කළා!" +
+            "<br>" +
+            "📚 " +
+            subject +
+            ": " +
+            (subjectCount+1) +
+            " / 25";
+
+
+        message.style.color =
+            "green";
+
+
+        clearForm();
+
+
+        await showQuestions();
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+
+        message.textContent =
+            "❌ Save/Update Error: " +
+            error.message;
+
+
+        message.style.color =
+            "red";
+
+    }
+
+    finally{
+
+        button.disabled =
+            false;
+
+    }
+
+}
+
+
+/* ========================================
+   CLEAR FORM
+======================================== */
+
+function clearForm(){
+
+    document.getElementById(
+        "question"
+    ).value = "";
+
+
+    for(let i=1;i<=5;i++){
+
+        document.getElementById(
+            "option"+i
+        ).value = "";
+
+    }
+
+
+    document.getElementById(
+        "answer"
+    ).value =
+        "0";
+
+
+    document.getElementById(
+        "questionImage"
+    ).value = "";
+
+
+    document.getElementById(
+        "questionPreview"
+    ).src = "";
+
+
+    document.getElementById(
+        "questionPreview"
+    ).style.display =
+        "none";
+
+
+    document.getElementById(
+        "questionRemove"
+    ).style.display =
+        "none";
+
+
+    for(let i=1;i<=5;i++){
+
+        document.getElementById(
+            "optionImage"+i
+        ).value = "";
+
+
+        document.getElementById(
+            "optionPreview"+i
+        ).src = "";
+
+
+        document.getElementById(
+            "optionPreview"+i
+        ).style.display =
+            "none";
+
+
+        document.getElementById(
+            "optionRemove"+i
+        ).style.display =
+            "none";
+
+    }
+
+}
+
+
+/* ========================================
+   CANCEL EDIT
+======================================== */
+
+function cancelEdit(){
+
+    editingMcqId =
+        null;
+
+
+    document.getElementById(
+        "editorTitle"
+    ).textContent =
+        "➕ Add MCQ";
+
+
+    document.getElementById(
+        "editBadge"
+    ).style.display =
+        "none";
+
+
+    document.getElementById(
+        "editorCard"
+    ).classList.remove(
+        "edit-mode"
+    );
+
+
+    document.getElementById(
+        "addButton"
+    ).className =
+        "add-btn";
+
+
+    document.getElementById(
+        "addButton"
+    ).textContent =
+        "➕ Add Question";
+
+
+    document.getElementById(
+        "cancelEditButton"
+    ).style.display =
+        "none";
+
+
+    clearForm();
+
+
+    document.getElementById(
+        "addMessage"
+    ).textContent =
+        "";
+
+}
+
+
+document
+    .getElementById(
+        "cancelEditButton"
+    )
+    .addEventListener(
+        "click",
+        cancelEdit
+    );
+
+
+/* ========================================
+   EDIT QUESTION
+======================================== */
+
+async function editQuestion(id){
+
+    if(
+        !currentUser ||
+        currentUser.uid !== ADMIN_UID ||
+        !pinUnlocked
+    ){
+
+        alert(
+            "🚫 Admin access required."
+        );
+
+        return;
+
+    }
+
+
+    try{
+
+        const mcqRef =
+            doc(
+                db,
+                "mcqs",
+                id
+            );
+
+
+        const snap =
+            await getDoc(
+                mcqRef
+            );
+
+
+        if(!snap.exists()){
+
+            alert(
+                "❌ MCQ එක හමු වුණේ නැහැ."
+            );
+
+            return;
+
+        }
+
+
+        const data =
+            snap.data();
+
+
+        editingMcqId =
+            id;
+
+
+        document.getElementById(
+            "subject"
+        ).value =
+            data.subject || "Chemistry";
+
+
+        document.getElementById(
+            "question"
+        ).value =
+            data.question || "";
+
+
+        for(let i=1;i<=5;i++){
+
+            document.getElementById(
+                "option"+i
+            ).value =
+                data.options?.[i-1] || "";
+
+        }
+
+
+        const correct =
+            await getCorrectAnswer(id);
+
+
+        if(
+            correct !== null &&
+            correct !== undefined
+        ){
+
+            document.getElementById(
+                "answer"
+            ).value =
+                String(correct);
+
+        }
+
+
+        /* Show existing question image */
+
+        if(data.questionImage){
+
+            document.getElementById(
+                "questionPreview"
+            ).src =
+                data.questionImage;
+
+            document.getElementById(
+                "questionPreview"
+            ).style.display =
+                "block";
+
+        }
+
+
+        /* Show existing option images */
+
+        const oldOptionImages =
+            Array.isArray(
+                data.optionImages
+            )
+            ? data.optionImages
+            : [];
+
+
+        for(let i=1;i<=5;i++){
+
+            if(oldOptionImages[i-1]){
+
+                document.getElementById(
+                    "optionPreview"+i
+                ).src =
+                    oldOptionImages[i-1];
+
+                document.getElementById(
+                    "optionPreview"+i
+                ).style.display =
+                    "block";
+
+            }
+
+        }
+
+
+        document.getElementById(
+            "editorTitle"
+        ).textContent =
+            "✏️ Edit MCQ";
+
+
+        document.getElementById(
+            "editBadge"
+        ).style.display =
+            "block";
+
+
+        document.getElementById(
+            "editorCard"
+        ).classList.add(
+            "edit-mode"
+        );
+
+
+        document.getElementById(
+            "addButton"
+        ).className =
+            "update-btn";
+
+
+        document.getElementById(
+            "addButton"
+        ).textContent =
+            "💾 Update MCQ";
+
+
+        document.getElementById(
+            "cancelEditButton"
+        ).style.display =
+            "block";
+
+
+        document.getElementById(
+            "editorCard"
+        ).scrollIntoView({
+            behavior:"smooth",
+            block:"start"
+        });
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        alert(
+            "❌ Edit load error: " +
+            error.message
+        );
+
+    }
+
+}
+
+
+/* ========================================
+   SHOW QUESTIONS
+======================================== */
+
+async function showQuestions(){
+
+    const list =
+        document.getElementById(
+            "questionList"
+        );
+
+
+    list.innerHTML =
+        "⏳ Loading MCQs...";
+
+
+    try{
+
+        const questions =
+            await getQuestions();
+
+
+        list.innerHTML = "";
+
+
+        if(questions.length === 0){
+
+            list.innerHTML =
+                `
+                <div class="empty-box">
+                    📭 මෙම Target Day එකට
+                    තවම MCQ add කරලා නැහැ.
+                    <br><br>
+                    ➕ Add Question කරලා
+                    MCQ එකක් add කරන්න.
+                </div>
+                `;
+
+
+            updateStatus(
+                questions
+            );
+
+            return;
+
+        }
+
+
+        const chemistry =
+            questions.filter(
+                function(item){
+
+                    return item.subject ===
+                        "Chemistry";
+
+                }
+            );
+
+
+        const physics =
+            questions.filter(
+                function(item){
+
+                    return item.subject ===
+                        "Physics";
+
+                }
+            );
+
+
+        if(chemistry.length > 0){
+
+            const title =
+                document.createElement(
+                    "h3"
+                );
+
+
+            title.textContent =
+                "🧪 Chemistry MCQs (" +
+                chemistry.length +
+                "/25)";
+
+
+            list.appendChild(title);
+
+
+            for(
+                let index=0;
+                index<chemistry.length;
+                index++
+            ){
+
+                await addQuestionToList(
+                    chemistry[index],
+                    index+1,
+                    list
+                );
+
+            }
+
+        }
+
+
+        if(physics.length > 0){
+
+            const title =
+                document.createElement(
+                    "h3"
+                );
+
+
+            title.textContent =
+                "⚡ Physics MCQs (" +
+                physics.length +
+                "/25)";
+
+
+            title.style.marginTop =
+                "25px";
+
+
+            list.appendChild(title);
+
+
+            for(
+                let index=0;
+                index<physics.length;
+                index++
+            ){
+
+                await addQuestionToList(
+                    physics[index],
+                    index+1,
+                    list
+                );
+
+            }
+
+        }
+
+
+        updateStatus(
+            questions
+        );
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+
+        list.innerHTML =
+            "❌ Questions load error: " +
+            error.message;
+
+    }
+
+}
+
+
+/* ========================================
+   QUESTION CARD
+======================================== */
+
+async function addQuestionToList(
+    item,
+    number,
+    list
+){
+
+    const correctAnswer =
+        await getCorrectAnswer(
+            item.id
+        );
+
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+
+    div.className =
+        "question-item";
+
+
+    let answerText =
+        "⚠️ Answer data නැහැ.";
+
+
+    if(
+        correctAnswer !== null &&
+        correctAnswer !== undefined
+    ){
+
+        answerText =
+            "✅ නිවැරදි පිළිතුර: " +
+            (
+                Number(correctAnswer)+1
+            );
+
+    }
+
+
+    const questionImage =
+        item.questionImage || "";
+
+
+    const optionImages =
+        Array.isArray(
+            item.optionImages
+        )
+        ? item.optionImages
+        : [];
+
+
+    let optionsHTML = "";
+
+
+    for(let i=0;i<5;i++){
+
+        const text =
+            escapeHTML(
+                item.options?.[i] || ""
+            );
+
+
+        const image =
+            optionImages[i] || "";
+
+
+        optionsHTML +=
+
+            "<div>" +
+
+            "<b>" +
+            (i+1) +
+            ".</b> " +
+            text;
+
+
+        if(image){
+
+            optionsHTML +=
+
+                "<img " +
+                "class='option-preview-small' " +
+                "src='" +
+                escapeAttribute(
+                    image
+                ) +
+                "' " +
+                "alt='Answer image'>";
+
+        }
+
+
+        optionsHTML +=
+            "</div>";
+
+    }
+
+
+    div.innerHTML = `
+
+        <b>
+            ${number}.
+            ${escapeHTML(
+                item.question
+            )}
+        </b>
+
+        ${
+            questionImage
+            ? `
+                <img
+                    class="saved-image"
+                    src="${escapeAttribute(
+                        questionImage
+                    )}"
+                    alt="Question image">
+              `
+            : ""
+        }
+
+        <p>
+            🧪/⚡ Subject:
+            ${escapeHTML(
+                item.subject
+            )}
+        </p>
+
+        <div>
+            ${optionsHTML}
+        </div>
+
+        <p class="correct">
+
+            ${answerText}
+
+        </p>
+
+        <button
+            class="edit-btn">
+
+            ✏️ Edit
+
+        </button>
+
+        <button
+            class="delete-btn">
+
+            🗑️ Delete
+
+        </button>
+
+    `;
+
+
+    div
+        .querySelector(
+            ".edit-btn"
+        )
+        .addEventListener(
+            "click",
+            function(){
+
+                editQuestion(
+                    item.id
+                );
+
+            }
+        );
+
+
+    div
+        .querySelector(
+            ".delete-btn"
+        )
+        .addEventListener(
+            "click",
+            function(){
+
+                deleteQuestion(
+                    item.id
+                );
+
+            }
+        );
+
+
+    list.appendChild(div);
+
+}
+
+
+/* ========================================
+   STATUS
+======================================== */
+
+function updateStatus(
+    questions
+){
+
+    const targetDate =
+        getAdminTargetDate();
+
+
+    const chemistry =
+        questions.filter(
+            function(item){
+
+                return item.subject ===
+                    "Chemistry";
+
+            }
+        ).length;
+
+
+    const physics =
+        questions.filter(
+            function(item){
+
+                return item.subject ===
+                    "Physics";
+
+            }
+        ).length;
+
+
+    const total =
+        chemistry + physics;
+
+
+    let statusText =
+
+        "📅 Target Day: <b>" +
+        targetDate +
+        "</b>" +
+
+        "<br><br>" +
+
+        "🧪 Chemistry: " +
+        chemistry +
+        " / 25" +
+
+        "<br>" +
+
+        "⚡ Physics: " +
+        physics +
+        " / 25" +
+
+        "<br><br>" +
+
+        "📚 Total: " +
+        total +
+        " / 50";
+
+
+    if(
+        chemistry < 25 ||
+        physics < 25
+    ){
+
+        statusText +=
+
+            "<br><br>" +
+
+            "✏️ තව MCQ add කරන්න පුළුවන්.";
+
+    }
+
+    else{
+
+        statusText +=
+
+            "<br><br>" +
+
+            "✅ Chemistry සහ Physics " +
+            "MCQ 25 බැගින් සම්පූර්ණයි.";
+
+    }
+
+
+    document.getElementById(
+        "status"
+    ).innerHTML =
+        statusText;
+
+}
+
+
+/* ========================================
+   DELETE
+======================================== */
+
+async function deleteQuestion(id){
+
+    if(
+        !currentUser ||
+        currentUser.uid !== ADMIN_UID ||
+        !pinUnlocked
+    ){
+
+        alert(
+            "🚫 Admin access required."
+        );
+
+        return;
+
+    }
+
+
+    const yes =
+        confirm(
+            "මෙම MCQ එක Delete කරන්නද?"
+        );
+
+
+    if(!yes){
+
+        return;
+
+    }
+
+
+    try{
+
+        await deleteDoc(
+            doc(
+                db,
+                "mcqs",
+                id
+            )
+        );
+
+
+        await deleteDoc(
+            doc(
+                db,
+                "mcqAnswers",
+                id
+            )
+        );
+
+
+        alert(
+            "✅ MCQ එක සහ Answer data Delete කළා."
+        );
+
+
+        await showQuestions();
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+
+        alert(
+            "❌ Delete Error: " +
+            error.message
+        );
+
+    }
+
+}
+
+
+/* ========================================
+   LOGOUT
+======================================== */
+
+document
+    .getElementById(
+        "logoutButton"
+    )
+    .addEventListener(
+        "click",
+        async function(){
+
+            pinUnlocked =
+                false;
+
+            await signOut(
+                auth
+            );
+
+        }
+    );
+
+
+/* ========================================
+   ESCAPE HTML
+======================================== */
+
+function escapeHTML(text){
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+
+    div.textContent =
+        text || "";
+
+
+    return div.innerHTML;
+
+}
+
+
+/* ========================================
+   ESCAPE ATTRIBUTE
+======================================== */
+
+function escapeAttribute(text){
+
+    return String(
+        text || ""
+    )
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+    .replace(
+        /'/g,
+        "&#39;"
+    )
+    .replace(
+        /</g,
+        "&lt;"
+    )
+    .replace(
+        />/g,
+        "&gt;"
+    );
+
+}
+
+
+/* ========================================
+   CLOCK
+======================================== */
+
+setInterval(
+    function(){
+
+        if(pinUnlocked){
+
+            updateTargetDate();
+
+            showQuestions();
+
+        }
+
+    },
+    60000
+);
+
+</script>
+
+</body>
+
+</html>
