@@ -1,0 +1,7039 @@
+<!DOCTYPE html>
+<html lang="si">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>MCQ Winner - Add MCQ</title>
+
+<!-- Tesseract OCR -->
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f1f5f9;
+    color:#172554;
+}
+
+.header{
+    background:linear-gradient(135deg,#1e3a8a,#2563eb);
+    color:white;
+    text-align:center;
+    padding:20px;
+}
+
+.header h1{
+    margin:0;
+}
+
+.container{
+    width:94%;
+    max-width:850px;
+    margin:20px auto;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    margin-bottom:20px;
+    border-radius:14px;
+    box-shadow:0 3px 10px rgba(0,0,0,.10);
+}
+
+input,
+textarea,
+select{
+    width:100%;
+    padding:13px;
+    margin:8px 0 15px;
+    border:1px solid #cbd5e1;
+    border-radius:8px;
+    font-size:16px;
+    outline:none;
+    font-family:Arial,sans-serif;
+}
+
+textarea{
+    min-height:120px;
+    resize:vertical;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+    border-color:#2563eb;
+    box-shadow:0 0 0 2px rgba(37,99,235,.10);
+}
+
+button{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:9px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+button:disabled{
+    opacity:.55;
+    cursor:not-allowed;
+}
+
+.google-btn{
+    background:white;
+    color:#1e293b;
+    border:1px solid #cbd5e1;
+}
+
+.login-btn{
+    background:#1e3a8a;
+    color:white;
+}
+
+.add-btn{
+    background:#16a34a;
+    color:white;
+}
+
+.delete-btn{
+    background:#dc2626;
+    color:white;
+    margin-top:10px;
+}
+
+.logout-btn{
+    background:#64748b;
+    color:white;
+    margin-top:10px;
+}
+
+.members-btn{
+    background:#2563eb;
+    color:white;
+    margin-top:10px;
+}
+
+.secondary-btn{
+    background:#475569;
+    color:white;
+}
+
+.ocr-btn{
+    background:#7c3aed;
+    color:white;
+}
+
+.validate-btn{
+    background:#0891b2;
+    color:white;
+}
+
+.save-all-btn{
+    background:#16a34a;
+    color:white;
+}
+
+.danger-btn{
+    background:#dc2626;
+    color:white;
+}
+
+.small-btn{
+    width:auto;
+    padding:9px 12px;
+    font-size:14px;
+}
+
+#pinPanel,
+#adminPanel{
+    display:none;
+}
+
+.message{
+    text-align:center;
+    font-weight:bold;
+    line-height:1.5;
+}
+
+.info{
+    background:#eff6ff;
+    color:#1e3a8a;
+    padding:14px;
+    border-radius:10px;
+    margin-bottom:15px;
+    line-height:1.7;
+}
+
+.warning{
+    background:#fff7ed;
+    color:#9a3412;
+    padding:14px;
+    border-radius:10px;
+    margin-bottom:15px;
+    line-height:1.7;
+}
+
+.status{
+    background:#ecfeff;
+    color:#155e75;
+    padding:14px;
+    border-radius:10px;
+    margin-bottom:15px;
+    text-align:center;
+    font-weight:bold;
+    line-height:1.7;
+}
+
+.user-box{
+    background:#f8fafc;
+    padding:12px;
+    border-radius:10px;
+    margin-bottom:15px;
+    font-size:14px;
+    white-space:pre-line;
+    word-break:break-word;
+}
+
+.question-item{
+    border:1px solid #cbd5e1;
+    border-radius:10px;
+    padding:15px;
+    margin-top:12px;
+    background:#f8fafc;
+    line-height:1.6;
+}
+
+.correct{
+    color:#15803d;
+    font-weight:bold;
+}
+
+.scientific-toolbar{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+    margin:5px 0 10px;
+}
+
+.scientific-toolbar button{
+    width:auto;
+    padding:8px 11px;
+    background:#e0f2fe;
+    color:#0c4a6e;
+    border:1px solid #bae6fd;
+    border-radius:7px;
+    font-size:15px;
+}
+
+.editor-label{
+    display:block;
+    font-weight:bold;
+    margin-top:5px;
+}
+
+.hidden{
+    display:none!important;
+}
+
+.empty-box{
+    background:#f8fafc;
+    padding:15px;
+    border-radius:10px;
+    text-align:center;
+    color:#64748b;
+}
+
+
+/* ========================================
+   PHOTO UPLOAD
+======================================== */
+
+.photo-box{
+    background:#f8fafc;
+    border:1px dashed #94a3b8;
+    padding:12px;
+    border-radius:10px;
+    margin-bottom:15px;
+}
+
+.photo-label{
+    display:block;
+    font-weight:bold;
+    margin-bottom:8px;
+}
+
+.photo-input{
+    margin:0;
+    padding:8px;
+    background:white;
+}
+
+.preview{
+    display:none;
+    width:100%;
+    max-height:260px;
+    object-fit:contain;
+    margin-top:10px;
+    border-radius:10px;
+    border:1px solid #cbd5e1;
+    background:white;
+}
+
+.remove-photo-btn{
+    display:none;
+    width:auto;
+    padding:8px 12px;
+    margin-top:8px;
+    background:#64748b;
+    color:white;
+    font-size:14px;
+}
+
+.upload-status{
+    display:none;
+    margin-top:8px;
+    color:#1e3a8a;
+    font-size:14px;
+    font-weight:bold;
+}
+
+
+/* ========================================
+   SAVED QUESTION IMAGES
+======================================== */
+
+.saved-image{
+    display:block;
+    width:100%;
+    max-height:220px;
+    object-fit:contain;
+    margin:8px 0;
+    border-radius:8px;
+    border:1px solid #cbd5e1;
+    background:white;
+}
+
+.option-preview-small{
+    display:block;
+    width:100%;
+    max-height:150px;
+    object-fit:contain;
+    margin:5px 0;
+    border-radius:8px;
+    border:1px solid #cbd5e1;
+    background:white;
+}
+
+
+/* ========================================
+   TABS
+======================================== */
+
+.tabs{
+    display:flex;
+    gap:8px;
+    margin-bottom:18px;
+}
+
+.tab-btn{
+    flex:1;
+    background:#e2e8f0;
+    color:#334155;
+}
+
+.tab-btn.active{
+    background:#2563eb;
+    color:white;
+}
+
+.tab-content{
+    display:none;
+}
+
+.tab-content.active{
+    display:block;
+}
+
+
+/* ========================================
+   OCR
+======================================== */
+
+.ocr-upload-box{
+    border:2px dashed #7c3aed;
+    background:#faf5ff;
+    padding:20px;
+    border-radius:14px;
+    text-align:center;
+}
+
+.ocr-file-input{
+    margin-top:12px;
+    background:white;
+}
+
+.photo-queue{
+    margin-top:15px;
+}
+
+.photo-queue-item{
+    background:white;
+    border:1px solid #cbd5e1;
+    border-radius:12px;
+    padding:12px;
+    margin-top:10px;
+}
+
+.photo-queue-row{
+    display:flex;
+    gap:10px;
+    align-items:center;
+}
+
+.photo-queue-thumb{
+    width:90px;
+    height:70px;
+    object-fit:cover;
+    border-radius:8px;
+    border:1px solid #cbd5e1;
+}
+
+.photo-queue-info{
+    flex:1;
+}
+
+.photo-status{
+    font-size:13px;
+    color:#475569;
+    margin-top:5px;
+}
+
+.progress-box{
+    margin-top:15px;
+    display:none;
+}
+
+.progress-bar{
+    height:14px;
+    background:#e2e8f0;
+    border-radius:10px;
+    overflow:hidden;
+}
+
+.progress-fill{
+    height:100%;
+    width:0%;
+    background:#7c3aed;
+    transition:width .2s;
+}
+
+.progress-text{
+    margin-top:7px;
+    text-align:center;
+    font-size:14px;
+    font-weight:bold;
+}
+
+.ocr-actions{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-top:15px;
+}
+
+@media(max-width:600px){
+    .ocr-actions{
+        grid-template-columns:1fr;
+    }
+}
+
+
+/* ========================================
+   OCR REVIEW
+======================================== */
+
+.review-header{
+    background:#f8fafc;
+    border:1px solid #cbd5e1;
+    padding:15px;
+    border-radius:12px;
+    margin-bottom:15px;
+}
+
+.review-stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:8px;
+    margin-top:10px;
+}
+
+.stat-box{
+    background:white;
+    border:1px solid #cbd5e1;
+    border-radius:9px;
+    padding:10px;
+    text-align:center;
+}
+
+.stat-number{
+    font-size:20px;
+    font-weight:bold;
+}
+
+@media(max-width:600px){
+    .review-stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+.review-item{
+    border:2px solid #cbd5e1;
+    border-radius:14px;
+    padding:15px;
+    margin-bottom:15px;
+    background:white;
+}
+
+.review-item.suspicious{
+    border-color:#f59e0b;
+    background:#fffbeb;
+}
+
+.review-item.invalid{
+    border-color:#ef4444;
+    background:#fef2f2;
+}
+
+.review-item.duplicate{
+    border-color:#f97316;
+    background:#fff7ed;
+}
+
+.review-top{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    align-items:center;
+    margin-bottom:10px;
+}
+
+.review-number{
+    font-size:18px;
+    font-weight:bold;
+}
+
+.badges{
+    display:flex;
+    flex-wrap:wrap;
+    gap:5px;
+}
+
+.badge{
+    display:inline-block;
+    padding:5px 8px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.badge-warning{
+    background:#fef3c7;
+    color:#92400e;
+}
+
+.badge-danger{
+    background:#fee2e2;
+    color:#991b1b;
+}
+
+.badge-success{
+    background:#dcfce7;
+    color:#166534;
+}
+
+.badge-info{
+    background:#dbeafe;
+    color:#1e40af;
+}
+
+.review-actions{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:6px;
+    margin-top:10px;
+}
+
+.review-actions button{
+    padding:9px;
+    font-size:13px;
+}
+
+@media(max-width:600px){
+    .review-actions{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+.move-btn{
+    background:#64748b;
+    color:white;
+}
+
+.reocr-btn{
+    background:#7c3aed;
+    color:white;
+}
+
+.source-btn{
+    background:#2563eb;
+    color:white;
+}
+
+.remove-review-btn{
+    background:#dc2626;
+    color:white;
+}
+
+.option-editor{
+    margin-bottom:10px;
+}
+
+.option-row{
+    display:flex;
+    align-items:center;
+    gap:7px;
+}
+
+.option-row input{
+    margin:0;
+}
+
+.option-letter{
+    width:32px;
+    min-width:32px;
+    font-weight:bold;
+}
+
+.answer-select{
+    margin-bottom:8px;
+}
+
+.confidence{
+    font-size:13px;
+    color:#475569;
+}
+
+.review-source{
+    display:none;
+    margin-top:10px;
+    background:#f8fafc;
+    padding:10px;
+    border-radius:10px;
+}
+
+.review-source img{
+    width:100%;
+    max-height:500px;
+    object-fit:contain;
+    border-radius:8px;
+    border:1px solid #cbd5e1;
+}
+
+
+/* ========================================
+   SCIENTIFIC EDITOR
+======================================== */
+
+.scientific-panel{
+    background:#f8fafc;
+    border:1px solid #cbd5e1;
+    padding:10px;
+    border-radius:10px;
+    margin-bottom:12px;
+}
+
+.scientific-tabs{
+    display:flex;
+    gap:6px;
+    overflow-x:auto;
+    margin-bottom:8px;
+}
+
+.scientific-tab{
+    width:auto;
+    padding:7px 10px;
+    background:#e2e8f0;
+    color:#334155;
+    white-space:nowrap;
+    font-size:13px;
+}
+
+.scientific-tab.active{
+    background:#2563eb;
+    color:white;
+}
+
+.symbol-panel{
+    display:none;
+    flex-wrap:wrap;
+    gap:5px;
+}
+
+.symbol-panel.active{
+    display:flex;
+}
+
+.symbol-btn{
+    width:auto;
+    padding:7px 9px;
+    background:#e0f2fe;
+    color:#0c4a6e;
+    border:1px solid #bae6fd;
+    font-size:14px;
+}
+
+
+/* ========================================
+   MODAL
+======================================== */
+
+.modal{
+    display:none;
+    position:fixed;
+    z-index:9999;
+    inset:0;
+    background:rgba(15,23,42,.75);
+    padding:20px;
+    overflow:auto;
+}
+
+.modal-card{
+    background:white;
+    width:100%;
+    max-width:850px;
+    margin:20px auto;
+    border-radius:14px;
+    padding:15px;
+}
+
+.modal-card img{
+    width:100%;
+    max-height:75vh;
+    object-fit:contain;
+}
+
+.modal-close{
+    background:#dc2626;
+    color:white;
+    margin-top:10px;
+}
+
+
+/* ========================================
+   MANUAL BUTTON AREA
+======================================== */
+
+.manual-top-actions{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-bottom:15px;
+}
+
+@media(max-width:600px){
+    .manual-top-actions{
+        grid-template-columns:1fr;
+    }
+}
+
+
+/* ========================================
+   DRAFT
+======================================== */
+
+.draft-box{
+    background:#f0fdf4;
+    color:#166534;
+    padding:12px;
+    border-radius:10px;
+    margin-top:10px;
+    font-size:14px;
+}
+
+
+/* ========================================
+   DUPLICATE
+======================================== */
+
+.duplicate-info{
+    background:#fff7ed;
+    color:#9a3412;
+    padding:10px;
+    border-radius:8px;
+    margin-top:8px;
+    font-size:13px;
+}
+
+
+/* ========================================
+   LOADING
+======================================== */
+
+.loading{
+    text-align:center;
+    padding:20px;
+    font-weight:bold;
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<div class="header">
+
+    <h1>MCQ Winner</h1>
+
+    <p>👑 Add Daily MCQ</p>
+
+</div>
+
+
+<div class="container">
+
+
+<!-- ========================================
+     LOGIN
+======================================== -->
+
+<div class="card" id="loginPanel">
+
+    <h2>🔐 Admin Login</h2>
+
+    <p>
+        Admin Google Account එකෙන් Login වෙන්න.
+    </p>
+
+    <button
+        id="googleLoginButton"
+        class="google-btn">
+
+        🔵 Sign in with Google
+
+    </button>
+
+    <p
+        id="loginMessage"
+        class="message">
+    </p>
+
+</div>
+
+
+<!-- ========================================
+     PIN
+======================================== -->
+
+<div class="card" id="pinPanel">
+
+    <h2>🔢 Admin PIN</h2>
+
+    <div id="userBox" class="user-box"></div>
+
+    <p>
+        Admin Panel එකට ඇතුල් වීමට PIN එක ඇතුළත් කරන්න.
+    </p>
+
+    <input
+        type="password"
+        id="pin"
+        inputmode="numeric"
+        placeholder="Admin PIN">
+
+    <button
+        id="pinLoginButton"
+        class="login-btn">
+
+        🔓 Unlock
+
+    </button>
+
+    <p
+        id="pinMessage"
+        class="message">
+    </p>
+
+</div>
+
+
+<!-- ========================================
+     ADMIN
+======================================== -->
+
+<div id="adminPanel">
+
+
+<!-- DAILY STATUS -->
+
+<div class="card">
+
+    <h2>📅 Daily MCQ System</h2>
+
+    <div id="status" class="status">
+        Loading...
+    </div>
+
+    <div id="targetDate" class="info">
+        Loading...
+    </div>
+
+    <div class="warning">
+
+        🌙 <b>රෑ 10:00 පසු</b>
+
+        <br>
+
+        ➡️ ඊළඟ දවසේ MCQ prepare කරන්න පුළුවන්.
+
+        <br><br>
+
+        🌅 <b>උදේ 5:00</b>
+
+        <br>
+
+        ➡️ එම දවසේ MCQ studentsලාට active වෙනවා.
+
+        <br><br>
+
+        🗃️ පරණ දවස්වල MCQ database එකේ තියාගන්නවා.
+
+    </div>
+
+    <button
+        class="members-btn"
+        id="membersButton">
+
+        👥 Members බලන්න
+
+    </button>
+
+    <button
+        class="logout-btn"
+        id="logoutButton">
+
+        🚪 Logout
+
+    </button>
+
+</div>
+
+
+<!-- ========================================
+     TABS
+======================================== -->
+
+<div class="card">
+
+    <div class="tabs">
+
+        <button
+            class="tab-btn active"
+            data-tab="manualTab">
+
+            ✍️ Manual
+
+        </button>
+
+        <button
+            class="tab-btn"
+            data-tab="ocrTab">
+
+            📷 Photo OCR
+
+        </button>
+
+        <button
+            class="tab-btn"
+            data-tab="reviewTab">
+
+            📝 Review
+            <span id="reviewCount">0</span>
+
+        </button>
+
+    </div>
+
+
+<!-- ========================================
+     MANUAL TAB
+======================================== -->
+
+<div
+    id="manualTab"
+    class="tab-content active">
+
+
+<div class="manual-top-actions">
+
+    <button
+        type="button"
+        class="secondary-btn"
+        id="clearManualButton">
+
+        🧹 Clear Form
+
+    </button>
+
+    <button
+        type="button"
+        class="secondary-btn"
+        id="loadDraftButton">
+
+        📂 Load Draft
+
+    </button>
+
+</div>
+
+
+<h2>➕ Add MCQ</h2>
+
+
+<label>Subject</label>
+
+<select id="subject">
+
+    <option value="Chemistry">
+        Chemistry
+    </option>
+
+    <option value="Physics">
+        Physics
+    </option>
+
+</select>
+
+
+<label class="editor-label">
+    📝 ප්‍රශ්නය
+</label>
+
+
+<div class="scientific-toolbar">
+
+    <button type="button" onclick="insertSymbol('question','Δ')">Δ</button>
+    <button type="button" onclick="insertSymbol('question','θ')">θ</button>
+    <button type="button" onclick="insertSymbol('question','λ')">λ</button>
+    <button type="button" onclick="insertSymbol('question','μ')">μ</button>
+    <button type="button" onclick="insertSymbol('question','Ω')">Ω</button>
+    <button type="button" onclick="insertSymbol('question','π')">π</button>
+    <button type="button" onclick="insertSymbol('question','√')">√</button>
+    <button type="button" onclick="insertSymbol('question','→')">→</button>
+    <button type="button" onclick="insertSymbol('question','←')">←</button>
+    <button type="button" onclick="insertSymbol('question','↔')">↔</button>
+    <button type="button" onclick="insertSymbol('question','±')">±</button>
+    <button type="button" onclick="insertSymbol('question','≤')">≤</button>
+    <button type="button" onclick="insertSymbol('question','≥')">≥</button>
+    <button type="button" onclick="insertSymbol('question','∞')">∞</button>
+    <button type="button" onclick="insertSymbol('question','²')">²</button>
+    <button type="button" onclick="insertSymbol('question','³')">³</button>
+    <button type="button" onclick="insertSymbol('question','⁻¹')">⁻¹</button>
+    <button type="button" onclick="insertSymbol('question','₁')">₁</button>
+    <button type="button" onclick="insertSymbol('question','₂')">₂</button>
+    <button type="button" onclick="insertSymbol('question','₃')">₃</button>
+    <button type="button" onclick="insertSymbol('question','₄')">₄</button>
+    <button type="button" onclick="insertSymbol('question','₅')">₅</button>
+    <button type="button" onclick="insertSymbol('question','₆')">₆</button>
+    <button type="button" onclick="insertSymbol('question','₇')">₇</button>
+    <button type="button" onclick="insertSymbol('question','₈')">₈</button>
+    <button type="button" onclick="insertSymbol('question','₉')">₉</button>
+    <button type="button" onclick="insertSymbol('question','₀')">₀</button>
+    <button type="button" onclick="insertSymbol('question','C₆H₆')">C₆H₆</button>
+    <button type="button" onclick="insertSymbol('question','H₂O')">H₂O</button>
+    <button type="button" onclick="insertSymbol('question','CO₂')">CO₂</button>
+    <button type="button" onclick="insertSymbol('question','SO₄²⁻')">SO₄²⁻</button>
+    <button type="button" onclick="insertSymbol('question','m s⁻¹')">m s⁻¹</button>
+
+</div>
+
+
+<textarea
+    id="question"
+    placeholder="ප්‍රශ්නය මෙතන type කරන්න...">
+</textarea>
+
+
+<!-- QUESTION PHOTO -->
+
+<div class="photo-box">
+
+    <span class="photo-label">
+        📷 ප්‍රශ්නයට Photo එකක්
+    </span>
+
+    <input
+        type="file"
+        id="questionImage"
+        class="photo-input"
+        accept="image/*">
+
+    <img
+        id="questionPreview"
+        class="preview">
+
+    <button
+        type="button"
+        id="questionRemove"
+        class="remove-photo-btn">
+
+        ❌ Photo ඉවත් කරන්න
+
+    </button>
+
+    <div
+        id="questionUploadStatus"
+        class="upload-status">
+    </div>
+
+</div>
+
+
+<!-- OPTIONS -->
+
+<label class="editor-label">
+    1️⃣ පළමු පිළිතුර
+</label>
+
+<input
+    id="option1"
+    type="text"
+    placeholder="පිළිතුර 1">
+
+
+<div class="photo-box">
+
+    <span class="photo-label">
+        📷 පළමු පිළිතුරට Photo
+    </span>
+
+    <input
+        type="file"
+        id="optionImage1"
+        class="photo-input"
+        accept="image/*">
+
+    <img
+        id="optionPreview1"
+        class="preview">
+
+    <button
+        type="button"
+        id="optionRemove1"
+        class="remove-photo-btn">
+
+        ❌ Photo ඉවත් කරන්න
+
+    </button>
+
+</div>
+
+
+<label class="editor-label">
+    2️⃣ දෙවන පිළිතුර
+</label>
+
+<input
+    id="option2"
+    type="text"
+    placeholder="පිළිතුර 2">
+
+
+<div class="photo-box">
+
+    <span class="photo-label">
+        📷 දෙවන පිළිතුරට Photo
+    </span>
+
+    <input
+        type="file"
+        id="optionImage2"
+        class="photo-input"
+        accept="image/*">
+
+    <img
+        id="optionPreview2"
+        class="preview">
+
+    <button
+        type="button"
+        id="optionRemove2"
+        class="remove-photo-btn">
+
+        ❌ Photo ඉවත් කරන්න
+
+    </button>
+
+</div>
+
+
+<label class="editor-label">
+    3️⃣ තුන්වන පිළිතුර
+</label>
+
+<input
+    id="option3"
+    type="text"
+    placeholder="පිළිතුර 3">
+
+
+<div class="photo-box">
+
+    <span class="photo-label">
+        📷 තුන්වන පිළිතුරට Photo
+    </span>
+
+    <input
+        type="file"
+        id="optionImage3"
+        class="photo-input"
+        accept="image/*">
+
+    <img
+        id="optionPreview3"
+        class="preview">
+
+    <button
+        type="button"
+        id="optionRemove3"
+        class="remove-photo-btn">
+
+        ❌ Photo ඉවත් කරන්න
+
+    </button>
+
+</div>
+
+
+<label class="editor-label">
+    4️⃣ හතරවන පිළිතුර
+</label>
+
+<input
+    id="option4"
+    type="text"
+    placeholder="පිළිතුර 4">
+
+
+<div class="photo-box">
+
+    <span class="photo-label">
+        📷 හතරවන පිළිතුරට Photo
+    </span>
+
+    <input
+        type="file"
+        id="optionImage4"
+        class="photo-input"
+        accept="image/*">
+
+    <img
+        id="optionPreview4"
+        class="preview">
+
+    <button
+        type="button"
+        id="optionRemove4"
+        class="remove-photo-btn">
+
+        ❌ Photo ඉවත් කරන්න
+
+    </button>
+
+</div>
+
+
+<label class="editor-label">
+    5️⃣ පස්වන පිළිතුර
+</label>
+
+<input
+    id="option5"
+    type="text"
+    placeholder="පිළිතුර 5">
+
+
+<div class="photo-box">
+
+    <span class="photo-label">
+        📷 පස්වන පිළිතුරට Photo
+    </span>
+
+    <input
+        type="file"
+        id="optionImage5"
+        class="photo-input"
+        accept="image/*">
+
+    <img
+        id="optionPreview5"
+        class="preview">
+
+    <button
+        type="button"
+        id="optionRemove5"
+        class="remove-photo-btn">
+
+        ❌ Photo ඉවත් කරන්න
+
+    </button>
+
+</div>
+
+
+<label>
+    ✅ නිවැරදි පිළිතුර
+</label>
+
+<select id="answer">
+
+    <option value="0">1 වන පිළිතුර</option>
+    <option value="1">2 වන පිළිතුර</option>
+    <option value="2">3 වන පිළිතුර</option>
+    <option value="3">4 වන පිළිතුර</option>
+    <option value="4">5 වන පිළිතුර</option>
+
+</select>
+
+
+<button
+    class="add-btn"
+    id="addButton">
+
+    ➕ Add Question
+
+</button>
+
+
+<p
+    id="addMessage"
+    class="message">
+</p>
+
+</div>
+
+
+<!-- ========================================
+     OCR TAB
+======================================== -->
+
+<div
+    id="ocrTab"
+    class="tab-content">
+
+
+<h2>📷 Paper Photo → MCQ OCR</h2>
+
+<div class="info">
+
+    📌 <b>භාවිතා කරන විදිහ</b>
+
+    <br><br>
+
+    1️⃣ MCQ ලියපු paper photo එක select කරන්න.
+
+    <br>
+
+    2️⃣ එක photo එකේ MCQ 5 / 25 / 50 / 100 වුණත් OCR කරන්න පුළුවන්.
+
+    <br>
+
+    3️⃣ තවත් photos පස්සේ add කරන්න පුළුවන්.
+
+    <br>
+
+    4️⃣ සියලු photos වල MCQ එකම Review List එකට එකතු වෙනවා.
+
+    <br>
+
+    5️⃣ Save කිරීමට කලින් වැරදි OCR text edit කරන්න.
+
+</div>
+
+
+<div class="ocr-upload-box">
+
+    <h3>📸 MCQ Paper Photos</h3>
+
+    <p>
+        Photos එකක් හෝ කිහිපයක් තෝරන්න.
+    </p>
+
+    <input
+        type="file"
+        id="ocrPhotoInput"
+        class="ocr-file-input"
+        accept="image/*"
+        multiple>
+
+</div>
+
+
+<div id="photoQueue" class="photo-queue"></div>
+
+
+<div class="progress-box" id="ocrProgressBox">
+
+    <div class="progress-bar">
+
+        <div
+            id="ocrProgressFill"
+            class="progress-fill">
+        </div>
+
+    </div>
+
+    <div
+        id="ocrProgressText"
+        class="progress-text">
+
+        OCR starting...
+
+    </div>
+
+</div>
+
+
+<div class="ocr-actions">
+
+    <button
+        class="ocr-btn"
+        id="startOcrButton">
+
+        🔎 OCR Photos
+
+    </button>
+
+    <button
+        class="secondary-btn"
+        id="clearOcrPhotosButton">
+
+        🧹 Clear Photos
+
+    </button>
+
+</div>
+
+
+<div
+    id="ocrMessage"
+    class="message">
+</div>
+
+
+</div>
+
+
+<!-- ========================================
+     REVIEW TAB
+======================================== -->
+
+<div
+    id="reviewTab"
+    class="tab-content">
+
+
+<div class="review-header">
+
+    <h2>📝 OCR Review / Editor</h2>
+
+    <div class="info">
+
+        ⚠️ OCR කරපු MCQ Save කිරීමට පෙර
+        <b>Question + Options 5 + Correct Answer</b>
+        check කරන්න.
+
+        <br><br>
+
+        🟠 Warning තියෙන MCQ එක manually check කරන්න.
+
+    </div>
+
+
+    <div class="review-stats">
+
+        <div class="stat-box">
+            <div class="stat-number" id="totalReview">0</div>
+            <div>Total</div>
+        </div>
+
+        <div class="stat-box">
+            <div class="stat-number" id="validReview">0</div>
+            <div>Valid</div>
+        </div>
+
+        <div class="stat-box">
+            <div class="stat-number" id="errorReview">0</div>
+            <div>Errors</div>
+        </div>
+
+        <div class="stat-box">
+            <div class="stat-number" id="duplicateReview">0</div>
+            <div>Duplicates</div>
+        </div>
+
+    </div>
+
+
+    <div
+        id="draftStatus"
+        class="draft-box">
+
+        💾 Draft auto-save active.
+
+    </div>
+
+</div>
+
+
+<div class="manual-top-actions">
+
+    <button
+        class="secondary-btn"
+        id="addManualToReviewButton">
+
+        ➕ Manual MCQ
+
+    </button>
+
+    <button
+        class="secondary-btn"
+        id="saveDraftButton">
+
+        💾 Save Draft
+
+    </button>
+
+</div>
+
+
+<button
+    class="validate-btn"
+    id="validateAllButton">
+
+    🔍 Validate All
+
+</button>
+
+
+<button
+    class="save-all-btn"
+    id="saveAllButton"
+    style="margin-top:10px;">
+
+    🚀 Add All Valid MCQs
+
+</button>
+
+
+<div
+    id="reviewMessage"
+    class="message">
+</div>
+
+
+<div
+    id="reviewList"
+    style="margin-top:15px;">
+
+    <div class="empty-box">
+        📭 තව OCR MCQ නැහැ.
+    </div>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<!-- ========================================
+     QUESTIONS
+======================================== -->
+
+<div class="card">
+
+    <h2>
+        📚 Target Day MCQs
+    </h2>
+
+    <div id="questionList">
+        Loading...
+    </div>
+
+</div>
+
+
+</div>
+
+
+<!-- ========================================
+     SOURCE PHOTO MODAL
+======================================== -->
+
+<div
+    id="sourceModal"
+    class="modal">
+
+    <div class="modal-card">
+
+        <h3 id="modalTitle">
+            Original Photo
+        </h3>
+
+        <img
+            id="modalImage"
+            src=""
+            alt="Original">
+
+        <button
+            class="modal-close"
+            id="modalClose">
+
+            ✖ Close
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<script type="module">
+
+
+/* ========================================
+   FIREBASE
+======================================== */
+
+import {
+    initializeApp
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+
+import {
+    getAuth,
+    GoogleAuthProvider,
+    signInWithPopup,
+    onAuthStateChanged,
+    signOut
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
+import {
+    getFirestore,
+    collection,
+    addDoc,
+    getDocs,
+    getDoc,
+    deleteDoc,
+    setDoc,
+    doc,
+    query,
+    where
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+/* ========================================
+   FIREBASE CONFIG
+======================================== */
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyAMkaGYmBuoFama5MW5AhoX9q6cly_-nbg",
+
+    authDomain:
+        "mcq-winner.firebaseapp.com",
+
+    projectId:
+        "mcq-winner",
+
+    storageBucket:
+        "mcq-winner.firebasestorage.app",
+
+    messagingSenderId:
+        "1022060912943",
+
+    appId:
+        "1:1022060912943:web:f6e58414867e32f685c1da",
+
+    measurementId:
+        "G-MBH3NZ728H"
+
+};
+
+
+const app =
+    initializeApp(firebaseConfig);
+
+
+const auth =
+    getAuth(app);
+
+
+const db =
+    getFirestore(app);
+
+
+const provider =
+    new GoogleAuthProvider();
+
+
+/* ========================================
+   CLOUDINARY
+======================================== */
+
+const CLOUDINARY_CLOUD_NAME =
+    "irjfos43";
+
+
+const CLOUDINARY_UPLOAD_PRESET =
+    "mcq_winner";
+
+
+/* ========================================
+   ADMIN
+======================================== */
+
+const ADMIN_UID =
+    "Npiu0xJQQchrVgHnXRuR8Rr5FOA2";
+
+
+const ADMIN_PIN =
+    "6020232";
+
+
+let currentUser = null;
+
+let pinUnlocked = false;
+
+
+/* ========================================
+   OCR STATE
+======================================== */
+
+let ocrPhotos = [];
+
+let reviewItems = [];
+
+let ocrBusy = false;
+
+let currentEditingTextarea = null;
+
+const DRAFT_KEY =
+    "mcqWinnerOCRDraftV2";
+
+
+/* ========================================
+   BASIC HELPERS
+======================================== */
+
+function uid(){
+
+    return (
+        Date.now().toString(36) +
+        Math.random().toString(36).slice(2)
+    );
+
+}
+
+
+function escapeHTML(text){
+
+    const div =
+        document.createElement("div");
+
+    div.textContent =
+        text || "";
+
+    return div.innerHTML;
+
+}
+
+
+function escapeAttribute(text){
+
+    return String(text || "")
+        .replace(/&/g,"&amp;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#39;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;");
+
+}
+
+
+/* ========================================
+   SRI LANKA TIME
+======================================== */
+
+function getSriLankaParts(){
+
+    const parts =
+        new Intl.DateTimeFormat(
+            "en-GB",
+            {
+                timeZone:"Asia/Colombo",
+                year:"numeric",
+                month:"2-digit",
+                day:"2-digit",
+                hour:"2-digit",
+                minute:"2-digit",
+                second:"2-digit",
+                hourCycle:"h23"
+            }
+        ).formatToParts(new Date());
+
+
+    const result = {};
+
+
+    parts.forEach(function(part){
+
+        if(part.type !== "literal"){
+
+            result[part.type] =
+                Number(part.value);
+
+        }
+
+    });
+
+
+    return result;
+
+}
+
+
+/* ========================================
+   DATE
+======================================== */
+
+function makeDate(year,month,day){
+
+    return (
+
+        String(year).padStart(4,"0") +
+        "-" +
+        String(month).padStart(2,"0") +
+        "-" +
+        String(day).padStart(2,"0")
+
+    );
+
+}
+
+
+function getSriLankaDateObject(){
+
+    const p =
+        getSriLankaParts();
+
+    return new Date(
+        Date.UTC(
+            p.year,
+            p.month - 1,
+            p.day
+        )
+    );
+
+}
+
+
+function getAdminTargetDate(){
+
+    const p =
+        getSriLankaParts();
+
+    const date =
+        getSriLankaDateObject();
+
+
+    if(p.hour >= 22){
+
+        date.setUTCDate(
+            date.getUTCDate() + 1
+        );
+
+    }
+
+
+    return makeDate(
+        date.getUTCFullYear(),
+        date.getUTCMonth() + 1,
+        date.getUTCDate()
+    );
+
+}
+
+
+/* ========================================
+   SYMBOL INSERT
+======================================== */
+
+function insertSymbol(inputId,symbol){
+
+    const input =
+        document.getElementById(inputId);
+
+    if(!input) return;
+
+
+    const start =
+        input.selectionStart ??
+        input.value.length;
+
+    const end =
+        input.selectionEnd ??
+        input.value.length;
+
+
+    input.value =
+        input.value.substring(0,start) +
+        symbol +
+        input.value.substring(end);
+
+
+    input.focus();
+
+
+    input.selectionStart =
+        input.selectionEnd =
+        start + symbol.length;
+
+}
+
+
+window.insertSymbol =
+    insertSymbol;
+
+
+/* ========================================
+   PHOTO PREVIEW
+======================================== */
+
+function setupPhotoPreview(
+    inputId,
+    previewId,
+    removeId
+){
+
+    const input =
+        document.getElementById(inputId);
+
+    const preview =
+        document.getElementById(previewId);
+
+    const removeButton =
+        document.getElementById(removeId);
+
+
+    input.addEventListener(
+        "change",
+        function(){
+
+            const file =
+                input.files[0];
+
+
+            if(!file){
+
+                preview.style.display =
+                    "none";
+
+                removeButton.style.display =
+                    "none";
+
+                return;
+
+            }
+
+
+            if(!file.type.startsWith("image/")){
+
+                alert(
+                    "කරුණාකර image file එකක් තෝරන්න."
+                );
+
+                input.value = "";
+
+                return;
+
+            }
+
+
+            if(file.size > 5 * 1024 * 1024){
+
+                alert(
+                    "Photo එක 5 MB ට වඩා අඩු විය යුතුයි."
+                );
+
+                input.value = "";
+
+                return;
+
+            }
+
+
+            const reader =
+                new FileReader();
+
+
+            reader.onload =
+                function(event){
+
+                    preview.src =
+                        event.target.result;
+
+                    preview.style.display =
+                        "block";
+
+                    removeButton.style.display =
+                        "inline-block";
+
+                };
+
+
+            reader.readAsDataURL(file);
+
+        }
+    );
+
+
+    removeButton.addEventListener(
+        "click",
+        function(){
+
+            input.value = "";
+
+            preview.src = "";
+
+            preview.style.display =
+                "none";
+
+            removeButton.style.display =
+                "none";
+
+        }
+    );
+
+}
+
+
+setupPhotoPreview(
+    "questionImage",
+    "questionPreview",
+    "questionRemove"
+);
+
+
+for(let i=1;i<=5;i++){
+
+    setupPhotoPreview(
+        "optionImage"+i,
+        "optionPreview"+i,
+        "optionRemove"+i
+    );
+
+}
+
+
+/* ========================================
+   CLOUDINARY
+======================================== */
+
+async function uploadToCloudinary(
+    file,
+    statusElementId
+){
+
+    if(!file){
+
+        return null;
+
+    }
+
+
+    const status =
+        statusElementId
+        ? document.getElementById(
+            statusElementId
+        )
+        : null;
+
+
+    if(status){
+
+        status.style.display =
+            "block";
+
+        status.textContent =
+            "☁️ Photo upload වෙමින්...";
+
+    }
+
+
+    const url =
+        "https://api.cloudinary.com/v1_1/" +
+        CLOUDINARY_CLOUD_NAME +
+        "/image/upload";
+
+
+    const formData =
+        new FormData();
+
+
+    formData.append(
+        "file",
+        file
+    );
+
+
+    formData.append(
+        "upload_preset",
+        CLOUDINARY_UPLOAD_PRESET
+    );
+
+
+    const response =
+        await fetch(
+            url,
+            {
+                method:"POST",
+                body:formData
+            }
+        );
+
+
+    const data =
+        await response.json();
+
+
+    if(!response.ok){
+
+        console.error(
+            "Cloudinary error:",
+            data
+        );
+
+
+        throw new Error(
+            data.error?.message ||
+            "Cloudinary photo upload failed."
+        );
+
+    }
+
+
+    if(status){
+
+        status.textContent =
+            "✅ Photo upload වුණා.";
+
+    }
+
+
+    return {
+
+        url:data.secure_url,
+
+        publicId:
+            data.public_id || ""
+
+    };
+
+}
+
+
+/* ========================================
+   TARGET DATE
+======================================== */
+
+function updateTargetDate(){
+
+    const p =
+        getSriLankaParts();
+
+    const target =
+        getAdminTargetDate();
+
+    const box =
+        document.getElementById(
+            "targetDate"
+        );
+
+
+    if(p.hour >= 22){
+
+        box.innerHTML =
+            "🌙 <b>රෑ 10:00 පසුයි.</b>" +
+            "<br><br>" +
+            "➡️ දැන් <b>" +
+            target +
+            "</b> දවසේ MCQ prepare කරන්න.";
+
+    }
+
+    else if(p.hour < 5){
+
+        box.innerHTML =
+            "🌃 දැන් <b>උදේ 5:00ට කලින්.</b>" +
+            "<br><br>" +
+            "➡️ Target Day: <b>" +
+            target +
+            "</b>";
+
+    }
+
+    else{
+
+        box.innerHTML =
+            "🌅 අද day's MCQ." +
+            "<br><br>" +
+            "➡️ Target Day: <b>" +
+            target +
+            "</b>";
+
+    }
+
+}
+
+
+/* ========================================
+   LOGIN
+======================================== */
+
+document
+.getElementById("googleLoginButton")
+.addEventListener(
+    "click",
+    async function(){
+
+        const message =
+            document.getElementById(
+                "loginMessage"
+            );
+
+
+        message.textContent =
+            "⏳ Google Login වෙමින්...";
+
+
+        try{
+
+            await signInWithPopup(
+                auth,
+                provider
+            );
+
+        }
+
+        catch(error){
+
+            console.error(error);
+
+            message.textContent =
+                "❌ Google Login Error: " +
+                error.message;
+
+            message.style.color =
+                "red";
+
+        }
+
+    }
+);
+
+
+/* ========================================
+   AUTH STATE
+======================================== */
+
+onAuthStateChanged(
+    auth,
+    function(user){
+
+        if(!user){
+
+            currentUser = null;
+
+            pinUnlocked = false;
+
+            document.getElementById(
+                "loginPanel"
+            ).style.display = "block";
+
+            document.getElementById(
+                "pinPanel"
+            ).style.display = "none";
+
+            document.getElementById(
+                "adminPanel"
+            ).style.display = "none";
+
+            return;
+
+        }
+
+
+        currentUser = user;
+
+
+        if(user.uid !== ADMIN_UID){
+
+            document.getElementById(
+                "loginPanel"
+            ).style.display = "block";
+
+            document.getElementById(
+                "pinPanel"
+            ).style.display = "none";
+
+            document.getElementById(
+                "adminPanel"
+            ).style.display = "none";
+
+            document.getElementById(
+                "loginMessage"
+            ).textContent =
+                "🚫 මෙම Google Account එකට Admin access නැහැ.";
+
+            document.getElementById(
+                "loginMessage"
+            ).style.color = "red";
+
+
+            signOut(auth);
+
+            return;
+
+        }
+
+
+        document.getElementById(
+            "loginPanel"
+        ).style.display = "none";
+
+
+        document.getElementById(
+            "pinPanel"
+        ).style.display = "block";
+
+
+        document.getElementById(
+            "userBox"
+        ).textContent =
+
+            "👑 Admin: " +
+            (
+                user.displayName ||
+                "Admin"
+            ) +
+            "\n" +
+            (
+                user.email ||
+                ""
+            );
+
+    }
+);
+
+
+/* ========================================
+   PIN
+======================================== */
+
+document
+.getElementById("pinLoginButton")
+.addEventListener(
+    "click",
+    unlockAdmin
+);
+
+
+document
+.getElementById("pin")
+.addEventListener(
+    "keydown",
+    function(event){
+
+        if(event.key === "Enter"){
+
+            unlockAdmin();
+
+        }
+
+    }
+);
+
+
+function unlockAdmin(){
+
+    const pin =
+        document.getElementById(
+            "pin"
+        ).value;
+
+
+    const message =
+        document.getElementById(
+            "pinMessage"
+        );
+
+
+    if(
+        !currentUser ||
+        currentUser.uid !== ADMIN_UID
+    ){
+
+        message.textContent =
+            "🚫 Admin access denied.";
+
+        message.style.color = "red";
+
+        return;
+
+    }
+
+
+    if(pin === ADMIN_PIN){
+
+        pinUnlocked = true;
+
+
+        document.getElementById(
+            "pinPanel"
+        ).style.display = "none";
+
+
+        document.getElementById(
+            "adminPanel"
+        ).style.display = "block";
+
+
+        updateTargetDate();
+
+        showQuestions();
+
+        loadDraft();
+
+    }
+
+    else{
+
+        message.textContent =
+            "❌ වැරදි Admin PIN එකක්.";
+
+        message.style.color = "red";
+
+    }
+
+}
+
+
+/* ========================================
+   MEMBERS
+======================================== */
+
+document
+.getElementById("membersButton")
+.addEventListener(
+    "click",
+    function(){
+
+        if(
+            !currentUser ||
+            currentUser.uid !== ADMIN_UID ||
+            !pinUnlocked
+        ){
+
+            alert(
+                "🚫 Admin access required."
+            );
+
+            return;
+
+        }
+
+
+        window.location.href =
+            "members.html";
+
+    }
+);
+
+
+/* ========================================
+   TABS
+======================================== */
+
+document
+.querySelectorAll(".tab-btn")
+.forEach(
+    function(button){
+
+        button.addEventListener(
+            "click",
+            function(){
+
+                const tab =
+                    button.dataset.tab;
+
+
+                document
+                .querySelectorAll(".tab-btn")
+                .forEach(
+                    b =>
+                        b.classList.remove(
+                            "active"
+                        )
+                );
+
+
+                document
+                .querySelectorAll(".tab-content")
+                .forEach(
+                    c =>
+                        c.classList.remove(
+                            "active"
+                        )
+                );
+
+
+                button.classList.add(
+                    "active"
+                );
+
+
+                document
+                .getElementById(tab)
+                .classList.add(
+                    "active"
+                );
+
+
+                if(tab === "reviewTab"){
+
+                    renderReview();
+
+                }
+
+            }
+        );
+
+    }
+);
+
+
+/* ========================================
+   FIRESTORE QUESTIONS
+======================================== */
+
+async function getQuestions(){
+
+    const targetDate =
+        getAdminTargetDate();
+
+
+    const q =
+        query(
+            collection(db,"mcqs"),
+            where(
+                "date",
+                "==",
+                targetDate
+            )
+        );
+
+
+    const snapshot =
+        await getDocs(q);
+
+
+    const questions = [];
+
+
+    snapshot.forEach(
+        function(docSnap){
+
+            questions.push({
+
+                id:docSnap.id,
+
+                ...docSnap.data()
+
+            });
+
+        }
+    );
+
+
+    return questions;
+
+}
+
+
+/* ========================================
+   SECURE ANSWER
+======================================== */
+
+async function getCorrectAnswer(mcqId){
+
+    try{
+
+        const answerRef =
+            doc(
+                db,
+                "mcqAnswers",
+                mcqId
+            );
+
+
+        const answerSnap =
+            await getDoc(
+                answerRef
+            );
+
+
+        if(!answerSnap.exists()){
+
+            return null;
+
+        }
+
+
+        return answerSnap
+            .data()
+            .correctAnswer;
+
+    }
+
+    catch(error){
+
+        console.error(
+            "Answer load error:",
+            error
+        );
+
+        return null;
+
+    }
+
+}
+
+
+/* ========================================
+   MANUAL ADD
+======================================== */
+
+document
+.getElementById("addButton")
+.addEventListener(
+    "click",
+    addQuestion
+);
+
+
+async function addQuestion(){
+
+    const message =
+        document.getElementById(
+            "addMessage"
+        );
+
+
+    if(
+        !currentUser ||
+        currentUser.uid !== ADMIN_UID ||
+        !pinUnlocked
+    ){
+
+        message.textContent =
+            "🚫 Admin access required.";
+
+        message.style.color =
+            "red";
+
+        return;
+
+    }
+
+
+    const subject =
+        document.getElementById(
+            "subject"
+        ).value;
+
+
+    const question =
+        document.getElementById(
+            "question"
+        ).value.trim();
+
+
+    const options = [];
+
+
+    for(let i=1;i<=5;i++){
+
+        options.push(
+            document.getElementById(
+                "option"+i
+            ).value.trim()
+        );
+
+    }
+
+
+    const answer =
+        Number(
+            document.getElementById(
+                "answer"
+            ).value
+        );
+
+
+    const questionFile =
+        document.getElementById(
+            "questionImage"
+        ).files[0] || null;
+
+
+    const optionFiles = [];
+
+
+    for(let i=1;i<=5;i++){
+
+        optionFiles.push(
+            document.getElementById(
+                "optionImage"+i
+            ).files[0] || null
+        );
+
+    }
+
+
+    if(
+        question === "" ||
+        options.some(
+            option => option === ""
+        )
+    ){
+
+        message.textContent =
+            "⚠️ ප්‍රශ්නය සහ පිළිතුරු 5ම පුරවන්න.";
+
+        message.style.color =
+            "red";
+
+        return;
+
+    }
+
+
+    try{
+
+        const targetDate =
+            getAdminTargetDate();
+
+
+        const questions =
+            await getQuestions();
+
+
+        const subjectCount =
+            questions.filter(
+                item =>
+                    item.subject === subject
+            ).length;
+
+
+        if(subjectCount >= 25){
+
+            message.textContent =
+                "⚠️ " +
+                subject +
+                " සඳහා " +
+                targetDate +
+                " දවසේ MCQ 25 සම්පූර්ණයි.";
+
+            message.style.color =
+                "red";
+
+            return;
+
+        }
+
+
+        document.getElementById(
+            "addButton"
+        ).disabled = true;
+
+
+        message.style.color =
+            "#1e3a8a";
+
+
+        message.textContent =
+            "⏳ Photo තියෙනවා නම් upload වෙමින්...";
+
+
+        let questionImageData = null;
+
+
+        if(questionFile){
+
+            questionImageData =
+                await uploadToCloudinary(
+                    questionFile,
+                    "questionUploadStatus"
+                );
+
+        }
+
+
+        const optionImages = [];
+
+
+        for(let i=0;i<5;i++){
+
+            const file =
+                optionFiles[i];
+
+
+            if(file){
+
+                const data =
+                    await uploadToCloudinary(
+                        file,
+                        null
+                    );
+
+                optionImages.push(data);
+
+            }
+
+            else{
+
+                optionImages.push(null);
+
+            }
+
+        }
+
+
+        const mcqData = {
+
+            subject:subject,
+
+            question:question,
+
+            options:options,
+
+            date:targetDate,
+
+            createdAt:new Date(),
+
+            createdBy:currentUser.uid,
+
+            questionImage:
+                questionImageData
+                ? questionImageData.url
+                : "",
+
+            questionImagePublicId:
+                questionImageData
+                ? questionImageData.publicId
+                : "",
+
+            optionImages:
+                optionImages.map(
+                    item =>
+                        item
+                        ? item.url
+                        : ""
+                ),
+
+            optionImagePublicIds:
+                optionImages.map(
+                    item =>
+                        item
+                        ? item.publicId
+                        : ""
+                )
+
+        };
+
+
+        const mcqDoc =
+            await addDoc(
+                collection(db,"mcqs"),
+                mcqData
+            );
+
+
+        await setDoc(
+            doc(
+                db,
+                "mcqAnswers",
+                mcqDoc.id
+            ),
+            {
+
+                correctAnswer:answer,
+
+                mcqId:mcqDoc.id,
+
+                createdAt:new Date(),
+
+                createdBy:currentUser.uid
+
+            }
+        );
+
+
+        message.innerHTML =
+            "✅ MCQ එක " +
+            targetDate +
+            " දවසට Save කළා!" +
+            "<br>" +
+            "📚 " +
+            subject +
+            ": " +
+            (subjectCount + 1) +
+            " / 25";
+
+
+        message.style.color =
+            "green";
+
+
+        clearForm();
+
+        await showQuestions();
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        message.textContent =
+            "❌ Save Error: " +
+            error.message;
+
+        message.style.color =
+            "red";
+
+    }
+
+    finally{
+
+        document.getElementById(
+            "addButton"
+        ).disabled = false;
+
+    }
+
+}
+
+
+/* ========================================
+   CLEAR MANUAL
+======================================== */
+
+function clearForm(){
+
+    document.getElementById(
+        "question"
+    ).value = "";
+
+
+    for(let i=1;i<=5;i++){
+
+        document.getElementById(
+            "option"+i
+        ).value = "";
+
+    }
+
+
+    document.getElementById(
+        "answer"
+    ).value = "0";
+
+
+    document.getElementById(
+        "questionImage"
+    ).value = "";
+
+
+    document.getElementById(
+        "questionPreview"
+    ).src = "";
+
+
+    document.getElementById(
+        "questionPreview"
+    ).style.display = "none";
+
+
+    document.getElementById(
+        "questionRemove"
+    ).style.display = "none";
+
+
+    for(let i=1;i<=5;i++){
+
+        document.getElementById(
+            "optionImage"+i
+        ).value = "";
+
+
+        document.getElementById(
+            "optionPreview"+i
+        ).src = "";
+
+
+        document.getElementById(
+            "optionPreview"+i
+        ).style.display = "none";
+
+
+        document.getElementById(
+            "optionRemove"+i
+        ).style.display = "none";
+
+    }
+
+}
+
+
+document
+.getElementById("clearManualButton")
+.addEventListener(
+    "click",
+    clearForm
+);
+
+
+/* ========================================
+   OCR PHOTO INPUT
+======================================== */
+
+document
+.getElementById("ocrPhotoInput")
+.addEventListener(
+    "change",
+    function(){
+
+        const files =
+            Array.from(
+                this.files || []
+            );
+
+
+        if(!files.length){
+
+            return;
+
+        }
+
+
+        files.forEach(
+            function(file){
+
+                if(
+                    !file.type.startsWith(
+                        "image/"
+                    )
+                ){
+
+                    return;
+
+                }
+
+
+                if(
+                    file.size >
+                    15 * 1024 * 1024
+                ){
+
+                    alert(
+                        file.name +
+                        " 15 MB ට වඩා වැඩියි."
+                    );
+
+                    return;
+
+                }
+
+
+                const photo = {
+
+                    id:uid(),
+
+                    file:file,
+
+                    name:file.name,
+
+                    url:
+                        URL.createObjectURL(
+                            file
+                        ),
+
+                    status:"Ready",
+
+                    progress:0,
+
+                    text:"",
+
+                    confidence:0
+
+                };
+
+
+                ocrPhotos.push(
+                    photo
+                );
+
+            }
+        );
+
+
+        this.value = "";
+
+        renderPhotoQueue();
+
+    }
+);
+
+
+/* ========================================
+   RENDER PHOTO QUEUE
+======================================== */
+
+function renderPhotoQueue(){
+
+    const box =
+        document.getElementById(
+            "photoQueue"
+        );
+
+
+    box.innerHTML = "";
+
+
+    if(ocrPhotos.length === 0){
+
+        box.innerHTML =
+            `
+            <div class="empty-box">
+                📭 Photos add කරලා නැහැ.
+            </div>
+            `;
+
+        return;
+
+    }
+
+
+    ocrPhotos.forEach(
+        function(photo,index){
+
+            const div =
+                document.createElement(
+                    "div"
+                );
+
+
+            div.className =
+                "photo-queue-item";
+
+
+            div.innerHTML =
+
+                `
+                <div class="photo-queue-row">
+
+                    <img
+                        class="photo-queue-thumb"
+                        src="${escapeAttribute(photo.url)}">
+
+                    <div class="photo-queue-info">
+
+                        <b>
+                            ${index+1}.
+                            ${escapeHTML(photo.name)}
+                        </b>
+
+                        <div class="photo-status">
+                            ${escapeHTML(photo.status)}
+                        </div>
+
+                    </div>
+
+                    <button
+                        class="danger-btn small-btn"
+                        data-remove-photo="${photo.id}">
+
+                        ✖
+
+                    </button>
+
+                </div>
+                `;
+
+
+            div
+            .querySelector(
+                "[data-remove-photo]"
+            )
+            .addEventListener(
+                "click",
+                function(){
+
+                    if(ocrBusy){
+
+                        return;
+
+                    }
+
+
+                    const index =
+                        ocrPhotos.findIndex(
+                            p =>
+                                p.id ===
+                                photo.id
+                        );
+
+
+                    if(index >= 0){
+
+                        URL.revokeObjectURL(
+                            ocrPhotos[index].url
+                        );
+
+                        ocrPhotos.splice(
+                            index,
+                            1
+                        );
+
+                    }
+
+
+                    renderPhotoQueue();
+
+                }
+            );
+
+
+            box.appendChild(div);
+
+        }
+    );
+
+}
+
+
+/* ========================================
+   CLEAR OCR PHOTOS
+======================================== */
+
+document
+.getElementById("clearOcrPhotosButton")
+.addEventListener(
+    "click",
+    function(){
+
+        if(ocrBusy){
+
+            alert(
+                "OCR වෙමින් තියෙනවා."
+            );
+
+            return;
+
+        }
+
+
+        ocrPhotos.forEach(
+            photo =>
+                URL.revokeObjectURL(
+                    photo.url
+                )
+        );
+
+
+        ocrPhotos = [];
+
+
+        renderPhotoQueue();
+
+    }
+);
+
+
+/* ========================================
+   OCR ENGINE
+======================================== */
+
+async function runOCR(photo){
+
+    photo.status =
+        "🔎 OCR වෙමින්...";
+
+    renderPhotoQueue();
+
+
+    const result =
+        await Tesseract.recognize(
+            photo.file,
+            "eng",
+            {
+
+                logger:function(info){
+
+                    if(
+                        info.status ===
+                        "recognizing text"
+                    ){
+
+                        photo.progress =
+                            Math.round(
+                                (info.progress || 0) *
+                                100
+                            );
+
+                        photo.status =
+                            "🔎 OCR " +
+                            photo.progress +
+                            "%";
+
+                        renderPhotoQueue();
+
+                    }
+
+                }
+
+            }
+        );
+
+
+    photo.text =
+        result.data.text || "";
+
+
+    photo.confidence =
+        Number(
+            result.data.confidence || 0
+        );
+
+
+    photo.status =
+        "✅ OCR complete (" +
+        Math.round(photo.confidence) +
+        "%)";
+
+
+    renderPhotoQueue();
+
+
+    return photo.text;
+
+}
+
+
+/* ========================================
+   START OCR
+======================================== */
+
+document
+.getElementById("startOcrButton")
+.addEventListener(
+    "click",
+    startOCR
+);
+
+
+async function startOCR(){
+
+    const message =
+        document.getElementById(
+            "ocrMessage"
+        );
+
+
+    if(!currentUser || !pinUnlocked){
+
+        message.textContent =
+            "🚫 Admin access required.";
+
+        message.style.color =
+            "red";
+
+        return;
+
+    }
+
+
+    if(ocrPhotos.length === 0){
+
+        message.textContent =
+            "⚠️ මුලින් paper photo එකක් select කරන්න.";
+
+        message.style.color =
+            "red";
+
+        return;
+
+    }
+
+
+    if(typeof Tesseract === "undefined"){
+
+        message.textContent =
+            "❌ OCR library load වෙලා නැහැ. Internet connection check කරන්න.";
+
+        message.style.color =
+            "red";
+
+        return;
+
+    }
+
+
+    if(ocrBusy){
+
+        return;
+
+    }
+
+
+    ocrBusy = true;
+
+
+    document.getElementById(
+        "startOcrButton"
+    ).disabled = true;
+
+
+    document.getElementById(
+        "ocrProgressBox"
+    ).style.display = "block";
+
+
+    try{
+
+        let allNewItems = [];
+
+
+        for(
+            let i=0;
+            i<ocrPhotos.length;
+            i++
+        ){
+
+            const photo =
+                ocrPhotos[i];
+
+
+            document.getElementById(
+                "ocrProgressText"
+            ).textContent =
+                "📷 Photo " +
+                (i+1) +
+                " / " +
+                ocrPhotos.length +
+                " OCR වෙමින්...";
+
+
+            await runOCR(photo);
+
+
+            const parsed =
+                parseOCRText(
+                    photo.text,
+                    photo
+                );
+
+
+            allNewItems =
+                allNewItems.concat(
+                    parsed
+                );
+
+
+            const progress =
+                Math.round(
+                    ((i+1) /
+                    ocrPhotos.length) *
+                    100
+                );
+
+
+            document.getElementById(
+                "ocrProgressFill"
+            ).style.width =
+                progress + "%";
+
+        }
+
+
+        reviewItems =
+            reviewItems.concat(
+                allNewItems
+            );
+
+
+        detectDuplicates();
+
+
+        saveDraft();
+
+
+        renderReview();
+
+
+        message.innerHTML =
+            "✅ OCR complete! " +
+            "<b>" +
+            allNewItems.length +
+            "</b> MCQ Review List එකට එකතු කළා.";
+
+
+        message.style.color =
+            "green";
+
+
+        activateTab("reviewTab");
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        message.textContent =
+            "❌ OCR Error: " +
+            error.message;
+
+        message.style.color =
+            "red";
+
+    }
+
+    finally{
+
+        ocrBusy = false;
+
+        document.getElementById(
+            "startOcrButton"
+        ).disabled = false;
+
+    }
+
+}
+
+
+/* ========================================
+   OCR PARSER
+======================================== */
+
+function normalizeOCRText(text){
+
+    return String(text || "")
+        .replace(/\r/g,"\n")
+        .replace(/[ \t]+/g," ")
+        .replace(/\n{3,}/g,"\n\n")
+        .trim();
+
+}
+
+
+/*
+   Finds question starts such as:
+
+   1.
+   1)
+   01.
+   Q1.
+   Q.1
+   Question 1
+*/
+
+function findQuestionStarts(lines){
+
+    const starts = [];
+
+
+    const regex =
+        /^(?:q(?:uestion)?\s*)?(\d{1,3})[\.\):\-]\s*/i;
+
+
+    lines.forEach(
+        function(line,index){
+
+            if(regex.test(line.trim())){
+
+                starts.push(index);
+
+            }
+
+        }
+    );
+
+
+    return starts;
+
+}
+
+
+/* ========================================
+   OPTION DETECTION
+======================================== */
+
+function parseOptionLine(line){
+
+    const clean =
+        line.trim();
+
+
+    let match =
+        clean.match(
+            /^([A-Ea-e])[\.\):\-]\s*(.+)$/
+        );
+
+
+    if(match){
+
+        return {
+
+            index:
+                match[1].toUpperCase()
+                    .charCodeAt(0) -
+                65,
+
+            text:
+                match[2].trim()
+
+        };
+
+    }
+
+
+    match =
+        clean.match(
+            /^([1-5])[\.\):\-]\s*(.+)$/
+        );
+
+
+    if(match){
+
+        return {
+
+            index:
+                Number(match[1]) - 1,
+
+            text:
+                match[2].trim()
+
+        };
+
+    }
+
+
+    return null;
+
+}
+
+
+/* ========================================
+   ANSWER DETECTION
+======================================== */
+
+function detectAnswer(text){
+
+    const value =
+        String(text || "")
+            .trim();
+
+
+    const patterns = [
+
+        /(?:answer|ans|correct)\s*[:=\-]?\s*([A-E1-5])/i,
+
+        /(?:පිළිතුර|නිවැරදි)\s*[:=\-]?\s*([A-E1-5])/i
+
+    ];
+
+
+    for(const pattern of patterns){
+
+        const match =
+            value.match(pattern);
+
+
+        if(match){
+
+            const raw =
+                match[1]
+                    .toUpperCase();
+
+
+            if(
+                raw >= "A" &&
+                raw <= "E"
+            ){
+
+                return (
+                    raw.charCodeAt(0) -
+                    65
+                );
+
+            }
+
+
+            return Number(raw) - 1;
+
+        }
+
+    }
+
+
+    return null;
+
+}
+
+
+/* ========================================
+   CLEAN QUESTION PREFIX
+======================================== */
+
+function removeQuestionPrefix(text){
+
+    return String(text || "")
+        .replace(
+            /^(?:q(?:uestion)?\s*)?\d{1,3}[\.\):\-]\s*/i,
+            ""
+        )
+        .trim();
+
+}
+
+
+/* ========================================
+   PARSE ONE BLOCK
+======================================== */
+
+function parseQuestionBlock(
+    blockLines,
+    photo
+){
+
+    let questionParts = [];
+
+    const options = [
+        "",
+        "",
+        "",
+        "",
+        ""
+    ];
+
+
+    let currentOption = -1;
+
+    let answer = null;
+
+
+    blockLines.forEach(
+        function(line){
+
+            const clean =
+                line.trim();
+
+
+            if(!clean){
+
+                return;
+
+            }
+
+
+            const option =
+                parseOptionLine(clean);
+
+
+            if(option){
+
+                currentOption =
+                    option.index;
+
+
+                if(
+                    currentOption >= 0 &&
+                    currentOption < 5
+                ){
+
+                    options[currentOption] =
+                        option.text;
+
+                }
+
+                return;
+
+            }
+
+
+            const detected =
+                detectAnswer(clean);
+
+
+            if(
+                detected !== null
+            ){
+
+                answer =
+                    detected;
+
+                return;
+
+            }
+
+
+            if(currentOption >= 0){
+
+                options[currentOption] +=
+                    (
+                        options[currentOption]
+                        ? " "
+                        : ""
+                    ) +
+                    clean;
+
+            }
+
+            else{
+
+                questionParts.push(
+                    clean
+                );
+
+            }
+
+        }
+    );
+
+
+    const question =
+        removeQuestionPrefix(
+            questionParts.join(" ")
+        );
+
+
+    const suspicious =
+        !question ||
+        options.some(
+            option =>
+                !option.trim()
+        ) ||
+        answer === null ||
+        photo.confidence < 65;
+
+
+    return {
+
+        id:uid(),
+
+        subject:
+            document.getElementById(
+                "subject"
+            ).value,
+
+        question:question,
+
+        options:options,
+
+        answer:
+            answer === null
+            ? 0
+            : answer,
+
+        answerDetected:
+            answer !== null,
+
+        sourcePhotoId:
+            photo.id,
+
+        sourcePhotoName:
+            photo.name,
+
+        sourcePhotoUrl:
+            photo.url,
+
+        confidence:
+            Number(
+                photo.confidence || 0
+            ),
+
+        suspicious:suspicious,
+
+        duplicate:false,
+
+        manuallyAdded:false,
+
+        validated:false
+
+    };
+
+}
+
+
+/* ========================================
+   PARSE OCR TEXT
+======================================== */
+
+function parseOCRText(
+    text,
+    photo
+){
+
+    const normalized =
+        normalizeOCRText(text);
+
+
+    if(!normalized){
+
+        return [
+
+            {
+
+                id:uid(),
+
+                subject:
+                    document.getElementById(
+                        "subject"
+                    ).value,
+
+                question:"",
+
+                options:["","","","",""],
+
+                answer:0,
+
+                answerDetected:false,
+
+                sourcePhotoId:
+                    photo.id,
+
+                sourcePhotoName:
+                    photo.name,
+
+                sourcePhotoUrl:
+                    photo.url,
+
+                confidence:
+                    Number(
+                        photo.confidence || 0
+                    ),
+
+                suspicious:true,
+
+                duplicate:false,
+
+                manuallyAdded:false,
+
+                validated:false
+
+            }
+
+        ];
+
+    }
+
+
+    const lines =
+        normalized
+            .split("\n")
+            .map(
+                line =>
+                    line.trim()
+            )
+            .filter(
+                line =>
+                    line.length > 0
+            );
+
+
+    const starts =
+        findQuestionStarts(lines);
+
+
+    const result = [];
+
+
+    /*
+      If numbered questions are detected,
+      split according to those numbers.
+    */
+
+    if(starts.length > 0){
+
+        for(
+            let i=0;
+            i<starts.length;
+            i++
+        ){
+
+            const start =
+                starts[i];
+
+
+            const end =
+                i+1 < starts.length
+                ? starts[i+1]
+                : lines.length;
+
+
+            const block =
+                lines.slice(
+                    start,
+                    end
+                );
+
+
+            if(block.length){
+
+                result.push(
+                    parseQuestionBlock(
+                        block,
+                        photo
+                    )
+                );
+
+            }
+
+        }
+
+    }
+
+    else{
+
+        /*
+          No question numbering.
+          Try to find blocks separated by blank lines.
+        */
+
+        const rawBlocks =
+            normalized
+                .split(/\n\s*\n+/)
+                .filter(Boolean);
+
+
+        rawBlocks.forEach(
+            function(block){
+
+                const blockLines =
+                    block
+                        .split("\n")
+                        .map(
+                            x => x.trim()
+                        )
+                        .filter(Boolean);
+
+
+                if(blockLines.length){
+
+                    result.push(
+                        parseQuestionBlock(
+                            blockLines,
+                            photo
+                        )
+                    );
+
+                }
+
+            }
+        );
+
+    }
+
+
+    /*
+      Never discard OCR.
+      If parser returns nothing,
+      keep the whole OCR as suspicious item.
+    */
+
+    if(result.length === 0){
+
+        result.push({
+
+            id:uid(),
+
+            subject:
+                document.getElementById(
+                    "subject"
+                ).value,
+
+            question:
+                normalized,
+
+            options:["","","","",""],
+
+            answer:0,
+
+            answerDetected:false,
+
+            sourcePhotoId:
+                photo.id,
+
+            sourcePhotoName:
+                photo.name,
+
+            sourcePhotoUrl:
+                photo.url,
+
+            confidence:
+                Number(
+                    photo.confidence || 0
+                ),
+
+            suspicious:true,
+
+            duplicate:false,
+
+            manuallyAdded:false,
+
+            validated:false
+
+        });
+
+    }
+
+
+    return result;
+
+}
+
+
+/* ========================================
+   DUPLICATE DETECTION
+======================================== */
+
+function normalizeForDuplicate(text){
+
+    return String(text || "")
+        .toLowerCase()
+        .replace(/\s+/g," ")
+        .replace(/[^\p{L}\p{N}]+/gu,"")
+        .trim();
+
+}
+
+
+function detectDuplicates(){
+
+    const map =
+        new Map();
+
+
+    reviewItems.forEach(
+        function(item){
+
+            item.duplicate = false;
+
+            const key =
+                normalizeForDuplicate(
+                    item.question
+                );
+
+
+            if(!key){
+
+                return;
+
+            }
+
+
+            if(map.has(key)){
+
+                item.duplicate = true;
+
+                map.get(key).duplicate =
+                    true;
+
+            }
+
+            else{
+
+                map.set(
+                    key,
+                    item
+                );
+
+            }
+
+        }
+    );
+
+}
+
+
+/* ========================================
+   VALIDATION
+======================================== */
+
+function validateItem(item){
+
+    const errors = [];
+
+
+    if(
+        !String(
+            item.question || ""
+        ).trim()
+    ){
+
+        errors.push(
+            "Question empty"
+        );
+
+    }
+
+
+    if(
+        !Array.isArray(
+            item.options
+        ) ||
+        item.options.length !== 5
+    ){
+
+        errors.push(
+            "Options 5ක් නැහැ"
+        );
+
+    }
+
+    else{
+
+        item.options.forEach(
+            function(option,index){
+
+                if(
+                    !String(
+                        option || ""
+                    ).trim()
+                ){
+
+                    errors.push(
+                        "Option " +
+                        (index+1) +
+                        " empty"
+                    );
+
+                }
+
+            }
+        );
+
+    }
+
+
+    if(
+        !Number.isInteger(
+            Number(item.answer)
+        ) ||
+        Number(item.answer) < 0 ||
+        Number(item.answer) > 4
+    ){
+
+        errors.push(
+            "Correct answer invalid"
+        );
+
+    }
+
+
+    item.errors =
+        errors;
+
+
+    item.valid =
+        errors.length === 0;
+
+
+    return item.valid;
+
+}
+
+
+function validateAll(){
+
+    detectDuplicates();
+
+
+    reviewItems.forEach(
+        validateItem
+    );
+
+
+    renderReview();
+
+
+    const total =
+        reviewItems.length;
+
+
+    const valid =
+        reviewItems.filter(
+            item =>
+                item.valid
+        ).length;
+
+
+    const errors =
+        total - valid;
+
+
+    const duplicates =
+        reviewItems.filter(
+            item =>
+                item.duplicate
+        ).length;
+
+
+    const message =
+        document.getElementById(
+            "reviewMessage"
+        );
+
+
+    message.innerHTML =
+        "🔍 Validation complete." +
+        "<br>" +
+        "Total: " +
+        total +
+        " | Valid: " +
+        valid +
+        " | Errors: " +
+        errors +
+        " | Duplicates: " +
+        duplicates;
+
+
+    message.style.color =
+        errors === 0
+        ? "green"
+        : "#b45309";
+
+
+    saveDraft();
+
+}
+
+
+/* ========================================
+   REVIEW RENDER
+======================================== */
+
+function renderReview(){
+
+    const list =
+        document.getElementById(
+            "reviewList"
+        );
+
+
+    detectDuplicates();
+
+
+    reviewItems.forEach(
+        validateItem
+    );
+
+
+    document.getElementById(
+        "reviewCount"
+    ).textContent =
+        reviewItems.length;
+
+
+    document.getElementById(
+        "totalReview"
+    ).textContent =
+        reviewItems.length;
+
+
+    document.getElementById(
+        "validReview"
+    ).textContent =
+        reviewItems.filter(
+            item =>
+                item.valid
+        ).length;
+
+
+    document.getElementById(
+        "errorReview"
+    ).textContent =
+        reviewItems.filter(
+            item =>
+                !item.valid
+        ).length;
+
+
+    document.getElementById(
+        "duplicateReview"
+    ).textContent =
+        reviewItems.filter(
+            item =>
+                item.duplicate
+        ).length;
+
+
+    list.innerHTML = "";
+
+
+    if(reviewItems.length === 0){
+
+        list.innerHTML =
+            `
+            <div class="empty-box">
+                📭 OCR / Manual MCQ නැහැ.
+            </div>
+            `;
+
+        return;
+
+    }
+
+
+    reviewItems.forEach(
+        function(item,index){
+
+            list.appendChild(
+                createReviewCard(
+                    item,
+                    index
+                )
+            );
+
+        }
+    );
+
+}
+
+
+/* ========================================
+   CREATE REVIEW CARD
+======================================== */
+
+function createReviewCard(
+    item,
+    index
+){
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+
+    validateItem(item);
+
+
+    let classes =
+        "review-item";
+
+
+    if(item.suspicious){
+
+        classes +=
+            " suspicious";
+
+    }
+
+
+    if(!item.valid){
+
+        classes +=
+            " invalid";
+
+    }
+
+
+    if(item.duplicate){
+
+        classes +=
+            " duplicate";
+
+    }
+
+
+    div.className =
+        classes;
+
+
+    const badges = [];
+
+
+    if(item.valid){
+
+        badges.push(
+            `<span class="badge badge-success">
+                ✓ Valid
+            </span>`
+        );
+
+    }
+
+    else{
+
+        badges.push(
+            `<span class="badge badge-danger">
+                ⚠ Error
+            </span>`
+        );
+
+    }
+
+
+    if(item.suspicious){
+
+        badges.push(
+            `<span class="badge badge-warning">
+                🔎 Check OCR
+            </span>`
+        );
+
+    }
+
+
+    if(item.duplicate){
+
+        badges.push(
+            `<span class="badge badge-warning">
+                ♻ Duplicate
+            </span>`
+        );
+
+    }
+
+
+    if(item.manuallyAdded){
+
+        badges.push(
+            `<span class="badge badge-info">
+                ✍ Manual
+            </span>`
+        );
+
+    }
+
+
+    div.innerHTML = `
+
+        <div class="review-top">
+
+            <div class="review-number">
+                MCQ ${index + 1}
+            </div>
+
+            <div class="badges">
+                ${badges.join("")}
+            </div>
+
+        </div>
+
+
+        <label class="editor-label">
+            📝 Question
+        </label>
+
+        <div
+            class="scientific-panel"
+            data-scientific-for="${item.id}">
+
+            <div class="scientific-tabs">
+
+                <button
+                    type="button"
+                    class="scientific-tab active"
+                    data-symbol-tab="common">
+
+                    Common
+
+                </button>
+
+                <button
+                    type="button"
+                    class="scientific-tab"
+                    data-symbol-tab="greek">
+
+                    Greek
+
+                </button>
+
+                <button
+                    type="button"
+                    class="scientific-tab"
+                    data-symbol-tab="chemistry">
+
+                    Chemistry
+
+                </button>
+
+                <button
+                    type="button"
+                    class="scientific-tab"
+                    data-symbol-tab="physics">
+
+                    Physics
+
+                </button>
+
+                <button
+                    type="button"
+                    class="scientific-tab"
+                    data-symbol-tab="math">
+
+                    Math
+
+                </button>
+
+                <button
+                    type="button"
+                    class="scientific-tab"
+                    data-symbol-tab="subsup">
+
+                    Sub/Sup
+
+                </button>
+
+            </div>
+
+
+            ${symbolPanelHTML(
+                item.id,
+                "common"
+            )}
+
+            ${symbolPanelHTML(
+                item.id,
+                "greek"
+            )}
+
+            ${symbolPanelHTML(
+                item.id,
+                "chemistry"
+            )}
+
+            ${symbolPanelHTML(
+                item.id,
+                "physics"
+            )}
+
+            ${symbolPanelHTML(
+                item.id,
+                "math"
+            )}
+
+            ${symbolPanelHTML(
+                item.id,
+                "subsup"
+            )}
+
+        </div>
+
+
+        <textarea
+            class="review-question"
+            data-id="${item.id}"
+            placeholder="Question...">${escapeHTML(item.question)}</textarea>
+
+
+        <label class="editor-label">
+            📚 Subject
+        </label>
+
+        <select
+            class="review-subject"
+            data-id="${item.id}">
+
+            <option
+                value="Chemistry"
+                ${item.subject === "Chemistry" ? "selected" : ""}>
+
+                Chemistry
+
+            </option>
+
+            <option
+                value="Physics"
+                ${item.subject === "Physics" ? "selected" : ""}>
+
+                Physics
+
+            </option>
+
+        </select>
+
+
+        <label class="editor-label">
+            🔢 Options
+        </label>
+
+
+        ${item.options.map(
+            function(option,optIndex){
+
+                return `
+
+                    <div class="option-editor">
+
+                        <div class="option-row">
+
+                            <div class="option-letter">
+                                ${String.fromCharCode(65 + optIndex)}.
+                            </div>
+
+                            <input
+                                class="review-option"
+                                data-id="${item.id}"
+                                data-option="${optIndex}"
+                                value="${escapeAttribute(option)}"
+                                placeholder="Option ${optIndex+1}">
+
+                        </div>
+
+                    </div>
+
+                `;
+
+            }
+        ).join("")}
+
+
+        <label class="editor-label">
+            ✅ Correct Answer
+        </label>
+
+        <select
+            class="answer-select review-answer"
+            data-id="${item.id}">
+
+            ${[0,1,2,3,4].map(
+                function(n){
+
+                    return `
+                        <option
+                            value="${n}"
+                            ${Number(item.answer) === n ? "selected" : ""}>
+
+                            ${n+1} වන පිළිතුර
+
+                        </option>
+                    `;
+
+                }
+            ).join("")}
+
+        </select>
+
+
+        <div class="confidence">
+
+            🔎 OCR confidence:
+            ${Math.round(item.confidence || 0)}%
+
+            ${
+                item.sourcePhotoName
+                ? "<br>📷 Source: " +
+                  escapeHTML(
+                      item.sourcePhotoName
+                  )
+                : ""
+            }
+
+        </div>
+
+
+        ${
+            item.errors?.length
+            ? `
+                <div class="duplicate-info">
+                    ❌ ${item.errors
+                        .map(
+                            escapeHTML
+                        )
+                        .join(" • ")}
+                </div>
+              `
+            : ""
+        }
+
+
+        ${
+            item.duplicate
+            ? `
+                <div class="duplicate-info">
+                    ♻️ මේ Question එක Review List එකේ
+                    වෙනත් MCQ එකකට duplicate වගේ පෙනෙනවා.
+                </div>
+              `
+            : ""
+        }
+
+
+        <div class="review-actions">
+
+            <button
+                type="button"
+                class="move-btn"
+                data-action="up">
+
+                ⬆️ Up
+
+            </button>
+
+            <button
+                type="button"
+                class="move-btn"
+                data-action="down">
+
+                ⬇️ Down
+
+            </button>
+
+            <button
+                type="button"
+                class="source-btn"
+                data-action="source">
+
+                📷 Original
+
+            </button>
+
+            <button
+                type="button"
+                class="reocr-btn"
+                data-action="reocr">
+
+                🔄 Re-OCR
+
+            </button>
+
+            <button
+                type="button"
+                class="remove-review-btn"
+                data-action="delete">
+
+                🗑️ Delete
+
+            </button>
+
+        </div>
+
+
+        <div
+            class="review-source"
+            data-source-box="${item.id}">
+
+            ${
+                item.sourcePhotoUrl
+                ? `
+                    <img
+                        src="${escapeAttribute(item.sourcePhotoUrl)}"
+                        alt="Original paper photo">
+                  `
+                : `
+                    <div class="empty-box">
+                        Original photo unavailable.
+                    </div>
+                  `
+            }
+
+        </div>
+
+    `;
+
+
+    /* ====================================
+       QUESTION CHANGE
+    ==================================== */
+
+    const questionInput =
+        div.querySelector(
+            ".review-question"
+        );
+
+
+    questionInput.addEventListener(
+        "focus",
+        function(){
+
+            currentEditingTextarea =
+                questionInput;
+
+        }
+    );
+
+
+    questionInput.addEventListener(
+        "input",
+        function(){
+
+            item.question =
+                questionInput.value;
+
+            item.validated = false;
+
+            saveDraft();
+
+        }
+    );
+
+
+    /* ====================================
+       SUBJECT
+    ==================================== */
+
+    div.querySelector(
+        ".review-subject"
+    ).addEventListener(
+        "change",
+        function(event){
+
+            item.subject =
+                event.target.value;
+
+            saveDraft();
+
+        }
+    );
+
+
+    /* ====================================
+       OPTIONS
+    ==================================== */
+
+    div
+    .querySelectorAll(
+        ".review-option"
+    )
+    .forEach(
+        function(input){
+
+            input.addEventListener(
+                "focus",
+                function(){
+
+                    currentEditingTextarea =
+                        input;
+
+                }
+            );
+
+
+            input.addEventListener(
+                "input",
+                function(){
+
+                    const opt =
+                        Number(
+                            input.dataset.option
+                        );
+
+
+                    item.options[opt] =
+                        input.value;
+
+
+                    item.validated =
+                        false;
+
+
+                    saveDraft();
+
+                }
+            );
+
+        }
+    );
+
+
+    /* ====================================
+       ANSWER
+    ==================================== */
+
+    div.querySelector(
+        ".review-answer"
+    ).addEventListener(
+        "change",
+        function(event){
+
+            item.answer =
+                Number(
+                    event.target.value
+                );
+
+
+            item.answerDetected =
+                true;
+
+
+            item.validated =
+                false;
+
+
+            saveDraft();
+
+        }
+    );
+
+
+    /* ====================================
+       SCIENTIFIC TABS
+    ==================================== */
+
+    div
+    .querySelectorAll(
+        ".scientific-tab"
+    )
+    .forEach(
+        function(tab){
+
+            tab.addEventListener(
+                "click",
+                function(){
+
+                    const panel =
+                        tab.closest(
+                            ".scientific-panel"
+                        );
+
+
+                    panel
+                    .querySelectorAll(
+                        ".scientific-tab"
+                    )
+                    .forEach(
+                        x =>
+                            x.classList.remove(
+                                "active"
+                            )
+                    );
+
+
+                    panel
+                    .querySelectorAll(
+                        ".symbol-panel"
+                    )
+                    .forEach(
+                        x =>
+                            x.classList.remove(
+                                "active"
+                            )
+                    );
+
+
+                    tab.classList.add(
+                        "active"
+                    );
+
+
+                    const name =
+                        tab.dataset.symbolTab;
+
+
+                    const target =
+                        panel.querySelector(
+                            `[data-symbol-panel="${name}"]`
+                        );
+
+
+                    if(target){
+
+                        target.classList.add(
+                            "active"
+                        );
+
+                    }
+
+                }
+            );
+
+        }
+    );
+
+
+    /* ====================================
+       SYMBOL BUTTONS
+    ==================================== */
+
+    div
+    .querySelectorAll(
+        ".symbol-btn"
+    )
+    .forEach(
+        function(button){
+
+            button.addEventListener(
+                "click",
+                function(){
+
+                    const symbol =
+                        button.dataset.symbol;
+
+
+                    insertIntoReviewItem(
+                        item,
+                        symbol,
+                        questionInput
+                    );
+
+                }
+            );
+
+        }
+    );
+
+
+    /* ====================================
+       ACTIONS
+    ==================================== */
+
+    div
+    .querySelectorAll(
+        "[data-action]"
+    )
+    .forEach(
+        function(button){
+
+            button.addEventListener(
+                "click",
+                async function(){
+
+                    const action =
+                        button.dataset.action;
+
+
+                    if(action === "up"){
+
+                        moveReviewItem(
+                            index,
+                            -1
+                        );
+
+                    }
+
+
+                    if(action === "down"){
+
+                        moveReviewItem(
+                            index,
+                            1
+                        );
+
+                    }
+
+
+                    if(action === "delete"){
+
+                        deleteReviewItem(
+                            item.id
+                        );
+
+                    }
+
+
+                    if(action === "source"){
+
+                        toggleSource(
+                            item.id
+                        );
+
+                    }
+
+
+                    if(action === "reocr"){
+
+                        await reOCRItem(
+                            item
+                        );
+
+                    }
+
+                }
+            );
+
+        }
+    );
+
+
+    return div;
+
+}
+
+
+/* ========================================
+   SYMBOL PANELS
+======================================== */
+
+function symbolPanelHTML(
+    itemId,
+    category
+){
+
+    const symbols = {
+
+        common:[
+            "Δ","θ","λ","μ","Ω","π","√",
+            "→","←","↔","↑","↓","±",
+            "≤","≥","≠","≈","∞","∝",
+            "×","÷","°","′","″"
+        ],
+
+        greek:[
+            "α","β","γ","δ","ε","ζ","η",
+            "θ","ι","κ","λ","μ","ν","ξ",
+            "ο","π","ρ","σ","τ","υ","φ",
+            "χ","ψ","ω",
+            "Γ","Δ","Θ","Λ","Ξ","Π",
+            "Σ","Φ","Ψ","Ω"
+        ],
+
+        chemistry:[
+            "H₂","H₂O","O₂","N₂","Cl₂",
+            "CO₂","CO₃²⁻","SO₄²⁻",
+            "NO₃⁻","NH₄⁺","OH⁻",
+            "H⁺","Na⁺","K⁺","Ca²⁺",
+            "Mg²⁺","Fe²⁺","Fe³⁺",
+            "Cu²⁺","Zn²⁺","Al³⁺",
+            "C₆H₆","CH₄","C₂H₅OH",
+            "→","⇌","↑","↓","Δ"
+        ],
+
+        physics:[
+            "v","u","a","g","t",
+            "F","m","p","E","P",
+            "W","Q","I","V","R",
+            "ρ","λ","f","T","ω",
+            "α","θ","μ","Ω",
+            "m s⁻¹","m s⁻²",
+            "N","J","W","Pa",
+            "C","V","Ω","Hz"
+        ],
+
+        math:[
+            "√","∛","²","³","⁴","⁵",
+            "⁶","⁷","⁸","⁹","⁰",
+            "₀","₁","₂","₃","₄",
+            "₅","₆","₇","₈","₉",
+            "∞","±","≤","≥","≠",
+            "≈","∝","π","∑","∫",
+            "∂","∇","log","ln",
+            "sin","cos","tan"
+        ],
+
+        subsup:[
+            "₀","₁","₂","₃","₄",
+            "₅","₆","₇","₈","₉",
+            "⁰","¹","²","³","⁴",
+            "⁵","⁶","⁷","⁸","⁹",
+            "₊","₋","₌",
+            "⁺","⁻","⁼",
+            "₍","₎","⁽","⁾",
+            "⁻¹","⁻²","⁻³"
+        ]
+
+    };
+
+
+    return `
+
+        <div
+            class="symbol-panel ${category === "common" ? "active" : ""}"
+            data-symbol-panel="${category}">
+
+            ${
+                symbols[category]
+                .map(
+                    symbol =>
+                        `
+                        <button
+                            type="button"
+                            class="symbol-btn"
+                            data-symbol="${escapeAttribute(symbol)}">
+
+                            ${escapeHTML(symbol)}
+
+                        </button>
+                        `
+                )
+                .join("")
+            }
+
+        </div>
+
+    `;
+
+}
+
+
+/* ========================================
+   INSERT INTO REVIEW
+======================================== */
+
+function insertIntoReviewItem(
+    item,
+    symbol,
+    textarea
+){
+
+    const start =
+        textarea.selectionStart ??
+        textarea.value.length;
+
+
+    const end =
+        textarea.selectionEnd ??
+        textarea.value.length;
+
+
+    const old =
+        textarea.value;
+
+
+    const value =
+        old.substring(0,start) +
+        symbol +
+        old.substring(end);
+
+
+    textarea.value =
+        value;
+
+
+    textarea.focus();
+
+
+    textarea.selectionStart =
+        textarea.selectionEnd =
+        start + symbol.length;
+
+
+    item.question =
+        value;
+
+
+    saveDraft();
+
+}
+
+
+/* ========================================
+   MOVE
+======================================== */
+
+function moveReviewItem(
+    index,
+    direction
+){
+
+    const newIndex =
+        index + direction;
+
+
+    if(
+        newIndex < 0 ||
+        newIndex >= reviewItems.length
+    ){
+
+        return;
+
+    }
+
+
+    const temp =
+        reviewItems[index];
+
+
+    reviewItems[index] =
+        reviewItems[newIndex];
+
+
+    reviewItems[newIndex] =
+        temp;
+
+
+    renderReview();
+
+    saveDraft();
+
+}
+
+
+/* ========================================
+   DELETE REVIEW
+======================================== */
+
+function deleteReviewItem(id){
+
+    const index =
+        reviewItems.findIndex(
+            item =>
+                item.id === id
+        );
+
+
+    if(index < 0){
+
+        return;
+
+    }
+
+
+    if(
+        !confirm(
+            "මේ MCQ එක Review List එකෙන් delete කරන්නද?"
+        )
+    ){
+
+        return;
+
+    }
+
+
+    reviewItems.splice(
+        index,
+        1
+    );
+
+
+    renderReview();
+
+    saveDraft();
+
+}
+
+
+/* ========================================
+   SOURCE
+======================================== */
+
+function toggleSource(id){
+
+    const box =
+        document.querySelector(
+            `[data-source-box="${id}"]`
+        );
+
+
+    if(!box){
+
+        return;
+
+    }
+
+
+    if(
+        box.style.display === "block"
+    ){
+
+        box.style.display =
+            "none";
+
+        return;
+
+    }
+
+
+    box.style.display =
+        "block";
+
+}
+
+
+/* ========================================
+   RE-OCR INDIVIDUAL
+======================================== */
+
+async function reOCRItem(item){
+
+    const photo =
+        ocrPhotos.find(
+            p =>
+                p.id ===
+                item.sourcePhotoId
+        );
+
+
+    if(!photo){
+
+        alert(
+            "Original photo එක page එකේ නැහැ. " +
+            "Photo එක නැවත OCR Photos වලට add කරන්න."
+        );
+
+        return;
+
+    }
+
+
+    if(ocrBusy){
+
+        return;
+
+    }
+
+
+    const yes =
+        confirm(
+            "මේ MCQ එකේ OCR text නැවත ලබාගෙන existing text replace කරන්නද?"
+        );
+
+
+    if(!yes){
+
+        return;
+
+    }
+
+
+    try{
+
+        ocrBusy = true;
+
+
+        await runOCR(
+            photo
+        );
+
+
+        const parsed =
+            parseOCRText(
+                photo.text,
+                photo
+            );
+
+
+        if(parsed.length > 0){
+
+            const first =
+                parsed[0];
+
+
+            item.question =
+                first.question;
+
+
+            item.options =
+                first.options;
+
+
+            item.answer =
+                first.answer;
+
+
+            item.answerDetected =
+                first.answerDetected;
+
+
+            item.confidence =
+                first.confidence;
+
+
+            item.suspicious =
+                first.suspicious;
+
+
+            item.validated =
+                false;
+
+        }
+
+
+        detectDuplicates();
+
+        renderReview();
+
+        saveDraft();
+
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        alert(
+            "❌ Re-OCR Error: " +
+            error.message
+        );
+
+    }
+
+    finally{
+
+        ocrBusy = false;
+
+    }
+
+}
+
+
+/* ========================================
+   MANUAL MCQ TO REVIEW
+======================================== */
+
+document
+.getElementById("addManualToReviewButton")
+.addEventListener(
+    "click",
+    function(){
+
+        reviewItems.push({
+
+            id:uid(),
+
+            subject:
+                document.getElementById(
+                    "subject"
+                ).value,
+
+            question:"",
+
+            options:[
+                "",
+                "",
+                "",
+                "",
+                ""
+            ],
+
+            answer:0,
+
+            answerDetected:true,
+
+            sourcePhotoId:"",
+
+            sourcePhotoName:"",
+
+            sourcePhotoUrl:"",
+
+            confidence:100,
+
+            suspicious:false,
+
+            duplicate:false,
+
+            manuallyAdded:true,
+
+            validated:false
+
+        });
+
+
+        activateTab(
+            "reviewTab"
+        );
+
+
+        renderReview();
+
+        saveDraft();
+
+
+        setTimeout(
+            function(){
+
+                const cards =
+                    document.querySelectorAll(
+                        ".review-item"
+                    );
+
+
+                const last =
+                    cards[
+                        cards.length - 1
+                    ];
+
+
+                if(last){
+
+                    last.scrollIntoView({
+                        behavior:"smooth",
+                        block:"start"
+                    });
+
+                }
+
+            },
+            100
+        );
+
+    }
+);
+
+
+/* ========================================
+   DRAFT
+======================================== */
+
+function getDraftData(){
+
+    return {
+
+        savedAt:
+            new Date().toISOString(),
+
+        subject:
+            document.getElementById(
+                "subject"
+            ).value,
+
+        items:
+            reviewItems.map(
+                function(item){
+
+                    return {
+
+                        id:item.id,
+
+                        subject:item.subject,
+
+                        question:item.question,
+
+                        options:item.options,
+
+                        answer:item.answer,
+
+                        answerDetected:
+                            item.answerDetected,
+
+                        sourcePhotoId:
+                            item.sourcePhotoId,
+
+                        sourcePhotoName:
+                            item.sourcePhotoName,
+
+                        confidence:
+                            item.confidence,
+
+                        suspicious:
+                            item.suspicious,
+
+                        duplicate:
+                            item.duplicate,
+
+                        manuallyAdded:
+                            item.manuallyAdded
+
+                    };
+
+                }
+            )
+
+    };
+
+}
+
+
+function saveDraft(){
+
+    try{
+
+        localStorage.setItem(
+            DRAFT_KEY,
+            JSON.stringify(
+                getDraftData()
+            )
+        );
+
+
+        const status =
+            document.getElementById(
+                "draftStatus"
+            );
+
+
+        if(status){
+
+            status.textContent =
+                "💾 Draft auto-saved: " +
+                new Date()
+                    .toLocaleTimeString();
+
+        }
+
+    }
+
+    catch(error){
+
+        console.warn(
+            "Draft save failed:",
+            error
+        );
+
+    }
+
+}
+
+
+function loadDraft(){
+
+    try{
+
+        const raw =
+            localStorage.getItem(
+                DRAFT_KEY
+            );
+
+
+        if(!raw){
+
+            return;
+
+        }
+
+
+        const data =
+            JSON.parse(raw);
+
+
+        if(
+            !data ||
+            !Array.isArray(
+                data.items
+            )
+        ){
+
+            return;
+
+        }
+
+
+        if(data.items.length === 0){
+
+            return;
+
+        }
+
+
+        const use =
+            confirm(
+                "💾 කලින් OCR Draft එකක් හමු වුණා.\n\n" +
+                data.items.length +
+                " MCQ load කරන්නද?"
+            );
+
+
+        if(!use){
+
+            return;
+
+        }
+
+
+        reviewItems =
+            data.items.map(
+                function(item){
+
+                    return {
+
+                        id:
+                            item.id ||
+                            uid(),
+
+                        subject:
+                            item.subject ||
+                            data.subject ||
+                            "Chemistry",
+
+                        question:
+                            item.question || "",
+
+                        options:
+                            Array.isArray(
+                                item.options
+                            )
+                            ? [
+                                item.options[0] || "",
+                                item.options[1] || "",
+                                item.options[2] || "",
+                                item.options[3] || "",
+                                item.options[4] || ""
+                              ]
+                            : [
+                                "","","","",""
+                              ],
+
+                        answer:
+                            Number(
+                                item.answer || 0
+                            ),
+
+                        answerDetected:
+                            !!item.answerDetected,
+
+                        sourcePhotoId:
+                            item.sourcePhotoId ||
+                            "",
+
+                        sourcePhotoName:
+                            item.sourcePhotoName ||
+                            "",
+
+                        sourcePhotoUrl:
+                            "",
+
+                        confidence:
+                            Number(
+                                item.confidence || 0
+                            ),
+
+                        suspicious:
+                            item.suspicious !== false,
+
+                        duplicate:false,
+
+                        manuallyAdded:
+                            !!item.manuallyAdded,
+
+                        validated:false
+
+                    };
+
+                }
+            );
+
+
+        detectDuplicates();
+
+        renderReview();
+
+
+        document.getElementById(
+            "draftStatus"
+        ).textContent =
+            "📂 Draft loaded. Original photos need to be added again for Re-OCR.";
+
+    }
+
+    catch(error){
+
+        console.error(
+            "Draft load error:",
+            error
+        );
+
+    }
+
+}
+
+
+document
+.getElementById("loadDraftButton")
+.addEventListener(
+    "click",
+    loadDraft
+);
+
+
+document
+.getElementById("saveDraftButton")
+.addEventListener(
+    "click",
+    function(){
+
+        saveDraft();
+
+        alert(
+            "✅ Draft save කළා."
+        );
+
+    }
+);
+
+
+/* ========================================
+   VALIDATE BUTTON
+======================================== */
+
+document
+.getElementById("validateAllButton")
+.addEventListener(
+    "click",
+    validateAll
+);
+
+
+/* ========================================
+   SAVE ALL
+======================================== */
+
+document
+.getElementById("saveAllButton")
+.addEventListener(
+    "click",
+    saveAllReviewItems
+);
+
+
+async function saveAllReviewItems(){
+
+    const message =
+        document.getElementById(
+            "reviewMessage"
+        );
+
+
+    if(
+        !currentUser ||
+        currentUser.uid !== ADMIN_UID ||
+        !pinUnlocked
+    ){
+
+        message.textContent =
+            "🚫 Admin access required.";
+
+        message.style.color =
+            "red";
+
+        return;
+
+    }
+
+
+    if(reviewItems.length === 0){
+
+        message.textContent =
+            "⚠️ Save කරන්න MCQ නැහැ.";
+
+        message.style.color =
+            "red";
+
+        return;
+
+    }
+
+
+    validateAll();
+
+
+    const validItems =
+        reviewItems.filter(
+            item =>
+                item.valid &&
+                !item.duplicate
+        );
+
+
+    if(validItems.length === 0){
+
+        message.innerHTML =
+            "❌ Save කිරීමට valid MCQ නැහැ.";
+
+        message.style.color =
+            "red";
+
+        return;
+
+    }
+
+
+    /*
+      Existing daily limit remains:
+      Chemistry 25
+      Physics 25
+    */
+
+    const targetDate =
+        getAdminTargetDate();
+
+
+    const existing =
+        await getQuestions();
+
+
+    const chemistryExisting =
+        existing.filter(
+            item =>
+                item.subject ===
+                "Chemistry"
+        ).length;
+
+
+    const physicsExisting =
+        existing.filter(
+            item =>
+                item.subject ===
+                "Physics"
+        ).length;
+
+
+    const chemistryNew =
+        validItems.filter(
+            item =>
+                item.subject ===
+                "Chemistry"
+        );
+
+
+    const physicsNew =
+        validItems.filter(
+            item =>
+                item.subject ===
+                "Physics"
+        );
+
+
+    if(
+        chemistryExisting +
+        chemistryNew.length >
+        25
+    ){
+
+        message.innerHTML =
+            "⚠️ Chemistry limit exceed වෙනවා." +
+            "<br>" +
+            "දැනට: " +
+            chemistryExisting +
+            "/25" +
+            "<br>" +
+            "Save කරන්න පුළුවන්: " +
+            Math.max(
+                0,
+                25 - chemistryExisting
+            );
+
+        message.style.color =
+            "#b45309";
+
+        return;
+
+    }
+
+
+    if(
+        physicsExisting +
+        physicsNew.length >
+        25
+    ){
+
+        message.innerHTML =
+            "⚠️ Physics limit exceed වෙනවා." +
+            "<br>" +
+            "දැනට: " +
+            physicsExisting +
+            "/25" +
+            "<br>" +
+            "Save කරන්න පුළුවන්: " +
+            Math.max(
+                0,
+                25 - physicsExisting
+            );
+
+        message.style.color =
+            "#b45309";
+
+        return;
+
+    }
+
+
+    const duplicateCount =
+        validItems.length;
+
+
+    const yes =
+        confirm(
+            "🚀 Valid MCQ " +
+            duplicateCount +
+            "ක් " +
+            targetDate +
+            " දවසට Firestore save කරන්නද?\n\n" +
+            "Chemistry: " +
+            chemistryNew.length +
+            "\n" +
+            "Physics: " +
+            physicsNew.length
+        );
+
+
+    if(!yes){
+
+        return;
+
+    }
+
+
+    const saveButton =
+        document.getElementById(
+            "saveAllButton"
+        );
+
+
+    saveButton.disabled =
+        true;
+
+
+    try{
+
+        let saved = 0;
+
+
+        for(
+            let i=0;
+            i<validItems.length;
+            i++
+        ){
+
+            const item =
+                validItems[i];
+
+
+            message.innerHTML =
+                "⏳ Saving " +
+                (i+1) +
+                " / " +
+                validItems.length +
+                "...";
+
+
+            /*
+              OCR source photo is NOT
+              automatically uploaded to Cloudinary.
+              Existing MCQ photo system is kept.
+            */
+
+            const mcqData = {
+
+                subject:
+                    item.subject,
+
+                question:
+                    item.question.trim(),
+
+                options:
+                    item.options.map(
+                        option =>
+                            String(
+                                option || ""
+                            ).trim()
+                    ),
+
+                date:
+                    targetDate,
+
+                createdAt:
+                    new Date(),
+
+                createdBy:
+                    currentUser.uid,
+
+                questionImage:"",
+
+                questionImagePublicId:"",
+
+                optionImages:[
+                    "",
+                    "",
+                    "",
+                    "",
+                    ""
+                ],
+
+                optionImagePublicIds:[
+                    "",
+                    "",
+                    "",
+                    "",
+                    ""
+                ],
+
+                ocrImported:true,
+
+                ocrEdited:
+                    !!item.manuallyAdded,
+
+                ocrConfidence:
+                    Number(
+                        item.confidence || 0
+                    ),
+
+                sourcePhotoName:
+                    item.sourcePhotoName || ""
+
+            };
+
+
+            const mcqDoc =
+                await addDoc(
+                    collection(db,"mcqs"),
+                    mcqData
+                );
+
+
+            await setDoc(
+                doc(
+                    db,
+                    "mcqAnswers",
+                    mcqDoc.id
+                ),
+                {
+
+                    correctAnswer:
+                        Number(
+                            item.answer
+                        ),
+
+                    mcqId:
+                        mcqDoc.id,
+
+                    createdAt:
+                        new Date(),
+
+                    createdBy:
+                        currentUser.uid
+
+                }
+            );
+
+
+            saved++;
+
+        }
+
+
+        /*
+          Remove only saved items from review.
+        */
+
+        const savedIds =
+            new Set(
+                validItems.map(
+                    item =>
+                        item.id
+                )
+            );
+
+
+        reviewItems =
+            reviewItems.filter(
+                item =>
+                    !savedIds.has(
+                        item.id
+                    )
+            );
+
+
+        saveDraft();
+
+        renderReview();
+
+        await showQuestions();
+
+
+        message.innerHTML =
+            "✅ <b>" +
+            saved +
+            "</b> MCQ successfully saved!" +
+            "<br>" +
+            "📅 " +
+            targetDate;
+
+
+        message.style.color =
+            "green";
+
+    }
+
+    catch(error){
+
+        console.error(
+            "Batch save error:",
+            error
+        );
+
+
+        message.innerHTML =
+            "❌ Batch Save Error: " +
+            escapeHTML(
+                error.message
+            );
+
+        message.style.color =
+            "red";
+
+    }
+
+    finally{
+
+        saveButton.disabled =
+            false;
+
+    }
+
+}
+
+
+/* ========================================
+   ACTIVATE TAB
+======================================== */
+
+function activateTab(tabId){
+
+    document
+    .querySelectorAll(".tab-btn")
+    .forEach(
+        function(button){
+
+            button.classList.toggle(
+                "active",
+                button.dataset.tab ===
+                tabId
+            );
+
+        }
+    );
+
+
+    document
+    .querySelectorAll(".tab-content")
+    .forEach(
+        function(content){
+
+            content.classList.toggle(
+                "active",
+                content.id ===
+                tabId
+            );
+
+        }
+    );
+
+
+    if(tabId === "reviewTab"){
+
+        renderReview();
+
+    }
+
+}
+
+
+/* ========================================
+   SHOW QUESTIONS
+======================================== */
+
+async function showQuestions(){
+
+    const list =
+        document.getElementById(
+            "questionList"
+        );
+
+
+    list.innerHTML =
+        "⏳ Loading MCQs...";
+
+
+    try{
+
+        const questions =
+            await getQuestions();
+
+
+        list.innerHTML = "";
+
+
+        if(questions.length === 0){
+
+            list.innerHTML =
+                `
+                <div class="empty-box">
+
+                    📭 මෙම Target Day එකට
+                    තවම MCQ add කරලා නැහැ.
+
+                    <br><br>
+
+                    ➕ Manual හෝ Photo OCR
+                    භාවිතා කරලා MCQ add කරන්න.
+
+                </div>
+                `;
+
+
+            updateStatus(
+                questions
+            );
+
+            return;
+
+        }
+
+
+        const chemistry =
+            questions.filter(
+                item =>
+                    item.subject ===
+                    "Chemistry"
+            );
+
+
+        const physics =
+            questions.filter(
+                item =>
+                    item.subject ===
+                    "Physics"
+            );
+
+
+        if(chemistry.length > 0){
+
+            const title =
+                document.createElement(
+                    "h3"
+                );
+
+
+            title.textContent =
+                "🧪 Chemistry MCQs (" +
+                chemistry.length +
+                "/25)";
+
+
+            list.appendChild(title);
+
+
+            for(
+                let index=0;
+                index<chemistry.length;
+                index++
+            ){
+
+                await addQuestionToList(
+                    chemistry[index],
+                    index+1,
+                    list
+                );
+
+            }
+
+        }
+
+
+        if(physics.length > 0){
+
+            const title =
+                document.createElement(
+                    "h3"
+                );
+
+
+            title.textContent =
+                "⚡ Physics MCQs (" +
+                physics.length +
+                "/25)";
+
+
+            title.style.marginTop =
+                "25px";
+
+
+            list.appendChild(title);
+
+
+            for(
+                let index=0;
+                index<physics.length;
+                index++
+            ){
+
+                await addQuestionToList(
+                    physics[index],
+                    index+1,
+                    list
+                );
+
+            }
+
+        }
+
+
+        updateStatus(
+            questions
+        );
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        list.innerHTML =
+            "❌ Questions load error: " +
+            error.message;
+
+    }
+
+}
+
+
+/* ========================================
+   QUESTION CARD
+======================================== */
+
+async function addQuestionToList(
+    item,
+    number,
+    list
+){
+
+    const correctAnswer =
+        await getCorrectAnswer(
+            item.id
+        );
+
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+
+    div.className =
+        "question-item";
+
+
+    let answerText =
+        "⚠️ Answer data නැහැ.";
+
+
+    if(
+        correctAnswer !== null &&
+        correctAnswer !== undefined
+    ){
+
+        answerText =
+            "✅ නිවැරදි පිළිතුර: " +
+            (
+                Number(
+                    correctAnswer
+                ) + 1
+            );
+
+    }
+
+
+    const questionImage =
+        item.questionImage || "";
+
+
+    const optionImages =
+        Array.isArray(
+            item.optionImages
+        )
+        ? item.optionImages
+        : [];
+
+
+    let optionsHTML = "";
+
+
+    for(let i=0;i<5;i++){
+
+        const text =
+            escapeHTML(
+                item.options?.[i] || ""
+            );
+
+
+        const image =
+            optionImages[i] || "";
+
+
+        optionsHTML +=
+            "<div>" +
+            "<b>" +
+            (i+1) +
+            ".</b> " +
+            text;
+
+
+        if(image){
+
+            optionsHTML +=
+                "<img " +
+                "class='option-preview-small' " +
+                "src='" +
+                escapeAttribute(
+                    image
+                ) +
+                "' " +
+                "alt='Answer image'>";
+
+        }
+
+
+        optionsHTML +=
+            "</div>";
+
+    }
+
+
+    div.innerHTML = `
+
+        <b>
+
+            ${number}.
+            ${escapeHTML(
+                item.question
+            )}
+
+        </b>
+
+
+        ${
+            questionImage
+            ? `
+                <img
+                    class="saved-image"
+                    src="${escapeAttribute(questionImage)}"
+                    alt="Question image">
+              `
+            : ""
+        }
+
+
+        <p>
+
+            🧪/⚡ Subject:
+            ${escapeHTML(
+                item.subject
+            )}
+
+        </p>
+
+
+        <div>
+            ${optionsHTML}
+        </div>
+
+
+        <p class="correct">
+
+            ${answerText}
+
+        </p>
+
+
+        <button
+            class="delete-btn">
+
+            🗑️ Delete
+
+        </button>
+
+    `;
+
+
+    div
+    .querySelector(
+        ".delete-btn"
+    )
+    .addEventListener(
+        "click",
+        function(){
+
+            deleteQuestion(
+                item.id
+            );
+
+        }
+    );
+
+
+    list.appendChild(
+        div
+    );
+
+}
+
+
+/* ========================================
+   STATUS
+======================================== */
+
+function updateStatus(
+    questions
+){
+
+    const targetDate =
+        getAdminTargetDate();
+
+
+    const chemistry =
+        questions.filter(
+            item =>
+                item.subject ===
+                "Chemistry"
+        ).length;
+
+
+    const physics =
+        questions.filter(
+            item =>
+                item.subject ===
+                "Physics"
+        ).length;
+
+
+    const total =
+        chemistry + physics;
+
+
+    let statusText =
+
+        "📅 Target Day: <b>" +
+        targetDate +
+        "</b>" +
+
+        "<br><br>" +
+
+        "🧪 Chemistry: " +
+        chemistry +
+        " / 25" +
+
+        "<br>" +
+
+        "⚡ Physics: " +
+        physics +
+        " / 25" +
+
+        "<br><br>" +
+
+        "📚 Total: " +
+        total +
+        " / 50";
+
+
+    if(
+        chemistry < 25 ||
+        physics < 25
+    ){
+
+        statusText +=
+
+            "<br><br>" +
+
+            "✏️ තව MCQ add කරන්න පුළුවන්.";
+
+    }
+
+    else{
+
+        statusText +=
+
+            "<br><br>" +
+
+            "✅ Chemistry සහ Physics " +
+            "MCQ 25 බැගින් සම්පූර්ණයි.";
+
+    }
+
+
+    document.getElementById(
+        "status"
+    ).innerHTML =
+        statusText;
+
+}
+
+
+/* ========================================
+   DELETE FIRESTORE QUESTION
+======================================== */
+
+async function deleteQuestion(id){
+
+    if(
+        !currentUser ||
+        currentUser.uid !== ADMIN_UID ||
+        !pinUnlocked
+    ){
+
+        alert(
+            "🚫 Admin access required."
+        );
+
+        return;
+
+    }
+
+
+    const yes =
+        confirm(
+            "මෙම MCQ එක Delete කරන්නද?"
+        );
+
+
+    if(!yes){
+
+        return;
+
+    }
+
+
+    try{
+
+        await deleteDoc(
+            doc(
+                db,
+                "mcqs",
+                id
+            )
+        );
+
+
+        await deleteDoc(
+            doc(
+                db,
+                "mcqAnswers",
+                id
+            )
+        );
+
+
+        alert(
+            "✅ MCQ එක සහ Answer data Delete කළා."
+        );
+
+
+        await showQuestions();
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+
+        alert(
+            "❌ Delete Error: " +
+            error.message
+        );
+
+    }
+
+}
+
+
+/* ========================================
+   LOGOUT
+======================================== */
+
+document
+.getElementById("logoutButton")
+.addEventListener(
+    "click",
+    async function(){
+
+        pinUnlocked = false;
+
+        await signOut(
+            auth
+        );
+
+    }
+);
+
+
+/* ========================================
+   MODAL
+======================================== */
+
+document
+.getElementById("modalClose")
+.addEventListener(
+    "click",
+    function(){
+
+        document.getElementById(
+            "sourceModal"
+        ).style.display =
+            "none";
+
+    }
+);
+
+
+/* ========================================
+   CLOCK
+======================================== */
+
+setInterval(
+    function(){
+
+        if(pinUnlocked){
+
+            updateTargetDate();
+
+            showQuestions();
+
+        }
+
+    },
+    60000
+);
+
+
+/* ========================================
+   INITIAL
+======================================== */
+
+renderPhotoQueue();
+
+renderReview();
+
+</script>
+
+</body>
+
+</html>
