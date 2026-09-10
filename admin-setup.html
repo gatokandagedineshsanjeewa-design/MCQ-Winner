@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MCQ Winner - Admin Setup</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f4f7fb;
+    color:#172033;
+}
+
+.container{
+    max-width:600px;
+    margin:30px auto;
+    padding:20px;
+}
+
+.card{
+    background:#fff;
+    border-radius:18px;
+    padding:25px;
+    box-shadow:0 8px 30px rgba(0,0,0,.10);
+    margin-bottom:20px;
+}
+
+h1{
+    text-align:center;
+    margin-top:0;
+}
+
+h2{
+    font-size:20px;
+}
+
+.warning{
+    background:#fff3cd;
+    color:#664d03;
+    padding:15px;
+    border-radius:12px;
+    margin-bottom:20px;
+    line-height:1.5;
+}
+
+.success{
+    background:#d1e7dd;
+    color:#0f5132;
+    padding:15px;
+    border-radius:12px;
+    margin-top:15px;
+    line-height:1.5;
+}
+
+.error{
+    background:#f8d7da;
+    color:#842029;
+    padding:15px;
+    border-radius:12px;
+    margin-top:15px;
+    line-height:1.5;
+}
+
+button{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:12px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    margin-top:10px;
+}
+
+.googleBtn{
+    background:#4285f4;
+    color:white;
+}
+
+.registerBtn{
+    background:#198754;
+    color:white;
+}
+
+.copyBtn{
+    background:#6f42c1;
+    color:white;
+}
+
+.logoutBtn{
+    background:#dc3545;
+    color:white;
+}
+
+input{
+    width:100%;
+    padding:13px;
+    margin-top:7px;
+    margin-bottom:14px;
+    border:1px solid #ccd3dd;
+    border-radius:10px;
+    font-size:15px;
+}
+
+label{
+    font-weight:bold;
+}
+
+.hidden{
+    display:none;
+}
+
+.uidBox,
+.hashBox{
+    background:#f1f3f5;
+    padding:14px;
+    border-radius:10px;
+    word-break:break-all;
+    font-family:monospace;
+    font-size:13px;
+    margin-top:8px;
+}
+
+.hashBox{
+    background:#eef7ff;
+    border:1px solid #b6d7ff;
+}
+
+.small{
+    font-size:13px;
+    color:#667085;
+    line-height:1.5;
+}
+
+.step{
+    background:#f8f9fa;
+    border-left:4px solid #198754;
+    padding:12px;
+    margin-top:10px;
+    border-radius:8px;
+    line-height:1.5;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="card">
+
+<h1>🔐 MCQ Winner Admin Setup</h1>
+
+<div class="warning">
+<b>Important:</b><br>
+මෙය Admin device එක setup කිරීම සඳහා පමණි.<br><br>
+
+පළමුව ඔබගේ <b>existing Admin Google account</b> එකෙන් login වන්න.
+</div>
+
+<button class="googleBtn" id="googleLoginBtn">
+🔵 Existing Admin Google Login
+</button>
+
+<div id="accountInfo" class="hidden">
+
+<h2>👑 Admin Account</h2>
+
+<p><b>Current UID:</b></p>
+
+<div class="uidBox" id="currentUid"></div>
+
+<p><b>Approved Admin UID:</b></p>
+
+<div class="uidBox">
+pz6z6ZU9bChyd6qXmrHNNCB6mFv2
+</div>
+
+</div>
+
+</div>
+
+
+<!-- Trusted Device -->
+
+<div class="card hidden" id="trustedDeviceCard">
+
+<h2>📱 Trusted Admin Device</h2>
+
+<p>
+මෙම browser/device එක Admin Trusted Device එකක් කිරීමට
+පහත Device Hash එක Firebase Console එකේ
+<code>adminDevices</code> collection එකට add කරන්න.
+</p>
+
+<div class="step">
+<b>Step 1</b><br>
+පහත Device Hash එක copy කරන්න.
+</div>
+
+<div class="hashBox" id="deviceHash">
+Generating...
+</div>
+
+<button class="copyBtn" id="copyHashBtn">
+📋 Copy Device Hash
+</button>
+
+<div class="step">
+<b>Step 2</b><br>
+Firebase Console → Firestore Database →
+<b>adminDevices</b> collection එකට යන්න.
+</div>
+
+<div class="step">
+<b>Step 3</b><br>
+Document ID එක ලෙස <b>Device Hash</b> එකම දාන්න.
+</div>
+
+<div class="step">
+<b>Step 4</b><br>
+Fields:
+<br><br>
+
+<code>uid</code> → Admin UID<br>
+<code>trusted</code> → true
+</div>
+
+<div class="success">
+Firebase Console එකෙන් document එක create කළාට පස්සේ,
+මෙම device එක Trusted Admin Device එකක් ලෙස හඳුනාගන්න පුළුවන්.
+</div>
+
+</div>
+
+
+<!-- Email Password Setup -->
+
+<div class="card hidden" id="passwordCard">
+
+<h2>🔑 Admin Email + Password</h2>
+
+<p class="small">
+Google Admin account එකට Email + Password login එක link කිරීමට
+පහත details භාවිතා කරන්න.
+</p>
+
+<label>Admin Email</label>
+<input
+    type="email"
+    id="adminEmail"
+    placeholder="Admin email"
+>
+
+<label>New Admin Password</label>
+<input
+    type="password"
+    id="adminPassword"
+    placeholder="New password"
+>
+
+<label>Confirm Password</label>
+<input
+    type="password"
+    id="confirmPassword"
+    placeholder="Confirm password"
+>
+
+<button class="registerBtn" id="linkPasswordBtn">
+🔐 Link Admin Email + Password
+</button>
+
+<div id="passwordMessage"></div>
+
+</div>
+
+
+<div class="card hidden" id="logoutCard">
+
+<button class="logoutBtn" id="logoutBtn">
+🚪 Logout
+</button>
+
+</div>
+
+</div>
+
+
+<script type="module">
+
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+import {
+    getAuth,
+    GoogleAuthProvider,
+    signInWithPopup,
+    signOut,
+    EmailAuthProvider,
+    linkWithCredential,
+    onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
+const firebaseConfig = {
+
+    apiKey:
+    "AIzaSyAMkaGYmBuoFama5MW5AhoX9q6cly_-nbg",
+
+    authDomain:
+    "mcq-winner.firebaseapp.com",
+
+    projectId:
+    "mcq-winner",
+
+    storageBucket:
+    "mcq-winner.firebasestorage.app",
+
+    messagingSenderId:
+    "1022060912943",
+
+    appId:
+    "1:1022060912943:web:f6e58414867e32f685c1da",
+
+    measurementId:
+    "G-MBH3NZ728H"
+};
+
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const ADMIN_UID =
+"Npiu0xJQQchrVgHnXRuR8Rr5FOA2";
+
+
+/* -------------------------------------------------
+   DEVICE ID
+------------------------------------------------- */
+
+const DEVICE_KEY =
+"mcqWinnerTrustedAdminDeviceId";
+
+
+function generateDeviceId(){
+
+    if(
+        window.crypto &&
+        typeof crypto.randomUUID === "function"
+    ){
+        return crypto.randomUUID();
+    }
+
+    return (
+        Date.now().toString(36) +
+        Math.random().toString(36).substring(2) +
+        Math.random().toString(36).substring(2)
+    );
+}
+
+
+function getDeviceId(){
+
+    let id =
+        localStorage.getItem(DEVICE_KEY);
+
+    if(!id){
+
+        id = generateDeviceId();
+
+        localStorage.setItem(
+            DEVICE_KEY,
+            id
+        );
+    }
+
+    return id;
+}
+
+
+/* -------------------------------------------------
+   SHA-256
+------------------------------------------------- */
+
+async function sha256(text){
+
+    const encoder =
+        new TextEncoder();
+
+    const data =
+        encoder.encode(text);
+
+    const hashBuffer =
+        await crypto.subtle.digest(
+            "SHA-256",
+            data
+        );
+
+    const hashArray =
+        Array.from(
+            new Uint8Array(hashBuffer)
+        );
+
+    return hashArray
+        .map(
+            b => b.toString(16).padStart(2,"0")
+        )
+        .join("");
+}
+
+
+/* -------------------------------------------------
+   DEVICE HASH
+------------------------------------------------- */
+
+async function getDeviceHash(){
+
+    const deviceId =
+        getDeviceId();
+
+    return await sha256(
+        "MCQ_WINNER_DEVICE_V1:" +
+        deviceId
+    );
+}
+
+
+/* -------------------------------------------------
+   UI ELEMENTS
+------------------------------------------------- */
+
+const googleLoginBtn =
+    document.getElementById(
+        "googleLoginBtn"
+    );
+
+const accountInfo =
+    document.getElementById(
+        "accountInfo"
+    );
+
+const trustedDeviceCard =
+    document.getElementById(
+        "trustedDeviceCard"
+    );
+
+const passwordCard =
+    document.getElementById(
+        "passwordCard"
+    );
+
+const logoutCard =
+    document.getElementById(
+        "logoutCard"
+    );
+
+const currentUid =
+    document.getElementById(
+        "currentUid"
+    );
+
+const deviceHashElement =
+    document.getElementById(
+        "deviceHash"
+    );
+
+const copyHashBtn =
+    document.getElementById(
+        "copyHashBtn"
+    );
+
+const linkPasswordBtn =
+    document.getElementById(
+        "linkPasswordBtn"
+    );
+
+const logoutBtn =
+    document.getElementById(
+        "logoutBtn"
+    );
+
+const passwordMessage =
+    document.getElementById(
+        "passwordMessage"
+    );
+
+
+/* -------------------------------------------------
+   GOOGLE LOGIN
+------------------------------------------------- */
+
+googleLoginBtn.addEventListener(
+    "click",
+    async () => {
+
+        try{
+
+            googleLoginBtn.disabled =
+                true;
+
+            googleLoginBtn.textContent =
+                "Signing in...";
+
+            const provider =
+                new GoogleAuthProvider();
+
+            const result =
+                await signInWithPopup(
+                    auth,
+                    provider
+                );
+
+            const user =
+                result.user;
+
+
+            /* SECURITY CHECK */
+
+            if(user.uid !== ADMIN_UID){
+
+                await signOut(auth);
+
+                alert(
+                    "❌ This Google account is not the approved Admin account."
+                );
+
+                return;
+            }
+
+
+            /* SUCCESS */
+
+            currentUid.textContent =
+                user.uid;
+
+            accountInfo.classList.remove(
+                "hidden"
+            );
+
+            trustedDeviceCard.classList.remove(
+                "hidden"
+            );
+
+            passwordCard.classList.remove(
+                "hidden"
+            );
+
+            logoutCard.classList.remove(
+                "hidden"
+            );
+
+
+            /* Generate hash */
+
+            deviceHashElement.textContent =
+                "Generating...";
+
+            const hash =
+                await getDeviceHash();
+
+            deviceHashElement.textContent =
+                hash;
+
+        }
+        catch(error){
+
+            console.error(error);
+
+            alert(
+                "❌ Login failed:\n" +
+                error.message
+            );
+
+        }
+        finally{
+
+            googleLoginBtn.disabled =
+                false;
+
+            googleLoginBtn.textContent =
+                "🔵 Existing Admin Google Login";
+        }
+
+    }
+);
+
+
+/* -------------------------------------------------
+   COPY HASH
+------------------------------------------------- */
+
+copyHashBtn.addEventListener(
+    "click",
+    async () => {
+
+        const hash =
+            deviceHashElement.textContent;
+
+        if(
+            !hash ||
+            hash === "Generating..."
+        ){
+            return;
+        }
+
+        try{
+
+            await navigator.clipboard.writeText(
+                hash
+            );
+
+            copyHashBtn.textContent =
+                "✅ Copied!";
+
+            setTimeout(
+                () => {
+
+                    copyHashBtn.textContent =
+                        "📋 Copy Device Hash";
+
+                },
+                2000
+            );
+
+        }
+        catch(error){
+
+            alert(
+                "Copy failed. Hash එක manually copy කරන්න."
+            );
+
+        }
+
+    }
+);
+
+
+/* -------------------------------------------------
+   LINK EMAIL + PASSWORD
+------------------------------------------------- */
+
+linkPasswordBtn.addEventListener(
+    "click",
+    async () => {
+
+        passwordMessage.innerHTML =
+            "";
+
+        const user =
+            auth.currentUser;
+
+        if(!user){
+
+            passwordMessage.innerHTML =
+                `<div class="error">
+                ❌ Please login with the approved Admin Google account first.
+                </div>`;
+
+            return;
+        }
+
+
+        if(user.uid !== ADMIN_UID){
+
+            passwordMessage.innerHTML =
+                `<div class="error">
+                ❌ Unauthorized Admin account.
+                </div>`;
+
+            return;
+        }
+
+
+        const email =
+            document.getElementById(
+                "adminEmail"
+            ).value.trim();
+
+        const password =
+            document.getElementById(
+                "adminPassword"
+            ).value;
+
+        const confirmPassword =
+            document.getElementById(
+                "confirmPassword"
+            ).value;
+
+
+        if(!email){
+
+            passwordMessage.innerHTML =
+                `<div class="error">
+                ❌ Admin email එක ඇතුළත් කරන්න.
+                </div>`;
+
+            return;
+        }
+
+
+        if(password.length < 6){
+
+            passwordMessage.innerHTML =
+                `<div class="error">
+                ❌ Password එක අවම වශයෙන් characters 6ක් විය යුතුයි.
+                </div>`;
+
+            return;
+        }
+
+
+        if(password !== confirmPassword){
+
+            passwordMessage.innerHTML =
+                `<div class="error">
+                ❌ Passwords දෙක match වෙන්නේ නැහැ.
+                </div>`;
+
+            return;
+        }
+
+
+        try{
+
+            linkPasswordBtn.disabled =
+                true;
+
+            linkPasswordBtn.textContent =
+                "Linking...";
+
+
+            const credential =
+                EmailAuthProvider.credential(
+                    email,
+                    password
+                );
+
+
+            await linkWithCredential(
+                user,
+                credential
+            );
+
+
+            passwordMessage.innerHTML =
+                `<div class="success">
+                ✅ Admin Email + Password successfully linked.
+                <br><br>
+                දැන් Admin Login එක Email + Password මගින් භාවිතා කළ හැක.
+                </div>`;
+
+        }
+        catch(error){
+
+            console.error(error);
+
+            let message =
+                error.message;
+
+            if(
+                error.code ===
+                "auth/credential-already-in-use"
+            ){
+                message =
+                "❌ මේ email/password credential එක වෙනත් account එකකට link කරලා තියෙනවා.";
+            }
+
+            if(
+                error.code ===
+                "auth/email-already-in-use"
+            ){
+                message =
+                "❌ මේ email එක දැනටමත් Firebase account එකකට සම්බන්ධයි.";
+            }
+
+            passwordMessage.innerHTML =
+                `<div class="error">
+                ${message}
+                </div>`;
+
+        }
+        finally{
+
+            linkPasswordBtn.disabled =
+                false;
+
+            linkPasswordBtn.textContent =
+                "🔐 Link Admin Email + Password";
+
+        }
+
+    }
+);
+
+
+/* -------------------------------------------------
+   LOGOUT
+------------------------------------------------- */
+
+logoutBtn.addEventListener(
+    "click",
+    async () => {
+
+        try{
+
+            await signOut(auth);
+
+            location.reload();
+
+        }
+        catch(error){
+
+            console.error(error);
+
+        }
+
+    }
+);
+
+
+/* -------------------------------------------------
+   AUTH STATE
+------------------------------------------------- */
+
+onAuthStateChanged(
+    auth,
+    async (user) => {
+
+        if(!user){
+
+            accountInfo.classList.add(
+                "hidden"
+            );
+
+            trustedDeviceCard.classList.add(
+                "hidden"
+            );
+
+            passwordCard.classList.add(
+                "hidden"
+            );
+
+            logoutCard.classList.add(
+                "hidden"
+            );
+
+            return;
+        }
+
+
+        if(user.uid !== ADMIN_UID){
+
+            await signOut(auth);
+
+            return;
+        }
+
+
+        currentUid.textContent =
+            user.uid;
+
+        accountInfo.classList.remove(
+            "hidden"
+        );
+
+        trustedDeviceCard.classList.remove(
+            "hidden"
+        );
+
+        passwordCard.classList.remove(
+            "hidden"
+        );
+
+        logoutCard.classList.remove(
+            "hidden"
+        );
+
+
+        const hash =
+            await getDeviceHash();
+
+        deviceHashElement.textContent =
+            hash;
+
+    }
+);
+
+</script>
+
+</body>
+</html>
