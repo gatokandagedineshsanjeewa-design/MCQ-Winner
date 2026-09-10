@@ -1,0 +1,2142 @@
+<!DOCTYPE html>
+<html lang="si">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>MCQ Winner - Login</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+
+    margin: 0;
+    padding: 0;
+
+    width: 100%;
+    min-height: 100%;
+
+    font-family: Arial, sans-serif;
+
+    background: #f2f6ff;
+}
+
+.box {
+
+    width: 100%;
+
+    min-height: 100vh;
+    min-height: 100dvh;
+
+    background: white;
+
+    padding:
+        25px
+        20px
+        30px
+        20px;
+}
+
+.loginContent {
+
+    width: 100%;
+
+    max-width: 500px;
+
+    margin: 0 auto;
+}
+
+.logo {
+
+    width: 90px;
+    height: 90px;
+
+    object-fit: contain;
+
+    display: block;
+
+    margin:
+        10px auto
+        12px;
+
+    cursor: pointer;
+
+    -webkit-tap-highlight-color:
+        transparent;
+
+    user-select: none;
+}
+
+.logo:active {
+
+    transform:
+        scale(0.95);
+}
+
+h1 {
+
+    color: #2563eb;
+
+    margin: 0;
+
+    text-align: center;
+
+    font-size: 28px;
+}
+
+.subtitle {
+
+    color: #555;
+
+    text-align: center;
+
+    margin:
+        6px 0 22px;
+}
+
+.sectionTitle {
+
+    font-size: 20px;
+
+    font-weight: bold;
+
+    color: #1e3a8a;
+
+    text-align: center;
+
+    margin-bottom: 12px;
+}
+
+input,
+select {
+
+    width: 100%;
+
+    padding: 13px;
+
+    margin-top: 10px;
+
+    border:
+        1px solid #d1d5db;
+
+    border-radius: 10px;
+
+    font-size: 15px;
+
+    outline: none;
+
+    background: white;
+}
+
+input:focus,
+select:focus {
+
+    border-color:
+        #2563eb;
+}
+
+button {
+
+    width: 100%;
+
+    padding: 14px;
+
+    margin-top: 15px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #2563eb;
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+button:disabled {
+
+    opacity: 0.6;
+}
+
+.linkButton {
+
+    background:
+        transparent;
+
+    color: #2563eb;
+
+    font-size: 14px;
+
+    margin-top: 8px;
+}
+
+.hidden {
+
+    display:
+        none !important;
+}
+
+#message {
+
+    margin-top: 18px;
+
+    white-space: pre-wrap;
+
+    word-break: break-word;
+
+    line-height: 1.5;
+
+    text-align: center;
+}
+
+.success {
+
+    color: #15803d;
+}
+
+.error {
+
+    color: #dc2626;
+}
+
+.note {
+
+    color: #777;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+
+    text-align: center;
+
+    margin-top: 12px;
+}
+
+hr {
+
+    border: none;
+
+    border-top:
+        1px solid #e5e7eb;
+
+    margin:
+        22px 0;
+}
+
+
+/* ========================================
+   TRUSTED ADMIN
+======================================== */
+
+#trustedSetup {
+
+    display: none !important;
+}
+
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 480px) {
+
+    .box {
+
+        padding:
+            18px
+            15px
+            25px
+            15px;
+    }
+
+    .logo {
+
+        width: 85px;
+        height: 85px;
+
+        margin-top: 5px;
+    }
+
+    h1 {
+
+        font-size: 25px;
+    }
+
+}
+
+
+/* ========================================
+   SMALL HEIGHT
+======================================== */
+
+@media (max-height: 650px) {
+
+    .box {
+
+        padding-top: 10px;
+    }
+
+    .logo {
+
+        width: 70px;
+        height: 70px;
+
+        margin-bottom: 5px;
+    }
+
+    .subtitle {
+
+        margin-bottom: 12px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="box">
+
+<div class="loginContent">
+
+
+<!-- LOGO -->
+
+<img
+    class="logo"
+    id="loginLogo"
+    src="Logo.png"
+    alt="MCQ Winner Logo"
+>
+
+
+<h1>
+    MCQ Winner
+</h1>
+
+
+<p class="subtitle">
+    Student Login
+</p>
+
+
+<!-- ========================================
+     STUDENT LOGIN
+======================================== -->
+
+<div id="loginSection">
+
+    <div class="sectionTitle">
+        Student Login
+    </div>
+
+    <input
+        type="tel"
+        id="loginPhone"
+        placeholder="Phone Number"
+        autocomplete="off"
+    >
+
+    <input
+        type="password"
+        id="loginPassword"
+        placeholder="Password"
+        autocomplete="off"
+    >
+
+    <button id="loginButton">
+        Student Login
+    </button>
+
+    <button
+        id="showRegisterButton"
+        class="linkButton"
+    >
+        Create New Student Account
+    </button>
+
+</div>
+
+
+<!-- ========================================
+     REGISTER
+======================================== -->
+
+<div
+    id="registerSection"
+    class="hidden"
+>
+
+    <div class="sectionTitle">
+        Create Student Account
+    </div>
+
+    <input
+        type="text"
+        id="name"
+        placeholder="Name"
+        autocomplete="off"
+    >
+
+    <select id="stream">
+
+        <option value="">
+            Select A/L Stream
+        </option>
+
+        <option value="Maths">
+            Maths
+        </option>
+
+        <option value="Biology">
+            Biology
+        </option>
+
+    </select>
+
+    <input
+        type="text"
+        id="school"
+        placeholder="School"
+        autocomplete="off"
+    >
+
+    <input
+        type="text"
+        id="nearestCity"
+        placeholder="Nearest City"
+        autocomplete="off"
+    >
+
+    <select id="alYear">
+
+        <option value="">
+            Select A/L Year
+        </option>
+
+        <option value="2026">2026</option>
+        <option value="2027">2027</option>
+        <option value="2028">2028</option>
+        <option value="2029">2029</option>
+        <option value="2030">2030</option>
+
+    </select>
+
+    <input
+        type="tel"
+        id="registerPhone"
+        placeholder="Phone Number"
+        autocomplete="off"
+    >
+
+    <input
+        type="password"
+        id="password"
+        placeholder="Password"
+        autocomplete="new-password"
+    >
+
+    <input
+        type="password"
+        id="confirmPassword"
+        placeholder="Confirm Password"
+        autocomplete="new-password"
+    >
+
+    <button id="registerButton">
+        Create Account
+    </button>
+
+    <button
+        id="showLoginButton"
+        class="linkButton"
+    >
+        Already have an account? Login
+    </button>
+
+</div>
+
+
+<!-- ========================================
+     ADMIN LOGIN
+======================================== -->
+
+<div
+    id="adminLoginSection"
+    class="hidden"
+>
+
+    <hr>
+
+    <div class="sectionTitle">
+        👑 Admin Login
+    </div>
+
+    <input
+        type="email"
+        id="adminEmail"
+        placeholder="Admin Email"
+        autocomplete="username"
+    >
+
+    <input
+        type="password"
+        id="adminPassword"
+        placeholder="Admin Password"
+        autocomplete="current-password"
+    >
+
+    <button id="adminLoginButton">
+        👑 Admin Login
+    </button>
+
+    <p class="note">
+        Admin account සඳහා පමණි.
+    </p>
+
+</div>
+
+
+<!-- Hidden Trusted Setup -->
+
+<div
+    id="trustedSetup"
+    class="hidden"
+>
+
+    <div id="deviceHash"></div>
+
+    <button id="copyHashButton">
+        Copy
+    </button>
+
+    <div id="trustedStatus"></div>
+
+</div>
+
+
+<p id="message"></p>
+
+
+</div>
+
+</div>
+
+
+<script type="module">
+
+
+/* ========================================
+   FIREBASE
+======================================== */
+
+import {
+
+    initializeApp
+
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+
+import {
+
+    getAuth,
+
+    createUserWithEmailAndPassword,
+
+    signInWithEmailAndPassword,
+
+    setPersistence,
+
+    browserSessionPersistence,
+
+    signOut
+
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
+import {
+
+    getFirestore,
+
+    doc,
+
+    getDoc,
+
+    setDoc,
+
+    serverTimestamp,
+
+    Timestamp
+
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+/* ========================================
+   FIREBASE CONFIG
+======================================== */
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyAMkaGYmBuoFama5MW5AhoX9q6cly_-nbg",
+
+    authDomain:
+        "mcq-winner.firebaseapp.com",
+
+    projectId:
+        "mcq-winner",
+
+    storageBucket:
+        "mcq-winner.firebasestorage.app",
+
+    messagingSenderId:
+        "1022060912943",
+
+    appId:
+        "1:1022060912943:web:f6e58414867e32f685c1da",
+
+    measurementId:
+        "G-MBH3NZ728H"
+
+};
+
+
+/* ========================================
+   ADMIN UID
+======================================== */
+
+const ADMIN_UID =
+    "Npiu0xJQQchrVgHnXRuR8Rr5FOA2";
+
+
+/* ========================================
+   HOME
+======================================== */
+
+const HOME_URL =
+    "https://gatokandagedineshsanjeewa-design.github.io/MCQ-Winner/index.html";
+
+
+/* ========================================
+   INIT
+======================================== */
+
+const app =
+    initializeApp(firebaseConfig);
+
+const auth =
+    getAuth(app);
+
+const db =
+    getFirestore(app);
+
+
+/* ========================================
+   AUTH SESSION
+======================================== */
+
+await setPersistence(
+    auth,
+    browserSessionPersistence
+);
+
+
+/*
+ * Login page එකට එනකොට
+ * පැරණි Firebase Auth session එක
+ * clear කරනවා.
+ */
+
+try {
+
+    await signOut(auth);
+
+}
+catch (error) {
+
+    console.log(
+        "Initial sign out:",
+        error
+    );
+
+}
+
+
+/* ========================================
+   ELEMENTS
+======================================== */
+
+const loginSection =
+    document.getElementById(
+        "loginSection"
+    );
+
+const registerSection =
+    document.getElementById(
+        "registerSection"
+    );
+
+const loginPhone =
+    document.getElementById(
+        "loginPhone"
+    );
+
+const loginPassword =
+    document.getElementById(
+        "loginPassword"
+    );
+
+const loginButton =
+    document.getElementById(
+        "loginButton"
+    );
+
+const registerButton =
+    document.getElementById(
+        "registerButton"
+    );
+
+const showRegisterButton =
+    document.getElementById(
+        "showRegisterButton"
+    );
+
+const showLoginButton =
+    document.getElementById(
+        "showLoginButton"
+    );
+
+const message =
+    document.getElementById(
+        "message"
+    );
+
+const loginLogo =
+    document.getElementById(
+        "loginLogo"
+    );
+
+const adminLoginSection =
+    document.getElementById(
+        "adminLoginSection"
+    );
+
+const adminEmail =
+    document.getElementById(
+        "adminEmail"
+    );
+
+const adminPassword =
+    document.getElementById(
+        "adminPassword"
+    );
+
+const adminLoginButton =
+    document.getElementById(
+        "adminLoginButton"
+    );
+
+
+/* ========================================
+   TRUSTED DEVICE
+======================================== */
+
+const TRUSTED_DEVICE_KEY =
+    "mcqWinnerTrustedDeviceId";
+
+const TRUSTED_DEVICE_PREFIX =
+    "MCQ_WINNER_DEVICE_V1:";
+
+const ADMIN_DEVICE_COLLECTION =
+    "adminDevices";
+
+
+/* ========================================
+   DEVICE ID
+======================================== */
+
+function generateTrustedDeviceId() {
+
+    try {
+
+        if (
+            window.crypto &&
+            typeof window.crypto.randomUUID ===
+            "function"
+        ) {
+
+            return window.crypto.randomUUID();
+
+        }
+
+    }
+    catch (error) {
+
+        console.log(
+            "randomUUID unavailable"
+        );
+
+    }
+
+
+    return (
+        "device-" +
+        Date.now().toString(36) +
+        "-" +
+        Math.random()
+            .toString(36)
+            .substring(2)
+    );
+
+}
+
+
+function getTrustedDeviceId() {
+
+    try {
+
+        let id =
+            localStorage.getItem(
+                TRUSTED_DEVICE_KEY
+            );
+
+
+        if (!id) {
+
+            id =
+                generateTrustedDeviceId();
+
+
+            localStorage.setItem(
+                TRUSTED_DEVICE_KEY,
+                id
+            );
+
+        }
+
+
+        return id;
+
+    }
+    catch (error) {
+
+        console.error(
+            "Device ID error:",
+            error
+        );
+
+        return null;
+
+    }
+
+}
+
+
+const TRUSTED_DEVICE_ID =
+    getTrustedDeviceId();
+
+
+/* ========================================
+   SHA256
+======================================== */
+
+async function sha256(text) {
+
+    const encoder =
+        new TextEncoder();
+
+    const data =
+        encoder.encode(text);
+
+    if (
+        !window.crypto ||
+        !window.crypto.subtle
+    ) {
+
+        throw new Error(
+            "SHA-256 support නැහැ."
+        );
+
+    }
+
+
+    const hashBuffer =
+        await window.crypto.subtle.digest(
+            "SHA-256",
+            data
+        );
+
+
+    const hashArray =
+        Array.from(
+            new Uint8Array(
+                hashBuffer
+            )
+        );
+
+
+    return hashArray
+        .map(
+            byte =>
+                byte
+                    .toString(16)
+                    .padStart(2, "0")
+        )
+        .join("");
+
+}
+
+
+/* ========================================
+   DEVICE HASH
+======================================== */
+
+async function getTrustedDeviceHash() {
+
+    if (!TRUSTED_DEVICE_ID) {
+
+        return null;
+
+    }
+
+
+    return await sha256(
+        TRUSTED_DEVICE_PREFIX +
+        TRUSTED_DEVICE_ID
+    );
+
+}
+
+
+/* ========================================
+   TRUSTED DEVICE CHECK
+======================================== */
+
+async function isTrustedAdminDevice() {
+
+    try {
+
+        const hash =
+            await getTrustedDeviceHash();
+
+
+        if (!hash) {
+
+            return false;
+
+        }
+
+
+        const deviceRef =
+            doc(
+                db,
+                ADMIN_DEVICE_COLLECTION,
+                hash
+            );
+
+
+        const deviceSnap =
+            await getDoc(
+                deviceRef
+            );
+
+
+        if (
+            !deviceSnap.exists()
+        ) {
+
+            return false;
+
+        }
+
+
+        const data =
+            deviceSnap.data();
+
+
+        /*
+         * ALL THREE MUST MATCH
+         */
+
+        if (
+            data.uid !== ADMIN_UID
+        ) {
+
+            return false;
+
+        }
+
+
+        if (
+            data.trusted !== true
+        ) {
+
+            return false;
+
+        }
+
+
+        if (
+            data.active !== true
+        ) {
+
+            return false;
+
+        }
+
+
+        return true;
+
+    }
+    catch (error) {
+
+        console.error(
+            "Trusted device check:",
+            error
+        );
+
+        return false;
+
+    }
+
+}
+
+
+/* ========================================
+   SHOW ADMIN LOGIN
+======================================== */
+
+async function revealAdminLoginIfTrusted() {
+
+    /*
+     * IMPORTANT:
+     * First hide it.
+     */
+
+    adminLoginSection.classList.add(
+        "hidden"
+    );
+
+
+    try {
+
+        const trusted =
+            await isTrustedAdminDevice();
+
+
+        /*
+         * ONLY TRUSTED DEVICE
+         */
+
+        if (!trusted) {
+
+            return false;
+
+        }
+
+
+        adminLoginSection.classList.remove(
+            "hidden"
+        );
+
+
+        showMessage(
+            "👑 Trusted Admin Device හඳුනාගත්තා.",
+            "success"
+        );
+
+
+        return true;
+
+    }
+    catch (error) {
+
+        console.error(
+            error
+        );
+
+        return false;
+
+    }
+
+}
+
+
+/* ========================================
+   MESSAGE
+======================================== */
+
+function showMessage(
+    text,
+    type = ""
+) {
+
+    message.innerText =
+        text;
+
+    message.className =
+        type;
+
+}
+
+
+/* ========================================
+   PHONE
+======================================== */
+
+function normalizePhone(phone) {
+
+    let cleanPhone =
+        phone.replace(
+            /\D/g,
+            ""
+        );
+
+
+    if (
+        cleanPhone.startsWith("0")
+    ) {
+
+        cleanPhone =
+            "94" +
+            cleanPhone.substring(1);
+
+    }
+
+
+    return cleanPhone;
+
+}
+
+
+function makeLoginEmail(phone) {
+
+    return (
+        normalizePhone(phone) +
+        "@mcqwinner.local"
+    );
+
+}
+
+
+function isValidSriLankanPhone(phone) {
+
+    const cleanPhone =
+        phone.replace(
+            /\D/g,
+            ""
+        );
+
+
+    return (
+
+        (
+            cleanPhone.startsWith("07") &&
+            cleanPhone.length === 10
+        )
+
+        ||
+
+        (
+            cleanPhone.startsWith("947") &&
+            cleanPhone.length === 11
+        )
+
+    );
+
+}
+
+
+/* ========================================
+   SHOW REGISTER
+======================================== */
+
+showRegisterButton.addEventListener(
+    "click",
+    function() {
+
+        loginSection.classList.add(
+            "hidden"
+        );
+
+        registerSection.classList.remove(
+            "hidden"
+        );
+
+        showMessage("");
+
+    }
+);
+
+
+/* ========================================
+   SHOW LOGIN
+======================================== */
+
+showLoginButton.addEventListener(
+    "click",
+    function() {
+
+        registerSection.classList.add(
+            "hidden"
+        );
+
+        loginSection.classList.remove(
+            "hidden"
+        );
+
+        showMessage("");
+
+    }
+);
+
+
+/* ========================================
+   REGISTER
+======================================== */
+
+registerButton.addEventListener(
+    "click",
+    async function() {
+
+        registerButton.disabled =
+            true;
+
+        showMessage(
+            "Account එක සාදමින්..."
+        );
+
+
+        try {
+
+            const name =
+                document
+                    .getElementById("name")
+                    .value
+                    .trim();
+
+            const stream =
+                document
+                    .getElementById("stream")
+                    .value;
+
+            const school =
+                document
+                    .getElementById("school")
+                    .value
+                    .trim();
+
+            const nearestCity =
+                document
+                    .getElementById("nearestCity")
+                    .value
+                    .trim();
+
+            const alYear =
+                document
+                    .getElementById("alYear")
+                    .value;
+
+            const phone =
+                document
+                    .getElementById("registerPhone")
+                    .value
+                    .trim();
+
+            const password =
+                document
+                    .getElementById("password")
+                    .value;
+
+            const confirmPassword =
+                document
+                    .getElementById("confirmPassword")
+                    .value;
+
+
+            if (
+                !name ||
+                !stream ||
+                !school ||
+                !nearestCity ||
+                !alYear ||
+                !phone ||
+                !password ||
+                !confirmPassword
+            ) {
+
+                throw new Error(
+                    "කරුණාකර සියලු තොරතුරු පුරවන්න."
+                );
+
+            }
+
+
+            if (
+                password !==
+                confirmPassword
+            ) {
+
+                throw new Error(
+                    "Password දෙක එක සමාන නැහැ."
+                );
+
+            }
+
+
+            if (
+                password.length < 6
+            ) {
+
+                throw new Error(
+                    "Password එක අවම වශයෙන් characters 6ක් විය යුතුයි."
+                );
+
+            }
+
+
+            if (
+                !isValidSriLankanPhone(
+                    phone
+                )
+            ) {
+
+                throw new Error(
+                    "නිවැරදි Sri Lankan Phone Number එකක් ඇතුළත් කරන්න."
+                );
+
+            }
+
+
+            const loginEmail =
+                makeLoginEmail(
+                    phone
+                );
+
+
+            const result =
+                await createUserWithEmailAndPassword(
+                    auth,
+                    loginEmail,
+                    password
+                );
+
+
+            const user =
+                result.user;
+
+
+            const uid =
+                user.uid;
+
+
+            /* 2 DAY TRIAL */
+
+            const trialStart =
+                new Date();
+
+
+            const trialEnd =
+                new Date(
+                    trialStart.getTime() +
+                    (
+                        2 *
+                        24 *
+                        60 *
+                        60 *
+                        1000
+                    )
+                );
+
+
+            const userRef =
+                doc(
+                    db,
+                    "users",
+                    uid
+                );
+
+
+            await setDoc(
+                userRef,
+                {
+
+                    uid:
+                        uid,
+
+                    role:
+                        "student",
+
+                    name:
+                        name,
+
+                    alStream:
+                        stream,
+
+                    school:
+                        school,
+
+                    nearestCity:
+                        nearestCity,
+
+                    alYear:
+                        alYear,
+
+                    phoneNumber:
+                        phone,
+
+                    subscriptionActive:
+                        false,
+
+                    subscriptionUntil:
+                        null,
+
+                    subscriptionPrice:
+                        100,
+
+                    subscriptionPeriod:
+                        "weekly",
+
+                    trialActive:
+                        true,
+
+                    trialStartAt:
+                        Timestamp.fromDate(
+                            trialStart
+                        ),
+
+                    trialUntil:
+                        Timestamp.fromDate(
+                            trialEnd
+                        ),
+
+                    createdAt:
+                        serverTimestamp()
+
+                }
+            );
+
+
+            sessionStorage.setItem(
+                "mcqLoginSession",
+                "student"
+            );
+
+
+            showMessage(
+
+                "✅ Account එක සාර්ථකව සාදන ලදී!\n\n" +
+                "🎁 දින 2ක Free MCQ Trial එකක් ලැබුණා.\n\n" +
+                "Welcome " +
+                name +
+                "!",
+
+                "success"
+
+            );
+
+
+            setTimeout(
+                function() {
+
+                    window.location.replace(
+                        HOME_URL
+                    );
+
+                },
+                1200
+            );
+
+        }
+        catch (error) {
+
+            console.error(
+                "Register Error:",
+                error
+            );
+
+
+            registerButton.disabled =
+                false;
+
+
+            let text =
+                "Account එක සෑදීමට නොහැකි විය.";
+
+
+            if (
+                error.code ===
+                "auth/email-already-in-use"
+            ) {
+
+                text =
+                    "මෙම Phone Number එකෙන් account එකක් දැනටමත් තිබෙනවා.";
+
+            }
+
+            else if (
+                error.code ===
+                "auth/weak-password"
+            ) {
+
+                text =
+                    "Password එක අවම වශයෙන් characters 6ක් විය යුතුයි.";
+
+            }
+
+            else if (
+                error.code ===
+                "auth/network-request-failed"
+            ) {
+
+                text =
+                    "Internet connection එක පරීක්ෂා කරන්න.";
+
+            }
+
+            else if (
+                error.message
+            ) {
+
+                text =
+                    error.message;
+
+            }
+
+
+            showMessage(
+                "❌ " + text,
+                "error"
+            );
+
+        }
+
+    }
+);
+
+
+/* ========================================
+   STUDENT LOGIN
+======================================== */
+
+loginButton.addEventListener(
+    "click",
+    async function() {
+
+        loginButton.disabled =
+            true;
+
+        showMessage(
+            "Login verify කරමින්..."
+        );
+
+
+        try {
+
+            const phone =
+                loginPhone
+                    .value
+                    .trim();
+
+            const password =
+                loginPassword
+                    .value;
+
+
+            if (
+                !phone ||
+                !password
+            ) {
+
+                throw new Error(
+                    "Phone Number සහ Password දෙකම ඇතුළත් කරන්න."
+                );
+
+            }
+
+
+            if (
+                !isValidSriLankanPhone(
+                    phone
+                )
+            ) {
+
+                throw new Error(
+                    "නිවැරදි Sri Lankan Phone Number එකක් ඇතුළත් කරන්න."
+                );
+
+            }
+
+
+            const loginEmail =
+                makeLoginEmail(
+                    phone
+                );
+
+
+            const result =
+                await signInWithEmailAndPassword(
+                    auth,
+                    loginEmail,
+                    password
+                );
+
+
+            const user =
+                result.user;
+
+
+            const uid =
+                user.uid;
+
+
+            const userRef =
+                doc(
+                    db,
+                    "users",
+                    uid
+                );
+
+
+            const userSnap =
+                await getDoc(
+                    userRef
+                );
+
+
+            if (
+                !userSnap.exists()
+            ) {
+
+                await signOut(auth);
+
+                throw new Error(
+                    "Student profile එක හමු වුණේ නැහැ."
+                );
+
+            }
+
+
+            const studentData =
+                userSnap.data();
+
+
+            if (
+                studentData.role ===
+                "admin"
+            ) {
+
+                await signOut(auth);
+
+                throw new Error(
+                    "මෙය Student account එකක් නොවේ. Admin Login භාවිතා කරන්න."
+                );
+
+            }
+
+
+            sessionStorage.setItem(
+                "mcqLoginSession",
+                "student"
+            );
+
+
+            showMessage(
+
+                "✅ Login සාර්ථකයි!\n\n" +
+                "Welcome " +
+                (
+                    studentData.name ||
+                    "Student"
+                ) +
+                "!",
+
+                "success"
+
+            );
+
+
+            setTimeout(
+                function() {
+
+                    window.location.replace(
+                        HOME_URL
+                    );
+
+                },
+                700
+            );
+
+        }
+        catch (error) {
+
+            console.error(
+                "Student Login Error:",
+                error
+            );
+
+
+            loginButton.disabled =
+                false;
+
+
+            let text =
+                "Login කිරීමට නොහැකි විය.";
+
+
+            if (
+                error.code ===
+                "auth/invalid-credential"
+            ) {
+
+                text =
+                    "Phone Number හෝ Password වැරදියි.";
+
+            }
+
+            else if (
+                error.code ===
+                "auth/user-not-found"
+            ) {
+
+                text =
+                    "මෙම Phone Number එකට account එකක් නැහැ.";
+
+            }
+
+            else if (
+                error.code ===
+                "auth/wrong-password"
+            ) {
+
+                text =
+                    "Password එක වැරදියි.";
+
+            }
+
+            else if (
+                error.code ===
+                "auth/too-many-requests"
+            ) {
+
+                text =
+                    "Login attempts වැඩියි. ටික වේලාවකට පසුව නැවත උත්සාහ කරන්න.";
+
+            }
+
+            else if (
+                error.message
+            ) {
+
+                text =
+                    error.message;
+
+            }
+
+
+            showMessage(
+                "❌ " + text,
+                "error"
+            );
+
+        }
+
+    }
+);
+
+
+/* ========================================
+   ADMIN LOGIN
+======================================== */
+
+adminLoginButton.addEventListener(
+    "click",
+    async function() {
+
+        adminLoginButton.disabled =
+            true;
+
+        showMessage(
+            "Admin Login verify කරමින්..."
+        );
+
+
+        try {
+
+            /*
+             * TRUSTED DEVICE
+             */
+
+            const trusted =
+                await isTrustedAdminDevice();
+
+
+            if (!trusted) {
+
+                throw new Error(
+                    "මෙම device එක Trusted Admin Device එකක් නොවේ."
+                );
+
+            }
+
+
+            const email =
+                adminEmail
+                    .value
+                    .trim();
+
+            const password =
+                adminPassword
+                    .value;
+
+
+            if (
+                !email ||
+                !password
+            ) {
+
+                throw new Error(
+                    "Admin Email සහ Password දෙකම ඇතුළත් කරන්න."
+                );
+
+            }
+
+
+            /*
+             * FIREBASE LOGIN
+             */
+
+            const result =
+                await signInWithEmailAndPassword(
+                    auth,
+                    email,
+                    password
+                );
+
+
+            const user =
+                result.user;
+
+
+            /*
+             * ADMIN UID
+             */
+
+            if (
+                user.uid !==
+                ADMIN_UID
+            ) {
+
+                await signOut(auth);
+
+                throw new Error(
+                    "මෙම account එක Admin account එක නොවේ."
+                );
+
+            }
+
+
+            /*
+             * ADMIN PROFILE
+             */
+
+            const userRef =
+                doc(
+                    db,
+                    "users",
+                    ADMIN_UID
+                );
+
+
+            const userSnap =
+                await getDoc(
+                    userRef
+                );
+
+
+            if (
+                !userSnap.exists()
+            ) {
+
+                await signOut(auth);
+
+                throw new Error(
+                    "Admin profile එක හමු වුණේ නැහැ."
+                );
+
+            }
+
+
+            const adminData =
+                userSnap.data();
+
+
+            if (
+                adminData.role !==
+                "admin"
+            ) {
+
+                await signOut(auth);
+
+                throw new Error(
+                    "Admin permission නැහැ."
+                );
+
+            }
+
+
+            /*
+             * ADMIN SESSION
+             */
+
+            sessionStorage.setItem(
+                "mcqLoginSession",
+                "admin"
+            );
+
+
+            localStorage.setItem(
+                "mcqLoginSession",
+                "admin"
+            );
+
+
+            showMessage(
+
+                "✅ Admin Login සාර්ථකයි!\n\n" +
+                "MCQ Winner වෙත යමින්...",
+
+                "success"
+
+            );
+
+
+            setTimeout(
+                function() {
+
+                    window.location.replace(
+                        HOME_URL
+                    );
+
+                },
+                700
+            );
+
+        }
+        catch (error) {
+
+            console.error(
+                "Admin Login Error:",
+                error
+            );
+
+
+            adminLoginButton.disabled =
+                false;
+
+
+            let text =
+                "Admin Login කිරීමට නොහැකි විය.";
+
+
+            if (
+                error.code ===
+                "auth/invalid-credential"
+            ) {
+
+                text =
+                    "Admin Email හෝ Password වැරදියි.";
+
+            }
+
+            else if (
+                error.code ===
+                "auth/user-not-found"
+            ) {
+
+                text =
+                    "Admin Email එක Firebase එකේ නැහැ.";
+
+            }
+
+            else if (
+                error.code ===
+                "auth/wrong-password"
+            ) {
+
+                text =
+                    "Admin Password එක වැරදියි.";
+
+            }
+
+            else if (
+                error.code ===
+                "auth/too-many-requests"
+            ) {
+
+                text =
+                    "Login attempts වැඩියි. ටික වේලාවකට පසුව නැවත උත්සාහ කරන්න.";
+
+            }
+
+            else if (
+                error.code ===
+                "auth/operation-not-allowed"
+            ) {
+
+                text =
+                    "Firebase Email/Password Login enable කරන්න.";
+
+            }
+
+            else if (
+                error.code ===
+                "auth/network-request-failed"
+            ) {
+
+                text =
+                    "Internet connection එක පරීක්ෂා කරන්න.";
+
+            }
+
+            else if (
+                error.message
+            ) {
+
+                text =
+                    error.message;
+
+            }
+
+
+            showMessage(
+                "❌ " + text,
+                "error"
+            );
+
+        }
+
+    }
+);
+
+
+/* ========================================
+   LOGO 5-TAP
+======================================== */
+
+let adminTapCount =
+    0;
+
+let adminTapTimer =
+    null;
+
+
+loginLogo.addEventListener(
+    "click",
+    function() {
+
+        adminTapCount++;
+
+
+        clearTimeout(
+            adminTapTimer
+        );
+
+
+        adminTapTimer =
+            setTimeout(
+                function() {
+
+                    adminTapCount =
+                        0;
+
+                },
+                2000
+            );
+
+
+        /*
+         * 5 taps completed
+         */
+
+        if (
+            adminTapCount >= 5
+        ) {
+
+            adminTapCount =
+                0;
+
+
+            clearTimeout(
+                adminTapTimer
+            );
+
+
+            /*
+             * Firebase trusted-device check.
+             *
+             * If trusted:
+             *    Admin Login appears.
+             *
+             * If not trusted:
+             *    Nothing appears.
+             */
+
+            revealAdminLoginIfTrusted();
+
+        }
+
+    }
+);
+
+
+/* ========================================
+   INITIAL STATE
+======================================== */
+
+adminLoginSection.classList.add(
+    "hidden"
+);
+
+
+/*
+ * Admin section remains hidden
+ * until 5 taps + trusted check.
+ */
+
+console.log(
+    "MCQ Winner Login loaded."
+);
+
+</script>
+
+
+</body>
+
+</html>
