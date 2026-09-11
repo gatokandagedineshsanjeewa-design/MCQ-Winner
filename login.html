@@ -1,0 +1,4106 @@
+<!DOCTYPE html>
+<html lang="si">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>MCQ Winner - Login</title>
+
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+html,body{
+
+    margin:0;
+    padding:0;
+
+    width:100%;
+    min-height:100%;
+
+    font-family:Arial,sans-serif;
+
+    background:#f2f6ff;
+}
+
+.box{
+
+    width:100%;
+
+    min-height:100vh;
+    min-height:100dvh;
+
+    background:white;
+
+    padding:25px 20px 30px;
+}
+
+.loginContent{
+
+    width:100%;
+    max-width:500px;
+
+    margin:0 auto;
+}
+
+
+/* ================= LOGO ================= */
+
+.logo{
+
+    width:90px;
+    height:90px;
+
+    object-fit:contain;
+
+    display:block;
+
+    margin:10px auto 12px;
+
+    cursor:pointer;
+
+    -webkit-tap-highlight-color:transparent;
+
+    user-select:none;
+
+    touch-action:manipulation;
+}
+
+.logo:active{
+
+    transform:scale(.95);
+}
+
+
+h1{
+
+    color:#2563eb;
+
+    margin:0;
+
+    text-align:center;
+
+    font-size:28px;
+}
+
+
+.subtitle{
+
+    color:#555;
+
+    text-align:center;
+
+    margin:6px 0 22px;
+}
+
+
+.sectionTitle{
+
+    font-size:20px;
+
+    font-weight:bold;
+
+    color:#1e3a8a;
+
+    text-align:center;
+
+    margin-bottom:12px;
+}
+
+
+input,
+select{
+
+    width:100%;
+
+    padding:13px;
+
+    margin-top:10px;
+
+    border:1px solid #d1d5db;
+
+    border-radius:10px;
+
+    font-size:15px;
+
+    outline:none;
+
+    background:white;
+
+    color:#111827;
+}
+
+
+input:focus,
+select:focus{
+
+    border-color:#2563eb;
+}
+
+
+button{
+
+    width:100%;
+
+    padding:14px;
+
+    margin-top:15px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#2563eb;
+
+    color:white;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    touch-action:manipulation;
+}
+
+
+button:disabled{
+
+    opacity:.6;
+}
+
+
+.linkButton{
+
+    background:transparent;
+
+    color:#2563eb;
+
+    font-size:14px;
+
+    margin-top:8px;
+}
+
+
+.adminButton{
+
+    background:#1e3a8a;
+}
+
+
+.hidden{
+
+    display:none !important;
+}
+
+
+#message{
+
+    margin-top:18px;
+
+    white-space:pre-wrap;
+
+    word-break:break-word;
+
+    line-height:1.5;
+
+    text-align:center;
+}
+
+
+.success{
+
+    color:#15803d;
+}
+
+
+.error{
+
+    color:#dc2626;
+}
+
+
+.note{
+
+    color:#777;
+
+    font-size:12px;
+
+    line-height:1.5;
+
+    text-align:center;
+
+    margin-top:12px;
+}
+
+
+hr{
+
+    border:none;
+
+    border-top:1px solid #e5e7eb;
+
+    margin:22px 0;
+}
+
+
+.deviceHashBox{
+
+    background:#f3f4f6;
+
+    color:#111827;
+
+    padding:12px;
+
+    border-radius:10px;
+
+    font-size:12px;
+
+    word-break:break-all;
+
+    border:1px solid #d1d5db;
+
+    margin-top:10px;
+
+    line-height:1.5;
+}
+
+
+@media(max-width:480px){
+
+    .box{
+
+        padding:18px 15px 25px;
+    }
+
+
+    .logo{
+
+        width:85px;
+        height:85px;
+
+        margin-top:5px;
+    }
+
+
+    h1{
+
+        font-size:25px;
+    }
+
+}
+
+
+@media(max-height:650px){
+
+    .box{
+
+        padding-top:10px;
+    }
+
+
+    .logo{
+
+        width:70px;
+        height:70px;
+
+        margin-bottom:5px;
+    }
+
+
+    .subtitle{
+
+        margin-bottom:12px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="box">
+
+<div class="loginContent">
+
+
+<!-- ================= LOGO ================= -->
+
+<img
+    class="logo"
+    id="loginLogo"
+    src="./Logo.png"
+    alt="MCQ Winner Logo"
+>
+
+
+<h1>
+MCQ Winner
+</h1>
+
+
+<p class="subtitle">
+Student Login
+</p>
+
+
+
+<!-- =====================================================
+     STUDENT LOGIN
+     ===================================================== -->
+
+<div id="loginSection">
+
+<div class="sectionTitle">
+
+Student Login
+
+</div>
+
+
+<input
+    type="tel"
+    id="loginPhone"
+    placeholder="Phone Number"
+    autocomplete="tel"
+    inputmode="numeric"
+>
+
+
+<input
+    type="password"
+    id="loginPassword"
+    placeholder="Password"
+    autocomplete="current-password"
+>
+
+
+<button id="loginButton">
+
+Student Login
+
+</button>
+
+
+<button
+    id="showRegisterButton"
+    class="linkButton"
+>
+
+Create New Student Account
+
+</button>
+
+</div>
+
+
+
+<!-- =====================================================
+     REGISTER
+     ===================================================== -->
+
+<div
+    id="registerSection"
+    class="hidden"
+>
+
+<div class="sectionTitle">
+
+Create Student Account
+
+</div>
+
+
+<input
+    type="text"
+    id="name"
+    placeholder="Name"
+    autocomplete="name"
+>
+
+
+<select id="stream">
+
+<option value="">
+
+Select A/L Stream
+
+</option>
+
+
+<option value="Maths">
+
+Maths
+
+</option>
+
+
+<option value="Biology">
+
+Biology
+
+</option>
+
+</select>
+
+
+<input
+    type="text"
+    id="school"
+    placeholder="School"
+    autocomplete="organization"
+>
+
+
+<input
+    type="text"
+    id="nearestCity"
+    placeholder="Nearest City"
+    autocomplete="address-level2"
+>
+
+
+<select id="alYear">
+
+<option value="">
+
+Select A/L Year
+
+</option>
+
+
+<option value="2026">
+2026
+</option>
+
+
+<option value="2027">
+2027
+</option>
+
+
+<option value="2028">
+2028
+</option>
+
+
+<option value="2029">
+2029
+</option>
+
+
+<option value="2030">
+2030
+</option>
+
+</select>
+
+
+<input
+    type="tel"
+    id="registerPhone"
+    placeholder="Phone Number"
+    autocomplete="tel"
+    inputmode="numeric"
+>
+
+
+<input
+    type="password"
+    id="password"
+    placeholder="Password"
+    autocomplete="new-password"
+>
+
+
+<input
+    type="password"
+    id="confirmPassword"
+    placeholder="Confirm Password"
+    autocomplete="new-password"
+>
+
+
+<button id="registerButton">
+
+Create Account
+
+</button>
+
+
+<button
+    id="showLoginButton"
+    class="linkButton"
+>
+
+Already have an account? Login
+
+</button>
+
+</div>
+
+
+
+<!-- =====================================================
+     ADMIN LOGIN
+     ===================================================== -->
+
+<div
+    id="adminLoginSection"
+    class="hidden"
+>
+
+<hr>
+
+
+<div class="sectionTitle">
+
+👑 Admin Login
+
+</div>
+
+
+<input
+    type="email"
+    id="adminEmail"
+    placeholder="Admin Email"
+    autocomplete="username"
+>
+
+
+<input
+    type="password"
+    id="adminPassword"
+    placeholder="Admin Password"
+    autocomplete="current-password"
+>
+
+
+<button
+    id="adminLoginButton"
+    class="adminButton"
+>
+
+Admin Login
+
+</button>
+
+
+<p class="note">
+
+Admin account සඳහා පමණි.
+
+</p>
+
+
+<button
+    id="hideAdminButton"
+    class="linkButton"
+>
+
+Hide Admin Login
+
+</button>
+
+</div>
+
+
+
+<!-- =====================================================
+     ADMIN DEVICE SETUP
+     ===================================================== -->
+
+<div
+    id="adminSetupSection"
+    class="hidden"
+>
+
+<hr>
+
+
+<div class="sectionTitle">
+
+🔐 Admin Device Setup
+
+</div>
+
+
+<p class="note">
+
+මේ APK device එක පළමු වරට authorize කිරීමට
+Admin Email + Password verify කරන්න.
+ඊට පස්සේ මේ device එකට අදාල Device Hash එක පෙන්වයි.
+
+</p>
+
+
+<input
+    type="email"
+    id="setupAdminEmail"
+    placeholder="Admin Email"
+    autocomplete="username"
+>
+
+
+<input
+    type="password"
+    id="setupAdminPassword"
+    placeholder="Admin Password"
+    autocomplete="current-password"
+>
+
+
+<button
+    id="setupAdminButton"
+    class="adminButton"
+>
+
+Verify & Show Device Hash
+
+</button>
+
+
+
+<div
+    id="deviceHashBox"
+    class="hidden"
+>
+
+
+<p class="note">
+
+මෙම Device Hash එක Firebase Firestore →
+adminDevices collection එකේ Document ID ලෙස දාන්න.
+
+</p>
+
+
+<div
+    id="deviceHashOutput"
+    class="deviceHashBox"
+></div>
+
+
+<button
+    id="copyDeviceHashButton"
+>
+
+Copy Device Hash
+
+</button>
+
+
+</div>
+
+
+<button
+    id="hideSetupButton"
+    class="linkButton"
+>
+
+Close Setup
+
+</button>
+
+</div>
+
+
+<p id="message"></p>
+
+
+</div>
+
+</div>
+
+
+
+<script type="module">
+
+
+/* =====================================================
+   FIREBASE
+   ===================================================== */
+
+
+import {
+
+    initializeApp
+
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+
+import {
+
+    getAuth,
+
+    signInWithEmailAndPassword,
+
+    createUserWithEmailAndPassword,
+
+    setPersistence,
+
+    browserSessionPersistence,
+
+    signOut
+
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
+import {
+
+    getFirestore,
+
+    doc,
+
+    getDoc,
+
+    setDoc,
+
+    serverTimestamp,
+
+    Timestamp
+
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+
+const firebaseConfig = {
+
+    apiKey:
+    "AIzaSyAMkaGYmBuoFama5MW5AhoX9q6cly_-nbg",
+
+    authDomain:
+    "mcq-winner.firebaseapp.com",
+
+    projectId:
+    "mcq-winner",
+
+    storageBucket:
+    "mcq-winner.firebasestorage.app",
+
+    messagingSenderId:
+    "1022060912943",
+
+    appId:
+    "1:1022060912943:web:f6e58414867e32f685c1da",
+
+    measurementId:
+    "G-MBH3NZ728H"
+
+};
+
+
+
+const ADMIN_UID =
+"pz6z6ZU9bChyd6qXmrHNNCB6mFv2";
+
+
+const HOME_URL =
+"https://gatokandagedineshsanjeewa-design.github.io/MCQ-Winner/index.html";
+
+
+
+const app =
+initializeApp(
+    firebaseConfig
+);
+
+
+const auth =
+getAuth(
+    app
+);
+
+
+const db =
+getFirestore(
+    app
+);
+
+
+
+/* =====================================================
+   SESSION
+   ===================================================== */
+
+
+try{
+
+    await setPersistence(
+        auth,
+        browserSessionPersistence
+    );
+
+}
+catch(error){
+
+    console.error(
+        "Persistence error:",
+        error
+    );
+
+}
+
+
+
+/* =====================================================
+   DOM
+   ===================================================== */
+
+
+const loginSection =
+document.getElementById(
+    "loginSection"
+);
+
+
+const registerSection =
+document.getElementById(
+    "registerSection"
+);
+
+
+const adminLoginSection =
+document.getElementById(
+    "adminLoginSection"
+);
+
+
+const adminSetupSection =
+document.getElementById(
+    "adminSetupSection"
+);
+
+
+const loginButton =
+document.getElementById(
+    "loginButton"
+);
+
+
+const registerButton =
+document.getElementById(
+    "registerButton"
+);
+
+
+const adminLoginButton =
+document.getElementById(
+    "adminLoginButton"
+);
+
+
+const setupAdminButton =
+document.getElementById(
+    "setupAdminButton"
+);
+
+
+const copyDeviceHashButton =
+document.getElementById(
+    "copyDeviceHashButton"
+);
+
+
+const hideSetupButton =
+document.getElementById(
+    "hideSetupButton"
+);
+
+
+const showRegisterButton =
+document.getElementById(
+    "showRegisterButton"
+);
+
+
+const showLoginButton =
+document.getElementById(
+    "showLoginButton"
+);
+
+
+const hideAdminButton =
+document.getElementById(
+    "hideAdminButton"
+);
+
+
+const message =
+document.getElementById(
+    "message"
+);
+
+
+const loginLogo =
+document.getElementById(
+    "loginLogo"
+);
+
+
+const deviceHashBox =
+document.getElementById(
+    "deviceHashBox"
+);
+
+
+const deviceHashOutput =
+document.getElementById(
+    "deviceHashOutput"
+);
+
+
+
+/* =====================================================
+   MESSAGE
+   ===================================================== */
+
+
+function showMessage(
+    text,
+    type=""
+){
+
+    message.innerText =
+    text;
+
+    message.className =
+    type;
+
+}
+
+
+
+/* =====================================================
+   PHONE
+   ===================================================== */
+
+
+function normalizePhone(
+    phone
+){
+
+    let clean =
+    phone.replace(
+        /\D/g,
+        ""
+    );
+
+
+    if(
+        clean.startsWith("0")
+    ){
+
+        clean =
+        "94" +
+        clean.substring(1);
+
+    }
+
+
+    return clean;
+
+}
+
+
+
+function makeLoginEmail(
+    phone
+){
+
+    return (
+
+        normalizePhone(
+            phone
+        )
+
+        +
+
+        "@mcqwinner.local"
+
+    );
+
+}
+
+
+
+function isValidSriLankanPhone(
+    phone
+){
+
+    const clean =
+    phone.replace(
+        /\D/g,
+        ""
+    );
+
+
+    return (
+
+        (
+
+            clean.startsWith("07")
+
+            &&
+
+            clean.length === 10
+
+        )
+
+        ||
+
+        (
+
+            clean.startsWith("947")
+
+            &&
+
+            clean.length === 11
+
+        )
+
+    );
+
+}
+
+
+
+/* =====================================================
+   STUDENT DEVICE
+   ===================================================== */
+
+
+function generateDeviceId(){
+
+    try{
+
+        if(
+
+            window.crypto &&
+
+            typeof
+            window.crypto.randomUUID ===
+            "function"
+
+        ){
+
+            return window.crypto.randomUUID();
+
+        }
+
+    }
+    catch(error){
+
+        console.log(
+            "randomUUID unavailable"
+        );
+
+    }
+
+
+    return (
+
+        "mcq-" +
+
+        Date.now().toString(36) +
+
+        "-" +
+
+        Math.random()
+        .toString(36)
+        .substring(2)
+
+    );
+
+}
+
+
+
+function getDeviceId(){
+
+    const KEY =
+    "mcqWinnerDeviceId";
+
+
+    let id =
+    localStorage.getItem(
+        KEY
+    );
+
+
+    if(!id){
+
+        id =
+        generateDeviceId();
+
+
+        localStorage.setItem(
+            KEY,
+            id
+        );
+
+    }
+
+
+    return id;
+
+}
+
+
+
+const DEVICE_ID =
+getDeviceId();
+
+
+const DEVICE_ACCOUNT_KEY =
+"mcqWinnerAccountUid";
+
+
+
+function getLocalAccountUid(){
+
+    try{
+
+        return localStorage.getItem(
+            DEVICE_ACCOUNT_KEY
+        );
+
+    }
+    catch(error){
+
+        return null;
+
+    }
+
+}
+
+
+
+function saveLocalAccountUid(
+    uid
+){
+
+    try{
+
+        localStorage.setItem(
+            DEVICE_ACCOUNT_KEY,
+            uid
+        );
+
+    }
+    catch(error){
+
+        console.error(
+            "Local account marker error:",
+            error
+        );
+
+    }
+
+}
+
+
+
+/* =====================================================
+   TRUSTED ADMIN DEVICE SYSTEM
+   ===================================================== */
+
+
+const TRUSTED_DEVICE_KEY =
+"mcqWinnerTrustedDeviceId";
+
+
+const TRUSTED_DEVICE_PREFIX =
+"MCQ_WINNER_DEVICE_V1:";
+
+
+
+function generateTrustedDeviceId(){
+
+    try{
+
+        if(
+
+            window.crypto &&
+
+            typeof
+            window.crypto.randomUUID ===
+            "function"
+
+        ){
+
+            return window.crypto.randomUUID();
+
+        }
+
+    }
+    catch(error){
+
+        console.log(
+            "Trusted randomUUID unavailable"
+        );
+
+    }
+
+
+    return (
+
+        "admin-" +
+
+        Date.now().toString(36) +
+
+        "-" +
+
+        Math.random()
+        .toString(36)
+        .substring(2)
+
+    );
+
+}
+
+
+
+function getTrustedDeviceId(){
+
+    let id =
+    localStorage.getItem(
+        TRUSTED_DEVICE_KEY
+    );
+
+
+    if(!id){
+
+        id =
+        generateTrustedDeviceId();
+
+
+        localStorage.setItem(
+            TRUSTED_DEVICE_KEY,
+            id
+        );
+
+    }
+
+
+    return id;
+
+}
+
+
+
+const TRUSTED_DEVICE_ID =
+getTrustedDeviceId();
+
+
+
+/* =====================================================
+   PURE JAVASCRIPT SHA-256
+   APK WEBVIEW FALLBACK
+   ===================================================== */
+
+
+function rightRotate(
+    value,
+    amount
+){
+
+    return (
+
+        (value >>> amount)
+
+        |
+
+        (value << (32 - amount))
+
+    );
+
+}
+
+
+
+function sha256PureJS(
+    input
+){
+
+    const K = [
+
+        0x428a2f98,
+        0x71374491,
+        0xb5c0fbcf,
+        0xe9b5dba5,
+        0x3956c25b,
+        0x59f111f1,
+        0x923f82a4,
+        0xab1c5ed5,
+
+        0xd807aa98,
+        0x12835b01,
+        0x243185be,
+        0x550c7dc3,
+        0x72be5d74,
+        0x80deb1fe,
+        0x9bdc06a7,
+        0xc19bf174,
+
+        0xe49b69c1,
+        0xefbe4786,
+        0x0fc19dc6,
+        0x240ca1cc,
+        0x2de92c6f,
+        0x4a7484aa,
+        0x5cb0a9dc,
+        0x76f988da,
+
+        0x983e5152,
+        0xa831c66d,
+        0xb00327c8,
+        0xbf597fc7,
+        0xc6e00bf3,
+        0xd5a79147,
+        0x06ca6351,
+        0x14292967,
+
+        0x27b70a85,
+        0x2e1b2138,
+        0x4d2c6dfc,
+        0x53380d13,
+        0x650a7354,
+        0x766a0abb,
+        0x81c2c92e,
+        0x92722c85,
+
+        0xa2bfe8a1,
+        0xa81a664b,
+        0xc24b8b70,
+        0xc76c51a3,
+        0xd192e819,
+        0xd6990624,
+        0xf40e3585,
+        0x106aa070,
+
+        0x19a4c116,
+        0x1e376c08,
+        0x2748774c,
+        0x34b0bcb5,
+        0x391c0cb3,
+        0x4ed8aa4a,
+        0x5b9cca4f,
+        0x682e6ff3,
+
+        0x748f82ee,
+        0x78a5636f,
+        0x84c87814,
+        0x8cc70208,
+        0x90befffa,
+        0xa4506ceb,
+        0xbef9a3f7,
+        0xc67178f2
+
+    ];
+
+
+    const bytes = [];
+
+
+    for(
+        let i = 0;
+        i < input.length;
+        i++
+    ){
+
+        bytes.push(
+            input.charCodeAt(i) & 0xff
+        );
+
+    }
+
+
+    const originalBitLength =
+    bytes.length * 8;
+
+
+    bytes.push(
+        0x80
+    );
+
+
+    while(
+        bytes.length % 64 !== 56
+    ){
+
+        bytes.push(
+            0
+        );
+
+    }
+
+
+    for(
+        let i = 7;
+        i >= 0;
+        i--
+    ){
+
+        bytes.push(
+
+            Math.floor(
+
+                originalBitLength /
+
+                Math.pow(
+                    2,
+                    i * 8
+                )
+
+            )
+
+            &
+
+            0xff
+
+        );
+
+    }
+
+
+    let H = [
+
+        0x6a09e667,
+        0xbb67ae85,
+        0x3c6ef372,
+        0xa54ff53a,
+        0x510e527f,
+        0x9b05688c,
+        0x1f83d9ab,
+        0x5be0cd19
+
+    ];
+
+
+
+    for(
+        let offset = 0;
+        offset < bytes.length;
+        offset += 64
+    ){
+
+        const W =
+        new Array(64);
+
+
+        for(
+            let i = 0;
+            i < 16;
+            i++
+        ){
+
+            const j =
+            offset + i * 4;
+
+
+            W[i] = (
+
+                (bytes[j] << 24)
+
+                |
+
+                (bytes[j + 1] << 16)
+
+                |
+
+                (bytes[j + 2] << 8)
+
+                |
+
+                bytes[j + 3]
+
+            ) >>> 0;
+
+        }
+
+
+
+        for(
+            let i = 16;
+            i < 64;
+            i++
+        ){
+
+            const s0 = (
+
+                rightRotate(
+                    W[i - 15],
+                    7
+                )
+
+                ^
+
+                rightRotate(
+                    W[i - 15],
+                    18
+                )
+
+                ^
+
+                (W[i - 15] >>> 3)
+
+            ) >>> 0;
+
+
+            const s1 = (
+
+                rightRotate(
+                    W[i - 2],
+                    17
+                )
+
+                ^
+
+                rightRotate(
+                    W[i - 2],
+                    19
+                )
+
+                ^
+
+                (W[i - 2] >>> 10)
+
+            ) >>> 0;
+
+
+            W[i] = (
+
+                W[i - 16]
+
+                +
+
+                s0
+
+                +
+
+                W[i - 7]
+
+                +
+
+                s1
+
+            ) >>> 0;
+
+        }
+
+
+
+        let a = H[0];
+        let b = H[1];
+        let c = H[2];
+        let d = H[3];
+
+        let e = H[4];
+        let f = H[5];
+        let g = H[6];
+        let h = H[7];
+
+
+
+        for(
+            let i = 0;
+            i < 64;
+            i++
+        ){
+
+            const S1 = (
+
+                rightRotate(e,6)
+
+                ^
+
+                rightRotate(e,11)
+
+                ^
+
+                rightRotate(e,25)
+
+            ) >>> 0;
+
+
+            const ch = (
+
+                (e & f)
+
+                ^
+
+                ((~e) & g)
+
+            ) >>> 0;
+
+
+            const temp1 = (
+
+                h
+
+                +
+
+                S1
+
+                +
+
+                ch
+
+                +
+
+                K[i]
+
+                +
+
+                W[i]
+
+            ) >>> 0;
+
+
+            const S0 = (
+
+                rightRotate(a,2)
+
+                ^
+
+                rightRotate(a,13)
+
+                ^
+
+                rightRotate(a,22)
+
+            ) >>> 0;
+
+
+            const maj = (
+
+                (a & b)
+
+                ^
+
+                (a & c)
+
+                ^
+
+                (b & c)
+
+            ) >>> 0;
+
+
+            const temp2 = (
+
+                S0
+
+                +
+
+                maj
+
+            ) >>> 0;
+
+
+            h = g;
+            g = f;
+            f = e;
+
+            e = (
+                d + temp1
+            ) >>> 0;
+
+            d = c;
+            c = b;
+            b = a;
+
+            a = (
+                temp1 + temp2
+            ) >>> 0;
+
+        }
+
+
+
+        H[0] =
+        (H[0] + a) >>> 0;
+
+        H[1] =
+        (H[1] + b) >>> 0;
+
+        H[2] =
+        (H[2] + c) >>> 0;
+
+        H[3] =
+        (H[3] + d) >>> 0;
+
+        H[4] =
+        (H[4] + e) >>> 0;
+
+        H[5] =
+        (H[5] + f) >>> 0;
+
+        H[6] =
+        (H[6] + g) >>> 0;
+
+        H[7] =
+        (H[7] + h) >>> 0;
+
+    }
+
+
+
+    return H
+    .map(
+
+        value =>
+
+        value
+        .toString(16)
+        .padStart(8,"0")
+
+    )
+    .join("");
+
+}
+
+
+
+/* =====================================================
+   SHA-256 MAIN
+   ===================================================== */
+
+
+async function sha256(
+    text
+){
+
+    /*
+       First try normal Web Crypto.
+    */
+
+    try{
+
+        if(
+
+            window.crypto &&
+
+            window.crypto.subtle &&
+
+            typeof
+            window.crypto.subtle.digest ===
+            "function"
+
+        ){
+
+            const encoder =
+            new TextEncoder();
+
+
+            const data =
+            encoder.encode(
+                text
+            );
+
+
+            const hashBuffer =
+            await window.crypto.subtle.digest(
+
+                "SHA-256",
+
+                data
+
+            );
+
+
+            const hashArray =
+            Array.from(
+
+                new Uint8Array(
+                    hashBuffer
+                )
+
+            );
+
+
+            return hashArray
+            .map(
+
+                b =>
+
+                b
+                .toString(16)
+                .padStart(2,"0")
+
+            )
+            .join("");
+
+        }
+
+    }
+    catch(error){
+
+        console.log(
+
+            "Web Crypto unavailable. " +
+
+            "Using JavaScript SHA-256 fallback."
+
+        );
+
+    }
+
+
+    /*
+       HTML-to-APK WebView fallback
+    */
+
+    return sha256PureJS(
+        text
+    );
+
+}
+
+
+
+/* =====================================================
+   TRUSTED DEVICE HASH
+   ===================================================== */
+
+
+async function getTrustedDeviceHash(){
+
+    const source =
+
+        TRUSTED_DEVICE_PREFIX +
+
+        TRUSTED_DEVICE_ID;
+
+
+    return await sha256(
+        source
+    );
+
+}
+
+
+
+/* =====================================================
+   TRUSTED DEVICE CHECK
+   ===================================================== */
+
+
+async function isTrustedAdminDevice(){
+
+    try{
+
+        const deviceHash =
+        await getTrustedDeviceHash();
+
+
+        if(!deviceHash){
+
+            return false;
+
+        }
+
+
+        const deviceRef =
+        doc(
+
+            db,
+
+            "adminDevices",
+
+            deviceHash
+
+        );
+
+
+        const deviceSnap =
+        await getDoc(
+            deviceRef
+        );
+
+
+        if(
+            !deviceSnap.exists()
+        ){
+
+            return false;
+
+        }
+
+
+        const data =
+        deviceSnap.data();
+
+
+        if(
+            data.uid !==
+            ADMIN_UID
+        ){
+
+            return false;
+
+        }
+
+
+        if(
+            data.trusted !==
+            true
+        ){
+
+            return false;
+
+        }
+
+
+        return true;
+
+    }
+    catch(error){
+
+        console.log(
+
+            "Trusted device check failed:",
+
+            error
+
+        );
+
+
+        return false;
+
+    }
+
+}
+
+
+
+async function checkTrustedDeviceSilently(){
+
+    try{
+
+        return await isTrustedAdminDevice();
+
+    }
+    catch(error){
+
+        return false;
+
+    }
+
+}
+
+
+
+/* =====================================================
+   TRIAL
+   ===================================================== */
+
+
+async function getTrialSettings(){
+
+    try{
+
+        const ref =
+        doc(
+
+            db,
+
+            "settings",
+
+            "trial"
+
+        );
+
+
+        const snap =
+        await getDoc(
+            ref
+        );
+
+
+        if(
+            !snap.exists()
+        ){
+
+            return null;
+
+        }
+
+
+        return snap.data();
+
+    }
+    catch(error){
+
+        console.error(
+
+            "Trial settings error:",
+
+            error
+
+        );
+
+
+        return null;
+
+    }
+
+}
+
+
+
+function getDateValue(
+    value
+){
+
+    if(!value){
+
+        return null;
+
+    }
+
+
+    if(
+
+        typeof value.toDate ===
+        "function"
+
+    ){
+
+        return value.toDate();
+
+    }
+
+
+    if(
+        value instanceof Date
+    ){
+
+        return value;
+
+    }
+
+
+    if(
+
+        typeof value.seconds ===
+        "number"
+
+    ){
+
+        return new Date(
+
+            value.seconds * 1000
+
+        );
+
+    }
+
+
+    const date =
+    new Date(
+        value
+    );
+
+
+    if(
+        isNaN(
+            date.getTime()
+        )
+    ){
+
+        return null;
+
+    }
+
+
+    return date;
+
+}
+
+
+
+function isTrialCurrentlyActive(
+    data
+){
+
+    if(!data){
+
+        return false;
+
+    }
+
+
+    if(
+        data.enabled === false
+    ){
+
+        return false;
+
+    }
+
+
+    const start =
+    getDateValue(
+        data.startAt
+    );
+
+
+    const end =
+    getDateValue(
+        data.endAt
+    );
+
+
+    if(
+        !start ||
+        !end
+    ){
+
+        return false;
+
+    }
+
+
+    const now =
+    new Date();
+
+
+    return (
+
+        now >= start
+
+        &&
+
+        now < end
+
+    );
+
+}
+
+
+
+/* =====================================================
+   SHOW REGISTER
+   ===================================================== */
+
+
+showRegisterButton.onclick =
+function(){
+
+    loginSection.classList.add(
+        "hidden"
+    );
+
+
+    registerSection.classList.remove(
+        "hidden"
+    );
+
+
+    adminLoginSection.classList.add(
+        "hidden"
+    );
+
+
+    adminSetupSection.classList.add(
+        "hidden"
+    );
+
+
+    showMessage("");
+
+};
+
+
+
+/* =====================================================
+   SHOW LOGIN
+   ===================================================== */
+
+
+showLoginButton.onclick =
+function(){
+
+    registerSection.classList.add(
+        "hidden"
+    );
+
+
+    loginSection.classList.remove(
+        "hidden"
+    );
+
+
+    adminLoginSection.classList.add(
+        "hidden"
+    );
+
+
+    adminSetupSection.classList.add(
+        "hidden"
+    );
+
+
+    showMessage("");
+
+};
+
+
+
+/* =====================================================
+   HIDE ADMIN
+   ===================================================== */
+
+
+hideAdminButton.onclick =
+function(){
+
+    adminLoginSection.classList.add(
+        "hidden"
+    );
+
+
+    showMessage("");
+
+};
+
+
+
+/* =====================================================
+   CLOSE ADMIN DEVICE SETUP
+   ===================================================== */
+
+
+hideSetupButton.onclick =
+function(){
+
+    adminSetupSection.classList.add(
+        "hidden"
+    );
+
+
+    deviceHashBox.classList.add(
+        "hidden"
+    );
+
+
+    deviceHashOutput.innerText =
+    "";
+
+
+    showMessage("");
+
+};
+
+
+
+/* =====================================================
+   REGISTER
+   ===================================================== */
+
+
+registerButton.onclick =
+async function(){
+
+    registerButton.disabled =
+    true;
+
+
+    showMessage(
+        "Account එක verify කරමින්..."
+    );
+
+
+    try{
+
+        const existingUid =
+        getLocalAccountUid();
+
+
+        if(existingUid){
+
+            throw new Error(
+
+                "මෙම device එකට Student account එකක් " +
+
+                "දැනටමත් සම්බන්ධ කර ඇත."
+
+            );
+
+        }
+
+
+        const name =
+        document
+        .getElementById("name")
+        .value
+        .trim();
+
+
+        const stream =
+        document
+        .getElementById("stream")
+        .value;
+
+
+        const school =
+        document
+        .getElementById("school")
+        .value
+        .trim();
+
+
+        const nearestCity =
+        document
+        .getElementById("nearestCity")
+        .value
+        .trim();
+
+
+        const alYear =
+        document
+        .getElementById("alYear")
+        .value;
+
+
+        const phone =
+        document
+        .getElementById("registerPhone")
+        .value
+        .trim();
+
+
+        const password =
+        document
+        .getElementById("password")
+        .value;
+
+
+        const confirmPassword =
+        document
+        .getElementById("confirmPassword")
+        .value;
+
+
+
+        if(
+
+            !name ||
+
+            !stream ||
+
+            !school ||
+
+            !nearestCity ||
+
+            !alYear ||
+
+            !phone ||
+
+            !password ||
+
+            !confirmPassword
+
+        ){
+
+            throw new Error(
+
+                "කරුණාකර සියලු තොරතුරු පුරවන්න."
+
+            );
+
+        }
+
+
+
+        if(
+
+            password !==
+            confirmPassword
+
+        ){
+
+            throw new Error(
+
+                "Password දෙක එක සමාන නැහැ."
+
+            );
+
+        }
+
+
+
+        if(
+            password.length < 6
+        ){
+
+            throw new Error(
+
+                "Password එක අවම වශයෙන් characters 6ක් විය යුතුයි."
+
+            );
+
+        }
+
+
+
+        if(
+            !isValidSriLankanPhone(
+                phone
+            )
+        ){
+
+            throw new Error(
+
+                "කරුණාකර නිවැරදි Sri Lankan Phone Number එකක් ඇතුළත් කරන්න."
+
+            );
+
+        }
+
+
+
+        const email =
+        makeLoginEmail(
+            phone
+        );
+
+
+
+        const result =
+        await createUserWithEmailAndPassword(
+
+            auth,
+
+            email,
+
+            password
+
+        );
+
+
+
+        const user =
+        result.user;
+
+
+
+        const trialData =
+        await getTrialSettings();
+
+
+
+        const trialActive =
+        isTrialCurrentlyActive(
+            trialData
+        );
+
+
+
+        let trialStart =
+        null;
+
+
+        let trialEnd =
+        null;
+
+
+
+        if(trialActive){
+
+            trialStart =
+            getDateValue(
+                trialData.startAt
+            );
+
+
+            trialEnd =
+            getDateValue(
+                trialData.endAt
+            );
+
+        }
+
+
+
+        await setDoc(
+
+            doc(
+
+                db,
+
+                "users",
+
+                user.uid
+
+            ),
+
+            {
+
+                uid:user.uid,
+
+                role:"student",
+
+                name:name,
+
+                alStream:stream,
+
+                school:school,
+
+                nearestCity:nearestCity,
+
+                alYear:alYear,
+
+                phoneNumber:phone,
+
+                deviceId:DEVICE_ID,
+
+                subscriptionActive:false,
+
+                subscriptionUntil:null,
+
+                subscriptionPrice:100,
+
+                subscriptionPeriod:"weekly",
+
+                trialActive:trialActive,
+
+                trialStartAt:
+
+                trialStart
+
+                ?
+
+                Timestamp.fromDate(
+                    trialStart
+                )
+
+                :
+
+                null,
+
+                trialUntil:
+
+                trialEnd
+
+                ?
+
+                Timestamp.fromDate(
+                    trialEnd
+                )
+
+                :
+
+                null,
+
+                trialSource:
+
+                trialActive
+
+                ?
+
+                "admin"
+
+                :
+
+                "none",
+
+                createdAt:
+                serverTimestamp()
+
+            }
+
+        );
+
+
+
+        saveLocalAccountUid(
+            user.uid
+        );
+
+
+
+        showMessage(
+
+            "✅ Account එක සාර්ථකව සාදන ලදී!",
+
+            "success"
+
+        );
+
+
+
+        setTimeout(
+
+            function(){
+
+                window.location.replace(
+                    HOME_URL
+                );
+
+            },
+
+            800
+
+        );
+
+    }
+    catch(error){
+
+        console.error(
+
+            "Register Error:",
+
+            error
+
+        );
+
+
+        registerButton.disabled =
+        false;
+
+
+        let text =
+        "Account එක සෑදීමට නොහැකි විය.";
+
+
+
+        if(
+
+            error.code ===
+            "auth/email-already-in-use"
+
+        ){
+
+            text =
+
+            "මෙම Phone Number එකෙන් account එකක් " +
+
+            "දැනටමත් තිබෙනවා.";
+
+        }
+
+        else if(
+
+            error.code ===
+            "auth/network-request-failed"
+
+        ){
+
+            text =
+
+            "Internet connection එක පරීක්ෂා කරන්න.";
+
+        }
+
+        else if(
+            error.message
+        ){
+
+            text =
+            error.message;
+
+        }
+
+
+
+        showMessage(
+
+            "❌ " + text,
+
+            "error"
+
+        );
+
+    }
+
+};
+
+
+
+/* =====================================================
+   STUDENT LOGIN
+   ===================================================== */
+
+
+loginButton.onclick =
+async function(){
+
+    loginButton.disabled =
+    true;
+
+
+    showMessage(
+        "Login verify කරමින්..."
+    );
+
+
+    try{
+
+        const phone =
+        document
+        .getElementById("loginPhone")
+        .value
+        .trim();
+
+
+        const password =
+        document
+        .getElementById("loginPassword")
+        .value;
+
+
+
+        if(
+            !phone ||
+            !password
+        ){
+
+            throw new Error(
+
+                "Phone Number සහ Password දෙකම ඇතුළත් කරන්න."
+
+            );
+
+        }
+
+
+
+        if(
+
+            !isValidSriLankanPhone(
+                phone
+            )
+
+        ){
+
+            throw new Error(
+
+                "කරුණාකර නිවැරදි Sri Lankan Phone Number එකක් ඇතුළත් කරන්න."
+
+            );
+
+        }
+
+
+
+        const result =
+        await signInWithEmailAndPassword(
+
+            auth,
+
+            makeLoginEmail(
+                phone
+            ),
+
+            password
+
+        );
+
+
+
+        const user =
+        result.user;
+
+
+
+        if(
+            user.uid ===
+            ADMIN_UID
+        ){
+
+            await signOut(
+                auth
+            );
+
+
+            throw new Error(
+
+                "Admin account එක Student Login එකෙන් භාවිතා කරන්න බැහැ."
+
+            );
+
+        }
+
+
+
+        const userSnap =
+        await getDoc(
+
+            doc(
+
+                db,
+
+                "users",
+
+                user.uid
+
+            )
+
+        );
+
+
+
+        if(
+            !userSnap.exists()
+        ){
+
+            await signOut(
+                auth
+            );
+
+
+            throw new Error(
+
+                "Student profile එක හමු වුණේ නැහැ."
+
+            );
+
+        }
+
+
+
+        const data =
+        userSnap.data();
+
+
+
+        if(
+            data.role ===
+            "admin"
+        ){
+
+            await signOut(
+                auth
+            );
+
+
+            throw new Error(
+
+                "මෙය Student account එකක් නොවේ."
+
+            );
+
+        }
+
+
+
+        if(
+
+            data.deviceId &&
+
+            data.deviceId !==
+            DEVICE_ID
+
+        ){
+
+            await signOut(
+                auth
+            );
+
+
+            throw new Error(
+
+                "🔐 මෙම Student account එක වෙනත් device එකකට සම්බන්ධ කර ඇත."
+
+            );
+
+        }
+
+
+
+        const localUid =
+        getLocalAccountUid();
+
+
+
+        if(
+
+            localUid &&
+
+            localUid !==
+            user.uid
+
+        ){
+
+            await signOut(
+                auth
+            );
+
+
+            throw new Error(
+
+                "🔐 මෙම device එක වෙනත් Student account එකකට සම්බන්ධ කර ඇත."
+
+            );
+
+        }
+
+
+
+        saveLocalAccountUid(
+            user.uid
+        );
+
+
+
+        showMessage(
+
+            "✅ Login සාර්ථකයි!\n\nWelcome " +
+
+            (
+
+                data.name ||
+
+                "Student"
+
+            ) +
+
+            "!",
+
+            "success"
+
+        );
+
+
+
+        setTimeout(
+
+            function(){
+
+                window.location.replace(
+                    HOME_URL
+                );
+
+            },
+
+            800
+
+        );
+
+    }
+    catch(error){
+
+        console.error(
+
+            "Student Login Error:",
+
+            error
+
+        );
+
+
+        loginButton.disabled =
+        false;
+
+
+        let text =
+        "Login කිරීමට නොහැකි විය.";
+
+
+
+        if(
+
+            error.code ===
+            "auth/invalid-credential"
+
+        ){
+
+            text =
+
+            "Phone Number හෝ Password වැරදියි.";
+
+        }
+
+        else if(
+
+            error.code ===
+            "auth/network-request-failed"
+
+        ){
+
+            text =
+
+            "Internet connection එක පරීක්ෂා කරන්න.";
+
+        }
+
+        else if(
+            error.message
+        ){
+
+            text =
+            error.message;
+
+        }
+
+
+
+        showMessage(
+
+            "❌ " + text,
+
+            "error"
+
+        );
+
+    }
+
+};
+
+
+
+/* =====================================================
+   ADMIN DEVICE SETUP
+   ===================================================== */
+
+
+setupAdminButton.onclick =
+async function(){
+
+    setupAdminButton.disabled =
+    true;
+
+
+    showMessage(
+
+        "🔐 Admin credentials verify කරමින්..."
+
+    );
+
+
+    try{
+
+        const email =
+        document
+        .getElementById(
+            "setupAdminEmail"
+        )
+        .value
+        .trim();
+
+
+        const password =
+        document
+        .getElementById(
+            "setupAdminPassword"
+        )
+        .value;
+
+
+
+        if(
+            !email ||
+            !password
+        ){
+
+            throw new Error(
+
+                "Admin Email සහ Password දෙකම ඇතුළත් කරන්න."
+
+            );
+
+        }
+
+
+
+        const result =
+        await signInWithEmailAndPassword(
+
+            auth,
+
+            email,
+
+            password
+
+        );
+
+
+
+        const user =
+        result.user;
+
+
+
+        /*
+           UID MUST MATCH ADMIN UID
+        */
+
+        if(
+
+            user.uid !==
+            ADMIN_UID
+
+        ){
+
+            await signOut(
+                auth
+            );
+
+
+            throw new Error(
+
+                "මෙම account එක approved Admin account එකක් නොවේ."
+
+            );
+
+        }
+
+
+
+        /*
+           Generate THIS DEVICE hash
+        */
+
+        const deviceHash =
+        await getTrustedDeviceHash();
+
+
+
+        if(
+
+            !deviceHash ||
+
+            deviceHash.length !== 64
+
+        ){
+
+            await signOut(
+                auth
+            );
+
+
+            throw new Error(
+
+                "Device Hash generate කිරීමට නොහැකි විය."
+
+            );
+
+        }
+
+
+
+        /*
+           Show hash
+        */
+
+        deviceHashOutput.innerText =
+        deviceHash;
+
+
+        deviceHashBox.classList.remove(
+            "hidden"
+        );
+
+
+
+        /*
+           IMPORTANT:
+
+           Client-side එකෙන් adminDevices document
+           create කරන්නේ නැහැ.
+
+           Firebase Console එකෙන් manually authorize
+           කිරීම තමයි මේ setup එකේ method එක.
+        */
+
+
+
+        await signOut(
+            auth
+        );
+
+
+
+        showMessage(
+
+            "✅ Admin verification සාර්ථකයි.\n\n" +
+
+            "Device Hash එක පහළින් ලැබුණා.",
+
+            "success"
+
+        );
+
+    }
+    catch(error){
+
+        console.error(
+
+            "Admin Device Setup Error:",
+
+            error
+
+        );
+
+
+
+        try{
+
+            await signOut(
+                auth
+            );
+
+        }
+        catch(_){
+
+        }
+
+
+
+        let text =
+        "Device Setup කිරීමට නොහැකි විය.";
+
+
+
+        if(
+
+            error.code ===
+            "auth/invalid-credential"
+
+        ){
+
+            text =
+
+            "Admin Email හෝ Password වැරදියි.";
+
+        }
+
+        else if(
+
+            error.code ===
+            "auth/network-request-failed"
+
+        ){
+
+            text =
+
+            "Internet connection එක පරීක්ෂා කරන්න.";
+
+        }
+
+        else if(
+            error.message
+        ){
+
+            text =
+            error.message;
+
+        }
+
+
+
+        showMessage(
+
+            "❌ " + text,
+
+            "error"
+
+        );
+
+    }
+
+
+
+    setupAdminButton.disabled =
+    false;
+
+};
+
+
+
+/* =====================================================
+   COPY DEVICE HASH
+   ===================================================== */
+
+
+copyDeviceHashButton.onclick =
+async function(){
+
+    const hash =
+    deviceHashOutput.innerText.trim();
+
+
+
+    if(!hash){
+
+        showMessage(
+
+            "Device Hash එකක් නැහැ.",
+
+            "error"
+
+        );
+
+        return;
+
+    }
+
+
+
+    /*
+       Normal clipboard
+    */
+
+    try{
+
+        if(
+
+            navigator.clipboard &&
+
+            navigator.clipboard.writeText
+
+        ){
+
+            await navigator.clipboard.writeText(
+                hash
+            );
+
+
+            showMessage(
+
+                "✅ Device Hash copied.",
+
+                "success"
+
+            );
+
+
+            return;
+
+        }
+
+    }
+    catch(error){
+
+        console.log(
+
+            "Clipboard API unavailable"
+
+        );
+
+    }
+
+
+
+    /*
+       APK WebView fallback
+    */
+
+    try{
+
+        const textarea =
+        document.createElement(
+            "textarea"
+        );
+
+
+        textarea.value =
+        hash;
+
+
+        textarea.style.position =
+        "fixed";
+
+
+        textarea.style.left =
+        "-9999px";
+
+
+        document.body.appendChild(
+            textarea
+        );
+
+
+        textarea.focus();
+
+
+        textarea.select();
+
+
+        document.execCommand(
+            "copy"
+        );
+
+
+        document.body.removeChild(
+            textarea
+        );
+
+
+        showMessage(
+
+            "✅ Device Hash copied.",
+
+            "success"
+
+        );
+
+    }
+    catch(error){
+
+        showMessage(
+
+            "Device Hash එක manually copy කරන්න.",
+
+            "error"
+
+        );
+
+    }
+
+};
+
+
+
+/* =====================================================
+   ADMIN LOGIN
+   ===================================================== */
+
+
+adminLoginButton.onclick =
+async function(){
+
+    adminLoginButton.disabled =
+    true;
+
+
+    showMessage(
+
+        "👑 Admin Login verify කරමින්..."
+
+    );
+
+
+    try{
+
+        /*
+           FIRST CHECK TRUSTED DEVICE
+        */
+
+        const trusted =
+        await checkTrustedDeviceSilently();
+
+
+
+        if(!trusted){
+
+            adminLoginSection.classList.add(
+                "hidden"
+            );
+
+
+            adminLoginButton.disabled =
+            false;
+
+
+            showMessage("");
+
+            return;
+
+        }
+
+
+
+        const email =
+        document
+        .getElementById(
+            "adminEmail"
+        )
+        .value
+        .trim();
+
+
+        const password =
+        document
+        .getElementById(
+            "adminPassword"
+        )
+        .value;
+
+
+
+        if(
+            !email ||
+            !password
+        ){
+
+            throw new Error(
+
+                "Admin Email සහ Password දෙකම ඇතුළත් කරන්න."
+
+            );
+
+        }
+
+
+
+        const result =
+        await signInWithEmailAndPassword(
+
+            auth,
+
+            email,
+
+            password
+
+        );
+
+
+
+        const user =
+        result.user;
+
+
+
+        /*
+           UID CHECK
+        */
+
+        if(
+
+            user.uid !==
+            ADMIN_UID
+
+        ){
+
+            await signOut(
+                auth
+            );
+
+
+            throw new Error(
+
+                "මෙම account එක approved Admin account එකක් නොවේ."
+
+            );
+
+        }
+
+
+
+        /*
+           CHECK TRUSTED DEVICE AGAIN
+        */
+
+        const trustedAfterLogin =
+        await checkTrustedDeviceSilently();
+
+
+
+        if(!trustedAfterLogin){
+
+            await signOut(
+                auth
+            );
+
+
+            throw new Error(
+
+                "🔐 මෙම device එක approved Admin device එකක් නොවේ."
+
+            );
+
+        }
+
+
+
+        /*
+           ADMIN USER DOCUMENT
+        */
+
+        const userRef =
+        doc(
+
+            db,
+
+            "users",
+
+            user.uid
+
+        );
+
+
+        const userSnap =
+        await getDoc(
+            userRef
+        );
+
+
+
+        /*
+           IMPORTANT:
+
+           Admin users document client-side එකෙන්
+           create කරන්නේ නැහැ.
+
+           Existing users/ADMIN_UID document එකේ
+           role = admin තිබිය යුතුයි.
+        */
+
+        if(
+            !userSnap.exists()
+        ){
+
+            await signOut(
+                auth
+            );
+
+
+            throw new Error(
+
+                "Firebase users document එක හමු වුණේ නැහැ.\n\n" +
+
+                "users/" +
+
+                ADMIN_UID +
+
+                " document එකේ role=\"admin\" තිබිය යුතුයි."
+
+            );
+
+        }
+
+
+
+        const data =
+        userSnap.data();
+
+
+
+        if(
+
+            data.role !==
+            "admin"
+
+        ){
+
+            await signOut(
+                auth
+            );
+
+
+            throw new Error(
+
+                "Admin profile එකේ role එක admin නොවේ."
+
+            );
+
+        }
+
+
+
+        /*
+           SAVE ADMIN SESSION
+        */
+
+        try{
+
+            localStorage.setItem(
+
+                "mcqLoginSession",
+
+                "admin"
+
+            );
+
+
+            sessionStorage.setItem(
+
+                "mcqLoginSession",
+
+                "admin"
+
+            );
+
+        }
+        catch(error){
+
+            console.log(
+                "Storage unavailable"
+            );
+
+        }
+
+
+
+        showMessage(
+
+            "✅ Admin Login සාර්ථකයි!",
+
+            "success"
+
+        );
+
+
+
+        setTimeout(
+
+            function(){
+
+                if(
+
+                    auth.currentUser &&
+
+                    auth.currentUser.uid ===
+                    ADMIN_UID
+
+                ){
+
+                    window.location.replace(
+                        HOME_URL
+                    );
+
+                }
+                else{
+
+                    adminLoginButton.disabled =
+                    false;
+
+
+                    showMessage(
+
+                        "❌ Login session එක verify කිරීමට නොහැකි විය.",
+
+                        "error"
+
+                    );
+
+                }
+
+            },
+
+            1200
+
+        );
+
+    }
+    catch(error){
+
+        console.error(
+
+            "Admin Login Error:",
+
+            error
+
+        );
+
+
+        adminLoginButton.disabled =
+        false;
+
+
+        let text =
+        "Admin Login කිරීමට නොහැකි විය.";
+
+
+
+        if(
+
+            error.code ===
+            "auth/invalid-credential"
+
+        ){
+
+            text =
+
+            "Admin Email හෝ Password වැරදියි.";
+
+        }
+
+        else if(
+
+            error.code ===
+            "auth/network-request-failed"
+
+        ){
+
+            text =
+
+            "Internet connection එක පරීක්ෂා කරන්න.";
+
+        }
+
+        else if(
+            error.message
+        ){
+
+            text =
+            error.message;
+
+        }
+
+
+
+        showMessage(
+
+            "❌ " + text,
+
+            "error"
+
+        );
+
+    }
+
+};
+
+
+
+/* =====================================================
+   5 TAP ADMIN
+   ===================================================== */
+
+
+let tapCount = 0;
+
+
+let tapTimer = null;
+
+
+
+loginLogo.onclick =
+async function(){
+
+    tapCount++;
+
+
+    clearTimeout(
+        tapTimer
+    );
+
+
+
+    /*
+       FIVE TAPS
+    */
+
+    if(
+        tapCount >= 5
+    ){
+
+        tapCount = 0;
+
+
+        clearTimeout(
+            tapTimer
+        );
+
+
+
+        /*
+           CHECK TRUSTED DEVICE
+        */
+
+        const trusted =
+        await checkTrustedDeviceSilently();
+
+
+
+        /*
+           ==========================================
+           NOT TRUSTED
+           SHOW DEVICE SETUP
+           ==========================================
+        */
+
+        if(!trusted){
+
+            adminLoginSection.classList.add(
+                "hidden"
+            );
+
+
+            registerSection.classList.add(
+                "hidden"
+            );
+
+
+            adminSetupSection.classList.remove(
+                "hidden"
+            );
+
+
+            deviceHashBox.classList.add(
+                "hidden"
+            );
+
+
+            deviceHashOutput.innerText =
+            "";
+
+
+            showMessage(
+
+                "🔐 මේ device එක තවම Trusted Admin Device එකක් නොවේ.\n\n" +
+
+                "Admin Device Setup කරන්න."
+
+            );
+
+
+
+            setTimeout(
+
+                function(){
+
+                    const setupEmail =
+                    document.getElementById(
+                        "setupAdminEmail"
+                    );
+
+
+                    if(setupEmail){
+
+                        setupEmail.focus();
+
+                    }
+
+                },
+
+                100
+
+            );
+
+
+            return;
+
+        }
+
+
+
+        /*
+           ==========================================
+           TRUSTED DEVICE
+           SHOW ADMIN LOGIN
+           ==========================================
+        */
+
+
+        adminSetupSection.classList.add(
+            "hidden"
+        );
+
+
+        adminLoginSection.classList.remove(
+            "hidden"
+        );
+
+
+        registerSection.classList.add(
+            "hidden"
+        );
+
+
+        loginSection.classList.remove(
+            "hidden"
+        );
+
+
+        showMessage(
+
+            "👑 Admin Login විවෘත කළා."
+
+        );
+
+
+
+        setTimeout(
+
+            function(){
+
+                const adminEmail =
+                document.getElementById(
+                    "adminEmail"
+                );
+
+
+                if(adminEmail){
+
+                    adminEmail.focus();
+
+                }
+
+            },
+
+            100
+
+        );
+
+
+        return;
+
+    }
+
+
+
+    /*
+       Reset tap count after 2 seconds
+    */
+
+    tapTimer =
+    setTimeout(
+
+        function(){
+
+            tapCount = 0;
+
+        },
+
+        2000
+
+    );
+
+};
+
+
+
+/* =====================================================
+   INITIAL STATE
+   ===================================================== */
+
+
+/*
+   Admin Login automatically show නොවේ.
+*/
+
+adminLoginSection.classList.add(
+    "hidden"
+);
+
+
+adminSetupSection.classList.add(
+    "hidden"
+);
+
+
+deviceHashBox.classList.add(
+    "hidden"
+);
+
+
+</script>
+
+</body>
+
+</html>
