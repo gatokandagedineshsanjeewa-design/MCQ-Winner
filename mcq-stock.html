@@ -1,0 +1,1404 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>MCQ Winner - MCQ Stock</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#0b1f3a;
+    color:white;
+}
+
+.header{
+    background:#102b50;
+    padding:18px 15px;
+    text-align:center;
+    border-bottom:2px solid #d4af37;
+}
+
+.header h1{
+    margin:0;
+    color:#d4af37;
+    font-size:24px;
+}
+
+.header p{
+    margin:7px 0 0;
+    font-size:13px;
+    color:#dbe7f5;
+}
+
+.container{
+    width:100%;
+    max-width:700px;
+    margin:auto;
+    padding:18px;
+}
+
+.card{
+    background:white;
+    color:#222;
+    border-radius:14px;
+    padding:18px;
+    margin-bottom:16px;
+    box-shadow:0 5px 15px rgba(0,0,0,.25);
+}
+
+.card h2{
+    margin-top:0;
+    color:#102b50;
+    font-size:19px;
+}
+
+label{
+    display:block;
+    font-weight:bold;
+    margin-top:12px;
+    margin-bottom:6px;
+}
+
+input,
+select{
+    width:100%;
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:16px;
+}
+
+button{
+    width:100%;
+    padding:13px;
+    border:0;
+    border-radius:9px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    margin-top:12px;
+}
+
+.saveBtn{
+    background:#d4af37;
+    color:#111;
+}
+
+.editBtn{
+    background:#102b50;
+    color:white;
+}
+
+.deleteBtn{
+    background:#c62828;
+    color:white;
+}
+
+.backBtn{
+    background:#555;
+    color:white;
+}
+
+.refreshBtn{
+    background:#1976d2;
+    color:white;
+}
+
+.message{
+    display:none;
+    padding:12px;
+    border-radius:8px;
+    margin-top:12px;
+    font-weight:bold;
+}
+
+.success{
+    background:#dff5e1;
+    color:#146b1e;
+}
+
+.error{
+    background:#ffe0e0;
+    color:#a40000;
+}
+
+.info{
+    background:#e1efff;
+    color:#124f87;
+}
+
+.stockItem{
+    border:1px solid #ddd;
+    border-radius:12px;
+    padding:15px;
+    margin-top:12px;
+}
+
+.stockTop{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+}
+
+.subject{
+    font-size:18px;
+    font-weight:bold;
+    color:#102b50;
+}
+
+.ready{
+    background:#d8f5dc;
+    color:#137333;
+    padding:5px 9px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.notReady{
+    background:#ffe4b5;
+    color:#8a5100;
+    padding:5px 9px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.count{
+    font-size:17px;
+    font-weight:bold;
+    margin-top:10px;
+}
+
+.count.readyCount{
+    color:#137333;
+}
+
+.count.waitCount{
+    color:#d26a00;
+}
+
+.small{
+    font-size:13px;
+    color:#666;
+    margin-top:6px;
+}
+
+.empty{
+    text-align:center;
+    color:#666;
+    padding:20px 5px;
+}
+
+.loading{
+    text-align:center;
+    padding:20px;
+}
+
+.hidden{
+    display:none;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+
+    <h1>MCQ WINNER</h1>
+
+    <p>MCQ Stock Management</p>
+
+</div>
+
+
+<div class="container">
+
+    <!-- CREATE / EDIT STOCK -->
+
+    <div class="card">
+
+        <h2 id="formTitle">Create MCQ Stock</h2>
+
+        <label>Subject</label>
+
+        <select id="subject">
+
+            <option value="Chemistry">Chemistry</option>
+
+            <option value="Physics">Physics</option>
+
+        </select>
+
+
+        <label>MCQ Date</label>
+
+        <input
+            type="date"
+            id="targetDate"
+        >
+
+
+        <label>Time Limit (minutes)</label>
+
+        <input
+            type="number"
+            id="timeLimit"
+            min="1"
+            max="180"
+            value="30"
+        >
+
+
+        <button
+            class="saveBtn"
+            id="saveBtn"
+            onclick="handleSave()"
+        >
+            SAVE STOCK
+        </button>
+
+
+        <button
+            class="backBtn"
+            onclick="goBack()"
+        >
+            BACK
+        </button>
+
+
+        <div
+            id="message"
+            class="message"
+        ></div>
+
+    </div>
+
+
+    <!-- STOCK LIST -->
+
+    <div class="card">
+
+        <h2>MCQ Stock</h2>
+
+        <button
+            class="refreshBtn"
+            onclick="loadStock()"
+        >
+            REFRESH STOCK
+        </button>
+
+        <div id="stockList">
+
+            <div class="loading">
+                Loading...
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script type="module">
+
+import {
+    initializeApp
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+
+import {
+    getAuth,
+    onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+
+import {
+    getFirestore,
+    collection,
+    query,
+    where,
+    getDocs,
+    doc,
+    setDoc,
+    deleteDoc,
+    serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+
+/* =========================================================
+   FIREBASE
+========================================================= */
+
+const firebaseConfig = {
+
+    apiKey:"AIzaSyAMkaGYmBuoFama5MW5AhoX9q6cly_-nbg",
+
+    authDomain:"mcq-winner.firebaseapp.com",
+
+    projectId:"mcq-winner",
+
+    storageBucket:"mcq-winner.firebasestorage.app",
+
+    messagingSenderId:"1022060912943",
+
+    appId:"1:1022060912943:web:f6e58414867e32f685c1da",
+
+    measurementId:"G-MBH3NZ728H"
+
+};
+
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+const db = getFirestore(app);
+
+
+
+/* =========================================================
+   ADMIN
+========================================================= */
+
+const ADMIN_UID =
+    "pz6z6ZU9bChyd6qXmrHNNCB6mFv2";
+
+
+let currentUser = null;
+
+let editingId = null;
+
+
+
+/* =========================================================
+   DOM
+========================================================= */
+
+const subjectInput =
+    document.getElementById("subject");
+
+const dateInput =
+    document.getElementById("targetDate");
+
+const timeInput =
+    document.getElementById("timeLimit");
+
+const stockList =
+    document.getElementById("stockList");
+
+const messageBox =
+    document.getElementById("message");
+
+const formTitle =
+    document.getElementById("formTitle");
+
+const saveBtn =
+    document.getElementById("saveBtn");
+
+
+
+/* =========================================================
+   SRI LANKA DATE
+========================================================= */
+
+function getSriLankaDate(){
+
+    const now = new Date();
+
+    const parts =
+        new Intl.DateTimeFormat(
+            "en-CA",
+            {
+                timeZone:"Asia/Colombo",
+                year:"numeric",
+                month:"2-digit",
+                day:"2-digit"
+            }
+        ).formatToParts(now);
+
+    const year =
+        parts.find(x => x.type === "year").value;
+
+    const month =
+        parts.find(x => x.type === "month").value;
+
+    const day =
+        parts.find(x => x.type === "day").value;
+
+    return `${year}-${month}-${day}`;
+}
+
+
+
+/* =========================================================
+   DEFAULT DATE
+========================================================= */
+
+dateInput.value =
+    getSriLankaDate();
+
+
+
+/* =========================================================
+   MESSAGE
+========================================================= */
+
+function showMessage(
+    text,
+    type="info"
+){
+
+    messageBox.textContent = text;
+
+    messageBox.className =
+        "message " + type;
+
+    messageBox.style.display =
+        "block";
+
+}
+
+
+function hideMessage(){
+
+    messageBox.style.display =
+        "none";
+
+}
+
+
+
+/* =========================================================
+   AUTH
+========================================================= */
+
+onAuthStateChanged(
+    auth,
+    async user => {
+
+        if(!user){
+
+            showMessage(
+                "Admin login required.",
+                "error"
+            );
+
+            stockList.innerHTML = `
+                <div class="empty">
+                    Admin login required.
+                </div>
+            `;
+
+            return;
+        }
+
+
+        if(user.uid !== ADMIN_UID){
+
+            showMessage(
+                "ඔබට Admin access නැත.",
+                "error"
+            );
+
+            stockList.innerHTML = `
+                <div class="empty">
+                    Admin access required.
+                </div>
+            `;
+
+            return;
+        }
+
+
+        currentUser = user;
+
+        hideMessage();
+
+        await loadStock();
+
+    }
+);
+
+
+
+/* =========================================================
+   GET ACTUAL MCQ COUNT
+========================================================= */
+
+async function getActualQuestionCount(
+    subject,
+    date
+){
+
+    try{
+
+        const q = query(
+            collection(db,"mcqs"),
+            where("subject","==",subject),
+            where("date","==",date)
+        );
+
+
+        const snapshot =
+            await getDocs(q);
+
+
+        return snapshot.size;
+
+    }catch(error){
+
+        console.error(
+            "MCQ count error:",
+            error
+        );
+
+        throw error;
+
+    }
+
+}
+
+
+
+/* =========================================================
+   SYNC ONE STOCK
+========================================================= */
+
+async function syncStock(
+    stockId,
+    subject,
+    date,
+    oldData={}
+){
+
+    const count =
+        await getActualQuestionCount(
+            subject,
+            date
+        );
+
+
+    const ready =
+        count === 25;
+
+
+    await setDoc(
+        doc(db,"mcqStock",stockId),
+        {
+
+            subject:subject,
+
+            date:date,
+
+            timeLimit:
+                Number(
+                    oldData.timeLimit || 30
+                ),
+
+            questionCount:count,
+
+            ready:ready,
+
+            updatedAt:
+                serverTimestamp()
+
+        },
+        {
+            merge:true
+        }
+    );
+
+
+    return {
+        count,
+        ready
+    };
+
+}
+
+
+
+/* =========================================================
+   LOAD STOCK
+========================================================= */
+
+window.loadStock =
+async function(){
+
+    if(!currentUser){
+
+        return;
+
+    }
+
+
+    stockList.innerHTML = `
+        <div class="loading">
+            Loading stock...
+        </div>
+    `;
+
+
+    try{
+
+        /*
+          First read existing Stock documents.
+        */
+
+        const stockSnapshot =
+            await getDocs(
+                collection(db,"mcqStock")
+            );
+
+
+        const stockMap = {};
+
+
+        stockSnapshot.forEach(
+            item => {
+
+                stockMap[item.id] = {
+
+                    id:item.id,
+
+                    ...item.data()
+
+                };
+
+            }
+        );
+
+
+        /*
+          Also find dates/subjects directly
+          from actual MCQs.
+
+          This means even if Stock count was
+          wrong or missing, it can be repaired.
+        */
+
+        const mcqSnapshot =
+            await getDocs(
+                collection(db,"mcqs")
+            );
+
+
+        const groups = {};
+
+
+        mcqSnapshot.forEach(
+            item => {
+
+                const data =
+                    item.data();
+
+
+                if(
+                    !data.subject ||
+                    !data.date
+                ){
+
+                    return;
+
+                }
+
+
+                const subject =
+                    data.subject;
+
+
+                const date =
+                    data.date;
+
+
+                const key =
+                    subject.toLowerCase()
+                    + "_"
+                    + date;
+
+
+                if(!groups[key]){
+
+                    groups[key] = {
+
+                        subject:subject,
+
+                        date:date,
+
+                        count:0
+
+                    };
+
+                }
+
+
+                groups[key].count++;
+
+            }
+        );
+
+
+        /*
+          Repair / create Stock documents
+          from actual MCQ counts.
+        */
+
+        for(
+            const key in groups
+        ){
+
+            const group =
+                groups[key];
+
+
+            const existing =
+                stockMap[key] || {};
+
+
+            const count =
+                group.count;
+
+
+            const ready =
+                count === 25;
+
+
+            await setDoc(
+                doc(db,"mcqStock",key),
+                {
+
+                    subject:
+                        group.subject,
+
+                    date:
+                        group.date,
+
+                    timeLimit:
+                        Number(
+                            existing.timeLimit || 30
+                        ),
+
+                    questionCount:
+                        count,
+
+                    ready:
+                        ready,
+
+                    createdAt:
+                        existing.createdAt ||
+                        serverTimestamp(),
+
+                    updatedAt:
+                        serverTimestamp()
+
+                },
+                {
+                    merge:true
+                }
+            );
+
+
+            stockMap[key] = {
+
+                ...existing,
+
+                id:key,
+
+                subject:
+                    group.subject,
+
+                date:
+                    group.date,
+
+                timeLimit:
+                    Number(
+                        existing.timeLimit || 30
+                    ),
+
+                questionCount:
+                    count,
+
+                ready:
+                    ready
+
+            };
+
+        }
+
+
+        /*
+          Repair Stock documents which have
+          zero MCQs too.
+        */
+
+        for(
+            const key in stockMap
+        ){
+
+            const item =
+                stockMap[key];
+
+
+            const actual =
+                groups[key]
+                    ? groups[key].count
+                    : 0;
+
+
+            if(
+                Number(item.questionCount || 0)
+                !== actual
+            ){
+
+                const fixedReady =
+                    actual === 25;
+
+
+                await setDoc(
+                    doc(db,"mcqStock",key),
+                    {
+
+                        questionCount:
+                            actual,
+
+                        ready:
+                            fixedReady,
+
+                        updatedAt:
+                            serverTimestamp()
+
+                    },
+                    {
+                        merge:true
+                    }
+                );
+
+
+                stockMap[key].questionCount =
+                    actual;
+
+                stockMap[key].ready =
+                    fixedReady;
+
+            }
+
+        }
+
+
+        const items =
+            Object.values(stockMap);
+
+
+        items.sort(
+            (a,b) =>
+                String(b.date || "")
+                .localeCompare(
+                    String(a.date || "")
+                )
+        );
+
+
+        if(items.length === 0){
+
+            stockList.innerHTML = `
+                <div class="empty">
+                    තවම MCQ Stock එකක් නැහැ.
+                </div>
+            `;
+
+            return;
+
+        }
+
+
+        stockList.innerHTML = "";
+
+
+        items.forEach(
+            item => {
+
+                const count =
+                    Number(
+                        item.questionCount || 0
+                    );
+
+
+                const ready =
+                    count === 25;
+
+
+                const div =
+                    document.createElement("div");
+
+
+                div.className =
+                    "stockItem";
+
+
+                div.innerHTML = `
+
+                    <div class="stockTop">
+
+                        <div class="subject">
+                            ${escapeHtml(
+                                item.subject || ""
+                            )}
+                        </div>
+
+                        <div class="${
+                            ready
+                            ? "ready"
+                            : "notReady"
+                        }">
+
+                            ${
+                                ready
+                                ? "READY"
+                                : "NOT READY"
+                            }
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="small">
+                        Date:
+                        ${escapeHtml(
+                            item.date || "-"
+                        )}
+                    </div>
+
+
+                    <div class="${
+                        ready
+                        ? "count readyCount"
+                        : "count waitCount"
+                    }">
+
+                        MCQs:
+                        ${count} / 25
+
+                    </div>
+
+
+                    <div class="small">
+
+                        Time:
+                        ${Number(
+                            item.timeLimit || 30
+                        )} minutes
+
+                    </div>
+
+
+                    <button
+                        class="editBtn"
+                        onclick='editStock(
+                            ${JSON.stringify(
+                                item
+                            )}
+                        )'
+                    >
+                        EDIT
+                    </button>
+
+
+                    <button
+                        class="deleteBtn"
+                        onclick='deleteStock(
+                            ${JSON.stringify(
+                                item
+                            )}
+                        )'
+                    >
+                        DELETE STOCK
+                    </button>
+
+                `;
+
+
+                stockList.appendChild(div);
+
+            }
+        );
+
+
+    }catch(error){
+
+        console.error(error);
+
+
+        stockList.innerHTML = `
+            <div class="empty">
+                Stock load error.
+                <br><br>
+                ${escapeHtml(
+                    error.message
+                )}
+            </div>
+        `;
+
+    }
+
+};
+
+
+
+/* =========================================================
+   SAVE STOCK
+========================================================= */
+
+window.handleSave =
+async function(){
+
+    if(!currentUser){
+
+        showMessage(
+            "Admin login required.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    const subject =
+        subjectInput.value;
+
+    const date =
+        dateInput.value;
+
+    const timeLimit =
+        Number(
+            timeInput.value
+        );
+
+
+    if(!subject || !date){
+
+        showMessage(
+            "Subject සහ Date දෙකම අවශ්‍යයි.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    if(
+        !timeLimit ||
+        timeLimit < 1
+    ){
+
+        showMessage(
+            "Time limit එක නිවැරදිව දෙන්න.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+    saveBtn.disabled =
+        true;
+
+    saveBtn.textContent =
+        "SAVING...";
+
+
+    try{
+
+        const stockId =
+            subject.toLowerCase()
+            + "_"
+            + date;
+
+
+        /*
+          IMPORTANT:
+          Actual MCQ count is read first.
+          We NEVER reset it to zero.
+        */
+
+        const count =
+            await getActualQuestionCount(
+                subject,
+                date
+            );
+
+
+        const ready =
+            count === 25;
+
+
+        await setDoc(
+            doc(
+                db,
+                "mcqStock",
+                stockId
+            ),
+            {
+
+                subject:subject,
+
+                date:date,
+
+                timeLimit:timeLimit,
+
+                questionCount:count,
+
+                ready:ready,
+
+                updatedAt:
+                    serverTimestamp(),
+
+                createdBy:
+                    currentUser.uid
+
+            },
+            {
+                merge:true
+            }
+        );
+
+
+        if(editingId){
+
+            showMessage(
+                "Stock updated successfully.",
+                "success"
+            );
+
+        }else{
+
+            showMessage(
+                ready
+                ? "25/25 MCQs තියෙනවා. Stock READY."
+                : `Stock saved. දැනට ${count}/25 MCQs.`,
+                ready
+                ? "success"
+                : "info"
+            );
+
+        }
+
+
+        resetForm();
+
+        await loadStock();
+
+
+    }catch(error){
+
+        console.error(error);
+
+
+        showMessage(
+            "Save error: "
+            + error.message,
+            "error"
+        );
+
+    }finally{
+
+        saveBtn.disabled =
+            false;
+
+        saveBtn.textContent =
+            "SAVE STOCK";
+
+    }
+
+};
+
+
+
+/* =========================================================
+   EDIT STOCK
+========================================================= */
+
+window.editStock =
+function(item){
+
+    editingId =
+        item.id;
+
+
+    subjectInput.value =
+        item.subject || "Chemistry";
+
+
+    dateInput.value =
+        item.date || "";
+
+
+    timeInput.value =
+        Number(
+            item.timeLimit || 30
+        );
+
+
+    formTitle.textContent =
+        "Edit MCQ Stock";
+
+
+    saveBtn.textContent =
+        "UPDATE STOCK";
+
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+};
+
+
+
+/* =========================================================
+   DELETE STOCK
+========================================================= */
+
+window.deleteStock =
+async function(item){
+
+    if(!currentUser){
+
+        return;
+
+    }
+
+
+    const ok =
+        confirm(
+            "Stock document එක delete කරන්නද?\n\n" +
+            "MCQ questions delete වෙන්නේ නැහැ."
+        );
+
+
+    if(!ok){
+
+        return;
+
+    }
+
+
+    try{
+
+        await deleteDoc(
+            doc(
+                db,
+                "mcqStock",
+                item.id
+            )
+        );
+
+
+        showMessage(
+            "Stock deleted. MCQs remain safe.",
+            "success"
+        );
+
+
+        await loadStock();
+
+
+    }catch(error){
+
+        console.error(error);
+
+
+        showMessage(
+            "Delete error: "
+            + error.message,
+            "error"
+        );
+
+    }
+
+};
+
+
+
+/* =========================================================
+   RESET FORM
+========================================================= */
+
+function resetForm(){
+
+    editingId = null;
+
+
+    formTitle.textContent =
+        "Create MCQ Stock";
+
+
+    saveBtn.textContent =
+        "SAVE STOCK";
+
+
+    dateInput.value =
+        getSriLankaDate();
+
+
+    timeInput.value =
+        30;
+
+}
+
+
+
+/* =========================================================
+   ESCAPE HTML
+========================================================= */
+
+function escapeHtml(value){
+
+    return String(value ?? "")
+        .replaceAll("&","&amp;")
+        .replaceAll("<","&lt;")
+        .replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;")
+        .replaceAll("'","&#039;");
+
+}
+
+
+
+/* =========================================================
+   BACK
+========================================================= */
+
+window.goBack =
+function(){
+
+    window.location.href =
+        "index.html";
+
+};
+
+</script>
+
+</body>
+</html>
