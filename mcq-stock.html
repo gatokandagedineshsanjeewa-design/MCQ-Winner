@@ -1,0 +1,1888 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>MCQ Winner - MCQ Stock</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#0b1f3a;
+    color:white;
+}
+
+.container{
+    width:94%;
+    max-width:900px;
+    margin:auto;
+    padding:18px 0 40px;
+}
+
+.header{
+    background:#102b4f;
+    border:1px solid #31547e;
+    border-radius:18px;
+    padding:18px;
+    text-align:center;
+    margin-bottom:18px;
+    box-shadow:0 8px 25px rgba(0,0,0,.25);
+}
+
+.logo{
+    width:75px;
+    height:75px;
+    object-fit:contain;
+    border-radius:18px;
+    margin-bottom:8px;
+}
+
+h1{
+    margin:5px 0;
+    color:#d4af37;
+    font-size:25px;
+}
+
+.subtitle{
+    color:#d9e5f5;
+    font-size:14px;
+}
+
+.back-btn,
+.logout-btn{
+    width:100%;
+    border:0;
+    border-radius:12px;
+    padding:13px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    margin-top:10px;
+}
+
+.back-btn{
+    background:#244d7a;
+    color:white;
+}
+
+.logout-btn{
+    background:#8b1e1e;
+    color:white;
+}
+
+.info-box{
+    background:#102b4f;
+    border:1px solid #31547e;
+    border-radius:15px;
+    padding:15px;
+    margin-bottom:18px;
+    line-height:1.6;
+}
+
+.status{
+    text-align:center;
+    padding:14px;
+    border-radius:12px;
+    background:#07182d;
+    margin-bottom:15px;
+    color:#d4af37;
+    font-weight:bold;
+}
+
+.date-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:14px;
+}
+
+.date-card{
+    background:#102b4f;
+    border:1px solid #31547e;
+    border-radius:18px;
+    padding:16px;
+    cursor:pointer;
+    transition:.2s;
+    box-shadow:0 6px 18px rgba(0,0,0,.20);
+}
+
+.date-card:active{
+    transform:scale(.98);
+}
+
+.date-card:hover{
+    border-color:#d4af37;
+}
+
+.date-title{
+    font-size:20px;
+    font-weight:bold;
+    color:#d4af37;
+    margin-bottom:4px;
+}
+
+.date-label{
+    font-size:13px;
+    color:#aebfd4;
+    margin-bottom:14px;
+}
+
+.subject-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+}
+
+.subject-box{
+    background:#07182d;
+    border-radius:12px;
+    padding:12px 8px;
+    text-align:center;
+}
+
+.subject-name{
+    font-size:14px;
+    margin-bottom:5px;
+}
+
+.subject-count{
+    font-size:20px;
+    font-weight:bold;
+}
+
+.ready{
+    color:#45e08a;
+}
+
+.not-ready{
+    color:#ffb84d;
+}
+
+.ready-badge{
+    margin-top:13px;
+    text-align:center;
+    padding:9px;
+    border-radius:10px;
+    font-weight:bold;
+    background:#123e2b;
+    color:#5cff9b;
+}
+
+.wait-badge{
+    margin-top:13px;
+    text-align:center;
+    padding:9px;
+    border-radius:10px;
+    font-weight:bold;
+    background:#49340e;
+    color:#ffc45c;
+}
+
+.arrow{
+    text-align:center;
+    margin-top:12px;
+    color:#9db4cf;
+    font-size:13px;
+}
+
+.empty{
+    background:#102b4f;
+    border:1px solid #31547e;
+    border-radius:15px;
+    padding:25px;
+    text-align:center;
+    color:#b9c8d9;
+}
+
+.detail-box{
+    display:none;
+    background:#07182d;
+    border:2px solid #d4af37;
+    border-radius:18px;
+    padding:16px;
+    margin-top:20px;
+}
+
+.detail-header{
+    text-align:center;
+    padding-bottom:12px;
+    border-bottom:1px solid #31547e;
+    margin-bottom:15px;
+}
+
+.detail-header h2{
+    color:#d4af37;
+    margin:0 0 5px;
+}
+
+.close-btn{
+    width:100%;
+    border:0;
+    border-radius:11px;
+    padding:12px;
+    background:#31547e;
+    color:white;
+    font-weight:bold;
+    font-size:15px;
+    cursor:pointer;
+    margin-top:15px;
+}
+
+.subject-title{
+    padding:12px;
+    border-radius:12px;
+    background:#102b4f;
+    margin:18px 0 10px;
+    font-size:18px;
+    font-weight:bold;
+}
+
+.question-card{
+    background:#102b4f;
+    border:1px solid #31547e;
+    border-radius:15px;
+    padding:15px;
+    margin-bottom:12px;
+}
+
+.question-number{
+    color:#d4af37;
+    font-weight:bold;
+    margin-bottom:8px;
+}
+
+.question-text{
+    font-size:16px;
+    line-height:1.6;
+    margin-bottom:10px;
+}
+
+.question-image{
+    width:100%;
+    max-height:350px;
+    object-fit:contain;
+    border-radius:10px;
+    margin:8px 0 12px;
+    background:#000;
+}
+
+.option{
+    background:#07182d;
+    border-radius:9px;
+    padding:9px;
+    margin:6px 0;
+    line-height:1.5;
+}
+
+.correct{
+    margin-top:10px;
+    background:#123e2b;
+    color:#5cff9b;
+    padding:10px;
+    border-radius:9px;
+    font-weight:bold;
+}
+
+.loading{
+    text-align:center;
+    padding:25px;
+    color:#d4af37;
+}
+
+.error{
+    background:#4a1717;
+    color:#ff9c9c;
+    padding:14px;
+    border-radius:10px;
+    line-height:1.5;
+}
+
+@media(min-width:650px){
+
+    .date-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+
+        <img
+            src="Logo.png"
+            class="logo"
+            onerror="this.style.display='none'"
+        >
+
+        <h1>📚 MCQ Stock</h1>
+
+        <div class="subtitle">
+            Daily Chemistry & Physics MCQ Stock
+        </div>
+
+        <button
+            class="back-btn"
+            id="backButton"
+        >
+            ⬅️ Back to Admin
+        </button>
+
+        <button
+            class="logout-btn"
+            id="logoutButton"
+        >
+            🚪 Logout
+        </button>
+
+    </div>
+
+
+    <div class="info-box">
+
+        📅 <b>Date එකක් touch කරන්න.</b>
+
+        <br>
+
+        එම date එකට Stock කරලා තියෙන
+        Chemistry සහ Physics MCQ සියල්ල
+        පහළින් බලන්න පුළුවන්.
+
+        <br><br>
+
+        🧪 Chemistry = 25/25
+
+        <br>
+
+        ⚡ Physics = 25/25
+
+        <br>
+
+        ✅ දෙකම 25 නම්
+        <b>STOCK READY</b>
+
+    </div>
+
+
+    <div
+        id="status"
+        class="status"
+    >
+        ⏳ Stock load වෙමින්...
+    </div>
+
+
+    <div
+        id="dateGrid"
+        class="date-grid"
+    ></div>
+
+
+    <div
+        id="detailBox"
+        class="detail-box"
+    >
+
+        <div class="detail-header">
+
+            <h2 id="detailDate">
+                📅 MCQ Date
+            </h2>
+
+            <div id="detailSummary"></div>
+
+        </div>
+
+
+        <div
+            id="detailContent"
+        ></div>
+
+
+        <button
+            class="close-btn"
+            id="closeDetail"
+        >
+            ⬆️ Date List එකට යන්න
+        </button>
+
+    </div>
+
+</div>
+
+
+<script type="module">
+
+import {
+    initializeApp
+} from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+
+import {
+    getAuth,
+    onAuthStateChanged,
+    setPersistence,
+    browserSessionPersistence,
+    signOut
+} from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
+import {
+    getFirestore,
+    collection,
+    query,
+    where,
+    getDocs,
+    doc,
+    getDoc
+} from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+/* ========================================
+   FIREBASE
+======================================== */
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyAMkaGYmBuoFama5MW5AhoX9q6cly_-nbg",
+
+    authDomain:
+        "mcq-winner.firebaseapp.com",
+
+    projectId:
+        "mcq-winner",
+
+    storageBucket:
+        "mcq-winner.firebasestorage.app",
+
+    messagingSenderId:
+        "1022060912943",
+
+    appId:
+        "1:1022060912943:web:f6e58414867e32f685c1da",
+
+    measurementId:
+        "G-MBH3NZ728H"
+};
+
+
+const app =
+    initializeApp(
+        firebaseConfig
+    );
+
+
+const auth =
+    getAuth(app);
+
+
+const db =
+    getFirestore(app);
+
+
+/* ========================================
+   ADMIN UID
+======================================== */
+
+const ADMIN_UID =
+    "pz6z6ZU9bChyd6qXmrHNNCB6mFv2";
+
+
+let currentUser = null;
+
+
+/* ========================================
+   ELEMENTS
+======================================== */
+
+const status =
+    document.getElementById(
+        "status"
+    );
+
+const dateGrid =
+    document.getElementById(
+        "dateGrid"
+    );
+
+const detailBox =
+    document.getElementById(
+        "detailBox"
+    );
+
+const detailDate =
+    document.getElementById(
+        "detailDate"
+    );
+
+const detailSummary =
+    document.getElementById(
+        "detailSummary"
+    );
+
+const detailContent =
+    document.getElementById(
+        "detailContent"
+    );
+
+
+/* ========================================
+   ESCAPE HTML
+======================================== */
+
+function escapeHTML(text){
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+    div.textContent =
+        text == null
+        ? ""
+        : String(text);
+
+    return div.innerHTML;
+}
+
+
+/* ========================================
+   ESCAPE ATTRIBUTE
+======================================== */
+
+function escapeAttribute(text){
+
+    return String(
+        text || ""
+    )
+    .replace(/&/g,"&amp;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#39;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;");
+}
+
+
+/* ========================================
+   FORMAT DATE
+======================================== */
+
+function formatDate(dateString){
+
+    if(!dateString){
+        return "";
+    }
+
+    const parts =
+        dateString.split("-");
+
+    if(parts.length !== 3){
+        return dateString;
+    }
+
+    const year =
+        Number(parts[0]);
+
+    const month =
+        Number(parts[1]);
+
+    const day =
+        Number(parts[2]);
+
+
+    const date =
+        new Date(
+            year,
+            month - 1,
+            day
+        );
+
+
+    return date.toLocaleDateString(
+        "en-GB",
+        {
+            weekday:"long",
+            day:"2-digit",
+            month:"long",
+            year:"numeric"
+        }
+    );
+}
+
+
+/* ========================================
+   DATE LABEL
+======================================== */
+
+function getDateLabel(dateString){
+
+    const today =
+        new Date();
+
+    const todayString =
+        today.getFullYear() +
+        "-" +
+        String(
+            today.getMonth()+1
+        ).padStart(2,"0") +
+        "-" +
+        String(
+            today.getDate()
+        ).padStart(2,"0");
+
+
+    if(
+        dateString ===
+        todayString
+    ){
+
+        return "TODAY";
+
+    }
+
+
+    const tomorrow =
+        new Date();
+
+    tomorrow.setDate(
+        tomorrow.getDate()+1
+    );
+
+
+    const tomorrowString =
+        tomorrow.getFullYear() +
+        "-" +
+        String(
+            tomorrow.getMonth()+1
+        ).padStart(2,"0") +
+        "-" +
+        String(
+            tomorrow.getDate()
+        ).padStart(2,"0");
+
+
+    if(
+        dateString ===
+        tomorrowString
+    ){
+
+        return "TOMORROW";
+
+    }
+
+
+    return "";
+}
+
+
+/* ========================================
+   LOAD STOCK DATES
+======================================== */
+
+async function loadStockDates(){
+
+    try{
+
+        status.textContent =
+            "⏳ MCQ Stock load වෙමින්...";
+
+
+        dateGrid.innerHTML =
+            "";
+
+
+        const snapshot =
+            await getDocs(
+                collection(
+                    db,
+                    "mcqStock"
+                )
+            );
+
+
+        const stocks = [];
+
+
+        snapshot.forEach(
+            function(docSnap){
+
+                const data =
+                    docSnap.data();
+
+
+                if(
+                    data.date
+                ){
+
+                    stocks.push({
+
+                        id:
+                            docSnap.id,
+
+                        ...data
+
+                    });
+
+                }
+
+            }
+        );
+
+
+        /* SORT NEWEST FIRST */
+
+        stocks.sort(
+            function(a,b){
+
+                return String(
+                    b.date
+                ).localeCompare(
+                    String(a.date)
+                );
+
+            }
+        );
+
+
+        if(
+            stocks.length === 0
+        ){
+
+            dateGrid.innerHTML = `
+
+                <div class="empty">
+
+                    📭 MCQ Stock එකේ
+                    තවම dates නැහැ.
+
+                </div>
+
+            `;
+
+
+            status.textContent =
+                "📚 Stock Empty";
+
+            return;
+
+        }
+
+
+        /* ====================================
+           DATE CARDS
+        ==================================== */
+
+        for(
+            const stock of stocks
+        ){
+
+            createDateCard(
+                stock
+            );
+
+        }
+
+
+        status.textContent =
+            "✅ " +
+            stocks.length +
+            " MCQ dates available";
+
+
+    }
+    catch(error){
+
+        console.error(error);
+
+
+        status.innerHTML = `
+
+            <div class="error">
+
+                ❌ Stock load error.
+
+                <br><br>
+
+                ${escapeHTML(
+                    error.message
+                )}
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/* ========================================
+   CREATE DATE CARD
+======================================== */
+
+function createDateCard(
+    stock
+){
+
+    const card =
+        document.createElement(
+            "div"
+        );
+
+
+    card.className =
+        "date-card";
+
+
+    const chemistry =
+        Number(
+            stock.questionCountChemistry ??
+            0
+        );
+
+
+    const physics =
+        Number(
+            stock.questionCountPhysics ??
+            0
+        );
+
+
+    /*
+       Current stock system has
+       separate stock docs:
+
+       chemistry_YYYY-MM-DD
+       physics_YYYY-MM-DD
+
+       So if this card comes from
+       one subject stock document,
+       load both subject stocks.
+    */
+
+    card.innerHTML = `
+
+        <div class="date-title">
+
+            📅 ${escapeHTML(
+                stock.date
+            )}
+
+        </div>
+
+        <div class="date-label">
+
+            ${escapeHTML(
+                formatDate(
+                    stock.date
+                )
+            )}
+
+            ${
+                getDateLabel(
+                    stock.date
+                )
+                ? `
+                    <br>
+                    <b>
+                        ${getDateLabel(
+                            stock.date
+                        )}
+                    </b>
+                  `
+                : ""
+            }
+
+        </div>
+
+
+        <div class="subject-row">
+
+            <div class="subject-box">
+
+                <div class="subject-name">
+                    🧪 Chemistry
+                </div>
+
+                <div
+                    class="subject-count"
+                    id="chem-${stock.date}"
+                >
+                    ...
+                </div>
+
+            </div>
+
+
+            <div class="subject-box">
+
+                <div class="subject-name">
+                    ⚡ Physics
+                </div>
+
+                <div
+                    class="subject-count"
+                    id="phy-${stock.date}"
+                >
+                    ...
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="ready-${stock.date}"
+            class="wait-badge"
+        >
+            ⏳ Checking...
+        </div>
+
+
+        <div class="arrow">
+
+            👆 Touch කරන්න →
+            MCQ බලන්න
+
+        </div>
+
+    `;
+
+
+    dateGrid.appendChild(
+        card
+    );
+
+
+    card.addEventListener(
+        "click",
+        function(){
+
+            openDate(
+                stock.date
+            );
+
+        }
+    );
+
+
+    loadDateCounts(
+        stock.date
+    );
+
+}
+
+
+/* ========================================
+   LOAD BOTH SUBJECT COUNTS
+======================================== */
+
+async function loadDateCounts(
+    date
+){
+
+    try{
+
+        const chemistryRef =
+            doc(
+                db,
+                "mcqStock",
+                "chemistry_" + date
+            );
+
+
+        const physicsRef =
+            doc(
+                db,
+                "mcqStock",
+                "physics_" + date
+            );
+
+
+        const chemistrySnap =
+            await getDoc(
+                chemistryRef
+            );
+
+
+        const physicsSnap =
+            await getDoc(
+                physicsRef
+            );
+
+
+        let chemistryCount = 0;
+        let physicsCount = 0;
+
+
+        let chemistryReady =
+            false;
+
+        let physicsReady =
+            false;
+
+
+        if(
+            chemistrySnap.exists()
+        ){
+
+            const data =
+                chemistrySnap.data();
+
+
+            chemistryCount =
+                Number(
+                    data.questionCount || 0
+                );
+
+
+            chemistryReady =
+                data.ready === true;
+
+        }
+
+
+        if(
+            physicsSnap.exists()
+        ){
+
+            const data =
+                physicsSnap.data();
+
+
+            physicsCount =
+                Number(
+                    data.questionCount || 0
+                );
+
+
+            physicsReady =
+                data.ready === true;
+
+        }
+
+
+        const chemistryElement =
+            document.getElementById(
+                "chem-" + date
+            );
+
+
+        const physicsElement =
+            document.getElementById(
+                "phy-" + date
+            );
+
+
+        const readyElement =
+            document.getElementById(
+                "ready-" + date
+            );
+
+
+        if(
+            chemistryElement
+        ){
+
+            chemistryElement.textContent =
+                chemistryCount +
+                " / 25";
+
+
+            chemistryElement.className =
+                "subject-count " +
+                (
+                    chemistryReady
+                    ? "ready"
+                    : "not-ready"
+                );
+
+        }
+
+
+        if(
+            physicsElement
+        ){
+
+            physicsElement.textContent =
+                physicsCount +
+                " / 25";
+
+
+            physicsElement.className =
+                "subject-count " +
+                (
+                    physicsReady
+                    ? "ready"
+                    : "not-ready"
+                );
+
+        }
+
+
+        if(
+            readyElement
+        ){
+
+            if(
+                chemistryReady &&
+                physicsReady
+            ){
+
+                readyElement.className =
+                    "ready-badge";
+
+                readyElement.textContent =
+                    "✅ STOCK READY";
+
+            }
+            else{
+
+                readyElement.className =
+                    "wait-badge";
+
+                readyElement.textContent =
+                    "⏳ " +
+                    chemistryCount +
+                    "/25 + " +
+                    physicsCount +
+                    "/25";
+
+            }
+
+        }
+
+    }
+    catch(error){
+
+        console.error(
+            "Count error:",
+            error
+        );
+
+    }
+
+}
+
+
+/* ========================================
+   OPEN DATE
+======================================== */
+
+async function openDate(
+    date
+){
+
+    detailBox.style.display =
+        "block";
+
+
+    detailDate.innerHTML =
+        "📅 " +
+        escapeHTML(
+            date
+        );
+
+
+    detailSummary.innerHTML =
+        escapeHTML(
+            formatDate(date)
+        );
+
+
+    detailContent.innerHTML = `
+
+        <div class="loading">
+
+            ⏳ මේ date එකේ
+            MCQ load වෙමින්...
+
+        </div>
+
+    `;
+
+
+    detailBox.scrollIntoView({
+        behavior:"smooth",
+        block:"start"
+    });
+
+
+    try{
+
+        const q =
+            query(
+                collection(
+                    db,
+                    "mcqs"
+                ),
+                where(
+                    "date",
+                    "==",
+                    date
+                )
+            );
+
+
+        const snapshot =
+            await getDocs(q);
+
+
+        const chemistry = [];
+        const physics = [];
+
+
+        snapshot.forEach(
+            function(docSnap){
+
+                const data =
+                    docSnap.data();
+
+
+                const item = {
+
+                    id:
+                        docSnap.id,
+
+                    ...data
+
+                };
+
+
+                if(
+                    data.subject ===
+                    "Chemistry"
+                ){
+
+                    chemistry.push(
+                        item
+                    );
+
+                }
+
+
+                if(
+                    data.subject ===
+                    "Physics"
+                ){
+
+                    physics.push(
+                        item
+                    );
+
+                }
+
+            }
+        );
+
+
+        /* ORDER */
+
+        chemistry.sort(
+            function(a,b){
+
+                return String(a.id)
+                    .localeCompare(
+                        String(b.id)
+                    );
+
+            }
+        );
+
+
+        physics.sort(
+            function(a,b){
+
+                return String(a.id)
+                    .localeCompare(
+                        String(b.id)
+                    );
+
+            }
+        );
+
+
+        detailSummary.innerHTML = `
+
+            🧪 Chemistry:
+            <b>${chemistry.length}/25</b>
+
+            &nbsp;&nbsp;
+
+            ⚡ Physics:
+            <b>${physics.length}/25</b>
+
+        `;
+
+
+        detailContent.innerHTML =
+            "";
+
+
+        if(
+            chemistry.length > 0
+        ){
+
+            addSubjectTitle(
+                "🧪 Chemistry MCQs (" +
+                chemistry.length +
+                "/25)"
+            );
+
+
+            for(
+                let i=0;
+                i<chemistry.length;
+                i++
+            ){
+
+                await addQuestionCard(
+                    chemistry[i],
+                    i+1
+                );
+
+            }
+
+        }
+
+
+        if(
+            physics.length > 0
+        ){
+
+            addSubjectTitle(
+                "⚡ Physics MCQs (" +
+                physics.length +
+                "/25)"
+            );
+
+
+            for(
+                let i=0;
+                i<physics.length;
+                i++
+            ){
+
+                await addQuestionCard(
+                    physics[i],
+                    i+1
+                );
+
+            }
+
+        }
+
+
+        if(
+            chemistry.length === 0 &&
+            physics.length === 0
+        ){
+
+            detailContent.innerHTML = `
+
+                <div class="empty">
+
+                    📭 මේ date එකට
+                    MCQ නැහැ.
+
+                </div>
+
+            `;
+
+        }
+
+    }
+    catch(error){
+
+        console.error(error);
+
+
+        detailContent.innerHTML = `
+
+            <div class="error">
+
+                ❌ MCQ load error.
+
+                <br><br>
+
+                ${escapeHTML(
+                    error.message
+                )}
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+
+/* ========================================
+   SUBJECT TITLE
+======================================== */
+
+function addSubjectTitle(
+    text
+){
+
+    const title =
+        document.createElement(
+            "div"
+        );
+
+
+    title.className =
+        "subject-title";
+
+
+    title.textContent =
+        text;
+
+
+    detailContent.appendChild(
+        title
+    );
+
+}
+
+
+/* ========================================
+   QUESTION CARD
+======================================== */
+
+async function addQuestionCard(
+    item,
+    number
+){
+
+    const card =
+        document.createElement(
+            "div"
+        );
+
+
+    card.className =
+        "question-card";
+
+
+    let optionsHTML =
+        "";
+
+
+    const options =
+        Array.isArray(
+            item.options
+        )
+        ? item.options
+        : [];
+
+
+    const optionImages =
+        Array.isArray(
+            item.optionImages
+        )
+        ? item.optionImages
+        : [];
+
+
+    for(
+        let i=0;
+        i<options.length;
+        i++
+    ){
+
+        let optionText =
+            "";
+
+
+        if(
+            typeof options[i] ===
+            "object"
+        ){
+
+            optionText =
+                options[i].text ||
+                "";
+
+        }
+        else{
+
+            optionText =
+                options[i] ||
+                "";
+
+        }
+
+
+        optionsHTML += `
+
+            <div class="option">
+
+                <b>${i+1}.</b>
+
+                ${escapeHTML(
+                    optionText
+                )}
+
+                ${
+                    optionImages[i]
+                    ? `
+                        <br>
+                        <img
+                            class="question-image"
+                            src="${escapeAttribute(
+                                optionImages[i]
+                            )}"
+                            alt="Option image"
+                        >
+                      `
+                    : ""
+                }
+
+            </div>
+
+        `;
+
+    }
+
+
+    let correctAnswer =
+        null;
+
+
+    try{
+
+        const answerRef =
+            doc(
+                db,
+                "mcqAnswers",
+                item.id
+            );
+
+
+        const answerSnap =
+            await getDoc(
+                answerRef
+            );
+
+
+        if(
+            answerSnap.exists()
+        ){
+
+            const answerData =
+                answerSnap.data();
+
+
+            if(
+                answerData.correctAnswer !==
+                undefined
+            ){
+
+                correctAnswer =
+                    Number(
+                        answerData.correctAnswer
+                    );
+
+            }
+            else if(
+                answerData.answer !==
+                undefined
+            ){
+
+                correctAnswer =
+                    Number(
+                        answerData.answer
+                    );
+
+            }
+
+        }
+
+    }
+    catch(error){
+
+        console.error(
+            "Answer load error:",
+            error
+        );
+
+    }
+
+
+    let correctHTML =
+        "";
+
+
+    if(
+        correctAnswer !== null &&
+        !Number.isNaN(
+            correctAnswer
+        )
+    ){
+
+        correctHTML = `
+
+            <div class="correct">
+
+                ✅ Correct Answer:
+                ${correctAnswer + 1}
+
+            </div>
+
+        `;
+
+    }
+    else{
+
+        correctHTML = `
+
+            <div class="correct">
+
+                ⚠️ Answer data නැහැ.
+
+            </div>
+
+        `;
+
+    }
+
+
+    const questionImage =
+        item.questionImage ||
+        "";
+
+
+    card.innerHTML = `
+
+        <div class="question-number">
+
+            Question ${number}
+
+        </div>
+
+
+        <div class="question-text">
+
+            ${escapeHTML(
+                item.question || ""
+            )}
+
+        </div>
+
+
+        ${
+            questionImage
+            ? `
+                <img
+                    class="question-image"
+                    src="${escapeAttribute(
+                        questionImage
+                    )}"
+                    alt="Question image"
+                >
+              `
+            : ""
+        }
+
+
+        ${optionsHTML}
+
+
+        ${correctHTML}
+
+    `;
+
+
+    detailContent.appendChild(
+        card
+    );
+
+}
+
+
+/* ========================================
+   CLOSE DETAIL
+======================================== */
+
+document
+    .getElementById(
+        "closeDetail"
+    )
+    .addEventListener(
+        "click",
+        function(){
+
+            detailBox.style.display =
+                "none";
+
+
+            window.scrollTo({
+                top:0,
+                behavior:"smooth"
+            });
+
+        }
+    );
+
+
+/* ========================================
+   BACK
+======================================== */
+
+document
+    .getElementById(
+        "backButton"
+    )
+    .addEventListener(
+        "click",
+        function(){
+
+            window.location.href =
+                "add-mcq.html";
+
+        }
+    );
+
+
+/* ========================================
+   LOGOUT
+======================================== */
+
+document
+    .getElementById(
+        "logoutButton"
+    )
+    .addEventListener(
+        "click",
+        async function(){
+
+            try{
+
+                await signOut(
+                    auth
+                );
+
+                window.location.href =
+                    "login.html";
+
+            }
+            catch(error){
+
+                alert(
+                    "Logout Error: " +
+                    error.message
+                );
+
+            }
+
+        }
+    );
+
+
+/* ========================================
+   AUTH
+======================================== */
+
+async function initializeAuth(){
+
+    try{
+
+        await setPersistence(
+            auth,
+            browserSessionPersistence
+        );
+
+    }
+    catch(error){
+
+        console.error(
+            "Persistence error:",
+            error
+        );
+
+    }
+
+
+    onAuthStateChanged(
+        auth,
+        async function(user){
+
+            if(!user){
+
+                window.location.href =
+                    "login.html";
+
+                return;
+
+            }
+
+
+            currentUser =
+                user;
+
+
+            if(
+                user.uid !==
+                ADMIN_UID
+            ){
+
+                alert(
+                    "🚫 Admin access required."
+                );
+
+
+                await signOut(
+                    auth
+                );
+
+
+                return;
+
+            }
+
+
+            await loadStockDates();
+
+        }
+    );
+
+}
+
+
+/* ========================================
+   START
+======================================== */
+
+initializeAuth();
+
+</script>
+
+</body>
+
+</html>
