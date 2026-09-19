@@ -1,0 +1,1976 @@
+<!DOCTYPE html>
+<html lang="si">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>MCQ Winner - Rank List</title>
+
+<style>
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #eef4ff;
+    color: #172554;
+}
+
+
+/* ==============================
+   HEADER
+============================== */
+
+.header {
+    background: linear-gradient(
+        135deg,
+        #1e3a8a,
+        #2563eb
+    );
+
+    color: white;
+    text-align: center;
+
+    padding: 28px 20px 35px;
+
+    border-radius:
+        0 0 28px 28px;
+}
+
+.header .logo {
+    font-size: 48px;
+}
+
+.header h1 {
+    margin: 5px 0;
+    font-size: 30px;
+}
+
+.header p {
+    margin: 8px 0 0;
+    opacity: 0.9;
+}
+
+
+/* ==============================
+   CONTAINER
+============================== */
+
+.container {
+    width: 94%;
+    max-width: 700px;
+    margin: 22px auto;
+}
+
+
+/* ==============================
+   BACK BUTTON
+============================== */
+
+.back-btn {
+    width: 100%;
+
+    padding: 14px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: white;
+
+    color: #1e3a8a;
+
+    font-size: 17px;
+
+    font-weight: bold;
+
+    box-shadow:
+        0 3px 10px
+        rgba(0,0,0,0.08);
+
+    cursor: pointer;
+
+    margin-bottom: 20px;
+}
+
+
+/* ==============================
+   DAY INFO
+============================== */
+
+.day-info {
+    background: white;
+
+    padding: 17px;
+
+    margin-bottom: 20px;
+
+    border-radius: 15px;
+
+    text-align: center;
+
+    box-shadow:
+        0 3px 10px
+        rgba(0,0,0,0.08);
+
+    line-height: 1.7;
+}
+
+.day-info strong {
+    color: #1d4ed8;
+}
+
+
+/* ==============================
+   SUBJECT BOX
+============================== */
+
+.subject-box {
+    background: white;
+
+    border-radius: 20px;
+
+    padding: 20px;
+
+    margin-bottom: 25px;
+
+    box-shadow:
+        0 4px 15px
+        rgba(0,0,0,0.08);
+}
+
+.subject-title {
+    text-align: center;
+
+    margin-bottom: 18px;
+
+    font-size: 24px;
+
+    font-weight: bold;
+}
+
+
+/* ==============================
+   TOP 20 TITLE
+============================== */
+
+.top-title {
+    background: #1e3a8a;
+
+    color: white;
+
+    padding: 13px;
+
+    border-radius: 12px;
+
+    text-align: center;
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    margin-bottom: 15px;
+}
+
+
+/* ==============================
+   MY RANK
+============================== */
+
+.my-rank {
+    background: #eff6ff;
+
+    border: 2px solid #bfdbfe;
+
+    border-radius: 15px;
+
+    padding: 16px;
+
+    text-align: center;
+
+    margin-top: 20px;
+
+    margin-bottom: 15px;
+}
+
+.my-rank h3 {
+    margin: 0 0 8px;
+}
+
+.my-rank .rank-number {
+    font-size: 30px;
+
+    font-weight: bold;
+
+    color: #1d4ed8;
+}
+
+.my-rank p {
+    margin: 5px 0;
+}
+
+
+/* ==============================
+   TOP 20 NOTICE
+============================== */
+
+.top20-notice {
+    background: #dcfce7;
+
+    border: 2px solid #86efac;
+
+    color: #166534;
+
+    border-radius: 12px;
+
+    padding: 12px;
+
+    text-align: center;
+
+    font-weight: bold;
+
+    margin-bottom: 15px;
+}
+
+
+/* ==============================
+   RANK ROW
+============================== */
+
+.rank-row {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    background: #f8fafc;
+
+    padding: 12px;
+
+    margin: 8px 0;
+
+    border-radius: 12px;
+
+    transition: 0.2s;
+}
+
+
+/* ==============================
+   CURRENT USER
+============================== */
+
+.my-row {
+    border: 3px solid #2563eb;
+
+    background: #dbeafe;
+
+    box-shadow:
+        0 3px 12px
+        rgba(37,99,235,0.18);
+}
+
+
+/* ==============================
+   RANK NUMBER
+============================== */
+
+.rank-number {
+    width: 42px;
+
+    text-align: center;
+
+    font-size: 20px;
+
+    font-weight: bold;
+}
+
+
+/* ==============================
+   NAME
+============================== */
+
+.rank-name {
+    flex: 1;
+
+    min-width: 0;
+}
+
+.rank-name strong {
+    display: block;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+}
+
+.rank-name small {
+    color: #64748b;
+}
+
+
+/* ==============================
+   SCORE
+============================== */
+
+.rank-score {
+    text-align: right;
+
+    font-weight: bold;
+
+    white-space: nowrap;
+}
+
+
+/* ==============================
+   TIME
+============================== */
+
+.rank-time {
+    color: #475569;
+
+    font-size: 13px;
+
+    margin-top: 3px;
+}
+
+
+/* ==============================
+   TOP THREE
+============================== */
+
+.first {
+    background: #fef3c7;
+}
+
+.second {
+    background: #f1f5f9;
+}
+
+.third {
+    background: #ffedd5;
+}
+
+
+/* ==============================
+   MOTIVATION
+============================== */
+
+.motivation {
+    background: linear-gradient(
+        135deg,
+        #eff6ff,
+        #dbeafe
+    );
+
+    border: 2px solid #bfdbfe;
+
+    border-radius: 15px;
+
+    padding: 16px;
+
+    text-align: center;
+
+    margin-top: 15px;
+
+    line-height: 1.7;
+}
+
+.motivation strong {
+    color: #1d4ed8;
+}
+
+
+/* ==============================
+   LOADING / EMPTY
+============================== */
+
+.loading,
+.empty {
+    text-align: center;
+
+    padding: 25px;
+
+    color: #64748b;
+
+    line-height: 1.7;
+}
+
+
+/* ==============================
+   FOOTER
+============================== */
+
+.footer {
+    text-align: center;
+
+    padding: 25px 10px;
+
+    color: #64748b;
+
+    font-size: 14px;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- ==============================
+     HEADER
+============================== -->
+
+<div class="header">
+
+    <div class="logo">
+        🏆
+    </div>
+
+    <h1>
+        Rank List
+    </h1>
+
+    <p>
+        අද Top 20
+    </p>
+
+</div>
+
+
+
+<div class="container">
+
+
+    <!-- ==============================
+         BACK
+    ============================== -->
+
+    <button
+        class="back-btn"
+        onclick="window.location.href='index.html'"
+    >
+        ← Home
+    </button>
+
+
+
+    <!-- ==============================
+         DAY INFORMATION
+    ============================== -->
+
+    <div
+        id="dayInfo"
+        class="day-info"
+    >
+
+        ⏳ Rank List එක
+        load වෙමින්...
+
+    </div>
+
+
+
+    <!-- ==============================
+         CHEMISTRY
+    ============================== -->
+
+    <div class="subject-box">
+
+        <div class="subject-title">
+
+            🧪 Chemistry
+
+        </div>
+
+
+        <!-- TOP 20 TITLE -->
+
+        <div class="top-title">
+
+            🏆 TODAY'S TOP 20
+
+        </div>
+
+
+        <!-- TOP 20 LIST -->
+
+        <div
+            id="chemistryList"
+        >
+
+            <div class="loading">
+
+                Loading...
+
+            </div>
+
+        </div>
+
+
+        <!-- MY RANK -->
+
+        <div
+            id="chemistryMyRank"
+            class="my-rank"
+        >
+
+            <div class="loading">
+
+                ඔබේ Rank එක බලමින්...
+
+            </div>
+
+        </div>
+
+
+        <!-- MOTIVATION -->
+
+        <div
+            id="chemistryMotivation"
+            class="motivation"
+        >
+
+            🌟 Keep Going!
+
+            <br>
+
+            අද score එකට වඩා වැදගත් වෙන්නේ
+            ඊළඟ දවසේ තවත් improve වෙන එක.
+
+            <br>
+
+            <strong>
+                Practice → Improve → Rise 🚀
+            </strong>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ==============================
+         PHYSICS
+    ============================== -->
+
+    <div class="subject-box">
+
+        <div class="subject-title">
+
+            ⚡ Physics
+
+        </div>
+
+
+        <!-- TOP 20 TITLE -->
+
+        <div class="top-title">
+
+            🏆 TODAY'S TOP 20
+
+        </div>
+
+
+        <!-- TOP 20 LIST -->
+
+        <div
+            id="physicsList"
+        >
+
+            <div class="loading">
+
+                Loading...
+
+            </div>
+
+        </div>
+
+
+        <!-- MY RANK -->
+
+        <div
+            id="physicsMyRank"
+            class="my-rank"
+        >
+
+            <div class="loading">
+
+                ඔබේ Rank එක බලමින්...
+
+            </div>
+
+        </div>
+
+
+        <!-- MOTIVATION -->
+
+        <div
+            id="physicsMotivation"
+            class="motivation"
+        >
+
+            🌟 Keep Going!
+
+            <br>
+
+            අද score එකට වඩා වැදගත් වෙන්නේ
+            ඊළඟ දවසේ තවත් improve වෙන එක.
+
+            <br>
+
+            <strong>
+                Practice → Improve → Rise 🚀
+            </strong>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+
+<!-- ==============================
+     FOOTER
+============================== -->
+
+<div class="footer">
+
+    MCQ Winner © 2026
+
+    <br>
+
+    එකතුවෙලා ගොඩයමු ❤️
+
+</div>
+
+
+
+<script type="module">
+
+
+// ========================================
+// FIREBASE APP
+// ========================================
+
+import {
+    initializeApp
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+
+
+// ========================================
+// FIREBASE AUTH
+// ========================================
+
+import {
+    getAuth,
+    onAuthStateChanged
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
+
+// ========================================
+// FIRESTORE
+// ========================================
+
+import {
+    getFirestore,
+    collection,
+    getDocs,
+    query,
+    where
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+
+// ========================================
+// FIREBASE CONFIG
+// ========================================
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyAMkaGYmBuoFama5MW5AhoX9q6cly_-nbg",
+
+    authDomain:
+        "mcq-winner.firebaseapp.com",
+
+    projectId:
+        "mcq-winner",
+
+    storageBucket:
+        "mcq-winner.firebasestorage.app",
+
+    messagingSenderId:
+        "1022060912943",
+
+    appId:
+        "1:1022060912943:web:f6e58414867e32f685c1da",
+
+    measurementId:
+        "G-MBH3NZ728H"
+
+};
+
+
+
+// ========================================
+// INITIALIZE
+// ========================================
+
+const app =
+    initializeApp(
+        firebaseConfig
+    );
+
+
+const auth =
+    getAuth(app);
+
+
+const db =
+    getFirestore(app);
+
+
+
+// ========================================
+// CURRENT USER
+// ========================================
+
+let currentUser = null;
+
+
+
+// ========================================
+// SRI LANKA DATE
+// ========================================
+
+function getSriLankaTime() {
+
+    return new Date(
+
+        new Date().toLocaleString(
+            "en-US",
+            {
+                timeZone:
+                    "Asia/Colombo"
+            }
+        )
+
+    );
+
+}
+
+
+
+// ========================================
+// FORMAT DATE
+// ========================================
+
+function formatDate(
+    date
+) {
+
+    const year =
+        date.getFullYear();
+
+
+    const month =
+        String(
+            date.getMonth() + 1
+        ).padStart(
+            2,
+            "0"
+        );
+
+
+    const day =
+        String(
+            date.getDate()
+        ).padStart(
+            2,
+            "0"
+        );
+
+
+    return (
+
+        year +
+        "-" +
+        month +
+        "-" +
+        day
+
+    );
+
+}
+
+
+
+// ========================================
+// ADD DAYS
+// ========================================
+
+function addDays(
+    date,
+    days
+) {
+
+    const result =
+        new Date(date);
+
+
+    result.setDate(
+        result.getDate() + days
+    );
+
+
+    return result;
+
+}
+
+
+
+// ========================================
+// ACTIVE RANK DATE
+// ========================================
+
+function getRankDate() {
+
+    const now =
+        getSriLankaTime();
+
+
+    const hour =
+        now.getHours();
+
+
+    if (hour < 5) {
+
+        return formatDate(
+
+            addDays(
+                now,
+                -1
+            )
+
+        );
+
+    }
+
+
+    return formatDate(
+        now
+    );
+
+}
+
+
+
+// ========================================
+// SHOW DAY INFO
+// ========================================
+
+function updateDayInfo() {
+
+    const now =
+        getSriLankaTime();
+
+
+    const hour =
+        now.getHours();
+
+
+    const rankDate =
+        getRankDate();
+
+
+    const box =
+        document.getElementById(
+            "dayInfo"
+        );
+
+
+    if (hour < 5) {
+
+        box.innerHTML =
+
+            "🌙 දැන් <b>5:00 AMට කලින්</b>." +
+
+            "<br>" +
+
+            "🏆 පෙන්වන්නේ <b>" +
+            rankDate +
+            "</b> දවසේ Rank List එක.";
+
+    }
+
+    else {
+
+        box.innerHTML =
+
+            "🌅 දැන් <b>5:00 AM පසුයි</b>." +
+
+            "<br>" +
+
+            "🏆 පෙන්වන්නේ <b>" +
+            rankDate +
+            "</b> දවසේ Rank List එක.";
+
+    }
+
+}
+
+
+
+// ========================================
+// FORMAT TIME
+// ========================================
+
+function formatTime(
+    totalSeconds
+) {
+
+    if (
+        totalSeconds === undefined ||
+        totalSeconds === null ||
+        totalSeconds === ""
+    ) {
+
+        return "—";
+
+    }
+
+
+    const secondsNumber =
+        Number(
+            totalSeconds
+        );
+
+
+    if (
+        !Number.isFinite(
+            secondsNumber
+        ) ||
+        secondsNumber < 0
+    ) {
+
+        return "—";
+
+    }
+
+
+    const total =
+        Math.floor(
+            secondsNumber
+        );
+
+
+    const hours =
+        Math.floor(
+            total / 3600
+        );
+
+
+    const minutes =
+        Math.floor(
+            (total % 3600) / 60
+        );
+
+
+    const seconds =
+        total % 60;
+
+
+    if (hours > 0) {
+
+        return (
+
+            String(hours)
+                .padStart(
+                    2,
+                    "0"
+                ) +
+
+            ":" +
+
+            String(minutes)
+                .padStart(
+                    2,
+                    "0"
+                ) +
+
+            ":" +
+
+            String(seconds)
+                .padStart(
+                    2,
+                    "0"
+                )
+
+        );
+
+    }
+
+
+    return (
+
+        String(minutes)
+            .padStart(
+                2,
+                "0"
+            ) +
+
+        ":" +
+
+        String(seconds)
+            .padStart(
+                2,
+                "0"
+            )
+
+    );
+
+}
+
+
+
+// ========================================
+// TIME VALUE CHECK
+// ========================================
+
+function hasValidTime(
+    value
+) {
+
+    if (
+        value === undefined ||
+        value === null ||
+        value === ""
+    ) {
+
+        return false;
+
+    }
+
+
+    const number =
+        Number(value);
+
+
+    return (
+        Number.isFinite(number) &&
+        number >= 0
+    );
+
+}
+
+
+
+// ========================================
+// SORT RESULTS
+// ========================================
+
+function sortResults(
+    results
+) {
+
+    results.sort(
+
+        function(a, b) {
+
+            const scoreA =
+                Number(
+                    a.score
+                ) || 0;
+
+
+            const scoreB =
+                Number(
+                    b.score
+                ) || 0;
+
+
+            // ==============================
+            // SCORE HIGH → LOW
+            // ==============================
+
+            if (
+                scoreA !==
+                scoreB
+            ) {
+
+                return (
+                    scoreB -
+                    scoreA
+                );
+
+            }
+
+
+
+            // ==============================
+            // SAME SCORE
+            // ==============================
+
+            const validA =
+                hasValidTime(
+                    a.timeTaken
+                );
+
+
+            const validB =
+                hasValidTime(
+                    b.timeTaken
+                );
+
+
+            // Both have time
+            // SHORTER TIME → HIGHER RANK
+
+            if (
+                validA &&
+                validB
+            ) {
+
+                const timeA =
+                    Number(
+                        a.timeTaken
+                    );
+
+
+                const timeB =
+                    Number(
+                        b.timeTaken
+                    );
+
+
+                if (
+                    timeA !==
+                    timeB
+                ) {
+
+                    return (
+                        timeA -
+                        timeB
+                    );
+
+                }
+
+            }
+
+
+            // Valid time before
+            // missing time
+
+            if (
+                validA &&
+                !validB
+            ) {
+
+                return -1;
+
+            }
+
+
+            if (
+                !validA &&
+                validB
+            ) {
+
+                return 1;
+
+            }
+
+
+            // Both same / missing
+
+            return 0;
+
+        }
+
+    );
+
+
+    return results;
+
+}
+
+
+
+// ========================================
+// LOGIN CHECK
+// ========================================
+
+onAuthStateChanged(
+
+    auth,
+
+    async function(user) {
+
+        if (!user) {
+
+            window.location.href =
+                "./login.html";
+
+            return;
+
+        }
+
+
+        currentUser =
+            user;
+
+
+        updateDayInfo();
+
+
+        await loadRanking(
+            "Chemistry"
+        );
+
+
+        await loadRanking(
+            "Physics"
+        );
+
+    }
+
+);
+
+
+
+// ========================================
+// LOAD RANKING
+// ========================================
+
+async function loadRanking(
+    subject
+) {
+
+    const listId =
+
+        subject === "Chemistry"
+
+        ? "chemistryList"
+
+        : "physicsList";
+
+
+    const myRankId =
+
+        subject === "Chemistry"
+
+        ? "chemistryMyRank"
+
+        : "physicsMyRank";
+
+
+    const motivationId =
+
+        subject === "Chemistry"
+
+        ? "chemistryMotivation"
+
+        : "physicsMotivation";
+
+
+    const listElement =
+        document.getElementById(
+            listId
+        );
+
+
+    const myRankElement =
+        document.getElementById(
+            myRankId
+        );
+
+
+    const motivationElement =
+        document.getElementById(
+            motivationId
+        );
+
+
+    try {
+
+
+        // ====================================
+        // ACTIVE DATE
+        // ====================================
+
+        const rankDate =
+            getRankDate();
+
+
+
+        // ====================================
+        // FIRESTORE QUERY
+        // ====================================
+
+        const q =
+            query(
+
+                collection(
+                    db,
+                    "results"
+                ),
+
+                where(
+                    "subject",
+                    "==",
+                    subject
+                ),
+
+                where(
+                    "date",
+                    "==",
+                    rankDate
+                )
+
+            );
+
+
+        const snapshot =
+            await getDocs(q);
+
+
+        const results = [];
+
+
+        snapshot.forEach(
+
+            function(docSnap) {
+
+                results.push({
+
+                    id:
+                        docSnap.id,
+
+                    ...docSnap.data()
+
+                });
+
+            }
+
+        );
+
+
+
+        // ====================================
+        // SORT
+        // ====================================
+
+        sortResults(
+            results
+        );
+
+
+
+        // ====================================
+        // TOP 20
+        // ====================================
+
+        const top20 =
+            results.slice(
+                0,
+                20
+            );
+
+
+
+        // ====================================
+        // SHOW TOP 20
+        // ====================================
+
+        if (
+            top20.length === 0
+        ) {
+
+            listElement.innerHTML = `
+
+                <div class="empty">
+
+                    📝 ${escapeHTML(rankDate)}
+                    දවසේ
+                    ${escapeHTML(subject)}
+                    Result තවම නැහැ.
+
+                    <br><br>
+
+                    පළමු Result එක
+                    submit කළාම
+                    මෙතන Rank List එක පෙන්වයි.
+
+                </div>
+
+            `;
+
+        }
+
+        else {
+
+            listElement.innerHTML =
+                "";
+
+
+            top20.forEach(
+
+                function(
+                    item,
+                    index
+                ) {
+
+                    const row =
+                        document.createElement(
+                            "div"
+                        );
+
+
+                    row.className =
+                        "rank-row";
+
+
+
+                    // ====================================
+                    // CURRENT USER
+                    // ====================================
+
+                    const isMe =
+                        item.uid ===
+                        currentUser.uid;
+
+
+                    if (isMe) {
+
+                        row.classList.add(
+                            "my-row"
+                        );
+
+                    }
+
+
+
+                    // ====================================
+                    // TOP THREE
+                    // ====================================
+
+                    if (
+                        index === 0
+                    ) {
+
+                        row.classList.add(
+                            "first"
+                        );
+
+                    }
+
+                    else if (
+                        index === 1
+                    ) {
+
+                        row.classList.add(
+                            "second"
+                        );
+
+                    }
+
+                    else if (
+                        index === 2
+                    ) {
+
+                        row.classList.add(
+                            "third"
+                        );
+
+                    }
+
+
+
+                    // ====================================
+                    // RANK ICON
+                    // ====================================
+
+                    const rankIcon =
+
+                        index === 0
+
+                        ? "🥇"
+
+                        : index === 1
+
+                        ? "🥈"
+
+                        : index === 2
+
+                        ? "🥉"
+
+                        : (
+                            index + 1
+                        );
+
+
+
+                    // ====================================
+                    // NAME
+                    // ====================================
+
+                    const studentName =
+                        item.name ||
+                        "Student";
+
+
+
+                    // ====================================
+                    // TIME
+                    // ====================================
+
+                    const displayTime =
+                        formatTime(
+                            item.timeTaken
+                        );
+
+
+
+                    // ====================================
+                    // ROW HTML
+                    // ====================================
+
+                    row.innerHTML = `
+
+                        <div class="rank-number">
+
+                            ${rankIcon}
+
+                        </div>
+
+
+                        <div class="rank-name">
+
+                            <strong>
+
+                                ${
+                                    escapeHTML(
+                                        studentName
+                                    )
+                                }
+
+                                ${
+                                    isMe
+                                    ? " 👤 You"
+                                    : ""
+                                }
+
+                            </strong>
+
+                            <small>
+
+                                Rank #${index + 1}
+
+                            </small>
+
+                        </div>
+
+
+                        <div class="rank-score">
+
+                            🏆
+                            ${
+                                Number(
+                                    item.score
+                                ) || 0
+                            }/25
+
+                            <div class="rank-time">
+
+                                ⏱️
+                                ${displayTime}
+
+                            </div>
+
+                        </div>
+
+                    `;
+
+
+                    listElement.appendChild(
+                        row
+                    );
+
+                }
+
+            );
+
+        }
+
+
+
+        // ====================================
+        // FIND CURRENT USER
+        // ====================================
+
+        const myIndex =
+            results.findIndex(
+
+                function(item) {
+
+                    return (
+                        item.uid ===
+                        currentUser.uid
+                    );
+
+                }
+
+            );
+
+
+
+        // ====================================
+        // USER HAS NO RESULT
+        // ====================================
+
+        if (
+            myIndex === -1
+        ) {
+
+            myRankElement.innerHTML = `
+
+                <h3>
+
+                    👤 ඔබේ ${escapeHTML(subject)}
+                    Rank
+
+                </h3>
+
+                <p>
+
+                    ${escapeHTML(rankDate)}
+                    දවසේ
+                    ${escapeHTML(subject)}
+                    Test එක
+                    තවම කරලා නැහැ.
+
+                </p>
+
+            `;
+
+        }
+
+        else {
+
+            const myResult =
+                results[
+                    myIndex
+                ];
+
+
+            const myRank =
+                myIndex + 1;
+
+
+            const myName =
+                myResult.name ||
+                "Student";
+
+
+            const myScore =
+                Number(
+                    myResult.score
+                ) || 0;
+
+
+            const myTime =
+                formatTime(
+                    myResult.timeTaken
+                );
+
+
+
+            // ====================================
+            // USER IS IN TOP 20
+            // ====================================
+
+            if (
+                myRank <= 20
+            ) {
+
+                myRankElement.innerHTML = `
+
+                    <div class="top20-notice">
+
+                        🎉 You are in
+                        TODAY'S TOP 20!
+
+                    </div>
+
+
+                    <h3>
+
+                        👤 ඔබේ
+                        ${escapeHTML(subject)}
+                        Rank
+
+                    </h3>
+
+
+                    <div class="rank-number">
+
+                        #${myRank}
+
+                    </div>
+
+
+                    <p>
+
+                        👤 Name:
+
+                        <b>
+
+                            ${
+                                escapeHTML(
+                                    myName
+                                )
+                            }
+
+                        </b>
+
+                    </p>
+
+
+                    <p>
+
+                        🏆 Score:
+
+                        <b>
+
+                            ${myScore}/25
+
+                        </b>
+
+                    </p>
+
+
+                    <p>
+
+                        ⏱️ Time:
+
+                        <b>
+
+                            ${myTime}
+
+                        </b>
+
+                    </p>
+
+                `;
+
+            }
+
+            else {
+
+                myRankElement.innerHTML = `
+
+                    <h3>
+
+                        👤 ඔබේ
+                        ${escapeHTML(subject)}
+                        Rank
+
+                    </h3>
+
+
+                    <div class="rank-number">
+
+                        #${myRank}
+
+                    </div>
+
+
+                    <p>
+
+                        👤 Name:
+
+                        <b>
+
+                            ${
+                                escapeHTML(
+                                    myName
+                                )
+                            }
+
+                        </b>
+
+                    </p>
+
+
+                    <p>
+
+                        🏆 Score:
+
+                        <b>
+
+                            ${myScore}/25
+
+                        </b>
+
+                    </p>
+
+
+                    <p>
+
+                        ⏱️ Time:
+
+                        <b>
+
+                            ${myTime}
+
+                        </b>
+
+                    </p>
+
+
+                    <p>
+
+                        📈 තව practice කරලා
+                        Top 20 එකට යමු!
+
+                    </p>
+
+                `;
+
+            }
+
+        }
+
+
+
+        // ====================================
+        // MOTIVATION
+        // ====================================
+
+        motivationElement.innerHTML = `
+
+            🌟 <strong>Keep Going!</strong>
+
+            <br>
+
+            අද score එකට වඩා වැදගත් වෙන්නේ
+            ඊළඟ දවසේ තවත් improve වෙන එක.
+
+            <br>
+
+            <strong>
+                Practice → Improve → Rise 🚀
+            </strong>
+
+        `;
+
+    }
+
+    catch(error) {
+
+        console.error(
+            subject +
+            " ranking error:",
+            error
+        );
+
+
+        listElement.innerHTML = `
+
+            <div class="empty">
+
+                ⚠️ ${escapeHTML(subject)}
+                Rank List එක
+                load කරන්න බැරි වුණා.
+
+                <br><br>
+
+                ${
+                    escapeHTML(
+                        error.message ||
+                        "Unknown error"
+                    )
+                }
+
+            </div>
+
+        `;
+
+
+        myRankElement.innerHTML = `
+
+            <p>
+
+                ⚠️ ඔබේ Rank එකත්
+                ලබාගන්න බැරි වුණා.
+
+            </p>
+
+        `;
+
+
+        motivationElement.innerHTML = `
+
+            🌟 Test එක continue කරන්න.
+            Rank List එක නැවත load කරලා බලන්න.
+
+        `;
+
+    }
+
+}
+
+
+
+// ========================================
+// ESCAPE HTML
+// ========================================
+
+function escapeHTML(
+    text
+) {
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+
+    div.textContent =
+        text || "";
+
+
+    return div.innerHTML;
+
+}
+
+</script>
+
+
+</body>
+
+</html>
