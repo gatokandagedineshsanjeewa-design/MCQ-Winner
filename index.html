@@ -1,0 +1,2718 @@
+<!DOCTYPE html>
+<html lang="si">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>MCQ Winner</title>
+
+<link
+    rel="manifest"
+    href="manifest.json"
+>
+
+<meta
+    name="theme-color"
+    content="#0b1f3a"
+>
+
+<meta
+    name="mobile-web-app-capable"
+    content="yes"
+>
+
+<meta
+    name="apple-mobile-web-app-capable"
+    content="yes"
+>
+
+<meta
+    name="apple-mobile-web-app-status-bar-style"
+    content="default"
+>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#eef4ff;
+    color:#172554;
+}
+
+/* ========================================
+   HEADER
+======================================== */
+
+.header{
+    position:relative;
+
+    background:linear-gradient(
+        135deg,
+        #0b1f3a,
+        #1e3a8a
+    );
+
+    color:white;
+
+    text-align:center;
+
+    padding:55px 20px 42px;
+
+    border-radius:0 0 30px 30px;
+}
+
+/* ========================================
+   PROFILE BUTTON
+======================================== */
+
+.profile-button{
+    position:absolute;
+
+    top:14px;
+    left:14px;
+
+    width:48px;
+    height:48px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:white;
+
+    color:#1e3a8a;
+
+    font-size:25px;
+
+    box-shadow:
+        0 3px 12px
+        rgba(0,0,0,0.20);
+
+    cursor:pointer;
+
+    -webkit-tap-highlight-color:
+        transparent;
+}
+
+.profile-button:active{
+    transform:scale(0.94);
+}
+
+/* ========================================
+   LOGIN STATUS
+======================================== */
+
+.login-status{
+    position:absolute;
+
+    top:14px;
+    right:14px;
+
+    background:
+        rgba(255,255,255,0.96);
+
+    color:#172554;
+
+    padding:8px 13px;
+
+    border-radius:30px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:7px;
+
+    font-size:14px;
+
+    font-weight:bold;
+
+    box-shadow:
+        0 3px 12px
+        rgba(0,0,0,0.18);
+
+    max-width:170px;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+}
+
+.login-dot{
+    width:9px;
+    height:9px;
+
+    border-radius:50%;
+
+    background:#22c55e;
+
+    flex-shrink:0;
+}
+
+/* ========================================
+   LOGO
+======================================== */
+
+.logo{
+    margin-bottom:10px;
+}
+
+.logo img{
+    width:110px;
+    height:110px;
+
+    object-fit:contain;
+
+    display:block;
+
+    margin:auto;
+}
+
+.header h1{
+    margin:0;
+
+    font-size:34px;
+
+    letter-spacing:1px;
+}
+
+.tagline{
+    margin:10px 0 0;
+
+    font-size:22px;
+
+    font-weight:bold;
+}
+
+.header p{
+    margin:8px 0 0;
+
+    font-size:16px;
+
+    opacity:.9;
+}
+
+/* ========================================
+   FORMULA
+======================================== */
+
+.formula-box{
+    width:90%;
+
+    max-width:500px;
+
+    margin:-25px auto 25px;
+
+    background:white;
+
+    padding:18px;
+
+    border-radius:18px;
+
+    text-align:center;
+
+    box-shadow:
+        0 5px 18px
+        rgba(0,0,0,0.12);
+}
+
+.formula{
+    font-size:22px;
+
+    font-weight:bold;
+
+    color:#1e3a8a;
+
+    letter-spacing:2px;
+}
+
+.formula-box p{
+    margin:8px 0 0;
+
+    color:#64748b;
+}
+
+/* ========================================
+   CONTAINER
+======================================== */
+
+.container{
+    width:92%;
+
+    max-width:650px;
+
+    margin:auto;
+}
+
+.title{
+    text-align:center;
+
+    margin:
+        25px 0
+        18px;
+}
+
+.title h2{
+    margin:0;
+
+    font-size:24px;
+}
+
+.title p{
+    margin-top:7px;
+
+    color:#64748b;
+}
+
+/* ========================================
+   SUBJECT CARD
+======================================== */
+
+.subject-card{
+    background:white;
+
+    padding:25px;
+
+    margin:18px 0;
+
+    border-radius:20px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+    box-shadow:
+        0 5px 15px
+        rgba(0,0,0,0.09);
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.subject-card:active{
+    transform:scale(.97);
+}
+
+.icon{
+    width:65px;
+    height:65px;
+
+    border-radius:17px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:34px;
+
+    flex-shrink:0;
+}
+
+.chemistry-icon{
+    background:#dcfce7;
+}
+
+.physics-icon{
+    background:#dbeafe;
+}
+
+.rank-icon{
+    background:#fef3c7;
+}
+
+.subject-info{
+    flex:1;
+}
+
+.subject-info h3{
+    margin:0;
+
+    font-size:22px;
+}
+
+.subject-info p{
+    margin:7px 0 0;
+
+    color:#64748b;
+}
+
+.arrow{
+    font-size:27px;
+
+    color:#2563eb;
+}
+
+/* ========================================
+   ANNOUNCEMENT
+======================================== */
+
+.announcement{
+    display:none;
+
+    background:white;
+
+    border-left:5px solid #d4af37;
+
+    padding:18px;
+
+    margin:22px 0;
+
+    border-radius:15px;
+
+    box-shadow:
+        0 4px 14px
+        rgba(0,0,0,0.08);
+}
+
+.announcement h3{
+    margin:
+        0 0 8px;
+
+    color:#92400e;
+}
+
+.announcement-text{
+    white-space:pre-wrap;
+
+    line-height:1.6;
+}
+
+/* ========================================
+   DAILY BOX
+======================================== */
+
+.daily-box{
+    background:#172554;
+
+    color:white;
+
+    padding:22px;
+
+    border-radius:20px;
+
+    margin:28px 0;
+
+    text-align:center;
+}
+
+.daily-box h3{
+    margin:0;
+
+    font-size:22px;
+}
+
+.daily-box p{
+    margin:8px 0 0;
+
+    opacity:.85;
+}
+
+/* ========================================
+   FOOTER
+======================================== */
+
+.footer{
+    text-align:center;
+
+    padding:25px 10px;
+
+    color:#64748b;
+
+    font-size:14px;
+}
+
+/* ========================================
+   PROFILE OVERLAY
+======================================== */
+
+.profile-overlay{
+    position:fixed;
+
+    inset:0;
+
+    background:
+        rgba(0,0,0,.58);
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+    z-index:9999;
+
+    padding:18px;
+}
+
+.profile-overlay.show{
+    display:flex;
+}
+
+.profile-box{
+    width:100%;
+
+    max-width:420px;
+
+    max-height:
+        calc(100vh - 35px);
+
+    overflow-y:auto;
+
+    background:white;
+
+    border-radius:24px;
+
+    padding:24px;
+
+    box-shadow:
+        0 12px 40px
+        rgba(0,0,0,.30);
+}
+
+.profile-header{
+    text-align:center;
+
+    margin-bottom:20px;
+}
+
+.profile-icon{
+    width:76px;
+    height:76px;
+
+    margin:0 auto 10px;
+
+    border-radius:50%;
+
+    background:#dbeafe;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:38px;
+}
+
+.profile-header h2{
+    margin:0;
+
+    color:#172554;
+}
+
+.profile-header p{
+    margin:6px 0 0;
+
+    color:#64748b;
+
+    font-size:14px;
+}
+
+.profile-field{
+    margin-bottom:13px;
+}
+
+.profile-field label{
+    display:block;
+
+    margin-bottom:5px;
+
+    font-size:13px;
+
+    font-weight:bold;
+
+    color:#475569;
+}
+
+.profile-field input,
+.profile-field select{
+    width:100%;
+
+    padding:12px;
+
+    border:
+        1px solid
+        #cbd5e1;
+
+    border-radius:10px;
+
+    font-size:15px;
+
+    outline:none;
+
+    background:#f8fafc;
+}
+
+.profile-field input:focus,
+.profile-field select:focus{
+    border-color:#2563eb;
+
+    background:white;
+}
+
+.profile-actions{
+    display:flex;
+
+    gap:10px;
+
+    margin-top:18px;
+}
+
+.profile-actions button{
+    flex:1;
+
+    padding:13px;
+
+    border:none;
+
+    border-radius:11px;
+
+    font-size:15px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+}
+
+.edit-profile-btn{
+    background:#2563eb;
+
+    color:white;
+}
+
+.save-profile-btn{
+    background:#16a34a;
+
+    color:white;
+}
+
+.close-profile-btn{
+    background:#e2e8f0;
+
+    color:#334155;
+}
+
+.logout-btn{
+    width:100%;
+
+    margin-top:12px;
+
+    padding:13px;
+
+    border:none;
+
+    border-radius:11px;
+
+    background:#dc2626;
+
+    color:white;
+
+    font-size:15px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+}
+
+.profile-message{
+    margin-top:12px;
+
+    text-align:center;
+
+    font-size:14px;
+
+    line-height:1.5;
+}
+
+/* ========================================
+   ADMIN SAYS POPUP
+======================================== */
+
+.admin-popup-overlay{
+    position:fixed;
+
+    inset:0;
+
+    background:
+        rgba(0,0,0,.58);
+
+    display:none;
+
+    align-items:center;
+
+    justify-content:center;
+
+    z-index:20000;
+
+    padding:20px;
+}
+
+.admin-popup-overlay.show{
+    display:flex;
+}
+
+.admin-popup-box{
+    width:100%;
+
+    max-width:380px;
+
+    background:white;
+
+    border-radius:22px;
+
+    padding:25px 22px;
+
+    text-align:center;
+
+    box-shadow:
+        0 15px 45px
+        rgba(0,0,0,.30);
+
+    animation:
+        adminPopupIn .18s ease-out;
+}
+
+@keyframes adminPopupIn{
+
+    from{
+        transform:scale(.90);
+
+        opacity:0;
+    }
+
+    to{
+        transform:scale(1);
+
+        opacity:1;
+    }
+
+}
+
+.admin-popup-icon{
+    font-size:42px;
+
+    margin-bottom:8px;
+}
+
+.admin-popup-box h2{
+    margin:
+        0 0 12px;
+
+    color:#172554;
+
+    font-size:23px;
+}
+
+.admin-popup-message{
+    color:#475569;
+
+    font-size:15px;
+
+    line-height:1.6;
+
+    white-space:pre-wrap;
+
+    margin-bottom:20px;
+}
+
+.admin-popup-actions{
+    display:flex;
+
+    gap:10px;
+}
+
+.admin-popup-actions button{
+    flex:1;
+
+    border:none;
+
+    border-radius:11px;
+
+    padding:13px;
+
+    font-size:15px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+}
+
+.admin-popup-ok{
+    background:#2563eb;
+
+    color:white;
+}
+
+.admin-popup-cancel{
+    background:#e2e8f0;
+
+    color:#334155;
+}
+
+.admin-popup-confirm{
+    background:#dc2626;
+
+    color:white;
+}
+
+/* ========================================
+   HIDDEN
+======================================== */
+
+.hidden{
+    display:none !important;
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<!-- ========================================
+     HEADER
+======================================== -->
+
+<div class="header">
+
+    <button
+        class="profile-button"
+        id="profileButton"
+        type="button"
+        aria-label="Profile"
+    >
+        👤
+    </button>
+
+
+    <div
+        class="login-status"
+        id="loginStatus"
+    >
+
+        <span
+            class="login-dot"
+            id="loginDot"
+        ></span>
+
+        <span id="loginText">
+            Checking...
+        </span>
+
+    </div>
+
+
+    <div class="logo">
+
+        <img
+            src="Logo.png"
+            alt="MCQ Winner Logo"
+        >
+
+    </div>
+
+
+    <h1>
+        MCQ Winner
+    </h1>
+
+
+    <div class="tagline">
+        එකතුවෙලා ගොඩයමු 💪
+    </div>
+
+
+    <p>
+        A/L Daily MCQ Challenge
+    </p>
+
+</div>
+
+
+
+<!-- ========================================
+     FORMULA
+======================================== -->
+
+<div class="formula-box">
+
+    <div class="formula">
+        ∑ &nbsp; π &nbsp; √ &nbsp; Δ &nbsp; ∞
+    </div>
+
+    <p>
+        Learn • Practice • Win
+    </p>
+
+</div>
+
+
+
+<!-- ========================================
+     MAIN
+======================================== -->
+
+<div class="container">
+
+
+    <div class="title">
+
+        <h2>
+            📚 අද Test එක තෝරන්න
+        </h2>
+
+        <p>
+            Chemistry සහ Physics
+            දිනපතා MCQ 25ක්
+        </p>
+
+    </div>
+
+
+
+    <!-- =====================================
+         ANNOUNCEMENT
+    ====================================== -->
+
+    <div
+        class="announcement"
+        id="announcementBox"
+    >
+
+        <h3>
+            📢 Announcement
+        </h3>
+
+        <div
+            class="announcement-text"
+            id="announcementText"
+        ></div>
+
+    </div>
+
+
+
+    <!-- =====================================
+         CHEMISTRY
+    ====================================== -->
+
+    <div
+        class="subject-card"
+        onclick="openSubject('Chemistry')"
+    >
+
+        <div
+            class="icon chemistry-icon"
+        >
+            🧪
+        </div>
+
+        <div class="subject-info">
+
+            <h3>
+                Chemistry
+            </h3>
+
+            <p>
+                Daily 25 MCQs
+            </p>
+
+        </div>
+
+        <div class="arrow">
+            →
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================
+         PHYSICS
+    ====================================== -->
+
+    <div
+        class="subject-card"
+        onclick="openSubject('Physics')"
+    >
+
+        <div
+            class="icon physics-icon"
+        >
+            ⚡
+        </div>
+
+        <div class="subject-info">
+
+            <h3>
+                Physics
+            </h3>
+
+            <p>
+                Daily 25 MCQs
+            </p>
+
+        </div>
+
+        <div class="arrow">
+            →
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================
+         RANK
+    ====================================== -->
+
+    <div
+        class="subject-card"
+        onclick="window.location.href='rank.html'"
+    >
+
+        <div
+            class="icon rank-icon"
+        >
+            🏆
+        </div>
+
+        <div class="subject-info">
+
+            <h3>
+                Rank List
+            </h3>
+
+            <p>
+                අද Top 20 බලන්න
+            </p>
+
+        </div>
+
+        <div class="arrow">
+            →
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================
+         DAILY
+    ====================================== -->
+
+    <div class="daily-box">
+
+        <h3>
+            🔥 Daily Challenge
+        </h3>
+
+        <p>
+            අද Chemistry හෝ Physics
+            MCQ 25ක් කරලා
+            ඔබේ Score එක බලන්න!
+        </p>
+
+    </div>
+
+
+</div>
+
+
+
+<!-- ========================================
+     FOOTER
+======================================== -->
+
+<div class="footer">
+
+    MCQ Winner © 2026
+
+    <br>
+
+    එකතුවෙලා ගොඩයමු ❤️
+
+</div>
+
+
+
+<!-- ========================================
+     PROFILE OVERLAY
+======================================== -->
+
+<div
+    class="profile-overlay"
+    id="profileOverlay"
+>
+
+    <div class="profile-box">
+
+
+        <div class="profile-header">
+
+            <div class="profile-icon">
+                👤
+            </div>
+
+            <h2>
+                My Profile
+            </h2>
+
+            <p>
+                ඔබගේ Account තොරතුරු
+            </p>
+
+        </div>
+
+
+        <!-- NAME -->
+
+        <div class="profile-field">
+
+            <label>
+                Name
+            </label>
+
+            <input
+                type="text"
+                id="profileName"
+                disabled
+            >
+
+        </div>
+
+
+        <!-- STREAM -->
+
+        <div class="profile-field">
+
+            <label>
+                A/L Stream
+            </label>
+
+            <select
+                id="profileStream"
+                disabled
+            >
+
+                <option value="">
+                    Select Stream
+                </option>
+
+                <option value="Maths">
+                    Maths
+                </option>
+
+                <option value="Biology">
+                    Biology
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- SCHOOL -->
+
+        <div class="profile-field">
+
+            <label>
+                School
+            </label>
+
+            <input
+                type="text"
+                id="profileSchool"
+                disabled
+            >
+
+        </div>
+
+
+        <!-- CITY -->
+
+        <div class="profile-field">
+
+            <label>
+                Nearest City
+            </label>
+
+            <input
+                type="text"
+                id="profileCity"
+                disabled
+            >
+
+        </div>
+
+
+        <!-- AL YEAR -->
+
+        <div class="profile-field">
+
+            <label>
+                A/L Year
+            </label>
+
+            <select
+                id="profileYear"
+                disabled
+            >
+
+                <option value="">
+                    Select Year
+                </option>
+
+                <option value="2026">
+                    2026
+                </option>
+
+                <option value="2027">
+                    2027
+                </option>
+
+                <option value="2028">
+                    2028
+                </option>
+
+                <option value="2029">
+                    2029
+                </option>
+
+                <option value="2030">
+                    2030
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- PHONE -->
+
+        <div class="profile-field">
+
+            <label>
+                Phone Number
+            </label>
+
+            <input
+                type="text"
+                id="profilePhone"
+                disabled
+            >
+
+        </div>
+
+
+        <!-- MESSAGE -->
+
+        <div
+            class="profile-message"
+            id="profileMessage"
+        ></div>
+
+
+        <!-- ACTIONS -->
+
+        <div class="profile-actions">
+
+            <button
+                class="edit-profile-btn"
+                id="editProfileButton"
+                type="button"
+            >
+                ✏️ Edit
+            </button>
+
+            <button
+                class="save-profile-btn hidden"
+                id="saveProfileButton"
+                type="button"
+            >
+                💾 Save
+            </button>
+
+            <button
+                class="close-profile-btn"
+                id="closeProfileButton"
+                type="button"
+            >
+                Close
+            </button>
+
+        </div>
+
+
+        <!-- LOGOUT -->
+
+        <button
+            class="logout-btn"
+            id="logoutButton"
+            type="button"
+        >
+            🚪 Logout
+        </button>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- ========================================
+     ADMIN SAYS POPUP
+======================================== -->
+
+<div
+    class="admin-popup-overlay"
+    id="adminPopupOverlay"
+>
+
+    <div class="admin-popup-box">
+
+        <div class="admin-popup-icon">
+            🛡️
+        </div>
+
+        <h2>
+            Admin Says
+        </h2>
+
+        <div
+            class="admin-popup-message"
+            id="adminPopupMessage"
+        ></div>
+
+        <div
+            class="admin-popup-actions"
+            id="adminPopupActions"
+        ></div>
+
+    </div>
+
+</div>
+
+
+
+<script type="module">
+
+
+/* ========================================
+   FIREBASE
+======================================== */
+
+import {
+    initializeApp
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+
+import {
+    getAuth,
+    onAuthStateChanged,
+    signOut
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
+import {
+    getFirestore,
+    doc,
+    getDoc,
+    setDoc,
+    serverTimestamp
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+
+/* ========================================
+   FIREBASE CONFIG
+======================================== */
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyAMkaGYmBuoFama5MW5AhoX9q6cly_-nbg",
+
+    authDomain:
+        "mcq-winner.firebaseapp.com",
+
+    projectId:
+        "mcq-winner",
+
+    storageBucket:
+        "mcq-winner.firebasestorage.app",
+
+    messagingSenderId:
+        "1022060912943",
+
+    appId:
+        "1:1022060912943:web:f6e58414867e32f685c1da",
+
+    measurementId:
+        "G-MBH3NZ728H"
+
+};
+
+
+
+/* ========================================
+   INITIALIZE
+======================================== */
+
+const app =
+    initializeApp(
+        firebaseConfig
+    );
+
+const auth =
+    getAuth(app);
+
+const db =
+    getFirestore(app);
+
+
+
+/* ========================================
+   URLS
+======================================== */
+
+const LOGIN_URL =
+    "./login.html";
+
+
+
+/* ========================================
+   CURRENT USER
+======================================== */
+
+let currentUser = null;
+
+let currentUserData = null;
+
+let authReady = false;
+
+
+
+/* ========================================
+   DOM
+======================================== */
+
+const loginText =
+    document.getElementById(
+        "loginText"
+    );
+
+const loginDot =
+    document.getElementById(
+        "loginDot"
+    );
+
+const profileButton =
+    document.getElementById(
+        "profileButton"
+    );
+
+const profileOverlay =
+    document.getElementById(
+        "profileOverlay"
+    );
+
+const closeProfileButton =
+    document.getElementById(
+        "closeProfileButton"
+    );
+
+const editProfileButton =
+    document.getElementById(
+        "editProfileButton"
+    );
+
+const saveProfileButton =
+    document.getElementById(
+        "saveProfileButton"
+    );
+
+const logoutButton =
+    document.getElementById(
+        "logoutButton"
+    );
+
+
+/* ========================================
+   ADMIN SAYS POPUP DOM
+======================================== */
+
+const adminPopupOverlay =
+    document.getElementById(
+        "adminPopupOverlay"
+    );
+
+const adminPopupMessage =
+    document.getElementById(
+        "adminPopupMessage"
+    );
+
+const adminPopupActions =
+    document.getElementById(
+        "adminPopupActions"
+    );
+
+
+
+/* ========================================
+   ADMIN SAYS - MESSAGE
+======================================== */
+
+function showAdminMessage(
+    message
+){
+
+    adminPopupMessage.textContent =
+        message;
+
+    adminPopupActions.innerHTML =
+        "";
+
+    const okButton =
+        document.createElement(
+            "button"
+        );
+
+    okButton.type =
+        "button";
+
+    okButton.className =
+        "admin-popup-ok";
+
+    okButton.textContent =
+        "OK";
+
+    okButton.addEventListener(
+        "click",
+        function(){
+
+            adminPopupOverlay.classList.remove(
+                "show"
+            );
+
+        }
+    );
+
+    adminPopupActions.appendChild(
+        okButton
+    );
+
+    adminPopupOverlay.classList.add(
+        "show"
+    );
+
+}
+
+
+
+/* ========================================
+   ADMIN SAYS - CONFIRM
+======================================== */
+
+function showAdminConfirm(
+    message,
+    onConfirm
+){
+
+    adminPopupMessage.textContent =
+        message;
+
+    adminPopupActions.innerHTML =
+        "";
+
+    const cancelButton =
+        document.createElement(
+            "button"
+        );
+
+    cancelButton.type =
+        "button";
+
+    cancelButton.className =
+        "admin-popup-cancel";
+
+    cancelButton.textContent =
+        "Cancel";
+
+
+    cancelButton.addEventListener(
+        "click",
+        function(){
+
+            adminPopupOverlay.classList.remove(
+                "show"
+            );
+
+        }
+    );
+
+
+    const confirmButton =
+        document.createElement(
+            "button"
+        );
+
+    confirmButton.type =
+        "button";
+
+    confirmButton.className =
+        "admin-popup-confirm";
+
+    confirmButton.textContent =
+        "Logout";
+
+
+    confirmButton.addEventListener(
+        "click",
+        async function(){
+
+            adminPopupOverlay.classList.remove(
+                "show"
+            );
+
+            await onConfirm();
+
+        }
+    );
+
+
+    adminPopupActions.appendChild(
+        cancelButton
+    );
+
+    adminPopupActions.appendChild(
+        confirmButton
+    );
+
+
+    adminPopupOverlay.classList.add(
+        "show"
+    );
+
+}
+
+
+
+/* ========================================
+   SESSION CHECK
+======================================== */
+
+const loginSession =
+    sessionStorage.getItem(
+        "mcqLoginSession"
+    );
+
+
+if(
+    loginSession !== "student"
+){
+
+    window.location.replace(
+        LOGIN_URL
+    );
+
+}
+
+
+
+/* ========================================
+   DATE VALUE
+======================================== */
+
+function getDateValue(value){
+
+    if(!value){
+        return null;
+    }
+
+
+    if(
+        typeof value.toDate ===
+        "function"
+    ){
+
+        return value.toDate();
+
+    }
+
+
+    if(
+        value instanceof Date
+    ){
+
+        return value;
+
+    }
+
+
+    if(
+        typeof value.seconds ===
+        "number"
+    ){
+
+        return new Date(
+            value.seconds * 1000
+        );
+
+    }
+
+
+    const date =
+        new Date(value);
+
+
+    if(
+        isNaN(
+            date.getTime()
+        )
+    ){
+
+        return null;
+
+    }
+
+
+    return date;
+
+}
+
+
+
+/* ========================================
+   STUDENT ACCESS
+======================================== */
+
+function hasStudentAccess(
+    userData
+){
+
+    const now =
+        new Date();
+
+
+    /* ====================================
+       PAID SUBSCRIPTION
+    ==================================== */
+
+    if(
+        userData.subscriptionActive ===
+        true
+    ){
+
+        const until =
+            getDateValue(
+                userData.subscriptionUntil
+            );
+
+
+        if(
+            until &&
+            until.getTime() >
+            now.getTime()
+        ){
+
+            return true;
+
+        }
+
+    }
+
+
+
+    /* ====================================
+       2 DAY TRIAL
+    ==================================== */
+
+    if(
+        userData.trialActive ===
+        true
+    ){
+
+        const until =
+            getDateValue(
+                userData.trialUntil
+            );
+
+
+        if(
+            until &&
+            until.getTime() >
+            now.getTime()
+        ){
+
+            return true;
+
+        }
+
+    }
+
+
+
+    /* ====================================
+       ADMIN FREE ACCESS
+    ==================================== */
+
+    if(
+        userData.adminFreeAccess ===
+        true
+    ){
+
+        const until =
+            getDateValue(
+                userData.adminFreeAccessUntil
+            );
+
+
+        if(
+            until &&
+            until.getTime() >
+            now.getTime()
+        ){
+
+            return true;
+
+        }
+
+    }
+
+
+    return false;
+
+}
+
+
+
+/* ========================================
+   AUTH STATE
+======================================== */
+
+onAuthStateChanged(
+    auth,
+    async function(user){
+
+        if(!user){
+
+            currentUser = null;
+
+            currentUserData = null;
+
+            authReady = false;
+
+            sessionStorage.removeItem(
+                "mcqLoginSession"
+            );
+
+            window.location.replace(
+                LOGIN_URL
+            );
+
+            return;
+
+        }
+
+
+        currentUser =
+            user;
+
+
+        try{
+
+            const userRef =
+                doc(
+                    db,
+                    "users",
+                    user.uid
+                );
+
+
+            const userSnap =
+                await getDoc(
+                    userRef
+                );
+
+
+            if(
+                !userSnap.exists()
+            ){
+
+                await signOut(
+                    auth
+                );
+
+                sessionStorage.removeItem(
+                    "mcqLoginSession"
+                );
+
+                window.location.replace(
+                    LOGIN_URL
+                );
+
+                return;
+
+            }
+
+
+            const data =
+                userSnap.data();
+
+
+            /* =================================
+               ADMIN PROTECTION
+            ================================= */
+
+            if(
+                data.role === "admin"
+            ){
+
+                await signOut(
+                    auth
+                );
+
+                sessionStorage.removeItem(
+                    "mcqLoginSession"
+                );
+
+                window.location.replace(
+                    LOGIN_URL
+                );
+
+                return;
+
+            }
+
+
+            currentUserData =
+                data;
+
+
+            authReady = true;
+
+
+            /* =================================
+               LOGIN STATUS
+            ================================= */
+
+            let name =
+                String(
+                    data.name ||
+                    "Student"
+                ).trim();
+
+
+            const firstName =
+                name
+                    .split(/\s+/)[0];
+
+
+            loginText.textContent =
+                "🟢 " +
+                firstName;
+
+
+            loginDot.style.background =
+                "#22c55e";
+
+
+            /* =================================
+               PROFILE DATA
+            ================================= */
+
+            loadProfileData(
+                data
+            );
+
+
+            /* =================================
+               ANNOUNCEMENT
+            ================================= */
+
+            loadAnnouncement();
+
+        }
+
+        catch(error){
+
+            console.error(
+                "Auth error:",
+                error
+            );
+
+            loginText.textContent =
+                "Student";
+
+        }
+
+    }
+);
+
+
+
+/* ========================================
+   PROFILE LOAD
+======================================== */
+
+function loadProfileData(
+    data
+){
+
+    document.getElementById(
+        "profileName"
+    ).value =
+        data.name ||
+        "";
+
+
+    document.getElementById(
+        "profileStream"
+    ).value =
+        data.alStream ||
+        data.stream ||
+        "";
+
+
+    document.getElementById(
+        "profileSchool"
+    ).value =
+        data.school ||
+        "";
+
+
+    document.getElementById(
+        "profileCity"
+    ).value =
+        data.nearestCity ||
+        "";
+
+
+    document.getElementById(
+        "profileYear"
+    ).value =
+        data.alYear ||
+        "";
+
+
+    document.getElementById(
+        "profilePhone"
+    ).value =
+        data.phoneNumber ||
+        "";
+
+}
+
+
+
+/* ========================================
+   PROFILE OPEN
+======================================== */
+
+profileButton.addEventListener(
+    "click",
+    function(){
+
+        if(!authReady){
+
+            showAdminMessage(
+                "⏳ Account එක verify කරමින් පවතී. ටිකක් රැඳී සිටින්න."
+            );
+
+            return;
+
+        }
+
+
+        document.getElementById(
+            "profileMessage"
+        ).textContent = "";
+
+
+        profileOverlay.classList.add(
+            "show"
+        );
+
+    }
+);
+
+
+
+/* ========================================
+   PROFILE CLOSE
+======================================== */
+
+closeProfileButton.addEventListener(
+    "click",
+    function(){
+
+        disableProfileEdit();
+
+        profileOverlay.classList.remove(
+            "show"
+        );
+
+    }
+);
+
+
+
+/* ========================================
+   OUTSIDE PROFILE CLICK
+======================================== */
+
+profileOverlay.addEventListener(
+    "click",
+    function(event){
+
+        if(
+            event.target ===
+            profileOverlay
+        ){
+
+            disableProfileEdit();
+
+            profileOverlay.classList.remove(
+                "show"
+            );
+
+        }
+
+    }
+);
+
+
+
+/* ========================================
+   ENABLE PROFILE EDIT
+======================================== */
+
+editProfileButton.addEventListener(
+    "click",
+    function(){
+
+        document.getElementById(
+            "profileName"
+        ).disabled = false;
+
+
+        document.getElementById(
+            "profileStream"
+        ).disabled = false;
+
+
+        document.getElementById(
+            "profileSchool"
+        ).disabled = false;
+
+
+        document.getElementById(
+            "profileCity"
+        ).disabled = false;
+
+
+        document.getElementById(
+            "profileYear"
+        ).disabled = false;
+
+
+        editProfileButton.classList.add(
+            "hidden"
+        );
+
+
+        saveProfileButton.classList.remove(
+            "hidden"
+        );
+
+
+        document.getElementById(
+            "profileMessage"
+        ).textContent =
+            "තොරතුරු වෙනස් කර Save කරන්න.";
+
+    }
+);
+
+
+
+/* ========================================
+   DISABLE PROFILE EDIT
+======================================== */
+
+function disableProfileEdit(){
+
+    document.getElementById(
+        "profileName"
+    ).disabled = true;
+
+
+    document.getElementById(
+        "profileStream"
+    ).disabled = true;
+
+
+    document.getElementById(
+        "profileSchool"
+    ).disabled = true;
+
+
+    document.getElementById(
+        "profileCity"
+    ).disabled = true;
+
+
+    document.getElementById(
+        "profileYear"
+    ).disabled = true;
+
+
+    editProfileButton.classList.remove(
+        "hidden"
+    );
+
+
+    saveProfileButton.classList.add(
+        "hidden"
+    );
+
+}
+
+
+
+/* ========================================
+   SAVE PROFILE
+======================================== */
+
+saveProfileButton.addEventListener(
+    "click",
+    async function(){
+
+        if(!currentUser){
+            return;
+        }
+
+
+        saveProfileButton.disabled =
+            true;
+
+
+        saveProfileButton.textContent =
+            "Saving...";
+
+
+        try{
+
+            const name =
+                document.getElementById(
+                    "profileName"
+                ).value.trim();
+
+
+            const stream =
+                document.getElementById(
+                    "profileStream"
+                ).value;
+
+
+            const school =
+                document.getElementById(
+                    "profileSchool"
+                ).value.trim();
+
+
+            const city =
+                document.getElementById(
+                    "profileCity"
+                ).value.trim();
+
+
+            const alYear =
+                document.getElementById(
+                    "profileYear"
+                ).value;
+
+
+            if(
+                !name ||
+                !stream ||
+                !school ||
+                !city ||
+                !alYear
+            ){
+
+                throw new Error(
+                    "කරුණාකර සියලු Profile තොරතුරු පුරවන්න."
+                );
+
+            }
+
+
+            await setDoc(
+
+                doc(
+                    db,
+                    "users",
+                    currentUser.uid
+                ),
+
+                {
+
+                    name:
+                        name,
+
+                    alStream:
+                        stream,
+
+                    school:
+                        school,
+
+                    nearestCity:
+                        city,
+
+                    alYear:
+                        alYear,
+
+                    updatedAt:
+                        serverTimestamp()
+
+                },
+
+                {
+                    merge:true
+                }
+
+            );
+
+
+            currentUserData = {
+
+                ...currentUserData,
+
+                name:
+                    name,
+
+                alStream:
+                    stream,
+
+                school:
+                    school,
+
+                nearestCity:
+                    city,
+
+                alYear:
+                    alYear
+
+            };
+
+
+            const firstName =
+                name
+                    .split(/\s+/)[0];
+
+
+            loginText.textContent =
+                "🟢 " +
+                firstName;
+
+
+            document.getElementById(
+                "profileMessage"
+            ).textContent =
+                "✅ Profile එක සාර්ථකව Save කළා.";
+
+
+            disableProfileEdit();
+
+        }
+
+        catch(error){
+
+            console.error(
+                "Profile save error:",
+                error
+            );
+
+
+            showAdminMessage(
+                "❌ " +
+                error.message
+            );
+
+        }
+
+
+        saveProfileButton.disabled =
+            false;
+
+
+        saveProfileButton.textContent =
+            "💾 Save";
+
+    }
+);
+
+
+
+/* ========================================
+   LOGOUT
+======================================== */
+
+logoutButton.addEventListener(
+    "click",
+    function(){
+
+        showAdminConfirm(
+            "Logout වෙන්නද?",
+            performLogout
+        );
+
+    }
+);
+
+
+
+/* ========================================
+   PERFORM LOGOUT
+======================================== */
+
+async function performLogout(){
+
+    try{
+
+        await signOut(
+            auth
+        );
+
+
+        sessionStorage.removeItem(
+            "mcqLoginSession"
+        );
+
+
+        localStorage.removeItem(
+            "mcqWinnerAccountUid"
+        );
+
+
+        window.location.replace(
+            LOGIN_URL
+        );
+
+    }
+
+    catch(error){
+
+        showAdminMessage(
+            "Logout Error: " +
+            error.message
+        );
+
+    }
+
+}
+
+
+
+/* ========================================
+   OPEN SUBJECT
+======================================== */
+
+window.openSubject =
+    async function(subject){
+
+        if(!authReady){
+
+            showAdminMessage(
+                "⏳ Account එක verify කරමින් පවතී. ටිකක් රැඳී සිටින්න."
+            );
+
+            return;
+
+        }
+
+
+        const user =
+            auth.currentUser;
+
+
+        if(!user){
+
+            sessionStorage.removeItem(
+                "mcqLoginSession"
+            );
+
+            window.location.replace(
+                LOGIN_URL
+            );
+
+            return;
+
+        }
+
+
+        try{
+
+            const userSnap =
+                await getDoc(
+                    doc(
+                        db,
+                        "users",
+                        user.uid
+                    )
+                );
+
+
+            if(
+                !userSnap.exists()
+            ){
+
+                await signOut(
+                    auth
+                );
+
+                sessionStorage.removeItem(
+                    "mcqLoginSession"
+                );
+
+                window.location.replace(
+                    LOGIN_URL
+                );
+
+                return;
+
+            }
+
+
+            const data =
+                userSnap.data();
+
+
+            if(
+                data.role === "admin"
+            ){
+
+                await signOut(
+                    auth
+                );
+
+                sessionStorage.removeItem(
+                    "mcqLoginSession"
+                );
+
+                window.location.replace(
+                    LOGIN_URL
+                );
+
+                return;
+
+            }
+
+
+            currentUserData =
+                data;
+
+
+            const access =
+                hasStudentAccess(
+                    data
+                );
+
+
+            /* =================================
+               NO ACCESS
+            ================================= */
+
+            if(!access){
+
+                window.location.href =
+                    "subscription.html?subject=" +
+                    encodeURIComponent(
+                        subject
+                    );
+
+                return;
+
+            }
+
+
+            /* =================================
+               ACCESS
+            ================================= */
+
+            window.location.href =
+                "mcq.html?subject=" +
+                encodeURIComponent(
+                    subject
+                );
+
+        }
+
+        catch(error){
+
+            console.error(
+                "Subject access error:",
+                error
+            );
+
+
+            showAdminMessage(
+                "⚠️ Account information ලබාගැනීමට නොහැකි විය.\n\n" +
+                "Internet connection එක පරීක්ෂා කර නැවත උත්සාහ කරන්න."
+            );
+
+        }
+
+    };
+
+
+
+/* ========================================
+   ANNOUNCEMENT
+======================================== */
+
+async function loadAnnouncement(){
+
+    try{
+
+        const announcementRef =
+            doc(
+                db,
+                "announcements",
+                "main"
+            );
+
+
+        const snapshot =
+            await getDoc(
+                announcementRef
+            );
+
+
+        if(
+            !snapshot.exists()
+        ){
+
+            return;
+
+        }
+
+
+        const data =
+            snapshot.data();
+
+
+        if(
+            data.active !== true ||
+            !data.message
+        ){
+
+            return;
+
+        }
+
+
+        document.getElementById(
+            "announcementText"
+        ).textContent =
+            data.message;
+
+
+        document.getElementById(
+            "announcementBox"
+        ).style.display =
+            "block";
+
+    }
+
+    catch(error){
+
+        console.error(
+            "Announcement error:",
+            error
+        );
+
+    }
+
+}
+
+
+
+/* ========================================
+   SERVICE WORKER
+======================================== */
+
+if(
+    "serviceWorker"
+    in navigator
+){
+
+    window.addEventListener(
+        "load",
+        function(){
+
+            navigator.serviceWorker
+                .register(
+                    "./pwabuilder-sw.js"
+                )
+
+                .then(
+                    function(){
+
+                        console.log(
+                            "MCQ Winner Service Worker registered"
+                        );
+
+                    }
+                )
+
+                .catch(
+                    function(error){
+
+                        console.log(
+                            "Service Worker registration failed:",
+                            error
+                        );
+
+                    }
+                );
+
+        }
+    );
+
+}
+
+</script>
+
+
+</body>
+
+</html>
