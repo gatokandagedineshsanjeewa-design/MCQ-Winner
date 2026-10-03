@@ -1,0 +1,1428 @@
+<!DOCTYPE html><html lang="si"><head>
+<meta charset="UTF-8"><meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+
+«»
+
+<title>MCQ Winner - Subscription</title><style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#0b1f3a;
+    color:white;
+    min-height:100vh;
+}
+
+.container{
+    width:100%;
+    max-width:520px;
+    margin:auto;
+    padding:22px 16px 40px;
+}
+
+.logo{
+    width:85px;
+    height:85px;
+    display:block;
+    margin:10px auto 12px;
+    border-radius:20px;
+}
+
+h1{
+    text-align:center;
+    margin:5px 0;
+    color:#d4af37;
+    font-size:28px;
+}
+
+.subtitle{
+    text-align:center;
+    color:#ddd;
+    margin-bottom:20px;
+}
+
+.card{
+    background:#102b4d;
+    border:1px solid rgba(212,175,55,.35);
+    border-radius:18px;
+    padding:20px;
+    margin-bottom:15px;
+    box-shadow:0 5px 18px rgba(0,0,0,.25);
+}
+
+.price{
+    text-align:center;
+    font-size:31px;
+    font-weight:bold;
+    color:#d4af37;
+    margin:5px 0;
+}
+
+.price small{
+    font-size:15px;
+    color:#ddd;
+}
+
+.features{
+    margin:15px 0 0;
+    padding:0;
+    list-style:none;
+}
+
+.features li{
+    padding:9px 0;
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.features li:last-child{
+    border-bottom:none;
+}
+
+.box{
+    display:none;
+    border-radius:15px;
+    padding:18px;
+    margin-bottom:15px;
+}
+
+.active{
+    background:#123f2c;
+    border:1px solid #38c982;
+}
+
+.free{
+    background:#403719;
+    border:1px solid #d4af37;
+}
+
+.trial{
+    background:#153b55;
+    border:1px solid #4db9ff;
+}
+
+.pending{
+    background:#423718;
+    border:1px solid #e7bd39;
+}
+
+.box h2{
+    margin:0 0 10px;
+    font-size:20px;
+}
+
+.box p{
+    margin:7px 0;
+    line-height:1.5;
+}
+
+.subject-name{
+    color:#d4af37;
+    font-weight:bold;
+}
+
+button{
+    width:100%;
+    border:none;
+    border-radius:12px;
+    padding:14px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.start-btn{
+    background:#d4af37;
+    color:#0b1f3a;
+    margin-top:12px;
+}
+
+.start-btn:disabled{
+    opacity:.6;
+}
+
+.pay-btn{
+    background:#d4af37;
+    color:#0b1f3a;
+    margin-top:12px;
+}
+
+.pay-btn:disabled{
+    opacity:.6;
+}
+
+.back-btn{
+    background:#183758;
+    color:white;
+    border:1px solid rgba(255,255,255,.2);
+    margin-top:5px;
+}
+
+.message{
+    display:none;
+    padding:13px;
+    border-radius:10px;
+    background:#3d2020;
+    border:1px solid #d85b5b;
+    margin-bottom:15px;
+    line-height:1.5;
+}
+
+.note{
+    text-align:center;
+    color:#aaa;
+    font-size:13px;
+    line-height:1.5;
+    margin-top:15px;
+}
+
+.loading{
+    text-align:center;
+    color:#ccc;
+    padding:15px;
+}
+
+.subject-card{
+    display:none;
+}
+
+</style></head><body><div class="container"><img
+    src="./Logo.png"
+    class="logo"
+    alt="MCQ Winner"
+>
+
+<h1>MCQ Winner</h1>
+
+<div class="subtitle">
+    Weekly Subscription
+</div>
+
+<div class="card">
+
+    <div class="price">
+        Rs.100 <small>/ 7 Days</small>
+    </div>
+
+    <ul class="features">
+
+        <li>🧪 Chemistry - Daily 25 MCQs</li>
+        <li>⚡ Physics - Daily 25 MCQs</li>
+        <li>📝 Daily Test & Results</li>
+        <li>🏆 Top 20 Rank List</li>
+        <li>💬 Discussion</li>
+        <li>🚫 No Advertisements</li>
+
+    </ul>
+
+</div>
+
+<div
+    id="subjectCard"
+    class="card subject-card"
+>
+
+    <p style="margin:0;">
+
+        Selected Subject:
+        <span
+            id="selectedSubjectText"
+            class="subject-name"
+        >
+            -
+        </span>
+
+    </p>
+
+</div>
+
+<div
+    id="loadingBox"
+    class="loading"
+>
+    Checking account...
+</div>
+
+<div
+    id="activeBox"
+    class="box active"
+>
+
+    <h2>✅ Subscription Active</h2>
+
+    <p>
+        ඔයාගේ subscription එක දැනට active.
+    </p>
+
+    <p id="activeUntilText"></p>
+
+    <button
+        id="activeStartButton"
+        class="start-btn"
+    >
+        START TEST
+    </button>
+
+</div>
+
+<div
+    id="freeAccessBox"
+    class="box free"
+>
+
+    <h2>🎁 Admin Free Access</h2>
+
+    <p>
+        <strong>
+            Admin විසින් free access ලබා දී ඇත
+        </strong>
+    </p>
+
+    <p>
+        Subject:
+        <span
+            id="freeAccessSubject"
+            class="subject-name"
+        >
+            -
+        </span>
+    </p>
+
+    <p id="freeAccessUntilText"></p>
+
+    <button
+        id="freeAccessStartButton"
+        class="start-btn"
+    >
+        START TEST
+    </button>
+
+</div>
+
+<div
+    id="trialBox"
+    class="box trial"
+>
+
+    <h2>🎉 Free Trial Active</h2>
+
+    <p>
+        ඔයාගේ free trial එක දැනට active.
+    </p>
+
+    <p id="trialUntilText"></p>
+
+    <button
+        id="trialStartButton"
+        class="start-btn"
+    >
+        START TEST
+    </button>
+
+</div>
+
+<div
+    id="pendingBox"
+    class="box pending"
+>
+
+    <h2>⏳ Payment Pending</h2>
+
+    <p>
+        Payment එක process වෙමින් පවතී.
+    </p>
+
+    <p>
+        PayHere payment confirmation එක
+        server එකෙන් verify කරනු ලැබේ.
+    </p>
+
+</div>
+
+<div
+    id="paymentBox"
+    class="card"
+    style="display:none;"
+>
+
+    <h2
+        style="
+            margin-top:0;
+            color:#d4af37;
+        "
+    >
+        Weekly Subscription
+    </h2>
+
+    <p>
+        Rs.100 ගෙවා දින 7ක subscription එක
+        ලබාගන්න.
+    </p>
+
+    <p
+        style="
+            color:#ccc;
+            font-size:14px;
+            line-height:1.5;
+        "
+    >
+        PayHere secure payment window එක
+        open කරනු ලැබේ.
+    </p>
+
+    <button
+        id="paymentButton"
+        class="pay-btn"
+    >
+        PAY Rs.100
+    </button>
+
+</div>
+
+<div
+    id="message"
+    class="message"
+></div>
+
+<div class="note">
+
+    Secure payment powered by PayHere.
+
+    <br>
+
+    Subscription period:
+    <strong>7 Days</strong>
+
+</div>
+
+<button
+    id="backButton"
+    class="back-btn"
+>
+    ← Back to Home
+</button>
+
+</div><script type="module">
+
+import {
+    initializeApp
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+
+import {
+    getAuth,
+    onAuthStateChanged,
+    setPersistence,
+    browserSessionPersistence
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
+import {
+    getFirestore,
+    doc,
+    getDoc
+}
+from
+"https://www.gstatic.com/firebasejs/12.1.0/firebase-firestore.js";
+
+
+const firebaseConfig = {
+
+    apiKey:
+        "AIzaSyAMkaGYmBuoFama5MW5AhoX9q6cly_-nbg",
+
+    authDomain:
+        "mcq-winner.firebaseapp.com",
+
+    projectId:
+        "mcq-winner",
+
+    storageBucket:
+        "mcq-winner.firebasestorage.app",
+
+    messagingSenderId:
+        "1022060912943",
+
+    appId:
+        "1:1022060912943:web:f6e58414867e32f685c1da",
+
+    measurementId:
+        "G-MBH3NZ728H"
+
+};
+
+
+const app =
+    initializeApp(
+        firebaseConfig
+    );
+
+
+const auth =
+    getAuth(app);
+
+
+const db =
+    getFirestore(app);
+
+
+const WORKER_URL =
+    "https://mcq-winner-payhere.dinpiyamcqwinner.workers.dev";
+
+
+const params =
+    new URLSearchParams(
+        window.location.search
+    );
+
+
+const subjectParam =
+    params.get("subject");
+
+
+const selectedSubject =
+    (
+        subjectParam === "Chemistry" ||
+        subjectParam === "Physics"
+    )
+    ? subjectParam
+    : null;
+
+
+const loadingBox =
+    document.getElementById(
+        "loadingBox"
+    );
+
+
+const activeBox =
+    document.getElementById(
+        "activeBox"
+    );
+
+
+const freeAccessBox =
+    document.getElementById(
+        "freeAccessBox"
+    );
+
+
+const trialBox =
+    document.getElementById(
+        "trialBox"
+    );
+
+
+const pendingBox =
+    document.getElementById(
+        "pendingBox"
+    );
+
+
+const paymentBox =
+    document.getElementById(
+        "paymentBox"
+    );
+
+
+const messageBox =
+    document.getElementById(
+        "message"
+    );
+
+
+const paymentButton =
+    document.getElementById(
+        "paymentButton"
+    );
+
+
+const activeStartButton =
+    document.getElementById(
+        "activeStartButton"
+    );
+
+
+const freeAccessStartButton =
+    document.getElementById(
+        "freeAccessStartButton"
+    );
+
+
+const trialStartButton =
+    document.getElementById(
+        "trialStartButton"
+    );
+
+
+const freeAccessSubject =
+    document.getElementById(
+        "freeAccessSubject"
+    );
+
+
+let currentUser =
+    null;
+
+
+let authReady =
+    false;
+
+
+if(selectedSubject){
+
+    document.getElementById(
+        "subjectCard"
+    ).style.display =
+        "block";
+
+
+    document.getElementById(
+        "selectedSubjectText"
+    ).textContent =
+        selectedSubject;
+
+}
+
+
+function hideStatusBoxes(){
+
+    activeBox.style.display =
+        "none";
+
+    freeAccessBox.style.display =
+        "none";
+
+    trialBox.style.display =
+        "none";
+
+    pendingBox.style.display =
+        "none";
+
+    paymentBox.style.display =
+        "none";
+
+}
+
+
+function showMessage(text){
+
+    messageBox.textContent =
+        text;
+
+    messageBox.style.display =
+        "block";
+
+}
+
+
+function hideMessage(){
+
+    messageBox.style.display =
+        "none";
+
+}
+
+
+function getDateValue(value){
+
+    if(!value){
+        return null;
+    }
+
+    if(
+        typeof value.toDate ===
+        "function"
+    ){
+
+        return value.toDate();
+
+    }
+
+    if(
+        value instanceof Date
+    ){
+
+        return value;
+
+    }
+
+    const date =
+        new Date(value);
+
+    if(
+        Number.isNaN(
+            date.getTime()
+        )
+    ){
+
+        return null;
+
+    }
+
+    return date;
+
+}
+
+
+function isFuture(value){
+
+    const date =
+        getDateValue(value);
+
+    if(!date){
+        return false;
+    }
+
+    return (
+        date.getTime() >
+        Date.now()
+    );
+
+}
+
+
+function formatDate(value){
+
+    const date =
+        getDateValue(value);
+
+    if(!date){
+        return "";
+    }
+
+    return date.toLocaleString(
+        "en-GB",
+        {
+            year:"numeric",
+            month:"2-digit",
+            day:"2-digit",
+            hour:"2-digit",
+            minute:"2-digit"
+        }
+    );
+
+}
+
+
+function goToMCQ(){
+
+    if(!selectedSubject){
+
+        showMessage(
+            "මුලින් Chemistry හෝ Physics subject එකක් තෝරන්න."
+        );
+
+        return;
+
+    }
+
+    window.location.href =
+        "./mcq.html?subject=" +
+        encodeURIComponent(
+            selectedSubject
+        );
+
+}
+
+
+activeStartButton.addEventListener(
+    "click",
+    goToMCQ
+);
+
+
+trialStartButton.addEventListener(
+    "click",
+    goToMCQ
+);
+
+
+freeAccessStartButton.addEventListener(
+    "click",
+    goToMCQ
+);
+
+
+/* =====================================================
+   NATIVE PAYHERE PAYMENT
+===================================================== */
+
+paymentButton.addEventListener(
+    "click",
+    async () => {
+
+        if(
+            !authReady ||
+            !currentUser
+        ){
+
+            showMessage(
+                "Login session එක සූදානම් නැහැ."
+            );
+
+            return;
+
+        }
+
+
+        if(
+            !selectedSubject
+        ){
+
+            showMessage(
+                "Home එකෙන් Chemistry හෝ Physics තෝරන්න."
+            );
+
+            return;
+
+        }
+
+
+        paymentButton.disabled =
+            true;
+
+        paymentButton.textContent =
+            "Preparing Payment...";
+
+        hideMessage();
+
+
+        try{
+
+            const userRef =
+                doc(
+                    db,
+                    "users",
+                    currentUser.uid
+                );
+
+
+            const userSnap =
+                await getDoc(
+                    userRef
+                );
+
+
+            if(
+                !userSnap.exists()
+            ){
+
+                throw new Error(
+                    "USER_NOT_FOUND"
+                );
+
+            }
+
+
+            const data =
+                userSnap.data();
+
+
+            const paidUntil =
+                data.subscriptionUntil ||
+                data.subscriptionExpiry;
+
+
+            if(
+                data.subscriptionActive === true &&
+                isFuture(paidUntil)
+            ){
+
+                await checkPaymentStatus();
+
+                showMessage(
+                    "ඔයාගේ subscription එක දැනටමත් active."
+                );
+
+                return;
+
+            }
+
+
+            if(
+                data.adminFreeAccess === true &&
+                isFuture(
+                    data.adminFreeAccessUntil
+                )
+            ){
+
+                await checkPaymentStatus();
+
+                showMessage(
+                    "Admin Free Access active නිසා payment අවශ්‍ය නැහැ."
+                );
+
+                return;
+
+            }
+
+
+            if(
+                data.trialActive === true &&
+                isFuture(
+                    data.trialUntil
+                )
+            ){
+
+                await checkPaymentStatus();
+
+                showMessage(
+                    "Free Trial active නිසා payment අවශ්‍ය නැහැ."
+                );
+
+                return;
+
+            }
+
+
+            const fullName =
+                String(
+                    data.name ||
+                    "MCQ Winner User"
+                ).trim();
+
+
+            const nameParts =
+                fullName.split(
+                    /\s+/
+                );
+
+
+            const firstName =
+                nameParts[0] ||
+                "MCQ";
+
+
+            const lastName =
+                nameParts
+                    .slice(1)
+                    .join(" ") ||
+                "Winner";
+
+
+            const email =
+                currentUser.email ||
+                data.email ||
+                "";
+
+
+            const phone =
+                data.phoneNumber ||
+                data.phone ||
+                "";
+
+
+            const address =
+                data.address ||
+                "Sri Lanka";
+
+
+            const city =
+                data.nearestCity ||
+                data.city ||
+                "Colombo";
+
+
+            if(!email){
+
+                throw new Error(
+                    "EMAIL_MISSING"
+                );
+
+            }
+
+
+            if(!phone){
+
+                throw new Error(
+                    "PHONE_MISSING"
+                );
+
+            }
+
+
+            /*
+             * Worker creates the PayHere payment data.
+             *
+             * Merchant Secret remains ONLY
+             * inside the Worker.
+             */
+
+            const response =
+                await fetch(
+                    WORKER_URL +
+                    "/create-payment",
+                    {
+
+                        method:"POST",
+
+                        headers:{
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body:
+                            JSON.stringify({
+
+                                uid:
+                                    currentUser.uid,
+
+                                first_name:
+                                    firstName,
+
+                                last_name:
+                                    lastName,
+
+                                email:
+                                    email,
+
+                                phone:
+                                    phone,
+
+                                address:
+                                    address,
+
+                                city:
+                                    city,
+
+                                subject:
+                                    selectedSubject
+
+                            })
+
+                    }
+                );
+
+
+            if(
+                !response.ok
+            ){
+
+                throw new Error(
+                    "WORKER_HTTP_" +
+                    response.status
+                );
+
+            }
+
+
+            const result =
+                await response.json();
+
+
+            if(
+                !result.success ||
+                !result.payment
+            ){
+
+                throw new Error(
+                    result.error ||
+                    "PAYMENT_CREATE_FAILED"
+                );
+
+            }
+
+
+            const payment =
+                result.payment;
+
+
+            /*
+             * IMPORTANT
+             *
+             * MainActivity will receive this
+             * JSON and start the native
+             * PayHere Android SDK.
+             */
+
+            if(
+                typeof window.Android ===
+                "undefined" ||
+                typeof window.Android.startPayment !==
+                "function"
+            ){
+
+                throw new Error(
+                    "NATIVE_PAYHERE_BRIDGE_MISSING"
+                );
+
+            }
+
+
+            const paymentJson =
+                JSON.stringify(
+                    payment
+                );
+
+
+            paymentButton.textContent =
+                "Opening PayHere...";
+
+
+            window.Android.startPayment(
+                paymentJson
+            );
+
+
+        }
+
+        catch(error){
+
+            console.error(
+                "Native PayHere error:",
+                error
+            );
+
+
+            let errorText =
+                "PayHere payment start කිරීමට නොහැකි වුණා.";
+
+
+            if(
+                error.message ===
+                "EMAIL_MISSING"
+            ){
+
+                errorText =
+                    "Account එකේ valid email address එකක් නැහැ.";
+
+            }
+
+            else if(
+                error.message ===
+                "PHONE_MISSING"
+            ){
+
+                errorText =
+                    "Account එකේ phone number එකක් නැහැ.";
+
+            }
+
+            else if(
+                error.message ===
+                "NATIVE_PAYHERE_BRIDGE_MISSING"
+            ){
+
+                errorText =
+                    "PayHere Android SDK bridge එක තවම MainActivity එකට connect කරලා නැහැ.";
+
+            }
+
+            else if(
+                error.message &&
+                error.message.startsWith(
+                    "WORKER_HTTP_"
+                )
+            ){
+
+                errorText =
+                    "Payment server එකට connect වීමට නොහැකි වුණා.";
+
+            }
+
+            else if(
+                error.message ===
+                "PAYMENT_CREATE_FAILED"
+            ){
+
+                errorText =
+                    "Payment request එක create කිරීමට නොහැකි වුණා.";
+
+            }
+
+
+            showMessage(
+                errorText
+            );
+
+        }
+
+        finally{
+
+            paymentButton.disabled =
+                false;
+
+            paymentButton.textContent =
+                "PAY Rs.100";
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   CHECK ACCOUNT STATUS
+===================================================== */
+
+async function checkPaymentStatus(){
+
+    hideStatusBoxes();
+
+    hideMessage();
+
+
+    if(!currentUser){
+
+        return;
+
+    }
+
+
+    loadingBox.style.display =
+        "block";
+
+
+    try{
+
+        const userRef =
+            doc(
+                db,
+                "users",
+                currentUser.uid
+            );
+
+
+        const userSnap =
+            await getDoc(
+                userRef
+            );
+
+
+        if(
+            !userSnap.exists()
+        ){
+
+            throw new Error(
+                "USER_NOT_FOUND"
+            );
+
+        }
+
+
+        const data =
+            userSnap.data();
+
+
+        const paidUntil =
+            data.subscriptionUntil ||
+            data.subscriptionExpiry;
+
+
+        if(
+            data.subscriptionActive === true &&
+            isFuture(paidUntil)
+        ){
+
+            activeBox.style.display =
+                "block";
+
+
+            document.getElementById(
+                "activeUntilText"
+            ).textContent =
+                "Active until: " +
+                formatDate(
+                    paidUntil
+                );
+
+
+            loadingBox.style.display =
+                "none";
+
+            return;
+
+        }
+
+
+        const freeUntil =
+            data.adminFreeAccessUntil;
+
+
+        if(
+            data.adminFreeAccess === true &&
+            isFuture(freeUntil)
+        ){
+
+            freeAccessBox.style.display =
+                "block";
+
+
+            freeAccessSubject.textContent =
+                selectedSubject ||
+                "Subject එක තෝරා නැත";
+
+
+            document.getElementById(
+                "freeAccessUntilText"
+            ).textContent =
+                "Free Access valid until: " +
+                formatDate(
+                    freeUntil
+                );
+
+
+            freeAccessStartButton.disabled =
+                !selectedSubject;
+
+
+            loadingBox.style.display =
+                "none";
+
+            return;
+
+        }
+
+
+        const trialUntil =
+            data.trialUntil;
+
+
+        if(
+            data.trialActive === true &&
+            isFuture(trialUntil)
+        ){
+
+            trialBox.style.display =
+                "block";
+
+
+            document.getElementById(
+                "trialUntilText"
+            ).textContent =
+                "Trial valid until: " +
+                formatDate(
+                    trialUntil
+                );
+
+
+            trialStartButton.disabled =
+                !selectedSubject;
+
+
+            loadingBox.style.display =
+                "none";
+
+            return;
+
+        }
+
+
+        paymentBox.style.display =
+            "block";
+
+
+        loadingBox.style.display =
+            "none";
+
+    }
+
+    catch(error){
+
+        console.error(
+            "Account status error:",
+            error
+        );
+
+
+        loadingBox.style.display =
+            "none";
+
+
+        showMessage(
+            "Account status check කිරීමේදී දෝෂයක් ඇති වුණා."
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   BACK TO HOME
+===================================================== */
+
+document.getElementById(
+    "backButton"
+).addEventListener(
+    "click",
+    () => {
+
+        window.location.href =
+            "./index.html";
+
+    }
+);
+
+
+/* =====================================================
+   AUTH
+===================================================== */
+
+async function initializeAuth(){
+
+    try{
+
+        await setPersistence(
+            auth,
+            browserSessionPersistence
+        );
+
+    }
+
+    catch(error){
+
+        console.error(
+            "Persistence error:",
+            error
+        );
+
+    }
+
+
+    onAuthStateChanged(
+        auth,
+        async (user) => {
+
+            currentUser =
+                user;
+
+
+            if(!user){
+
+                authReady =
+                    false;
+
+                window.location.href =
+                    "./login.html";
+
+                return;
+
+            }
+
+
+            authReady =
+                true;
+
+
+            await checkPaymentStatus();
+
+        }
+    );
+
+}
+
+
+initializeAuth();
+
+</script></body></html>
